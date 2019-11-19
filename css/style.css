@@ -7,10 +7,7 @@
   width:100%;
   height: 500px;
   background-size: cover;
-
-
 }
-
 #cajanegra{
   margin:0 auto;
   width: 50%;
@@ -88,4 +85,111 @@
   margin:2%;
   width:30%;
   border-radius:50%;
+}
+/*
+FOOTER
+*/
+.footer{
+  padding-top: 5vh;
+  background-color: black;
+  width:  100%;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+/*
+FOOTER
+LISTA (CONTACTO, FAQ, HOME)
+*/
+.lista{
+  text-align: left;
+  width: 50%;
+  float: left;
+}
+.lista ul{
+  list-style: none;
+}
+.lista ul li a{
+  font-size: 18px;
+  color: white;
+  margin-left: 5%;
+}
+.lista ion-icon{
+  border-radius: 180px;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 15px;
+}
+
+/*
+FOOTER INFO(INC, Lenguajes USADOS)
+*/
+.info{
+  float: right;
+  width: 25%;
+  color: white;
+  margin-top: 5%;
+}
+.info h4{
+  font-family: sans-serif;
+  font-size: 15px;
+  float: left;
+}
+.info ion-icon{
+  font-size: 30px;
+  float: right;
+}
+.info  a ion-icon {
+
+  color: white;
+}
+/*Centro de ayuda(faq.html)*/
+.container-fuild{
+  overflow: hidden;
+}
+nav{
+  overflow: hidden;
+  position: relative;
+}
+.perfil button{
+  border-radius: 100%;
+}
+.header{
+  padding-top: 0;
+  overflow: hidden;
+  background-color: #e3f2fd;
+  position: relative;
+  height: 25vh;
+  padding-top: 5%;
+}
+.usuario{
+  text-align: center;
+  margin-top: 0;
+  width: 100%;
+  float: left;
+  height: 15vh;
+}
+.busqueda{
+  width: 30%;
+  float: right;
+  bottom: 0px;
+}
+.seccion{
+  margin-left: 5%;
+  margin-top: 2%;
+  margin-right: 5%;
+  width: auto;
+  overflow: hidden;
+}
+.duda{
+  float: right;
+  font-size: 25px;
+  overflow: hidden;
+  width: 35%;
+}
+.duda ul li{
+  border-left: black 1px solid;
+  padding-left: 5%;
+}
+
 }
