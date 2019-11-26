@@ -1,6 +1,34 @@
 *{
   box-sizing: border-box;
 }
+nav a img{
+  width: 50px;
+}
+#busquedaNav{
+  width: 70%;
+}
+
+#barrabusqueda{
+  width: 85%;
+}
+#log-out{
+  border-radius: 100%;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 15px;
+  margin-right:  10%;
+}
+#build{
+  border-radius: 100%;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 15px;
+  margin-right:  10%;
+}
+#lupa{
+  font-size: 20px;
+  color: white;
+}
 #presentacion{
   position:relative;
   background-image: url("../img/fondo.jpg");
@@ -144,35 +172,28 @@ FOOTER INFO(INC, Lenguajes USADOS)
   color: white;
 }
 /*Centro de ayuda(faq.html)*/
-.container-fuild{
-  overflow: hidden;
-}
-nav{
-  overflow: hidden;
-  position: relative;
-}
+/*Boton perfil*/
 .perfil button{
   border-radius: 100%;
 }
+.dropdown-menu{
+z-index: 1;
+}
+/*Header*/
 .header{
   padding-top: 0;
   overflow: hidden;
   background-color: #e3f2fd;
   position: relative;
-  height: 25vh;
-  padding-top: 5%;
 }
+/*Header usuario con fondo*/
 .usuario{
+  background-image: url('../img/faqBienvenido.png');
   text-align: center;
   margin-top: 0;
   width: 100%;
   float: left;
-  height: 15vh;
-}
-.busqueda{
-  width: 30%;
-  float: right;
-  bottom: 0px;
+  height: 18vh;
 }
 .seccion{
   margin-left: 5%;
@@ -191,5 +212,85 @@ nav{
   border-left: black 1px solid;
   padding-left: 5%;
 }
-
-}
+/*Mobile*/
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  /*Barra de navegacion*/
+  nav a{
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
+  }
+  nav a img{
+    width: 100%;
+    position: relative;
+  }
+  #busquedaNav{
+    width: 90%;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+  #barrabusqueda{
+    width: 80%;
+  }
+  #botonLupa{
+    margin-left: 2%;
+  }
+  /*Boton perfil*/
+  .perfil{
+    margin-left: 40%;
+    margin-right: 40%;
+    width: 20%;
+    border-radius: 100%;
+    position: relative;
+  }
+  .dropdown-menu{
+  z-index: 1;
+  background-color: gray;
+  }
+  .dropdown-item{
+    font-size: 15px;
+    margin-left: 0;
+  }
+  /*Header faq MOBILE*/
+  .usuario h1{
+    font-size: 20px;
+  }
+  /*Seccion MOBILE*/
+  .seccion{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    overflow: inherit;
+    text-align: center;
+  }
+  .duda{
+    width: 100%;
+    text-align: left;
+  }
+  .duda ul li a{
+    font-size: 15px;
+  }
+  .contenido h4{
+    font-size: 25px;
+    margin-bottom: 10%;
+  }
+  .contenido article{
+    text-align: left;
+    width: 90%;
+    margin-left: auto;
+    margin-right:auto;
+  }
+  /*FOOTER MOBILE*/
+  .footer{
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  .lista{
+    width: 90%;
+  }
+  .info{
+      width: 90%;
+  }
