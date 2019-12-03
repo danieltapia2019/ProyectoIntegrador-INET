@@ -27,7 +27,7 @@ if($_POST){
     $info[]=$usuario;
     var_dump($info);
     $json=json_encode($info);
-    file_put_contents("data/usuarios.txt",$json);
+    file_put_contents("../data/usuarios.txt",$json);
     session_start();
     $_SESSION["usuario"]=$usuario;
     header('Location:./../perfil1.php');
