@@ -30,7 +30,7 @@ if($_POST){
     file_put_contents("../data/usuarios.txt",$json);
     session_start();
     $_SESSION["usuario"]=$usuario;
-    header('Location:./../perfil1.php');
+    header('Location:./../usuario/perfil1.php');
   }
 }
  ?>
