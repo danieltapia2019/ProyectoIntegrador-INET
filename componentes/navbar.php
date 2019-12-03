@@ -8,7 +8,7 @@ if(isset($_SESSION["usuario"])){
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-danger">
-  <a class="navbar-brand" href="/<?= basename(dirname(__FILE__))?>/index.php"><img src="/<?= basename(dirname(__FILE__))?>/img/logo.png" alt="" width=60px></a>
+  <a class="navbar-brand" href="/ProyectoIntegrador-INET/index.php"><img src="/ProyectoIntegrador-INET/img/logo.png" alt="" width=60px></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -54,12 +54,12 @@ if(isset($_SESSION["usuario"])){
           <?php if(isset($userA["ruta"])):?>
             <span><img src="<?=$userA["ruta"]?>" alt="" class="rounded-circle"></span>
           <?php else:?>
-            <span><img src="/<?= basename(dirname(__FILE__))?>/img/perfil.jpg" alt="" class="rounded-circle mx-2"><?=$userA["username"]?></span>
+            <span><img src="/ProyectoIntegrador-INET/img/perfil.jpg" alt="" class="rounded-circle mx-2"><?=$userA["username"]?></span>
           <?php endif;?>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/<?= basename(dirname(__FILE__))?>/usuario/perfil1.php">Mi perfil</a>
-          <a class="dropdown-item" href="/<?= basename(dirname(__FILE__))?>/index.php?logout=0">Cerrar Sesion</a>
+          <a class="dropdown-item" href="/ProyectoIntegrador-INET/usuario/perfil1.php">Mi perfil</a>
+          <a class="dropdown-item" href="/ProyectoIntegrador-INET/index.php?logout=0">Cerrar Sesion</a>
         </div>
 
       </li>

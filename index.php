@@ -21,7 +21,7 @@ if(isset($_GET["logout"])){
 <body>
   <div class="container-fuild">
     <!--Navbar-->
-    <?php include("navbar.php"); ?>
+    <?php include("componentes/navbar.php"); ?>
 
     <!-- Modal Registro-->
     <div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
