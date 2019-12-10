@@ -231,7 +231,7 @@ z-index: 1;
 
   /*HOME index*/
 
-  /*Nav Home*/
+  /*Navbar*/
   #navbarSupportedContent{
     text-align: center;
   }
@@ -399,7 +399,7 @@ z-index: 1;
 }
 /*TABLET*/
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
-/*INDEX.HTML HOME*/
+/*Navbar*/
 #navbarSupportedContent{
 }
 /*Contacto iNDEX.HTML*/
@@ -429,7 +429,9 @@ background-color: green;
 }
 /*FOOTER INDEX.HTML*/
 
+}
 
 
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
 
 }

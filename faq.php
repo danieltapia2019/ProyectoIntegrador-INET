@@ -1,3 +1,18 @@
+<?php
+session_start();
+$userName = "";
+if(isset($_SESSION)){
+  if(sizeof($_SESSION) !=0){
+  $userName = $_SESSION["usuario"]["username"];}
+  else {
+    $userName = "";
+  }
+}
+if(isset($_GET["logout"])){
+  session_destroy();
+  header('Location: faq.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
   <head>
@@ -10,32 +25,12 @@
     <title>Centro de ayuda</title>
   </head>
   <body>
-    <div class="container-fuild">
-      <nav class="navbar navbar-expand-lg navbar-light bg-danger">
-        <a class="navbar-brand" href="index.html"><img src="img/logo.png" alt=""></a>
-        <form class="form-inline my-2 my-lg-2" id="busquedaNav">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"  id="barrabusqueda">
-        <button class="btn btn-info my-2 my-sm-8 " type="submit" id="botonLupa">
-          <ion-icon name="search" id="lupa"></ion-icon>
-        </button>
-        </form>
-        <div class="perfil">
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <ion-icon name="person"></ion-icon></button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#"><ion-icon name="log-out" id="log-out"></ion-icon>Cerrar Sesion</a>
-        <a class="dropdown-item" href="usuario\configuracion.html"><ion-icon name="build" id="build"></ion-icon>Configuracion</a>
-      </div>
-    </div>
-    </div>
-        </div>
 
-      </nav>
+    <?php include("componentes/navbar.php"); ?>
       <header class = "header">
         <div class="usuario">
           <br>
-            <h1>Hola <span>@Usuario</span>
+            <h1>Hola <?=$userName?>
               ¿Necesitas ayuda?
               </h1>
         </div>
@@ -124,20 +119,21 @@
 
         </div>
       </section>
+
       <footer class="footer">
         <div class="lista">
           <ul>
             <li>
-              <a href="#sesion">
+              <a href="faq.php">
                 <ion-icon name="help"></ion-icon>
                 Preguntas Frecuentes</a>
             </li>
             <li>
-              <a href="index.html">
+              <a href="#">
                 <ion-icon name="home"></ion-icon>
                 Home</a></li>
             <li>
-            <a href="index.html">
+            <a href="#contacto">
               <ion-icon name="contact"></ion-icon>
               Contacto</a></li>
           </ul>

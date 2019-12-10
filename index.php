@@ -23,100 +23,6 @@ if(isset($_GET["logout"])){
     <!--Navbar-->
     <?php include("componentes/navbar.php"); ?>
 
-    <!-- Modal Registro-->
-    <div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Bienvenido a Promunity</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form class="" action="operaciones/registrar.php" method="post">
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-user"></i></span>
-                </div>
-                <input type="text" name="username" class="form-control" aria-label="text" placeholder="Nombre de usuario">
-              </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
-                </div>
-                <input type="email" name="email" class="form-control" aria-label="email" placeholder="Ingrese email">
-              </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                </div>
-                <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña">
-              </div>
-              <button type="submit" class="btn btn-danger btn-lg btn-block my-3 ">Registrarse</button>
-            </form>
-
-
-            <p class="h6 text-center">Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
-            <div class="">
-            <hr>
-            </div>
-            <p class="h6 text-center">¿Ya tienes una cuenta?<mark><a href="#">Inicia sesión.</a></mark></p>
-
-
-          </div>
-
-
-
-
-        </div>
-
-      </div>
-
-    </div>
-    <!-- Modal Inicio-->
-    <div class="modal fade" id="modalInicio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Bienvenido! Inicia Sesión</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-
-          <form action="operaciones/loguear.php" method="post">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
-              </div>
-              <input type="email" name="email" class="form-control" aria-label="email" placeholder="Ingrese email">
-            </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-lock"></i></span>
-              </div>
-              <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña">
-            </div>
-            <p>
-            <input type="checkbox" name="" value=""> Recordarme</p>
-            <button type="submit" class="btn btn-danger btn-lg btn-block my-3 ">Iniciar Sesión</button>
-          </form>
-            <p class="text-center"> <a href="#" >¿Has olvidado tu contraseña?</a></p>
-            <p class="text-center mt-3">¿No tienes cuenta?<mark><a href="#">Registrate</a></mark></p>
-          </div>
-
-
-
-
-
-        </div>
-
-      </div>
-
-    </div>
-
 
 
     <section>
@@ -316,44 +222,35 @@ if(isset($_GET["logout"])){
 
 
 </div>
-    <footer class="footer">
-      <div class="lista">
-        <ul>
-          <li>
-            <a href="faq.html">
-              <ion-icon name="help"></ion-icon>
-              Preguntas Frecuentes</a>
-          </li>
-          <li>
-            <a href="#">
-              <ion-icon name="home"></ion-icon>
-              Home</a></li>
-          <li>
-          <a href="#contacto">
-            <ion-icon name="contact"></ion-icon>
-            Contacto</a></li>
-        </ul>
-      </div>
-      <div class="info">
-          <h4>
-            2019 Promunity, inc
-          </h4>
-          <ion-icon name="logo-html5"></ion-icon>
-          <ion-icon name="logo-javascript"></ion-icon>
-          <a href="https://github.com/danieltapia2019/ProyectoIntegrador-INET">
-            <ion-icon name="logo-github"></ion-icon></a>
-      </div>
+<footer class="footer">
+  <div class="lista">
+    <ul>
+      <li>
+        <a href="faq.php">
+          <ion-icon name="help"></ion-icon>
+          Preguntas Frecuentes</a>
+      </li>
+      <li>
+        <a href="#">
+          <ion-icon name="home"></ion-icon>
+          Home</a></li>
+      <li>
+      <a href="#contacto">
+        <ion-icon name="contact"></ion-icon>
+        Contacto</a></li>
+    </ul>
+  </div>
+  <div class="info">
+      <h4>
+        2019 Promunity, inc
+      </h4>
+      <ion-icon name="logo-html5"></ion-icon>
+      <ion-icon name="logo-javascript"></ion-icon>
+      <a href="https://github.com/danieltapia2019/ProyectoIntegrador-INET">
+        <ion-icon name="logo-github"></ion-icon></a>
+  </div>
 
-    </footer>
-
-
-
-
-
-
-
-
-
+</footer>
 
   </div>
 
