@@ -3,16 +3,16 @@
       <div class="lista">
         <ul>
           <li>
-            <a href="faq.php">
+            <a href="/ProyectoIntegrador-INET/faq.php">
               <ion-icon name="help"></ion-icon>
               Preguntas Frecuentes</a>
           </li>
           <li>
-            <a href="#">
+            <a href="/ProyectoIntegrador-INET/index.php">
               <ion-icon name="home"></ion-icon>
               Home</a></li>
           <li>
-          <a href="#contacto">
+          <a href="/ProyectoIntegrador-INET/index.php">
             <ion-icon name="contact"></ion-icon>
             Contacto</a></li>
         </ul>

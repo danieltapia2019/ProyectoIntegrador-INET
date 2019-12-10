@@ -429,9 +429,11 @@ background-color: green;
 }
 /*FOOTER INDEX.HTML*/
 
+/*SIDE BAR*/
+
 }
-
-
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-
+  #menu{
+    font-size: 500px;
+  }
 }
