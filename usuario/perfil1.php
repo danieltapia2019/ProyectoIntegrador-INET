@@ -25,7 +25,7 @@ if(isset($_SESSION)){
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?=$userName?></title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/estilo.css">
   <link rel="stylesheet" href="perfilStyle.css">
   <link rel="shortcut icon" href="img\logo.png" />
 </head>
@@ -64,32 +64,86 @@ if(isset($_SESSION)){
               </h1>
         </div>
       </header>
-      <section>
+      <section class="opciones">
         <!--Mis cursos-->
         <!--Dar curso-->
         <!--Favoritos-->
                 <!--Configuracion-->
               <div class="configuracion" style="display: none;" id="configuracion">
+                            <form class="" action="" method="post">
+
+                                <div id="imagenNombre">
+
+                                      <div class="input-group mb-3">
+                                          <img src="/ProyectoIntegrador-INET/img/perfil.jpg" alt="" id="imgNormal">
+                                          <img id="imagenPrevisualizacion" class="rounded-circle mx-2" style="display: none;" >
+                                        <div class="custom-file">
+                                          <input type="file" class="custom-file-input" id="seleccionArchivos" required>
+                                          <label accept="image/* "class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
+                                        </div>
+                                      </div>
+
+                                      <!-- La imagen que vamos a usar para previsualizar lo que el usuario selecciona -->
+                                      <script >const $seleccionArchivos = document.querySelector("#seleccionArchivos"),
+                                     $imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");
+
+                                   // Escuchar cuando cambie
+                                   $seleccionArchivos.addEventListener("change", () => {
+                                     imagenNormal = document.getElementById('imgNormal').style.display="none";
+                                     imagenElegida = document.getElementById('imagenPrevisualizacion').style.display="inherit";
+                                     // Los archivos seleccionados, pueden ser muchos o uno
+                                     const archivos = $seleccionArchivos.files;
+                                     // Si no hay archivos salimos de la función y quitamos la imagen
+                                     if (!archivos || !archivos.length) {
+                                       $imagenPrevisualizacion.src = "";
+                                       imagenNormal = document.getElementById('imgNormal').style.display="inherit";
+                                       imagenElegida = document.getElementById('imagenPrevisualizacion').style.display="none";
+                                       return;
+                                     }
+                                     // Ahora tomamos el primer archivo, el cual vamos a previsualizar
+                                     const primerArchivo = archivos[0];
+                                     // Lo convertimos a un objeto de tipo objectURL
+                                     const objectURL = URL.createObjectURL(primerArchivo);
+                                     // Y a la fuente de la imagen le ponemos el objectURL
+                                     $imagenPrevisualizacion.src = objectURL;
+                                   });</script>
+                                </div>
+                                <button class="btn btn-success btn-sm" type="submit" name="button">
+                                  Guardar foto
+                                </button>
+
+                            </form>
                             <form class="" action="" method="">
+                              <hr>
                               <div class="form-group">
                           <label for="exampleInputEmail1">Cambiar Email</label>
                           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
                           value=<?=$userEmail?>>
                         </div>
-                        <div class="form-group">
-                          <label for="exampleInputPassword1">Contraseña Actual</label>
-                          <input type="password" class="form-control" placeholder="Password" id="password">
+                          <hr>
+                          <label for="password">Contraseña actual</label>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                          </div>
+                          <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña" id="passwordRegister">
                           <button class="btn btn-primary" type="button" name="button" onclick="mostrarContrasena()">
-                              <ion-icon name="eye" id="ojoOn"></ion-icon>
+                              <ion-icon name="eye" id="ojoRegister"></ion-icon>
                           </button>
-                        </div>
 
-                          <div class="form-group">
-                            <label for="exampleInputPassword1">Contraseña Nueva</label>
-                            <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña" id="passwordRegister">
-                            <button class="btn btn-primary" type="button" name="button" onclick="mostrarContrasena()">
-                                <ion-icon name="eye" id="ojoRegister"></ion-icon>
-                            </button>  </div>
+                        </div>
+                        <hr>
+                        <label for="password">Contraseña nueva</label>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                          </div>
+                          <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña" id="passwordRegister">
+                          <button class="btn btn-primary" type="button" name="button" onclick="mostrarContrasena()">
+                              <ion-icon name="eye" id="ojoRegister"></ion-icon>
+                          </button>
+
+                        </div>
 
                     <button type="submit" name="button" class="btn btn-success">
                       Guardar Cambios

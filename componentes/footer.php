@@ -12,7 +12,7 @@
               <ion-icon name="home"></ion-icon>
               Home</a></li>
           <li>
-          <a href="/ProyectoIntegrador-INET/index.php">
+          <a href="/ProyectoIntegrador-INET/index.php#contacto">
             <ion-icon name="contact"></ion-icon>
             Contacto</a></li>
         </ul>

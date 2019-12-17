@@ -7,7 +7,6 @@ nav a img{
 #busquedaNav{
   width: 70%;
 }
-
 #barrabusqueda{
   width: 85%;
 }
@@ -226,12 +225,42 @@ z-index: 1;
   border-left: black 1px solid;
   padding-left: 5%;
 }
+/*LOGUEAR.PHP*/
+.modal-body{
+width: 60%;
+margin-left: 20%;
+margin-right:20%;
+}
+
+/*SECCION PEFIL.PHP*/
+#configuracion{
+  margin-top: 10%;
+  width: 60%;
+  margin-bottom: 5%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+#fotoPerfil input{
+  font-size: 15px;
+}
+.custom-file{
+  margin-top: 12px;
+  }
+  #imgNormal{
+    width: 90px;
+    height: 90px;
+  }
+  #imagenPrevisualizacion{
+    width: 90px;
+    height: 90px;
+  }
 /*Mobile*/
 @media only screen and (min-width: 320px) and (max-width: 767px) {
-
-  /*HOME index*/
-
   /*Navbar*/
+  .barra{
+    width: 80%;
+    margin-right:  5%;
+  }
   #navbarSupportedContent{
     text-align: center;
   }
@@ -290,7 +319,7 @@ z-index: 1;
     display: inherit;
   }
 
-  /*Contacto iNDEX.HTML*/
+  /*Contacto iNDEX.PHP*/
   .datosContacto{
     width: 90%;
     margin-left: 5%;
@@ -362,8 +391,6 @@ z-index: 1;
   /*Seccion MOBILE*/
   .seccion{
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
     margin-top: 0;
     overflow: inherit;
     text-align: center;
@@ -382,8 +409,8 @@ z-index: 1;
   .contenido article{
     text-align: left;
     width: 90%;
-    margin-left: auto;
-    margin-right:auto;
+    margin-left: 5%;
+    margin-right: 5%;
   }
   /*FOOTER MOBILE*/
   .footer{
@@ -396,6 +423,30 @@ z-index: 1;
   .info{
       width: 90%;
   }
+/*LOGUEAR.PHP*/
+.modal-body{
+  width: 95%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+/*PERFIL.PHP*/
+#imagenNombre img{
+  width: 60px;
+  height: 60px;
+}
+/*SECCION PEFIL.PHP*/
+#configuracion{
+  margin-top: 10%;
+  width: 100%;
+  margin-bottom: 5%;
+}
+#fotoPerfil input{
+  font-size: 15px;
+}
+.custom-file{
+  margin-top: 12px;
+  }
+
 }
 /*TABLET*/
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
@@ -427,13 +478,9 @@ background-color: green;
 .opinion{
   width: 45%;
 }
-/*FOOTER INDEX.HTML*/
-
 /*SIDE BAR*/
-
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  #menu{
-    font-size: 500px;
-  }
+  /*LOGUEAR PHP*/
+
 }

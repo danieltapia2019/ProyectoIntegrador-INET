@@ -16,8 +16,8 @@ if(isset($_SESSION["usuario"])){
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
         <form class="form-inline" id="barrabusqueda">
-          <input class="form-control mr-sm-2 bg-dark border-0 text-white" type="search" placeholder="Buscar cursos" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0 bg-dark border-0" type="submit"><i class="fas fa-search"></i></button>
+          <input class="form-control mr-sm-2 bg-dark border-0 text-white barra" type="search" placeholder="Buscar cursos" aria-label="Search">
+          <button class="btn btn-sm btn-outline-success my-2 my-sm-0 bg-dark border-0" type="submit"><i class="fas fa-search"></i></button>
         </form>
       <li class="nav-item dropdown mx-3">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -84,7 +84,7 @@ if(isset($_SESSION["usuario"])){
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
               </div>
-              <input type="text" name="username" class="form-control" aria-label="text" placeholder="Nombre de usuario">
+              <input type="text" name="username" class="form-control" aria-label="text" placeholder="Nombre de usuario" required>
             </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
@@ -104,7 +104,6 @@ if(isset($_SESSION["usuario"])){
             </div>
             <button type="submit" class="btn btn-danger btn-lg btn-block my-3 ">Registrarse</button>
           </form>
-
 
           <p class="h6 text-center">Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
           <div class="">

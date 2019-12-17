@@ -25,6 +25,8 @@ if(isset($_GET["logout"])){
     <title>Centro de ayuda</title>
   </head>
   <body>
+    <div class="container-fuild">
+
 
     <?php include("componentes/navbar.php"); ?>
       <header class = "header">
@@ -119,40 +121,8 @@ if(isset($_GET["logout"])){
 
         </div>
       </section>
-
-      <footer class="footer">
-        <div class="lista">
-          <ul>
-            <li>
-              <a href="faq.php">
-                <ion-icon name="help"></ion-icon>
-                Preguntas Frecuentes</a>
-            </li>
-            <li>
-              <a href="#">
-                <ion-icon name="home"></ion-icon>
-                Home</a></li>
-            <li>
-            <a href="#contacto">
-              <ion-icon name="contact"></ion-icon>
-              Contacto</a></li>
-          </ul>
-        </div>
-        <div class="info">
-            <h4>
-              2019 Promunity, inc
-            </h4>
-            <ion-icon name="logo-html5"></ion-icon>
-            <ion-icon name="logo-javascript"></ion-icon>
-            <a href="https://github.com/danieltapia2019/ProyectoIntegrador-INET">
-              <ion-icon name="logo-github"></ion-icon></a>
-        </div>
-
-      </footer>
-
-
-    </div>
-
+      <?php include ("/componentes/footer.php") ?>
+          </div>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -14,7 +14,7 @@ if(isset($_GET["logout"])){
   <title>Promunity</title>
   <script src="https://kit.fontawesome.com/918d19c8b4.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/estilo.css">
   <link rel="shortcut icon" href="img\logo.png" />
 </head>
 
@@ -178,41 +178,43 @@ if(isset($_GET["logout"])){
       <p class="h2 mb-5">¿Qué opinan nuestros alumnos?</p>
       <div class="articuloOpiniones">
         <article class="border border-secundary border-bottom-0 opinion">
-          <span class=h4><img src="img/perfil.jpg" alt="">Estudiante</span>
+          <span class=h4><img src="img/alumno1.jpeg" alt="">Estudiante</span>
+          <p>Promunity es una muy buena pagina para aprender programacion desde 0 excelente cursos y la informacion es didactica</p>
+        </article>
+        <article class="border border-secundary border-bottom-0 opinion">
+          <span class=h4><img src="img/alumno2.jpeg" alt="">Estudiante</span>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis consequatur repellendus sint in temporibus! Beatae!</p>
         </article>
         <article class="border border-secundary border-bottom-0 opinion">
-          <span class=h4><img src="img/perfil.jpg" alt="">Estudiante</span>
+          <span class=h4><img src="img/alumno3.jpeg" alt="">Estudiante</span>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis consequatur repellendus sint in temporibus! Beatae!</p>
         </article>
         <article class="border border-secundary border-bottom-0 opinion">
-          <span class=h4><img src="img/perfil.jpg" alt="">Estudiante</span>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis consequatur repellendus sint in temporibus! Beatae!</p>
-        </article>
-        <article class="border border-secundary border-bottom-0 opinion">
-          <span class=h4><img src="img/perfil.jpg" alt="">Estudiante</span>
+          <span class=h4><img src="img/alumno4.jpeg" alt="">Estudiante</span>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis consequatur repellendus sint in temporibus! Beatae!</p>
         </article>
       </div>
 
       </div>
+
+        <!--Carrusel solo para mobile-->
       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
       <article class="border border-secundary border-bottom-0 opinion">
-        <span class=h4><img src="img/perfil.jpg" alt="">Estudiante</span>
+        <span class=h4><img src="img/alumno1.jpeg" alt="">Estudiante</span>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis consequatur repellendus sint in temporibus! Beatae!</p>
       </article>
       </div>
       <div class="carousel-item">
       <article class="border border-secundary border-bottom-0 opinion">
-        <span class=h4><img src="img/perfil.jpg" alt="">Estudiante</span>
+        <span class=h4><img src="img/alumno2.jpeg" alt="">Estudiante</span>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis consequatur repellendus sint in temporibus! Beatae!</p>
       </article>
       </div>
       <div class="carousel-item">
       <article class="border border-secundary border-bottom-0 opinion">
-        <span class=h4><img src="img/perfil.jpg" alt="">Estudiante</span>
+        <span class=h4><img src="img/alumno3.jpeg" alt="">Estudiante</span>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis consequatur repellendus sint in temporibus! Beatae!</p>
       </article>
       </div>
@@ -220,39 +222,10 @@ if(isset($_GET["logout"])){
     </div>
   </div>
 
+        <!--Footer-->
+        <?php include("/componentes/footer.php") ?>
 
 </div>
-<footer class="footer">
-  <div class="lista">
-    <ul>
-      <li>
-        <a href="faq.php">
-          <ion-icon name="help"></ion-icon>
-          Preguntas Frecuentes</a>
-      </li>
-      <li>
-        <a href="#">
-          <ion-icon name="home"></ion-icon>
-          Home</a></li>
-      <li>
-      <a href="#contacto">
-        <ion-icon name="contact"></ion-icon>
-        Contacto</a></li>
-    </ul>
-  </div>
-  <div class="info">
-      <h4>
-        2019 Promunity, inc
-      </h4>
-      <ion-icon name="logo-html5"></ion-icon>
-      <ion-icon name="logo-javascript"></ion-icon>
-      <a href="https://github.com/danieltapia2019/ProyectoIntegrador-INET">
-        <ion-icon name="logo-github"></ion-icon></a>
-  </div>
-
-</footer>
-
-  </div>
 
 
 
