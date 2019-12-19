@@ -53,7 +53,7 @@ body {
 /* Add a black background color to the top navigation */
 .topnav {
     overflow: hidden;
-    width: 5%;
+    width: auto;
     text-align: center;
     padding: 1%;
     float: left;
