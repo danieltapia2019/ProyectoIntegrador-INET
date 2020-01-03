@@ -1,36 +1,46 @@
 <?php
+
+//clase usuario con atributos, metodos getter and setters
+include ("../data/usuario.php");
 //0=nombre de usuario en uso
 //1=email en uso
 //-1=todo correcto
+
 $errorExistente="-1";
 if($_POST){
   $json=file_get_contents("../data/usuarios.txt");
   $info=json_decode($json,true);
-  $usuario=["id"=>count($info),
-  "username"=>$_POST["username"],
-  "email"=>$_POST["email"],
-  "password"=>password_hash($_POST["password"],PASSWORD_DEFAULT),
-  ];
+  $claseUsuario = new Usuario($_POST["username"],$_POST["email"],$_POST["password"]);
+  $claseUsuario->setId(count($info));
   if(count($info)>0){
     for($i=0;$i< count($info);$i++){
-      if($info[$i]["username"] == $usuario["username"]){
+      if(unserialize($info[$i])->getUserName() == $claseUsuario->getUserName() ){
         $errorExistente = 0;
         break;
       }
-      else if($info[$i]["email"] == $usuario["email"]){
+      else if(unserialize($info[$i])->getEmail() == $claseUsuario->getEmail()){
         $errorExistente = 1;
         break;
       }
     }
   }
   if($errorExistente==-1){
+    //Probando
+    $info[]=serialize($claseUsuario);
+    $json=json_encode($info);
+    file_put_contents("../data/usuarios.txt",$json);
+    session_start();
+    $_SESSION["usuario"]=serialize($claseUsuario);
+    header('Location:./../usuario/perfil1.php');
+    //Probando
+    /*
     $info[]=$usuario;
-    var_dump($info);
     $json=json_encode($info);
     file_put_contents("../data/usuarios.txt",$json);
     session_start();
     $_SESSION["usuario"]=$usuario;
     header('Location:./../usuario/perfil1.php');
+    */
   }
 }
  ?>
@@ -42,7 +52,7 @@ if($_POST){
   <title>Iniciar Sesion</title>
   <script src="https://kit.fontawesome.com/918d19c8b4.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/stylePrincipal.css">
+  <link rel="stylesheet" href="../css/stylePrincipal.css">
   <link rel="shortcut icon" href="img\logo.png" />
  </head>
  <body>
@@ -60,7 +70,7 @@ if($_POST){
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-user"></i></span>
                 </div>
-                <input type="text" name="username" class="form-control" aria-label="text" placeholder="Nombre de usuario">
+                <input type="text" name="username" class="form-control" aria-label="text" placeholder="Nombre de usuario" required maxlength="25" minlength="5">
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -72,7 +82,7 @@ if($_POST){
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-lock"></i></span>
                 </div>
-                <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña">
+                <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña" required maxlength="20" minlength="6">
               </div>
               <button type="submit" class="btn btn-danger btn-lg btn-block my-3 ">Registrarse</button>
             </form>

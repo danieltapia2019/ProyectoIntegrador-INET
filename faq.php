@@ -1,9 +1,11 @@
 <?php
+include ("data/usuario.php");
 session_start();
 $userName = "";
 if(isset($_SESSION)){
   if(sizeof($_SESSION) !=0){
-  $userName = $_SESSION["usuario"]["username"];}
+  $userName = unserialize($_SESSION["usuario"])->getUserName();
+}
   else {
     $userName = "";
   }

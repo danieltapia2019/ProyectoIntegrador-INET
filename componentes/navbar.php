@@ -1,6 +1,8 @@
 <?php
+
 $usuarioLogueado=false;
 $userA="";
+$foto = null;
 if(isset($_SESSION["usuario"])){
   $usuarioLogueado=true;
   $userA=$_SESSION["usuario"];
@@ -52,10 +54,10 @@ if(isset($_SESSION["usuario"])){
       <?php if($usuarioLogueado):?>
       <li class="nav-item dropdown mx-3">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <?php if(isset($userA["ruta"])):?>
+          <?php if(isset($foto)):?>
             <span><img src="<?=$userA["ruta"]?>" alt="" class="rounded-circle"></span>
           <?php else:?>
-            <span id="imagenNombre"><img src="/ProyectoIntegrador-INET/img/perfil.jpg" alt="" class="rounded-circle mx-2"><?=$userA["username"]?></span>
+            <span id="imagenNombre"><img src="/ProyectoIntegrador-INET/img/perfil.jpg" alt="" class="rounded-circle mx-2"><?=unserialize($userA)->getUserName()?></span>
           <?php endif;?>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -85,19 +87,19 @@ if(isset($_SESSION["usuario"])){
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
               </div>
-              <input type="text" name="username" class="form-control" aria-label="text" placeholder="Nombre de usuario" required>
+              <input type="text" name="username" class="form-control" aria-label="text" placeholder="Nombre de usuario" required maxlength="25" minlength="5">
             </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
               </div>
-              <input type="email" name="email" class="form-control" aria-label="email" placeholder="Ingrese email">
+              <input type="email" name="email" class="form-control" aria-label="email" placeholder="Ingrese email" required>
             </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
               </div>
-              <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña" id="passwordRegister">
+              <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña" id="passwordRegister" maxlength="20" minlength="6" required>
               <button class="btn btn-primary" type="button" name="button" onclick="mostrarContrasena()">
                   <ion-icon name="eye" id="ojoRegister"></ion-icon>
               </button>
@@ -134,13 +136,13 @@ if(isset($_SESSION["usuario"])){
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
             </div>
-            <input type="email" name="email" class="form-control" aria-label="email" placeholder="Ingrese email">
+            <input type="email" name="email" class="form-control" aria-label="email" placeholder="Ingrese email" required>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-lock"></i></span>
             </div>
-            <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña" id="password">
+            <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña" id="password" maxlength="20" minlength="6" required>
             <button type="button" class="btn btn-primary" name="button" onclick="mostrarContrasena()">
                 <ion-icon name="eye" id="ojoOn"></ion-icon>
             </button>

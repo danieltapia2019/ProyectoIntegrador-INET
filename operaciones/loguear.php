@@ -1,4 +1,6 @@
 <?php
+include ("../data/usuario.php");
+
 $usuarioEncontrado="";
 //0=email correcto contraseña incorrecta
 //1=email incorrecto
@@ -11,8 +13,8 @@ if($_POST){
     $usuario="";
     if(count($info)>0){
         for($i=0;$i< count($info);$i++){
-            if($info[$i]["email"] == $email){
-                if(password_verify($password,$info[$i]["password"])){
+            if(unserialize($info[$i])->getEmail() == $email){
+                if(password_verify($password,unserialize($info[$i])->getPassword())){
                     $usuarioEncontrado=-1;
                     $usuario=$info[$i];
                     break;
@@ -61,13 +63,13 @@ if($_POST){
                     <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
                     </div>
-                    <input type="email" name="email" class="form-control" aria-label="email" placeholder="Ingrese email">
+                    <input type="email" name="email" class="form-control" aria-label="email" placeholder="Ingrese email" required>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-lock"></i></span>
                     </div>
-                    <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña">
+                    <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña" required maxlength="20" minlength="6">
                 </div>
                 <p>
                 <input type="checkbox" name="" value=""> Recordarme</p>

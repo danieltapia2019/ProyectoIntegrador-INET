@@ -1,4 +1,6 @@
 <?php
+
+include ("../data/usuario.php");
 session_start();
 if(!isset($_SESSION["usuario"])){
     header('Location:index.php');
@@ -8,8 +10,8 @@ $userName = "";
 $userEmail = "";
 if(isset($_SESSION)){
   if(sizeof($_SESSION) !=0){
-  $userName = $_SESSION["usuario"]["username"];
-  $userEmail = $_SESSION["usuario"]["email"];
+  //$userName = unserialize($_SESSION["usuario"])->getUserName();
+  //$userEmail = unserialize($_SESSION["usuario"])->getEmail();
 }
   else {
     $userName = "";
@@ -31,6 +33,7 @@ if(isset($_SESSION)){
 </head>
 <body>
     <!--Navbar-->
+
     <?php include("../componentes/navbar.php");?>
     <!--Header-->
       <header class = "bienvenido">
