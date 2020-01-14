@@ -5,6 +5,7 @@ class Usuario{
   private $username;
   private $email;
   private $password;
+  private $foto;
 
   /*CONSTRUCTOR*/
 
@@ -40,6 +41,13 @@ class Usuario{
   }
   public function getId($id){
     return $this->id;
+  }
+
+  public function setFoto($foto){
+    $this->foto = $foto;
+  }
+  public function getFoto(){
+    return $this-> foto;
   }
 
 

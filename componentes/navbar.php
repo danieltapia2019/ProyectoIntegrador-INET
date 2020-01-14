@@ -2,10 +2,15 @@
 
 $usuarioLogueado=false;
 $userA="";
-$foto = null;
+$extension = "no";
 if(isset($_SESSION["usuario"])){
   $usuarioLogueado=true;
   $userA=$_SESSION["usuario"];
+}
+if(count($_SESSION) > 0){
+if(unserialize($_SESSION["usuario"])->getFoto()["fotoPerfil"]["name"] != null){
+  $extension =  pathinfo(unserialize($_SESSION["usuario"])->getFoto()["fotoPerfil"]["name"],PATHINFO_EXTENSION);
+}
 }
 ?>
 
@@ -54,8 +59,8 @@ if(isset($_SESSION["usuario"])){
       <?php if($usuarioLogueado):?>
       <li class="nav-item dropdown mx-3">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <?php if(isset($foto)):?>
-            <span><img src="<?=$userA["ruta"]?>" alt="" class="rounded-circle"></span>
+          <?php if($extension != "no"):?>
+            <span id="fotoPerfil"><img style="border-radius: 100%;" src="<?="/ProyectoIntegrador-INET/img/fotoPerfil/".unserialize($userA)->getUserName().".".$extension?>" class="rounded-circle mx-2"><?=unserialize($userA)->getUserName()?></span>
           <?php else:?>
             <span id="imagenNombre"><img src="/ProyectoIntegrador-INET/img/perfil.jpg" alt="" class="rounded-circle mx-2"><?=unserialize($userA)->getUserName()?></span>
           <?php endif;?>
@@ -82,7 +87,7 @@ if(isset($_SESSION["usuario"])){
           </button>
         </div>
         <div class="modal-body">
-          <form class="" action="operaciones/registrar.php" method="post">
+          <form class="" action="operaciones/registrar.php" method="post" enctype="multipart/form-data">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -105,6 +110,41 @@ if(isset($_SESSION["usuario"])){
               </button>
 
             </div>
+              <div id="imagenNombre">
+
+                        <div class="input-group mb-3">
+                              <img src="/ProyectoIntegrador-INET/img/perfil.jpg" alt="" id="imgNormal">
+                                <img id="imagenPrevisualizacion" class="rounded-circle mx-2" style="display: none;" >
+                                      <div class="custom-file">
+                                <input name="fotoPerfil" type="file" class="custom-file-input" id="seleccionArchivos" accept="image/*" data-max-size="2048">
+                                <label accept="image/* "class="custom-file-label" for="inputGroupFile01">Foto</label>
+                                              </div>
+                                    </div>
+                                            <!-- La imagen que vamos a usar para previsualizar lo que el usuario selecciona -->
+                                                    <script >const $seleccionArchivos = document.querySelector("#seleccionArchivos"),
+                                                   $imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");
+
+                                                 // Escuchar cuando cambie
+                                                 $seleccionArchivos.addEventListener("change", () => {
+                                                   imagenNormal = document.getElementById('imgNormal').style.display="none";
+                                                   imagenElegida = document.getElementById('imagenPrevisualizacion').style.display="inherit";
+                                                   // Los archivos seleccionados, pueden ser muchos o uno
+                                                   const archivos = $seleccionArchivos.files;
+                                                 // Si no hay archivos salimos de la función y quitamos la imagen
+                                                 if (!archivos || !archivos.length) {
+                                                   $imagenPrevisualizacion.src = "";
+                                                   imagenNormal = document.getElementById('imgNormal').style.display="inherit";
+                                                   imagenElegida = document.getElementById('imagenPrevisualizacion').style.display="none";
+                                                   return;
+                                                 }
+                                                 // Ahora tomamos el primer archivo, el cual vamos a previsualizar
+                                                 const primerArchivo = archivos[0];
+                                                 // Lo convertimos a un objeto de tipo objectURL
+                                                 const objectURL = URL.createObjectURL(primerArchivo);
+                                                 // Y a la fuente de la imagen le ponemos el objectURL
+                                                 $imagenPrevisualizacion.src = objectURL;
+                                               });</script>
+                                            </div>
             <button type="submit" class="btn btn-danger btn-lg btn-block my-3 ">Registrarse</button>
           </form>
 

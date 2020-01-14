@@ -12,6 +12,7 @@ if($_POST){
   $info=json_decode($json,true);
   $claseUsuario = new Usuario($_POST["username"],$_POST["email"],$_POST["password"]);
   $claseUsuario->setId(count($info));
+  $claseUsuario->setFoto($_FILES);
   if(count($info)>0){
     for($i=0;$i< count($info);$i++){
       if(unserialize($info[$i])->getUserName() == $claseUsuario->getUserName() ){
@@ -25,22 +26,15 @@ if($_POST){
     }
   }
   if($errorExistente==-1){
-    //Probando
     $info[]=serialize($claseUsuario);
     $json=json_encode($info);
     file_put_contents("../data/usuarios.txt",$json);
     session_start();
     $_SESSION["usuario"]=serialize($claseUsuario);
     header('Location:./../usuario/perfil1.php');
-    //Probando
-    /*
-    $info[]=$usuario;
-    $json=json_encode($info);
-    file_put_contents("../data/usuarios.txt",$json);
-    session_start();
-    $_SESSION["usuario"]=$usuario;
-    header('Location:./../usuario/perfil1.php');
-    */
+    $extension =  pathinfo($_FILES["fotoPerfil"]["name"],PATHINFO_EXTENSION);
+    move_uploaded_file($_FILES["fotoPerfil"]["tmp_name"],"../img/fotoPerfil/".$claseUsuario->getUserName().".".$extension);
+
   }
 }
  ?>
