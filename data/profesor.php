@@ -1,12 +1,11 @@
 <?php
 
-class Usuario{
+class Profesor{
   private $id;
   private $username;
   private $email;
   private $password;
   private $foto;
-  private $acceso;
 
   /*CONSTRUCTOR*/
 
@@ -50,11 +49,10 @@ class Usuario{
   public function getFoto(){
     return $this-> foto;
   }
-  public function setAcceso($acceso){
-    $this->acceso = $acceso;
-  }
-  public function getAcceso(){
-    return $this-> acceso;
+
+  public function crearCurso($idProfesor,$nombreCurso,$cursoLenguaje,$cursoFoto){
+    $insertarCurso = "INSERT INTO curso (curso_lenguaje,curso_nombre,curso_autor,curso_foto) VALUES ('$idAlumno','$email','$foto','$password','$usuario')";
+
   }
 
 }

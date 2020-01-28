@@ -4,7 +4,7 @@ session_start();
 $userName = "";
 if(isset($_SESSION)){
   if(sizeof($_SESSION) !=0){
-  $userName = unserialize($_SESSION["usuario"])->getUserName();
+  $userName = $_SESSION["usuario"]->getUserName();
 }
   else {
     $userName = "";

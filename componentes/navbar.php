@@ -2,15 +2,17 @@
 
 $usuarioLogueado=false;
 $userA="";
-$extension = "no";
+$fotoPerfil = "no";
 if(isset($_SESSION["usuario"])){
   $usuarioLogueado=true;
   $userA=$_SESSION["usuario"];
 }
+if($_SESSION){
 if(count($_SESSION) > 0){
-if(unserialize($_SESSION["usuario"])->getFoto()["fotoPerfil"]["name"] != null){
-  $extension =  pathinfo(unserialize($_SESSION["usuario"])->getFoto()["fotoPerfil"]["name"],PATHINFO_EXTENSION);
+if($_SESSION["usuario"]->getFoto() != null){
+  $fotoPerfil =  $_SESSION["usuario"]->getFoto();
 }
+  }
 }
 ?>
 
@@ -59,10 +61,10 @@ if(unserialize($_SESSION["usuario"])->getFoto()["fotoPerfil"]["name"] != null){
       <?php if($usuarioLogueado):?>
       <li class="nav-item dropdown mx-3">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <?php if($extension != "no"):?>
-            <span id="fotoPerfil"><img style="border-radius: 100%;" src="<?="/ProyectoIntegrador-INET/img/fotoPerfil/".unserialize($userA)->getUserName().".".$extension?>" class="rounded-circle mx-2"><?=unserialize($userA)->getUserName()?></span>
+          <?php if($fotoPerfil != "no"):?>
+            <span id="fotoPerfil"><img style="border-radius: 100%;" src="<?="/ProyectoIntegrador-INET/img/fotoPerfil/".$fotoPerfil?>" class="rounded-circle mx-2"><?=$userA->getUserName()?></span>
           <?php else:?>
-            <span id="imagenNombre"><img src="/ProyectoIntegrador-INET/img/perfil.jpg" alt="" class="rounded-circle mx-2"><?=unserialize($userA)->getUserName()?></span>
+            <span id="imagenNombre"><img src="/ProyectoIntegrador-INET/img/perfil.jpg" alt="" class="rounded-circle mx-2"><?=$userA->getUserName()?></span>
           <?php endif;?>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">

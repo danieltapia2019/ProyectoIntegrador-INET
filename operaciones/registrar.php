@@ -1,38 +1,65 @@
 <?php
-
+//conexion a la base de datos
+include ("../data/conexion.php");
 //clase usuario con atributos, metodos getter and setters
 include ("../data/usuario.php");
-//0=nombre de usuario en uso
-//1=email en uso
-//-1=todo correcto
 
+//Obtener el id y asignarlo
+
+session_start();
+$maxIdAlumno = mysqli_query($conexion,"SELECT MAX(id) AS id_alumno FROM alumno");
+if ($row = mysqli_fetch_row($maxId)){//ID maximo {
+    $idAlumno = trim($row[0])+1;
+}
+if ($row2 = mysqli_fetch_row(mysqli_query($conexion,"SELECT MAX(id) AS id_profesor FROM profesor"))){//ID maximo {
+    $idProfesor = trim($row2[0])+1;
+}
+$alumnos = mysqli_query($conexion,"SELECT * FROM alumno");
+$profesores = mysqli_query($conexion,"SELECT * FROM profesor");
 $errorExistente="-1";
 if($_POST){
-  $json=file_get_contents("../data/usuarios.txt");
-  $info=json_decode($json,true);
   $claseUsuario = new Usuario($_POST["username"],$_POST["email"],$_POST["password"]);
-  $claseUsuario->setId(count($info));
-  $claseUsuario->setFoto($_FILES);
-  if(count($info)>0){
-    for($i=0;$i< count($info);$i++){
-      if(unserialize($info[$i])->getUserName() == $claseUsuario->getUserName() ){
+  $claseUsuario->setId($idAlumno);
+  if($idAlumno > 0){
+    while($fila = mysqli_fetch_row($alumnos)){
+      if($fila[4] == $claseUsuario->getUserName()){
         $errorExistente = 0;
         break;
       }
-      else if(unserialize($info[$i])->getEmail() == $claseUsuario->getEmail()){
+      if($fila[1] == $claseUsuario->getEmail()){
+        $errorExistente = 1;
+        break;
+      }
+    }
+  }
+  if($idProfesor > 0){
+    while($fila2 = mysqli_fetch_row($profesores)){
+      if($fila2[4] == $claseUsuario->getUserName()){
+        $errorExistente = 0;
+        break;
+      }
+      if($fila2[1] == $claseUsuario->getEmail()){
         $errorExistente = 1;
         break;
       }
     }
   }
   if($errorExistente==-1){
-    $info[]=serialize($claseUsuario);
-    $json=json_encode($info);
-    file_put_contents("../data/usuarios.txt",$json);
-    session_start();
-    $_SESSION["usuario"]=serialize($claseUsuario);
+    if($_FILES["fotoPerfil"]["name"] != null){
+      $extension =  pathinfo($_FILES["fotoPerfil"]["name"],PATHINFO_EXTENSION);
+      $claseUsuario->setFoto($claseUsuario->getUserName().".".$extension);
+    }else{
+      $claseUsuario->setFoto(NULL);
+    }
+    $_SESSION["usuario"]=$claseUsuario;
+    $usuario = $claseUsuario->getUserName();
+    $email = $claseUsuario->getEmail();
+    $password = $claseUsuario->getPassword();
+    $foto = $claseUsuario->getFoto();
+    $acceso = $claseUsuario->getAcceso();
+    $insertarUsuario = "INSERT INTO alumno (alumno_email,alumno_foto,alumno_password,alumno_usuario,alumno_acceso) VALUES ('$email','$foto','$password','$usuario','$acceso')";
+    $insertarAlumno = mysqli_query($conexion,$insertarUsuario);
     header('Location:./../usuario/perfil1.php');
-    $extension =  pathinfo($_FILES["fotoPerfil"]["name"],PATHINFO_EXTENSION);
     move_uploaded_file($_FILES["fotoPerfil"]["tmp_name"],"../img/fotoPerfil/".$claseUsuario->getUserName().".".$extension);
 
   }

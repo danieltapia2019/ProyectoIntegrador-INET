@@ -2,16 +2,17 @@
 
 include ("../data/usuario.php");
 session_start();
-$extension = "no";
-$fotoPerfil = unserialize($_SESSION["usuario"])->getFoto()["fotoPerfil"];
 
 if(!isset($_SESSION["usuario"])){
     header('Location:index.php');
 }
 
 if(count($_SESSION) > 0){
-if(unserialize($_SESSION["usuario"])->getFoto()["fotoPerfil"]["name"] != null){
-  $extension =  pathinfo(unserialize($_SESSION["usuario"])->getFoto()["fotoPerfil"]["name"],PATHINFO_EXTENSION);
+if($_SESSION["usuario"]->getFoto() != null){
+  $fotoPerfil  =  $_SESSION["usuario"]->getFoto();
+}
+else {
+  $fotoPerfil = "no";
 }
 }
 
@@ -19,8 +20,8 @@ $userName = "";
 $userEmail = "";
 if(isset($_SESSION)){
   if(sizeof($_SESSION) !=0){
-  $userName = unserialize($_SESSION["usuario"])->getUserName();
-  $userEmail = unserialize($_SESSION["usuario"])->getEmail();
+  $userName = $_SESSION["usuario"]->getUserName();
+  $userEmail = $_SESSION["usuario"]->getEmail();
 }
   else {
     $userName = "";
@@ -87,10 +88,10 @@ if(isset($_SESSION)){
                                 <div id="imagenNombre">
 
                                       <div class="input-group mb-3">
-                                        <?php if($extension == "no"): ?>
+                                        <?php if($fotoPerfil == "no"): ?>
                                           <img src="/ProyectoIntegrador-INET/img/perfil.jpg" alt="" id="imgNormal">
                                         <?php else: ?>
-                                          <img src="<?="/ProyectoIntegrador-INET/img/fotoPerfil/".$userName.".".$extension?>" alt="" class="rounded-circle mx-2" id="imgNormal"></span>
+                                          <img src="<?="/ProyectoIntegrador-INET/img/fotoPerfil/".$fotoPerfil?>" alt="" class="rounded-circle mx-2" id="imgNormal"></span>
                                         <?php endif; ?>
                                           <img id="imagenPrevisualizacion" class="rounded-circle mx-2" style="display: none;" >
                                         <div class="custom-file">

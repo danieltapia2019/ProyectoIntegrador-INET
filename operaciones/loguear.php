@@ -1,6 +1,9 @@
 <?php
+include ("../data/conexion.php");
+
 include ("../data/usuario.php");
 
+session_start();
 $usuarioEncontrado="";
 //0=email correcto contraseña incorrecta
 //1=email incorrecto
@@ -8,31 +11,51 @@ $usuarioEncontrado="";
 if($_POST){
     $email=$_POST["email"];
     $password=$_POST["password"];
-    $json=file_get_contents("../data/usuarios.txt");
-    $info=json_decode($json,true);
     $usuario="";
-    if(count($info)>0){
-        for($i=0;$i< count($info);$i++){
-            if(unserialize($info[$i])->getEmail() == $email){
-                if(password_verify($password,unserialize($info[$i])->getPassword())){
-                    $usuarioEncontrado=-1;
-                    $usuario=$info[$i];
-                    break;
-                }
-                else{
-                    $usuarioEncontrado=0;
-                    break;
-                }
-            }
-            else{
-                $usuarioEncontrado=1;
 
-            }
+    $alumnos = mysqli_query($conexion,"SELECT * FROM alumno");
+    $profesores = mysqli_query($conexion,"SELECT * FROM profesor");
+
+    while($fila = mysqli_fetch_row($alumnos)){
+      if($fila[1] == $email){
+        if(password_verify($password,$fila[3])){
+          $usuarioEncontrado = -1;
+          $usuario = $fila;
+          break;
         }
+        else {
+          $usuarioEncontrado = 0;
+          break;
+        }
+      }else {
+         $usuarioEncontrado = 1;
+      }
     }
+
+      while($fila2 = mysqli_fetch_row($profesores)){
+
+          if($fila2[1] == $email){
+            if(password_verify($password,$fila2[3])){
+              $usuarioEncontrado = -1;
+              $usuario = $fila2;
+              break;
+            }
+            else {
+              $usuarioEncontrado = 0;
+              break;
+            }
+          }else {
+             $usuarioEncontrado = 1;
+          }
+      }
+
     if($usuarioEncontrado==-1){
-        session_start();
-        $_SESSION["usuario"]=$usuario;
+        var_dump($usuario);
+        $claseUsuario = new Usuario($usuario[4],$usuario[1],$usuario[3]);
+        $claseUsuario->setId($usuario[0]);
+        $claseUsuario->setFoto($usuario[2]);
+        $claseUsuario->setAcceso($usuario[5]);
+        $_SESSION["usuario"]=$claseUsuario;
         header('Location:./../usuario/perfil1.php');
     }
 }
