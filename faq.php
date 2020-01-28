@@ -1,5 +1,7 @@
 <?php
-include ("data/usuario.php");
+
+include_once ($_SERVER['DOCUMENT_ROOT'].'/ProyectoIntegrador-INET/rutas.php');
+include (DATA_PATH."usuario.php");
 session_start();
 $userName = "";
 if(isset($_SESSION)){

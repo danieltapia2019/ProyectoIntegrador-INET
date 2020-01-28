@@ -1,6 +1,7 @@
 <?php
 
-include ("../data/usuario.php");
+include_once ($_SERVER['DOCUMENT_ROOT'].'/ProyectoIntegrador-INET/rutas.php');
+include (DATA_PATH."usuario.php");
 session_start();
 
 if(!isset($_SESSION["usuario"])){
@@ -44,7 +45,7 @@ if(isset($_SESSION)){
 <body>
     <!--Navbar-->
 
-    <?php include("../componentes/navbar.php");?>
+    <?php include(COMPONENT_PATH."navbar.php");?>
     <!--Header-->
       <header class = "bienvenido">
         <div class="usuario">
@@ -55,9 +56,11 @@ if(isset($_SESSION)){
       <a href="#">
         <ion-icon name="briefcase"></ion-icon>
         Mis cursos</a>
+        <?php if($_SESSION["usuario"]->getAcceso() >=2): ?>
       <a href="#">
         <ion-icon name="add-circle"></ion-icon>
         Dar un curso</a>
+      <?php endif; ?>
       <a href="#">
         <ion-icon name="star"></ion-icon>
         Favoritos</a>
@@ -83,7 +86,7 @@ if(isset($_SESSION)){
         <!--Favoritos-->
                 <!--Configuracion-->
               <div class="configuracion" style="display: none;" id="configuracion">
-                            <form class="" action="" method="post">
+                            <form class="" action="perfil1.php" method="post">
 
                                 <div id="imagenNombre">
 
@@ -130,7 +133,7 @@ if(isset($_SESSION)){
                                 </button>
 
                             </form>
-                            <form class="" action="" method="">
+                            <form class="" action="" method="post">
                               <hr>
                               <div class="form-group">
                           <label for="exampleInputEmail1">Cambiar Email</label>
@@ -143,8 +146,8 @@ if(isset($_SESSION)){
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                           </div>
-                          <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña" id="passwordRegister">
-                          <button class="btn btn-primary" type="button" name="button" onclick="mostrarContrasena()">
+                          <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña" id="passwordRegister" required>
+                          <button class="btn btn-primary" type="button" name="button" onclick="mostrarContrasena()" >
                               <ion-icon name="eye" id="ojoRegister"></ion-icon>
                           </button>
 
@@ -156,7 +159,7 @@ if(isset($_SESSION)){
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                           </div>
                           <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña" id="passwordRegister">
-                          <button class="btn btn-primary" type="button" name="button" onclick="mostrarContrasena()">
+                          <button class="btn btn-primary" type="button" name="button" onclick="mostrarContrasena()" required>
                               <ion-icon name="eye" id="ojoRegister"></ion-icon>
                           </button>
 
@@ -172,7 +175,7 @@ if(isset($_SESSION)){
       </section>
 
     <!--Footer-->
-    <?php include("../componentes/footer.php") ?>
+    <?php include(COMPONENT_PATH."footer.php") ?>
 
         <!--Script-->
     <script>

@@ -172,8 +172,7 @@ if($_SESSION["usuario"]->getFoto() != null){
           </button>
         </div>
         <div class="modal-body">
-
-        <form action="operaciones/loguear.php" method="post">
+        <form action="/ProyectoIntegrador-INET/operaciones/loguear.php" method="post">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>

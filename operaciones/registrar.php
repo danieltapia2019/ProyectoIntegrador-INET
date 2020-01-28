@@ -1,8 +1,8 @@
 <?php
-//conexion a la base de datos
-include ("../data/conexion.php");
+include_once ($_SERVER['DOCUMENT_ROOT'].'/ProyectoIntegrador-INET/rutas.php');
+include (DATA_PATH."usuario.php");
 //clase usuario con atributos, metodos getter and setters
-include ("../data/usuario.php");
+include (DATA_PATH."conexion.php");
 
 //Obtener el id y asignarlo
 
@@ -20,6 +20,7 @@ $errorExistente="-1";
 if($_POST){
   $claseUsuario = new Usuario($_POST["username"],$_POST["email"],$_POST["password"]);
   $claseUsuario->setId($idAlumno);
+  $claseUsuario->setAcceso(1);
   if($idAlumno > 0){
     while($fila = mysqli_fetch_row($alumnos)){
       if($fila[4] == $claseUsuario->getUserName()){
@@ -79,7 +80,7 @@ if($_POST){
  <body>
      <div class="container-fuild">
 
-         <?php include ("../componentes/navbar.php") ?>
+         <?php include (COMPONENT_PATH."navbar.php") ?>
             <div class="modal-body">
             <?php if($errorExistente==0):?>
                 <p>Nombre de Usuario en uso. Por favor elija otro.</p>
@@ -115,7 +116,7 @@ if($_POST){
         </div>
 
 
-                          <?php include ("../componentes/footer.php") ?>
+                          <?php include (COMPONENT_PATH."footer.php") ?>
      </div>
 
 

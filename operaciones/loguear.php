@@ -1,7 +1,8 @@
 <?php
-include ("../data/conexion.php");
 
-include ("../data/usuario.php");
+include_once ($_SERVER['DOCUMENT_ROOT'].'/ProyectoIntegrador-INET/rutas.php');
+include (DATA_PATH."conexion.php");
+include (DATA_PATH."usuario.php");
 
 session_start();
 $usuarioEncontrado="";
@@ -28,35 +29,35 @@ if($_POST){
           break;
         }
       }else {
-         $usuarioEncontrado = 1;
+        while($fila2 = mysqli_fetch_row($profesores)){
+            if($fila2[1] == $email){
+              if(password_verify($password,$fila2[3])){
+                $usuarioEncontrado = -1;
+                $usuario = $fila2;
+                break;
+              }
+              else {
+                $usuarioEncontrado = 0;
+                break;
+              }
+            }else {
+               $usuarioEncontrado = 1;
+               break;
+            }
+        }
       }
     }
 
-      while($fila2 = mysqli_fetch_row($profesores)){
 
-          if($fila2[1] == $email){
-            if(password_verify($password,$fila2[3])){
-              $usuarioEncontrado = -1;
-              $usuario = $fila2;
-              break;
-            }
-            else {
-              $usuarioEncontrado = 0;
-              break;
-            }
-          }else {
-             $usuarioEncontrado = 1;
-          }
-      }
 
     if($usuarioEncontrado==-1){
-        var_dump($usuario);
         $claseUsuario = new Usuario($usuario[4],$usuario[1],$usuario[3]);
         $claseUsuario->setId($usuario[0]);
         $claseUsuario->setFoto($usuario[2]);
         $claseUsuario->setAcceso($usuario[5]);
         $_SESSION["usuario"]=$claseUsuario;
         header('Location:./../usuario/perfil1.php');
+
     }
 }
  ?>
@@ -72,7 +73,7 @@ if($_POST){
 </head>
  <body>
      <div class="container-fuild">
-       <?php include ("../componentes/navbar.php") ?>
+       <?php include (COMPONENT_PATH."navbar.php") ?>
 
             <div class="modal-body">
             <?php if($usuarioEncontrado==0):?>
@@ -105,7 +106,7 @@ if($_POST){
 
 
 
-                  <?php include ("../componentes/footer.php") ?>
+                  <?php include (COMPONENT_PATH."footer.php") ?>
         </div>
 
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
