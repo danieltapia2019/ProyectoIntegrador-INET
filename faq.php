@@ -1,7 +1,7 @@
 <?php
 
-include_once ($_SERVER['DOCUMENT_ROOT'].'/ProyectoIntegrador-INET/rutas.php');
-include (DATA_PATH."usuario.php");
+include_once ('rutas.php');
+include ("data/usuario.php");
 session_start();
 $userName = "";
 if(isset($_SESSION)){
@@ -125,7 +125,7 @@ if(isset($_GET["logout"])){
 
         </div>
       </section>
-      <?php include ("/componentes/footer.php") ?>
+      <?php include ("componentes/footer.php") ?>
     </div>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

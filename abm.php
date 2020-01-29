@@ -1,8 +1,8 @@
 <?php
 
-include_once ($_SERVER['DOCUMENT_ROOT'].'/ProyectoIntegrador-INET/rutas.php');
-include (DATA_PATH."conexion.php");
-include (DATA_PATH."usuario.php");
+include_once ('rutas.php');
+include ("data/conexion.php");
+include ("data/usuario.php");
 session_start();
 if($_SESSION){
   if($_SESSION["usuario"]->getAcceso() == 1){
@@ -61,7 +61,7 @@ $resultado = mysqli_query($conexion,$consulta);
    </head>
    <body>
      <div class="container-fuild">
-       <?php include(COMPONENT_PATH."navbar.php") ?>
+       <?php include("componentes/navbar.php") ?>
        <header>
          <h1>Bienvenido al ABM de Promunity</h1>
          <img src="" alt="">
@@ -199,7 +199,7 @@ $resultado = mysqli_query($conexion,$consulta);
    </div>
  </div>
 
-<?php include("./componentes/footer.php") ?>
+<?php include("componentes/footer.php") ?>
 </div>
 
 

@@ -1,5 +1,12 @@
 <?php
+if(file_exists('rutas.php')){
+  include_once('rutas.php');
+}
+elseif (file_exists(__DIR__."/../rutas.php")) {
+  include_once(__DIR__."/../rutas.php");
+}
 
+echo $BASE_DIR;
 $usuarioLogueado=false;
 $userA="";
 $fotoPerfil = "no";
@@ -17,7 +24,7 @@ if($_SESSION["usuario"]->getFoto() != null){
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-danger">
-  <a class="navbar-brand" href="/ProyectoIntegrador-INET/index.php"><img src="/ProyectoIntegrador-INET/img/logo.png" alt="" width=60px></a>
+  <a class="navbar-brand" href="<?=$BASE_URL?>/index.php"><img src="<?=$BASE_URL?>/img/logo.png" alt="" width=60px></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -62,14 +69,14 @@ if($_SESSION["usuario"]->getFoto() != null){
       <li class="nav-item dropdown mx-3">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <?php if($fotoPerfil != "no"):?>
-            <span id="fotoPerfil"><img style="border-radius: 100%;" src="<?="/ProyectoIntegrador-INET/img/fotoPerfil/".$fotoPerfil?>" class="rounded-circle mx-2"><?=$userA->getUserName()?></span>
+            <span id="fotoPerfil"><img style="border-radius: 100%;" src="<?=$BASE_URL."/img/fotoPerfil/".$fotoPerfil?>" class="rounded-circle mx-2"><?=$userA->getUserName()?></span>
           <?php else:?>
-            <span id="imagenNombre"><img src="/ProyectoIntegrador-INET/img/perfil.jpg" alt="" class="rounded-circle mx-2"><?=$userA->getUserName()?></span>
+            <span id="imagenNombre"><img src="<?=$BASE_URL?>/img/perfil.jpg" alt="" class="rounded-circle mx-2"><?=$userA->getUserName()?></span>
           <?php endif;?>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/ProyectoIntegrador-INET/usuario/perfil1.php">Mi perfil</a>
-          <a class="dropdown-item" href="/ProyectoIntegrador-INET/index.php?logout=0">Cerrar Sesion</a>
+          <a class="dropdown-item" href="<?=$BASE_URL?>/usuario/perfil1.php">Mi perfil</a>
+          <a class="dropdown-item" href="<?=$BASE_URL?>/index.php?logout=0">Cerrar Sesion</a>
         </div>
 
       </li>
@@ -89,7 +96,7 @@ if($_SESSION["usuario"]->getFoto() != null){
           </button>
         </div>
         <div class="modal-body">
-          <form class="" action="operaciones/registrar.php" method="post" enctype="multipart/form-data">
+          <form class="" action="<?=$BASE_URL?>/operaciones/registrar.php" method="post" enctype="multipart/form-data">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -115,7 +122,7 @@ if($_SESSION["usuario"]->getFoto() != null){
               <div id="imagenNombre">
 
                         <div class="input-group mb-3">
-                              <img src="/ProyectoIntegrador-INET/img/perfil.jpg" alt="" id="imgNormal">
+                              <img src="<?=$BASE_URL?>/img/perfil.jpg" alt="" id="imgNormal">
                                 <img id="imagenPrevisualizacion" class="rounded-circle mx-2" style="display: none;" >
                                       <div class="custom-file">
                                 <input name="fotoPerfil" type="file" class="custom-file-input" id="seleccionArchivos" accept="image/*" data-max-size="2048">
@@ -172,7 +179,7 @@ if($_SESSION["usuario"]->getFoto() != null){
           </button>
         </div>
         <div class="modal-body">
-        <form action="/ProyectoIntegrador-INET/operaciones/loguear.php" method="post">
+        <form action="<?=$BASE_URL?>/operaciones/loguear.php" method="post">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>

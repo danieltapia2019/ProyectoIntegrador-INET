@@ -1,18 +1,25 @@
-
+<?php
+if(file_exists('rutas.php')){
+  include_once('rutas.php');
+}
+elseif (file_exists(__DIR__."/../rutas.php")) {
+  include_once(__DIR__."/../rutas.php");
+}
+ ?>
     <footer class="footer">
       <div class="lista">
         <ul>
           <li>
-            <a href="/ProyectoIntegrador-INET/faq.php">
+            <a href="<?=$BASE_URL?>/faq.php">
               <ion-icon name="help"></ion-icon>
               Preguntas Frecuentes</a>
           </li>
           <li>
-            <a href="/ProyectoIntegrador-INET/index.php">
+            <a href="<?=$BASE_URL?>/index.php">
               <ion-icon name="home"></ion-icon>
               Home</a></li>
           <li>
-          <a href="/ProyectoIntegrador-INET/index.php#contacto">
+          <a href="<?=$BASE_URL?>/index.php#contacto">
             <ion-icon name="contact"></ion-icon>
             Contacto</a></li>
         </ul>

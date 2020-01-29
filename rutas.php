@@ -1,13 +1,11 @@
 <?php
-/*
-define ('ROOT_PATH', $_SERVER['DOCUMENT_ROOT'].'/ProyectoIntegrador-INET/');
-define ('COMPONENT_PATH', ROOT_PATH.'componentes/');
-define ('CSS_PATH', ROOT_PATH.'css/');
-define ('DATA_PATH', ROOT_PATH.'data/');
-define ('IMG_PATH',ROOT_PATH.'img/');
-define ('OPERACIONES_PATH',ROOT_PATH.'operaciones/');
-define ('USUARIO_PATH',ROOT_PATH.'usuario/');*/
-//declare ('BASE_DIR',__DIR__);
-$BASE_DIR = __DIR__;
-$BASE_URL = "http://localhost/ProyectoIntegrador-INET";
+//DESCOMENTAR
+//echo __DIR__;//ejecutar y copiar la ruta y asignarla a $BASE_DIR para el correcto funcionamiento de rutas
+$BASE_DIR = "G:/Archivos de Programas/xampp/htdocs/PROYECTYOSSSSS/ProyectoIntegrador-INET";//ruta para includes necesarios
+
+
+//$partesruta = pathinfo($_SERVER['REQUEST_URI']);
+//echo "https://".$_SERVER["HTTP_HOST"].$partesruta["dirname"]."/"; //mismo procedimiento que con la $BASE_DIR solo que se lo asignamos a la $BASE_URL
+$BASE_URL = "https://localhost/PROYECTYOSSSSS/ProyectoIntegrador-INET";
+
  ?>

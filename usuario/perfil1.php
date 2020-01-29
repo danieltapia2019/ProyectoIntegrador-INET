@@ -1,11 +1,11 @@
 <?php
 
-include_once ($_SERVER['DOCUMENT_ROOT'].'/ProyectoIntegrador-INET/rutas.php');
-include (DATA_PATH."usuario.php");
+include("../rutas.php");
+include("../data/usuario.php");
 session_start();
 
 if(!isset($_SESSION["usuario"])){
-    header('Location:index.php');
+    header('Location:'.$BASE_URL.'/index.php');
 }
 
 if(count($_SESSION) > 0){
@@ -40,12 +40,12 @@ if(isset($_SESSION)){
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="../css/stylePrincipal.css">
   <link rel="stylesheet" href="perfilStyle.css">
-  <link rel="shortcut icon" href="img\logo.png" />
+  <link rel="shortcut icon" href="../img/logo.png" />
 </head>
 <body>
     <!--Navbar-->
 
-    <?php include(COMPONENT_PATH."navbar.php");?>
+    <?php include("../componentes/navbar.php");?>
     <!--Header-->
       <header class = "bienvenido">
         <div class="usuario">
@@ -92,9 +92,9 @@ if(isset($_SESSION)){
 
                                       <div class="input-group mb-3">
                                         <?php if($fotoPerfil == "no"): ?>
-                                          <img src="/ProyectoIntegrador-INET/img/perfil.jpg" alt="" id="imgNormal">
+                                          <img src="<?=$BASE_URL?>/img/perfil.jpg" alt="" id="imgNormal">
                                         <?php else: ?>
-                                          <img src="<?="/ProyectoIntegrador-INET/img/fotoPerfil/".$fotoPerfil?>" alt="" class="rounded-circle mx-2" id="imgNormal"></span>
+                                          <img src="<?=$BASE_URL?>/img/fotoPerfil/<?=$fotoPerfil?>" alt="" class="rounded-circle mx-2" id="imgNormal"></span>
                                         <?php endif; ?>
                                           <img id="imagenPrevisualizacion" class="rounded-circle mx-2" style="display: none;" >
                                         <div class="custom-file">
@@ -175,7 +175,7 @@ if(isset($_SESSION)){
       </section>
 
     <!--Footer-->
-    <?php include(COMPONENT_PATH."footer.php") ?>
+    <?php include("../componentes/footer.php") ?>
 
         <!--Script-->
     <script>

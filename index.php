@@ -1,7 +1,5 @@
 <?php
-
-include_once ("rutas.php");
-include ($BASE_DIR."/data/usuario.php");
+include ("data/usuario.php");
 session_start();
 if(isset($_GET["logout"])){
   session_destroy();
@@ -24,7 +22,7 @@ if(isset($_GET["logout"])){
 <body>
   <div class="container-fuild">
     <!--Navbar-->
-    <?php include($BASE_DIR."/componentes/navbar.php"); ?>
+    <?php include("componentes/navbar.php"); ?>
 
 
 
@@ -227,7 +225,7 @@ if(isset($_GET["logout"])){
 
         <!--Footer-->
 
-        <?php include(COMPONENT_PATH."footer.php"); ?>
+        <?php include("componentes/footer.php"); ?>
 </div>
 
 

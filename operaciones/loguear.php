@@ -1,11 +1,11 @@
 <?php
 
-include_once ($_SERVER['DOCUMENT_ROOT'].'/ProyectoIntegrador-INET/rutas.php');
-include (DATA_PATH."conexion.php");
-include (DATA_PATH."usuario.php");
+include("../rutas.php");
+include("../data/conexion.php");
+include("../data/usuario.php");
 
 session_start();
-$usuarioEncontrado="";
+$usuarioEncontrado ="";
 //0=email correcto contraseña incorrecta
 //1=email incorrecto
 //-1=usuario logueado correctamente
@@ -69,11 +69,11 @@ if($_POST){
   <title>Iniciar Sesion</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="../css/stylePrincipal.css">
-  <link rel="shortcut icon" href="img\logo.png" />
+  <link rel="shortcut icon" href="../img/logo.png" />
 </head>
  <body>
      <div class="container-fuild">
-       <?php include (COMPONENT_PATH."navbar.php") ?>
+       <?php include("../componentes/navbar.php"); ?>
 
             <div class="modal-body">
             <?php if($usuarioEncontrado==0):?>
@@ -106,7 +106,7 @@ if($_POST){
 
 
 
-                  <?php include (COMPONENT_PATH."footer.php") ?>
+                  <?php include ("../componentes/footer.php") ?>
         </div>
 
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
