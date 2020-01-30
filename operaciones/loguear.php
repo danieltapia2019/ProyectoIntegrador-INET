@@ -17,36 +17,37 @@ if($_POST){
     $alumnos = mysqli_query($conexion,"SELECT * FROM alumno");
     $profesores = mysqli_query($conexion,"SELECT * FROM profesor");
 
+
     while($fila = mysqli_fetch_row($alumnos)){
-      if($fila[1] == $email){
-        if(password_verify($password,$fila[3])){
-          $usuarioEncontrado = -1;
-          $usuario = $fila;
+ if($fila[1] == $email){
+   if(password_verify($password,$fila[3])){
+     $usuarioEncontrado = -1;
+     $usuario = $fila;
+     break;
+   }
+   else {
+     $usuarioEncontrado = 0;
+     break;
+   }
+ }else {
+   while($fila2 = mysqli_fetch_row($profesores)){
+       if($fila2[1] == $email){
+         if(password_verify($password,$fila2[3])){
+           $usuarioEncontrado = -1;
+           $usuario = $fila2;
+           break;
+         }
+         else {
+           $usuarioEncontrado = 0;
+           break;
+         }
+       }else {
+          $usuarioEncontrado = 1;
           break;
-        }
-        else {
-          $usuarioEncontrado = 0;
-          break;
-        }
-      }else {
-        while($fila2 = mysqli_fetch_row($profesores)){
-            if($fila2[1] == $email){
-              if(password_verify($password,$fila2[3])){
-                $usuarioEncontrado = -1;
-                $usuario = $fila2;
-                break;
-              }
-              else {
-                $usuarioEncontrado = 0;
-                break;
-              }
-            }else {
-               $usuarioEncontrado = 1;
-               break;
-            }
-        }
-      }
-    }
+       }
+   }
+ }
+}
 
 
 

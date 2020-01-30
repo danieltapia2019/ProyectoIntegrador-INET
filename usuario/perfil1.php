@@ -2,12 +2,20 @@
 
 include("../rutas.php");
 include("../data/usuario.php");
+include ("../data/conexion.php");
 session_start();
-
-if(!isset($_SESSION["usuario"])){
+$misCursosAlumno = "SELECT INTO";
+if(!isset($_SESSION["usuario"])) {
     header('Location:'.$BASE_URL.'/index.php');
 }
+$UsuarioID = $_SESSION["usuario"]->getId();
+if($_SESSION["usuario"]->getAcceso() == 1){
+  $consulta = "SELECT curso.id, curso.curso_lenguaje , curso.curso_nombre, curso.curso_foto FROM alumno_curso,curso WHERE alumno_curso.alumno_id = '$UsuarioID' AND alumno_curso.curso_id = curso.id";
+}else{
+  $consulta = "SELECT curso.id,curso.curso_lenguaje,curso.curso_nombre,curso.curso_foto  FROM curso  WHERE curso.curso_autor = '$UsuarioID'";
+}
 
+$resultado = mysqli_query($conexion,$consulta);
 if(count($_SESSION) > 0){
 if($_SESSION["usuario"]->getFoto() != null){
   $fotoPerfil  =  $_SESSION["usuario"]->getFoto();
@@ -53,7 +61,7 @@ if(isset($_SESSION)){
           <!--SideNav-->
           <div id="sideNavigation" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <a href="#">
+      <a href="#" onclick="abrirMisCursos()">
         <ion-icon name="briefcase"></ion-icon>
         Mis cursos</a>
         <?php if($_SESSION["usuario"]->getAcceso() >=2): ?>
@@ -82,7 +90,32 @@ if(isset($_SESSION)){
       </header>
       <section class="opciones">
         <!--Mis cursos-->
+        <div class="mis-cursos" id="misCursos">
+          <h1> Usted Esta en Mis cursos</h1>
+          <?php while($fila = mysqli_fetch_row($resultado)){ ?>
+            <article class="border border-secundary border-top-0 curso">
+
+            <div class="card" style="width: 18rem;">
+              <img src="<?=$BASE_URL."/img/fotoCurso/".$fila[3]?>" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title"><?=$fila[2]?></h5>
+                <p>Lenguaje: <?=$fila[1]?></p>
+                <?php if($_SESSION["usuario"]->getAcceso() < 1): ?>
+                <h6>Alumnos: </h6>
+                <a href="#" class="btn btn-primary">Borrar Curso</a>
+                <?php endif; ?>
+              </div>
+            </div>
+            </article>
+        <?php }  ?>
+        </div>
         <!--Dar curso-->
+        <div class="crear-curso" id="crearCurso">
+          <form class="" action="perfil1.php" method="post">
+            
+          </form>
+
+        </div>
         <!--Favoritos-->
                 <!--Configuracion-->
               <div class="configuracion" style="display: none;" id="configuracion">
@@ -207,9 +240,15 @@ if(isset($_SESSION)){
         document.getElementById('configuracion').style.display = "none";
 
      }
+     function abrirMisCursos(){
+       document.getElementById("sideNavigation").style.width = "0";
+       document.getElementById('configuracion').style.display = "none";
+       document.getElementById("misCursos").style.display = "inherit";
+     }
 
     function abrirConfiguracion(){
       document.getElementById("sideNavigation").style.width = "0";
+      document.getElementById("misCursos").style.display = "none";
       document.getElementById('configuracion').style.display = "inherit";
     }
     function openNav() {

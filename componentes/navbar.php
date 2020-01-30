@@ -6,7 +6,6 @@ elseif (file_exists(__DIR__."/../rutas.php")) {
   include_once(__DIR__."/../rutas.php");
 }
 
-echo $BASE_DIR;
 $usuarioLogueado=false;
 $userA="";
 $fotoPerfil = "no";

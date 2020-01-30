@@ -12,7 +12,7 @@ if($_SESSION){
   header('Location:index.php');
 }
 $elegido = "Alumnos";
-$consulta = "SELECT * FROM alumno";
+$consulta = "SELECT alumno.id , alumno.alumno_usuario ,alumno.alumno_email FROM alumno";
 //indice para ver que eligio ver el ADMINISTRADOR
 $indice = 0;
 
@@ -21,12 +21,12 @@ if($_POST){
   switch ($indice) {
     case 0:
     //alumnos
-    $consulta = "SELECT * FROM alumno";
+    $consulta = "SELECT alumno.id , alumno.alumno_usuario ,alumno.alumno_email FROM alumno";
     $elegido = "Alumnos";
       break;
     case 1:
     //Profesores
-    $consulta = "SELECT * FROM profesor";
+    $consulta = "SELECT profesor.id , profesor.profesor_usuario , profesor.profesor_email FROM profesor";
     $elegido = "Profesores";
       break;
     case 2:
@@ -72,7 +72,6 @@ $resultado = mysqli_query($conexion,$consulta);
              <option value=<?php echo $indice;?> selected="true" disabled="disabled"><?php echo $elegido; ?></option>
              <option value="0">Alumnos</option>
              <option value="1">Profesores</option>
-             <option value="2">Administradores</option>
              <option value="3">Cursos</option>
              <option value="4">Alumno/Curso</option>
            </select>
@@ -91,7 +90,6 @@ $resultado = mysqli_query($conexion,$consulta);
              <th scope="col">ID</th>
              <th>Usuario</th>
              <th>Email</th>
-             <th>Contraseña</th>
             <?php endif; ?>
             <?php if($indice == 3): ?>
              <th scope="col">ID</th>
@@ -111,9 +109,8 @@ $resultado = mysqli_query($conexion,$consulta);
            <tr>
              <?php if($indice == 0 || $indice == 1 || $indice == 2): ?>
              <td><?php echo $fila[0]; ?></td>
-             <td><?php echo $fila[4]; ?></td>
              <td><?php echo $fila[1]; ?></td>
-             <td><?php echo $fila[3]; ?></td>
+             <td><?php echo $fila[2]; ?></td>
             <?php endif; ?>
             <?php if($indice == 3): ?>
              <td><?php echo $fila[0]; ?></td>
