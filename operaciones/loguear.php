@@ -14,47 +14,28 @@ if($_POST){
     $password=$_POST["password"];
     $usuario="";
 
-    $alumnos = mysqli_query($conexion,"SELECT * FROM alumno");
-    $profesores = mysqli_query($conexion,"SELECT * FROM profesor");
+    $usuarios = mysqli_query($conexion,"SELECT id,username,email,pwd,foto,acceso FROM usuarios");
 
 
-    while($fila = mysqli_fetch_row($alumnos)){
- if($fila[1] == $email){
-   if(password_verify($password,$fila[3])){
-     $usuarioEncontrado = -1;
-     $usuario = $fila;
-     break;
-   }
-   else {
-     $usuarioEncontrado = 0;
-     break;
-   }
- }else {
-   while($fila2 = mysqli_fetch_row($profesores)){
-       if($fila2[1] == $email){
-         if(password_verify($password,$fila2[3])){
-           $usuarioEncontrado = -1;
-           $usuario = $fila2;
-           break;
-         }
-         else {
-           $usuarioEncontrado = 0;
-           break;
-         }
-       }else {
-          $usuarioEncontrado = 1;
-          break;
-       }
-   }
- }
-}
-
-
-
+    while($fila = mysqli_fetch_row($usuarios)){
+      if($fila[2] == $email){
+        if(password_verify($password,$fila[3])){
+            $usuarioEncontrado = -1;
+            $usuario = $fila;
+            break;
+          }
+          else {
+            $usuarioEncontrado = 0;
+            break;
+          }
+      }else {
+            $usuarioEncontrado = 1;
+            }
+      }
     if($usuarioEncontrado==-1){
-        $claseUsuario = new Usuario($usuario[4],$usuario[1],$usuario[3]);
+        $claseUsuario = new Usuario($usuario[1],$usuario[2],$usuario[3]);
         $claseUsuario->setId($usuario[0]);
-        $claseUsuario->setFoto($usuario[2]);
+        $claseUsuario->setFoto($usuario[4]);
         $claseUsuario->setAcceso($usuario[5]);
         $_SESSION["usuario"]=$claseUsuario;
         header('Location:./../usuario/perfil1.php');
@@ -69,7 +50,7 @@ if($_POST){
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iniciar Sesion</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="../css/stylePrincipal.css">
+  <link rel="stylesheet" href="../css/loguear.css">
   <link rel="shortcut icon" href="../img/logo.png" />
 </head>
  <body>

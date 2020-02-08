@@ -3,17 +3,17 @@
 include_once ('rutas.php');
 include ("data/conexion.php");
 include ("data/usuario.php");
+
 session_start();
 if($_SESSION){
-  if($_SESSION["usuario"]->getAcceso() == 1){
+  if($_SESSION["usuario"]->getAcceso() != 0){
     header('Location:index.php');
   }
 }else {
   header('Location:index.php');
 }
 $elegido = "Alumnos";
-$consulta = "SELECT alumno.id , alumno.alumno_usuario ,alumno.alumno_email FROM alumno";
-//indice para ver que eligio ver el ADMINISTRADOR
+$consulta = "SELECT usuarios.id , usuarios.username ,usuarios.email FROM usuarios WHERE usuarios.acceso = 2";
 $indice = 0;
 
 if($_POST){
@@ -21,31 +21,33 @@ if($_POST){
   switch ($indice) {
     case 0:
     //alumnos
-    $consulta = "SELECT alumno.id , alumno.alumno_usuario ,alumno.alumno_email FROM alumno";
+    $consulta = "SELECT usuarios.id , usuarios.username ,usuarios.email FROM usuarios WHERE usuarios.acceso = 2";
     $elegido = "Alumnos";
       break;
     case 1:
     //Profesores
-    $consulta = "SELECT profesor.id , profesor.profesor_usuario , profesor.profesor_email FROM profesor";
+    $consulta = "SELECT usuarios.id , usuarios.username ,usuarios.email FROM usuarios WHERE usuarios.acceso = 1";
     $elegido = "Profesores";
       break;
     case 2:
     //Administradores
-    $consulta = "SELECT * FROM alumno";
+    $consulta = "SELECT usuarios.id , usuarios.username ,usuarios.email FROM usuarios WHERE usuarios.acceso = 0";
+    $elegido = "Administradores";
       break;
     case 3:
     //Cursos
-    $consulta = "SELECT curso.id,curso.curso_lenguaje,curso.curso_nombre,prof.profesor_usuario  FROM curso, profesor AS prof WHERE curso.curso_autor = prof.id";
+    $consulta = "SELECT curso.id, curso.titulo ,curso.lenguaje ,curso.precio, user.username FROM curso , usuarios AS user WHERE curso.autor = user.id";
     $elegido = "Cursos";
       break;
     case 4:
     //Cursos/Alumno
     $elegido = "Cursos/Alumnos";
-    $consulta = "SELECT alumnos.alumno_usuario, cursos.curso_nombre FROM alumno_curso,curso AS cursos, alumno AS alumnos WHERE alumno_curso.alumno_id = alumnos.id AND alumno_curso.curso_id = cursos.id";
+    $consulta = "SELECT alumnos.username, cursos.curso_nombre FROM usuario_curso,curso AS cursos, usuarios AS alumnos WHERE usuario_curso.id_usuario = alumnos.id AND usuario_curso.id_curso = cursos.id";
       break;
 
     default:
-    $consulta = "SELECT * FROM alumno";
+
+    $consulta = "SELECT usuario.id , usuario.username ,usuario.email FROM usuario WHERE usuario.acceso = 2";
       break;
   }
 }
@@ -72,6 +74,7 @@ $resultado = mysqli_query($conexion,$consulta);
              <option value=<?php echo $indice;?> selected="true" disabled="disabled"><?php echo $elegido; ?></option>
              <option value="0">Alumnos</option>
              <option value="1">Profesores</option>
+             <option value="2">Administradores</option>
              <option value="3">Cursos</option>
              <option value="4">Alumno/Curso</option>
            </select>
@@ -79,9 +82,7 @@ $resultado = mysqli_query($conexion,$consulta);
          </form>
      </header>
      <main>
-       <?php if($_SESSION["usuario"]->getAcceso() == 2): ?>
        <button class="btn btn-success" type="button" name="button" data-toggle="modal" data-target="#modalAgregar">Agregar</button>
-     <?php endif; ?>
        <hr>
        <table class="table table-dark">
          <thead>
@@ -93,9 +94,10 @@ $resultado = mysqli_query($conexion,$consulta);
             <?php endif; ?>
             <?php if($indice == 3): ?>
              <th scope="col">ID</th>
-             <th>Nombre del curso</th>
-             <th>Autor</th>
+             <th>Titulo</th>
              <th>Lenguaje</th>
+             <th>Precio</th>
+             <th>Autor</th>
             <?php endif; ?>
             <?php if($indice == 4): ?>
               <th>Alumno</th>
@@ -114,19 +116,18 @@ $resultado = mysqli_query($conexion,$consulta);
             <?php endif; ?>
             <?php if($indice == 3): ?>
              <td><?php echo $fila[0]; ?></td>
+             <td><?php echo $fila[1]; ?></td>
              <td><?php echo $fila[2]; ?></td>
              <td><?php echo $fila[3]; ?></td>
-             <td><?php echo $fila[1]; ?></td>
+             <td><?php echo $fila[4]; ?></td>
             <?php endif; ?>
             <?php if($indice == 4): ?>
              <td><?php echo $fila[0]; ?></td>
              <td><?php echo $fila[1]; ?></td>
             <?php endif; ?>
 
-              <?php if($_SESSION["usuario"]->getAcceso() == 2): ?>
              <td> <button class="btn btn-danger" type="button" name="button">Eliminar</button> </td>
              <td> <button class="btn btn-warning" type="button" name="button">Editar</button> </td>
-           <?php endif; ?>
            </tr>
          <?php } ?>
          </tbody>
@@ -164,6 +165,7 @@ $resultado = mysqli_query($conexion,$consulta);
                </div>
                <input type="password" name="adn" class="form-control" aria-label="adn" placeholder="Ingrese Contraseña" required>
              </div>
+
            <?php endif; ?>
            <?php if($indice == 3):?>
            <div class="input-group mb-3">

@@ -1,0 +1,71 @@
+@import 'navbar.css';
+@import 'footer.css';
+.header{
+  padding-top: 0;
+  overflow: hidden;
+  background-color: #e3f2fd;
+  position: relative;
+}
+/*Header usuario con fondo*/
+.usuario{
+  background-image: url('../img/faqBienvenido.png');
+  text-align: center;
+  margin-top: 0;
+  width: 100%;
+  float: left;
+  height: 18vh;
+}
+.seccion{
+  margin-left: 5%;
+  margin-top: 2%;
+  margin-right: 5%;
+  width: auto;
+  overflow: hidden;
+}
+.duda{
+  float: right;
+  font-size: 25px;
+  overflow: hidden;
+  width: 35%;
+}
+.duda ul li{
+  border-left: black 1px solid;
+  padding-left: 5%;
+}
+/*FAQ MOBILE*/
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+.usuario h1{
+  font-size: 20px;
+}
+/*Seccion MOBILE*/
+.seccion{
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 0;
+  overflow: inherit;
+  text-align: center;
+}
+.duda{
+  width: 100%;
+  float: inherit;
+  text-align: left;
+  overflow: hidden;
+}
+.duda ul li a{
+  font-size: 15px;
+}
+.contenido {
+}
+.contenido h4{
+  font-size: 15px;
+  margin-bottom: 10%;
+}
+.contenido article{
+  text-align: left;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+/*CIERRE FAQ MOBILE*/
+}

@@ -4,15 +4,15 @@ include("../rutas.php");
 include("../data/usuario.php");
 include ("../data/conexion.php");
 session_start();
-$misCursosAlumno = "SELECT INTO";
 if(!isset($_SESSION["usuario"])) {
     header('Location:'.$BASE_URL.'/index.php');
 }
-$UsuarioID = $_SESSION["usuario"]->getId();
-if($_SESSION["usuario"]->getAcceso() == 1){
-  $consulta = "SELECT curso.id, curso.curso_lenguaje , curso.curso_nombre, curso.curso_foto FROM alumno_curso,curso WHERE alumno_curso.alumno_id = '$UsuarioID' AND alumno_curso.curso_id = curso.id";
+$id = $_SESSION["usuario"]->getId();
+if($_SESSION["usuario"]->getAcceso() == 2){
+  $consulta = "SELECT curso.id, curso.titulo ,curso.lenguaje,curso.foto_curso FROM usuario_curso,curso WHERE usuario_curso.id_usuario = '$id' AND usuario_curso.id_curso = curso.id";
+
 }else{
-  $consulta = "SELECT curso.id,curso.curso_lenguaje,curso.curso_nombre,curso.curso_foto  FROM curso  WHERE curso.curso_autor = '$UsuarioID'";
+  $consulta = "SELECT curso.id, curso.titulo ,curso.lenguaje,curso.foto_curso FROM curso  WHERE curso.autor = '$id'";
 }
 
 $resultado = mysqli_query($conexion,$consulta);
@@ -46,7 +46,7 @@ if(isset($_SESSION)){
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?=$userName?></title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="../css/stylePrincipal.css">
+  <link rel="stylesheet" href="../css/perfil1.css">
   <link rel="stylesheet" href="perfilStyle.css">
   <link rel="shortcut icon" href="../img/logo.png" />
 </head>
@@ -64,14 +64,11 @@ if(isset($_SESSION)){
       <a href="#" onclick="abrirMisCursos()">
         <ion-icon name="briefcase"></ion-icon>
         Mis cursos</a>
-        <?php if($_SESSION["usuario"]->getAcceso() >=2): ?>
+        <?php if($_SESSION["usuario"]->getAcceso() < 2): ?>
       <a href="#">
         <ion-icon name="add-circle"></ion-icon>
         Dar un curso</a>
       <?php endif; ?>
-      <a href="#">
-        <ion-icon name="star"></ion-icon>
-        Favoritos</a>
       <a href="#" onclick="abrirConfiguracion()">
         <ion-icon name="build"></ion-icon>
         Configuracion</a>
@@ -90,35 +87,35 @@ if(isset($_SESSION)){
       </header>
       <section class="opciones">
         <!--Mis cursos-->
-        <div class="mis-cursos" id="misCursos">
-          <h1> Usted Esta en Mis cursos</h1>
+        <div class="mis-cursos" id="misCursos" style="display: none;">
           <?php while($fila = mysqli_fetch_row($resultado)){ ?>
             <article class="border border-secundary border-top-0 curso">
-
             <div class="card" style="width: 18rem;">
               <img src="<?=$BASE_URL."/img/fotoCurso/".$fila[3]?>" class="card-img-top" alt="...">
               <div class="card-body">
-                <h5 class="card-title"><?=$fila[2]?></h5>
-                <p>Lenguaje: <?=$fila[1]?></p>
-                <?php if($_SESSION["usuario"]->getAcceso() < 1): ?>
+                <h5 class="card-title"><?=$fila[1]?></h5>
+                <p>Lenguaje: <?=$fila[2]?></p>
+                <?php if($_SESSION["usuario"]->getAcceso() == 1): ?>
                 <h6>Alumnos: </h6>
                 <a href="#" class="btn btn-primary">Borrar Curso</a>
                 <?php endif; ?>
               </div>
+              <a href="#">Ir al curso</a>
             </div>
+
             </article>
         <?php }  ?>
         </div>
         <!--Dar curso-->
-        <div class="crear-curso" id="crearCurso">
+        <div class="crear-curso" id="crearCurso" style="display: none;">
           <form class="" action="perfil1.php" method="post">
-            
+
           </form>
 
         </div>
         <!--Favoritos-->
                 <!--Configuracion-->
-              <div class="configuracion" style="display: none;" id="configuracion">
+              <div class="configuracion" id="configuracion">
                             <form class="" action="perfil1.php" method="post">
 
                                 <div id="imagenNombre">
@@ -210,60 +207,11 @@ if(isset($_SESSION)){
     <!--Footer-->
     <?php include("../componentes/footer.php") ?>
 
-        <!--Script-->
-    <script>
-
-    function mostrarContrasena(){
-      var tipoLogin = document.getElementById("password");
-      var ojoLogin = document.getElementById("ojoOn");
-      var tipoRegister = document.getElementById("passwordRegister");
-      var ojoRegister = document.getElementById("ojoRegister");
-      if(tipoLogin.type == "password"){
-          tipoLogin.type = "text";
-          ojoLogin.name = "eye-off";
-      }else{
-          tipoLogin.type = "password";
-          ojoLogin.name = "eye";
-      }
-      if(tipoRegister.type == "password"){
-          tipoRegister.type = "text";
-          ojoRegister.name = "eye-off";
-      }else{
-          tipoRegister.type = "password";
-          ojoRegister.name = "eye";
-      }
-    }
-
-
-    function abrirFavoritos(){
-        document.getElementById("sideNavigation").style.width = "0";
-        document.getElementById('configuracion').style.display = "none";
-
-     }
-     function abrirMisCursos(){
-       document.getElementById("sideNavigation").style.width = "0";
-       document.getElementById('configuracion').style.display = "none";
-       document.getElementById("misCursos").style.display = "inherit";
-     }
-
-    function abrirConfiguracion(){
-      document.getElementById("sideNavigation").style.width = "0";
-      document.getElementById("misCursos").style.display = "none";
-      document.getElementById('configuracion').style.display = "inherit";
-    }
-    function openNav() {
-    document.getElementById("sideNavigation").style.width = "200px";
-    }
-
-    function closeNav() {
-    document.getElementById("sideNavigation").style.width = "0";
-    }
-</script>
     <script src="https://kit.fontawesome.com/918d19c8b4.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+    <script type="text/javascript" src="funcionesPerfil.js"></script>
 </body>
 </html>

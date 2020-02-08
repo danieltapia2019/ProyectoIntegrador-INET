@@ -1,0 +1,68 @@
+
+/*
+FOOTER
+*/
+.footer{
+  padding-top: 5vh;
+  background-color: black;
+  width:  100%;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+.lista{
+  text-align: left;
+  width: 50%;
+  float: left;
+}
+.lista ul{
+  list-style: none;
+}
+.lista ul li a{
+  font-size: 18px;
+  color: white;
+  margin-left: 5%;
+}
+.lista ion-icon{
+  border-radius: 180px;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 15px;
+}
+
+/*
+FOOTER INFO(INC, Lenguajes USADOS)
+*/
+.info{
+  float: right;
+  width: 25%;
+  color: white;
+  margin-top: 5%;
+}
+.info h4{
+  font-family: sans-serif;
+  font-size: 15px;
+  float: left;
+}
+.info ion-icon{
+  font-size: 30px;
+  float: right;
+}
+.info  a ion-icon {
+
+  color: white;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+/*FOOTER MOBILE*/
+.footer{
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.lista{
+  width: 90%;
+}
+.info{
+    width: 90%;
+}
+/*CIERRE MOBILE FOOTER*/
+}

@@ -4,46 +4,22 @@ include("../data/conexion.php");
 include("../data/usuario.php");
 //clase usuario con atributos, metodos getter and setters
 
-//Obtener el id y asignarlo
-
 session_start();
-$maxIdAlumno = mysqli_query($conexion,"SELECT MAX(id) AS id_alumno FROM alumno");
-if ($row = mysqli_fetch_row($maxId)){//ID maximo {
-    $idAlumno = trim($row[0])+1;
-}
-if ($row2 = mysqli_fetch_row(mysqli_query($conexion,"SELECT MAX(id) AS id_profesor FROM profesor"))){//ID maximo {
-    $idProfesor = trim($row2[0])+1;
-}
-$alumnos = mysqli_query($conexion,"SELECT * FROM alumno");
-$profesores = mysqli_query($conexion,"SELECT * FROM profesor");
+
+$usuarios = mysqli_query($conexion,"SELECT id,username,email,pwd,foto,acceso FROM usuarios");
 $errorExistente="-1";
 if($_POST){
   $claseUsuario = new Usuario($_POST["username"],$_POST["email"],$_POST["password"]);
-  $claseUsuario->setId($idAlumno);
-  $claseUsuario->setAcceso(1);
-  if($idAlumno > 0){
-    while($fila = mysqli_fetch_row($alumnos)){
-      if($fila[4] == $claseUsuario->getUserName()){
+  $claseUsuario->setAcceso(2);
+    while($fila = mysqli_fetch_row($usuarios)){
+      if($fila[1] == $claseUsuario->getUserName()){
         $errorExistente = 0;
         break;
       }
-      if($fila[1] == $claseUsuario->getEmail()){
+      if($fila[2] == $claseUsuario->getEmail()){
         $errorExistente = 1;
         break;
       }
-    }
-  }
-  if($idProfesor > 0){
-    while($fila2 = mysqli_fetch_row($profesores)){
-      if($fila2[4] == $claseUsuario->getUserName()){
-        $errorExistente = 0;
-        break;
-      }
-      if($fila2[1] == $claseUsuario->getEmail()){
-        $errorExistente = 1;
-        break;
-      }
-    }
   }
   if($errorExistente==-1){
     if($_FILES["fotoPerfil"]["name"] != null){
@@ -58,11 +34,10 @@ if($_POST){
     $password = $claseUsuario->getPassword();
     $foto = $claseUsuario->getFoto();
     $acceso = $claseUsuario->getAcceso();
-    $insertarUsuario = "INSERT INTO alumno (alumno_email,alumno_foto,alumno_password,alumno_usuario,alumno_acceso) VALUES ('$email','$foto','$password','$usuario','$acceso')";
-    $insertarAlumno = mysqli_query($conexion,$insertarUsuario);
+    $insertarUsuario = "INSERT INTO usuarios (username,email,pwd,foto,acceso) VALUES ('$usuario','$email','$password','$foto','$acceso')";
+    $insertar = mysqli_query($conexion,$insertarUsuario);
     header('Location:./../usuario/perfil1.php');
-    move_uploaded_file($_FILES["fotoPerfil"]["tmp_name"],"../img/fotoPerfil/".$claseUsuario->getUserName().".".$extension);
-
+    move_uploaded_file($_FILES["fotoPerfil"]["tmp_name"],"../img/fotoPerfil/".$foto);
   }
 }
  ?>
@@ -74,7 +49,7 @@ if($_POST){
   <title>Iniciar Sesion</title>
   <script src="https://kit.fontawesome.com/918d19c8b4.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="../css/stylePrincipal.css">
+  <link rel="stylesheet" href="../css/loguear.css">
   <link rel="shortcut icon" href="../img/logo.png" />
  </head>
  <body>
