@@ -1,68 +1,88 @@
-
-/*
-FOOTER
-*/
-.footer{
+.footer {
   padding-top: 5vh;
   background-color: black;
-  width:  100%;
+  width: 100%;
   overflow: hidden;
   font-family: sans-serif;
 }
-.lista{
+
+.lista {
+  overflow: hidden;
   text-align: left;
-  width: 50%;
+  width: 100%;
   float: left;
 }
-.lista ul{
+
+.lista ul,
+.info ul {
   list-style: none;
 }
-.lista ul li a{
-  font-size: 18px;
-  color: white;
-  margin-left: 5%;
+.info ul li {
+  margin: 2.5%;
 }
-.lista ion-icon{
-  border-radius: 180px;
-  border-style: solid;
-  border-width: 1px;
-  font-size: 15px;
+.lista ul li a,
+.info ul li a {
+  font-size: 1rem;
+  color: white;
+}
+
+.info ul li:last-child i {
+  font-size: 1rem;
+}
+
+.info>ul>li>i.html:hover {
+  color: #f16529;
+}
+
+.info>ul>li>i.css:hover {
+  color: #264de4;
+}
+
+.info>ul>li>i.js:hover {
+  color: #F0DB4F;
+}
+
+.info>ul>li>i.php:hover {
+  color: #474A8A;
 }
 
 /*
 FOOTER INFO(INC, Lenguajes USADOS)
 */
-.info{
-  float: right;
-  width: 25%;
-  color: white;
-  margin-top: 5%;
-}
-.info h4{
-  font-family: sans-serif;
-  font-size: 15px;
-  float: left;
-}
-.info ion-icon{
-  font-size: 30px;
-  float: right;
-}
-.info  a ion-icon {
 
-  color: white;
-}
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
-/*FOOTER MOBILE*/
-.footer{
-  padding-left: 5%;
-  padding-right: 5%;
-}
-.lista{
-  width: 90%;
-}
-.info{
+  .footer {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .lista {
     width: 90%;
+  }
 }
-/*CIERRE MOBILE FOOTER*/
+
+/*Small devices*/
+@media (min-width: 768px) and (max-width: 991.98px) {}
+
+/*Medium devices*/
+@media (min-width: 992px) and (max-width: 1199.98px) {}
+
+/*Large devices*/
+@media (min-width: 1200px) {
+  div.info {
+    width: 100%;
+  }
+
+  .info ul {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .info ul li{
+    margin: 1%;
+  }
+  .info>ul>li:last-child > i {
+    font-size: 1.25rem;
+    flex-direction: column;
+  }
 }
