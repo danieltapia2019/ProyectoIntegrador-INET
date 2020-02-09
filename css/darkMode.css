@@ -1,23 +1,23 @@
 /* Navbar */
+nav.navbar.navbar-expand-lg{
+    background-color: #39373b !important;
+}
 
+body{
+    background-color: #212121 !important;
+}
 /* 
 pale red
     #d74850
-
-    green ones
+green ones
     #324448
-
     #6b8b8d
-
     #b6cdb1
-
-    pseu white
+pseu white
     #f0f6f7
-
-    yellow?
+ yellow?
     #f9d268
-
-    darks
+ darks
     #323441
     #39373b
 */

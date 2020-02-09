@@ -17,9 +17,11 @@
 .info ul {
   list-style: none;
 }
+
 .info ul li {
   margin: 2.5%;
 }
+
 .lista ul li a,
 .info ul li a {
   font-size: 1rem;
@@ -70,18 +72,31 @@ FOOTER INFO(INC, Lenguajes USADOS)
 
 /*Large devices*/
 @media (min-width: 1200px) {
+  div.lista {
+    overflow: hidden;
+  }
+
+  .lista>ul {
+    float: left;
+  }
+  .lista>ul:last-child {
+    margin-left:5%;
+  }
+
   div.info {
     width: 100%;
   }
 
-  .info ul {
+  .info>ul {
     display: flex;
     justify-content: space-evenly;
   }
-  .info ul li{
-    margin: 1%;
+
+  .info>ul>li,.list>ul>li {
+    margin-left: 1%;
   }
-  .info>ul>li:last-child > i {
+
+  .info>ul>li:last-child>i {
     font-size: 1.25rem;
     flex-direction: column;
   }

@@ -34,7 +34,7 @@
   }
   if( isset($_POST['userPreference']) ){
     if( $_POST['userPreference'] === "dark"){
-        setcookie("UserMode","Dark",time()+60*60*24*31);
+        setcookie("UserMode","Dark",time()+60*60*24*30);
         header('Location:'.$BASE_URL.'usuario/userProfile.php');
     } else {
         setcookie("UserMode"," ",time()-60*60*24*31*2);
@@ -42,7 +42,6 @@
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -59,7 +58,7 @@
   <link rel="stylesheet" href = "../css/perfil1.css">
   <link rel="stylesheet" href = "userProfile.css">
   <!-- DARK MODE -->
-  <?= isset($_COOKIE['UserMode']) ? '<link rel="stylesheet" href="css/darkMode.css">' : '';?>
+  <?= isset($_COOKIE['UserMode']) ? '<link rel="stylesheet" href="../css/darkMode.css">' : '';?>
   <link rel="shortcut icon" href="../img/logo.png" />
 </head>
 
@@ -211,6 +210,7 @@
         <button class="btn btn-outline-primary">Guardar</button>
     </form>
     <p class="text-danger" >*No disponible</p>
+    <?php var_dump($_COOKIE)?>
     </div>
   </section>
 

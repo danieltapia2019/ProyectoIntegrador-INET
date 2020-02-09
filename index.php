@@ -16,12 +16,12 @@
   <!--Fontawesome-->
   <script src="https://kit.fontawesome.com/918d19c8b4.js" crossorigin="anonymous"></script>
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <!--CSS-->
   <link rel="stylesheet" href="css/stylePrincipal.css">
   <!-- DARK MODE -->
-  <?= isset($_COOKIE['UserMode']) ? '<link rel="stylesheet" href="css/dark.css">' : '';?>
+  <?= isset($_COOKIE['UserMode']) ? '<link rel="stylesheet" href="css/darkMode.css">' : '';?>
   <!--  -->
   <link rel="shortcut icon" href="img\logo.png" />
 </head>
@@ -183,9 +183,7 @@
               <img src="img/alumno2.jpeg" alt="Estudiante" style="width: 5rem;" class="rounded-circle shadow">
               <h6 class="card-title mt-2">Estudiante</h6>
             </span>
-            <p class="card-text">Promunity es una muy buena pagina para aprender programacion desde 0 excelente cursos y
-              la informacion es
-              didactica</p>
+            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, molestiae accusantium?</p>
           </div>
         </div>
         <div class="card" style="width: 12rem;">
@@ -194,9 +192,7 @@
               <img src="img/alumno3.jpeg" alt="Estudiante" style="width: 5rem;" class="rounded-circle shadow">
               <h6 class="card-title mt-2">Estudiante</h6>
             </span>
-            <p class="card-text">Promunity es una muy buena pagina para aprender programacion desde 0 excelente cursos y
-              la informacion es
-              didactica</p>
+            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, molestiae accusantium?</p>
           </div>
         </div>
         <div class="card" style="width: 12rem;">
@@ -205,9 +201,7 @@
               <img src="img/alumno4.jpeg" alt="Estudiante" style="width: 5rem;" class="rounded-circle shadow">
               <h6 class="card-title mt-2">Estudiante</h6>
             </span>
-            <p class="card-text">Promunity es una muy buena pagina para aprender programacion desde 0 excelente cursos y
-              la informacion es
-              didactica</p>
+            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, molestiae accusantium?</p>
           </div>
         </div>
       </div>
@@ -239,19 +233,19 @@
         </div>
       </div>
     </div>
-
+  <?php //var_dump($_COOKIE); ?>
     <!--Footer-->
     <?php include("componentes/footer.php"); ?>
     <!-- /.Footer -->
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
   </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
   </script>
 </body>
 

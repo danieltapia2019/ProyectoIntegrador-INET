@@ -49,12 +49,12 @@
             aria-haspopup="true" aria-expanded="false">Cursos
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Lenguajes de Programacion</a>
-            <a class="dropdown-item" href="#">Desarrollo de Videojuegos</a>
-            <a class="dropdown-item" href="#">Desarrollo Web</a>
-            <a class="dropdown-item" href="#">Aplicaciones Moviles</a>
+            <a class="dropdown-item" href="<?=$BASE_URL?>/cursos.php?LP">Lenguajes de Programacion</a>
+            <a class="dropdown-item" href="<?=$BASE_URL?>/cursos.php?DV">Desarrollo de Videojuegos</a>
+            <a class="dropdown-item" href="<?=$BASE_URL?>/cursos.php?DW">Desarrollo Web</a>
+            <a class="dropdown-item" href="<?=$BASE_URL?>/cursos.php?AM">Aplicaciones Moviles</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Mas cursos...</a>
+            <a class="dropdown-item" href="<?=$BASE_URL?>/cursos.php">Mas cursos...</a>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -184,7 +184,8 @@
           <hr>
         </div>
         <h6 class="h6 text-center">¿Ya tienes una cuenta?</h6>
-        <button class="btn btn-regSignIn" data-toggle="modal" data-target="#modalInicio" id="button" onclick="cerrarModalActivo()">Inicia Sesión</i></button>
+        <button class="btn btn-regSignIn" data-toggle="modal" data-target="#modalInicio" id="button"
+          onclick="cerrarModalActivo()">Inicia Sesión</i></button>
       </div>
     </div>
   </div>
@@ -230,8 +231,8 @@
           </form>
           <p class="text-center"> <a href="#">¿Has olvidado tu contraseña?</a></p>
           <p class="text-center mt-3">¿No tienes cuenta?
-            <button class="btn btn-signUp" data-toggle="modal"
-              data-target="#modalRegistro" onclick="cerrarModalActivo()" id="button">Registrate</button>
+            <button class="btn btn-signUp" data-toggle="modal" data-target="#modalRegistro"
+              onclick="cerrarModalActivo()" id="button">Registrate</button>
           </p>
         </div>
       </div>
@@ -239,10 +240,6 @@
   </div>
 </div>
 <script>
-  $(document).ready(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-  });
-
   function mostrarContrasena() {
 
     var tipoLogin = document.getElementById("password");
@@ -270,7 +267,6 @@
       }
     }
   }
-
   function cerrarModalActivo() {
     var modalInicio = $("#modalInicio").is(":visible");
     if (modalInicio) {

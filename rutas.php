@@ -6,6 +6,6 @@ $BASE_DIR = "C:\xampp\htdocs\ProyectoIntegrador-INET";//ruta para includes neces
 
 //$partesruta = pathinfo($_SERVER['REQUEST_URI']);
 //echo "https://".$_SERVER["HTTP_HOST"].$partesruta["dirname"]."/"; //mismo procedimiento que con la $BASE_DIR solo que se lo asignamos a la $BASE_URL
-$BASE_URL = "https://localhost/ProyectoIntegrador-INET/";
+$BASE_URL = "https://localhost/ProyectoIntegrador-INET";
 
  ?>
