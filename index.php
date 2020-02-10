@@ -1,9 +1,11 @@
 <?php
-  include ("data/usuario.php");
-  session_start();
+  require("data/usuario.php");
+  require("app/controller.php");
+
   if(isset($_GET["logout"])){
-    session_destroy();
-    header('Location: index.php');
+    // session_destroy();
+    Controlador::cerrarSesionUsuario();
+    header("Location: index.php");
   }
 ?>
 <!DOCTYPE html>
@@ -135,7 +137,7 @@
       <h5 class="h2 mb-5">Contacto</h5>
       <form>
         <div class="form-row">
-          <form class="" action="index.html" method="post">
+          <form class="" action="index.html" method="POST">
             <div class="datosContacto">
               <div class="form-group">
                 <label for="nombre">Nombre</label>
@@ -164,7 +166,7 @@
     </div>
 
     <div id="opiniones">
-      <p class="h2 mb-5">¿Qué opinan nuestros alumnos?</p>
+      <h2 class="mb-5">¿Qué opinan nuestros alumnos?</h2>
       <div class="articuloOpiniones d-flex justify-content-around">
         <div class="card" style="width: 12rem;">
           <div class="card-body">
@@ -205,8 +207,7 @@
           </div>
         </div>
       </div>
-    </div>
-
+    </div><!-- /Opiniones -->
     <!--Carrusel solo para mobile-->
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">

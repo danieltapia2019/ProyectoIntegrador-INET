@@ -2,6 +2,7 @@
   include("../rutas.php");
   include("../data/conexion.php");
   include("../data/usuario.php");
+  include("../app/controller.php");
 
   session_start();
   $usuarioEncontrado = "";
@@ -14,7 +15,6 @@
     $usuario="";
 
     $usuarios = mysqli_query($conexion,"SELECT id,username,email,pwd,foto,acceso FROM usuarios");
-
 
     while($fila = mysqli_fetch_row($usuarios)){
       if($fila[2] == $email){
@@ -36,28 +36,40 @@
         $claseUsuario->setId($usuario[0]);
         $claseUsuario->setFoto($usuario[4]);
         $claseUsuario->setAcceso($usuario[5]);
+
         $_SESSION["usuario"]=$claseUsuario;
+
+        // Controlador::abrirSesionUsuario($claseUsuario);
+
+        if( isset($_POST['remember']) ){
+          // Controlador::hornear('user',$claseUsuario);
+        }
         header('Location:./../usuario/userProfile.php');
     }
   }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-  <meta charset="utf-8">
+<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Iniciar Sesion</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>Iniciar Sesión</title>
+  <!--Fontawesome-->
+  <script src="https://kit.fontawesome.com/918d19c8b4.js" crossorigin="anonymous"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!--CSS-->
   <link rel="stylesheet" href="../css/loguear.css">
   <link rel="shortcut icon" href="../img/logo.png" />
 </head>
 
 <body>
   <div class="container-fuild">
+    <!-- Navbar-->
     <?php include("../componentes/navbar.php"); ?>
-
+    <!-- /Navbar-->
     <div class="modal-body">
       <?php if($usuarioEncontrado==0):?>
       <p>Contraseña incorrecta</p>
@@ -89,9 +101,10 @@
           data-target="#modalRegistro">Registrate</button>
       </p>
     </div>
+    <!-- Footer -->
     <?php include ("../componentes/footer.php") ?>
+    <!-- /Footer -->
   </div>
-
   <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
@@ -102,7 +115,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
   </script>
-  <script src="https://kit.fontawesome.com/918d19c8b4.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

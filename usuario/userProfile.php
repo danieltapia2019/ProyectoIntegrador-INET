@@ -2,7 +2,8 @@
   include("../rutas.php");
   include("../data/usuario.php");
   include("../data/conexion.php");
-  session_start();
+  include_once('../app/controller.php');
+
   if(!isset($_SESSION["usuario"])) {
       header('Location:'.$BASE_URL.'/index.php');
   }
@@ -24,23 +25,33 @@
 
   $userName = "";
   $userEmail = "";
-  if( isset($_SESSION) ){
-    if( sizeof($_SESSION) !=0){
-    $userName = $_SESSION["usuario"]->getUserName();
-    $userEmail = $_SESSION["usuario"]->getEmail();
-    } else {
-        $userName = "";
+  if( isset($_COOKIE['UserLogged']) ){
+    $userName = $_COOKIE['UserName'];
+    $userEmail = $_COOKIE['UserEmail'];
+  } else {
+    if( isset($_SESSION) ){
+      if( sizeof($_SESSION) != 0){
+        $userName = $_SESSION["usuario"]->getUserName();
+        $userEmail = $_SESSION["usuario"]->getEmail();
+      } else {
+          $userName = "";
+      }
     }
   }
+  // Dark Mode
   if( isset($_POST['userPreference']) ){
     if( $_POST['userPreference'] === "dark"){
-        setcookie("UserMode","Dark",time()+60*60*24*30);
-        header('Location:'.$BASE_URL.'usuario/userProfile.php');
+        Controlador::hornear('mode',$_POST['userPreference']);
+        header('Location:'.$BASE_URL.'/usuario/userProfile.php');
     } else {
-        setcookie("UserMode"," ",time()-60*60*24*31*2);
-        header('Location:'.$BASE_URL.'usuario/userProfile.php');
+        Controlador::consumir('mode');
+        header('Location:'.$BASE_URL.'/usuario/userProfile.php');
     }
-}
+  }
+  // Dejar de recordarme en la pagina (elimina las cookies)
+  if( isset($_POST['userLoginAuto'])) {
+    Controlador::consumir('user');
+  }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -52,13 +63,14 @@
   <!--Fontawesome-->
   <script src="https://kit.fontawesome.com/918d19c8b4.js" crossorigin="anonymous"></script>
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity = "sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin = "anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <!--CSS-->
-  <link rel="stylesheet" href = "../css/perfil1.css">
-  <link rel="stylesheet" href = "userProfile.css">
+  <link rel="stylesheet" href="../css/perfil1.css">
+  <link rel="stylesheet" href="userProfile.css">
   <!-- DARK MODE -->
   <?= isset($_COOKIE['UserMode']) ? '<link rel="stylesheet" href="../css/darkMode.css">' : '';?>
+
   <link rel="shortcut icon" href="../img/logo.png" />
 </head>
 
@@ -77,7 +89,8 @@
           <?php if($_SESSION["usuario"]->getAcceso() < 2): ?>
           <li><a href="#"><i class="far fa-plus-square mr-1"></i>Dar un curso</a></li>
           <?php endif; ?>
-          <li><a href="#" onclick="abrirConfiguracion()"><i class="fas fa-user-cog mr-1"></i>Configuracion</a></li>
+          <li><a href="#" onclick="abrirPerfil()"><i class="fas fa-user-edit"></i>Perfil</a></li>
+          <li><a href="#" onclick="abrirConfiguracion()"><i class="fas fa-cog"></i>Configuracion</a></li>
         </ul>
       </div>
 
@@ -117,7 +130,7 @@
     </div>
     <!--Favoritos-->
     <!--Configuracion-->
-    <div class="configuracion" id="configuracion">
+    <div class="perfil" id="perfil">
       <form class="" action="perfil1.php" method="post">
         <div id="imagenNombre">
           <div class="input-group mb-3">
@@ -163,12 +176,12 @@
         <button class="btn btn-success btn-sm" type="submit" name="button">Guardar foto</button>
       </form>
 
-      <form class="" action="" method="post">
+      <form class="" action="" method="POST">
         <hr>
         <div class="form-group">
-          <label for="exampleInputEmail1">Cambiar Email</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            placeholder="Enter email" value=<?=$userEmail?>>
+          <label for="email">Cambiar Email</label>
+          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"
+            value=<?=$userEmail?>>
         </div>
         <hr>
         <label for="password">Contraseña actual</label>
@@ -178,9 +191,11 @@
           </div>
           <input type="password" name="password" class="form-control" aria-label="password"
             placeholder="Ingrese contraseña" id="passwordRegister" required>
-          <button class="btn btn-primary" type="button" name="button" onclick="mostrarContrasena()">
-            <ion-icon name="eye" id="ojoRegister"></ion-icon>
-          </button>
+          <div class="input-group-append">
+            <button class="btn btn-outline-primary" type="button" name="button" onclick="mostrarContrasena()">
+              <i name="eye" id="ojoRegister" class="far fa-eye"></i>
+            </button>
+          </div>
         </div>
         <hr>
         <label for="password">Contraseña nueva</label>
@@ -190,27 +205,45 @@
           </div>
           <input type="password" name="password" class="form-control" aria-label="password"
             placeholder="Ingrese contraseña" id="passwordRegister">
-          <button class="btn btn-primary" type="button" name="button" onclick="mostrarContrasena()" required>
-            <ion-icon name="eye" id="ojoRegister"></ion-icon>
-          </button>
+          <div class="input-group-append">
+            <button class="btn btn-outline-primary" type="button" name="button" onclick="mostrarContrasena()">
+              <i name="eye" id="ojoRegister" class="far fa-eye"></i>
+            </button>
+          </div>
         </div>
         <button type="submit" name="button" class="btn btn-success">Guardar Cambios</button>
       </form>
-      <h4 class="mt-5 mb-2">Dark Mode</h4>
+    </div>
+    <!-- Configuracion -->
+    <div class="config" id="config">
+      <h2 class="">Configuracion de la página</h2>
+      <h4 class="mt-5 mb-3"><i class="fas fa-adjust"></i>Dark Mode</h4>
       <form action="userProfile.php" method="POST">
         <div class="form-check">
-            <?php if( !isset($_COOKIE['UserMode']) ) : ?>
-            <input class="form-check-input" type="checkbox" value="dark" id="darkmode" name="userPreference">
-            <label class="form-check-label" for="darkmode">Dark Mode</label>
-            <?php else : ?>
-            <input class="form-check-input" type="checkbox" value="light" id="lightMode" name="userPreference">
-            <label class="form-check-label" for="lightMode">Light Mode</label>
-            <?php endif; ?>
+          <?php if( !isset($_COOKIE['UserMode']) ) : ?>
+          <input class="form-check-input" type="checkbox" value="dark" id="darkmode" name="userPreference">
+          <label class="form-check-label" for="darkmode">Dark Mode</label>
+          <?php else : ?>
+          <input class="form-check-input" type="checkbox" value="light" id="lightMode" name="userPreference">
+          <label class="form-check-label" for="lightMode">Light Mode</label>
+          <?php endif; ?>
         </div>
         <button class="btn btn-outline-primary">Guardar</button>
-    </form>
-    <p class="text-danger" >*No disponible</p>
-    <?php var_dump($_COOKIE)?>
+      </form>
+      <p class="text-warning"><strong>*Advertencia</strong>, el 'Modo Oscuro' no ha sido implementado en la totalidad de
+        la web, puede que algunas páginas no se vean bien <b>:| *</b></p>
+      <?php //if( isset($_COOKIE['UserLoged']) ) :?>
+      <h4 class="mt-3 mb-2"><i class="fas fa-cookie-bite"></i>Login Automático</h4>
+      <form action="userProfile.php" method="POST">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="light" id="lightMode" name="userLoginAuto">
+          <label class="form-check-label" for="lightMode">Dejar de recordarme</label>
+        </div>
+        <button class="btn btn-outline-primary">Guardar</button>
+      </form>
+      <p class="text-danger"><strong>*No disponible*</strong></p>
+      <?php //endif; ?>
+      <h4>PHP Version: <?php echo phpversion();?></h4>
     </div>
   </section>
 

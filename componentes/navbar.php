@@ -10,18 +10,26 @@
   $userA = "";
   $fotoPerfil = "no";
 
-  if(isset($_SESSION["usuario"])){
+  if( isset($_COOKIE['UserLogged']) ){
     $usuarioLogueado = true;
-    $userA = $_SESSION["usuario"];
-  }
-
-  if($_SESSION){
-    if(count($_SESSION) > 0){
-      if($_SESSION["usuario"]->getFoto() != null){
-        $fotoPerfil =  $_SESSION["usuario"]->getFoto();
+  } else {
+    if(isset($_SESSION["usuario"])){
+      $usuarioLogueado = true;
+      $userA = $_SESSION["usuario"];
+    }
+    if($_SESSION){
+      if(count($_SESSION) > 0){
+        try {
+          if($_SESSION["usuario"]->getFoto() != null){
+            $fotoPerfil =  $_SESSION["usuario"]->getFoto();
+          }
+        } catch (\Throwable $th) {
+          echo "Error al acceder a un recurso".$th->getMessage();
+        }
       }
     }
   }
+
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container">
@@ -49,10 +57,10 @@
             aria-haspopup="true" aria-expanded="false">Cursos
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="<?=$BASE_URL?>/cursos.php?LP">Lenguajes de Programacion</a>
-            <a class="dropdown-item" href="<?=$BASE_URL?>/cursos.php?DV">Desarrollo de Videojuegos</a>
-            <a class="dropdown-item" href="<?=$BASE_URL?>/cursos.php?DW">Desarrollo Web</a>
-            <a class="dropdown-item" href="<?=$BASE_URL?>/cursos.php?AM">Aplicaciones Moviles</a>
+            <a class="dropdown-item" href="<?=$BASE_URL?>/cursos.php?programacion">Lenguajes de Programacion</a>
+            <a class="dropdown-item" href="<?=$BASE_URL?>/cursos.php?videoJueos">Desarrollo de Videojuegos</a>
+            <a class="dropdown-item" href="<?=$BASE_URL?>/cursos.php?desarrolloWeb">Desarrollo Web</a>
+            <a class="dropdown-item" href="<?=$BASE_URL?>/cursos.php?appMoviles">Aplicaciones Moviles</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="<?=$BASE_URL?>/cursos.php">Mas cursos...</a>
           </div>
@@ -224,7 +232,7 @@
               </div>
             </div>
             <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="remember">
+              <input type="checkbox" class="form-check-input" id="remember" name="remember">
               <label class="form-check-label" for="remember">Recordarme</label>
             </div>
             <button type="submit" class="btn btn-signIn btn-lg btn-block my-3 ">Iniciar Sesión</button>

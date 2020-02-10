@@ -2,6 +2,7 @@
 include("../rutas.php");
 include("../data/conexion.php");
 include("../data/usuario.php");
+include("../app/controller.php");
 //clase usuario con atributos, metodos getter and setters
 
 session_start();
@@ -36,11 +37,11 @@ if($_POST){
     $acceso = $claseUsuario->getAcceso();
     $insertarUsuario = "INSERT INTO usuarios (username,email,pwd,foto,acceso) VALUES ('$usuario','$email','$password','$foto','$acceso')";
     $insertar = mysqli_query($conexion,$insertarUsuario);
-    header('Location:./../usuario/perfil1.php');
+    header('Location:./../usuario/userprofile.php');
     move_uploaded_file($_FILES["fotoPerfil"]["tmp_name"],"../img/fotoPerfil/".$foto);
+    }
   }
-}
- ?>
+?>
  <!DOCTYPE html>
  <html lang="en">
  <head>

@@ -1,5 +1,6 @@
 <?php
-    session_start();
+    require("data/usuario.php");
+    require("app/controller.php");
 ?>
 <!DOCTYPE html>
 <html lang="es" dir="ltr">

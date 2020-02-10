@@ -1,19 +1,26 @@
 function abrirFavoritos() {
   document.getElementById("sideNavigation").style.width = "0";
-  document.getElementById('configuracion').style.display = "none";
-
+  document.getElementById('perfil').style.display = "none";
 }
 
 function abrirMisCursos() {
   document.getElementById("sideNavigation").style.width = "0";
-  document.getElementById('configuracion').style.display = "none";
+  document.getElementById('perfil').style.display = "none";
+  document.getElementById('config').style.display = "none";
   document.getElementById("misCursos").style.display = "inherit";
 }
 
-function abrirConfiguracion() {
+function abrirPerfil() {
   document.getElementById("sideNavigation").style.width = "0";
   document.getElementById("misCursos").style.display = "none";
-  document.getElementById('configuracion').style.display = "inherit";
+  document.getElementById('config').style.display = "none";
+  document.getElementById('perfil').style.display = "inherit";
+}
+function abrirConfiguracion() {
+  document.getElementById("sideNavigation").style.width = "0";
+  document.getElementById('misCursos').style.display = "none";
+  document.getElementById('perfil').style.display = "none";
+  document.getElementById('config').style.display = "inherit";
 }
 
 function openNav() {
