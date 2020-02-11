@@ -15,7 +15,6 @@ if($_SESSION["usuario"]->getAcceso() == 2){
   $consulta = "SELECT curso.id, curso.titulo ,curso.lenguaje,curso.foto_curso FROM curso  WHERE curso.autor = '$id'";
 }
 
-$resultado = mysqli_query($conexion,$consulta);
 if(count($_SESSION) > 0){
 if($_SESSION["usuario"]->getFoto() != null){
   $fotoPerfil  =  $_SESSION["usuario"]->getFoto();
@@ -88,19 +87,20 @@ if(isset($_SESSION)){
       <section class="opciones">
         <!--Mis cursos-->
         <div class="mis-cursos" id="misCursos" style="display: none;">
-          <?php while($fila = mysqli_fetch_row($resultado)){ ?>
+          <?php foreach($conexion->query($consulta) as $row){ ?>
             <article class="border border-secundary border-top-0 curso">
             <div class="card" style="width: 18rem;">
-              <img src="<?=$BASE_URL."/img/fotoCurso/".$fila[3]?>" class="card-img-top" alt="...">
+              <img src="<?=$BASE_URL."/img/fotoCurso/".$row['foto_curso']?>" class="card-img-top" alt="...">
               <div class="card-body">
-                <h5 class="card-title"><?=$fila[1]?></h5>
-                <p>Lenguaje: <?=$fila[2]?></p>
+                <h5 class="card-title"><?=$row['titulo']?></h5>
+                <p>Lenguaje: <?=$row['lenguaje']?></p>
                 <?php if($_SESSION["usuario"]->getAcceso() == 1): ?>
                 <h6>Alumnos: </h6>
                 <a href="#" class="btn btn-primary">Borrar Curso</a>
                 <?php endif; ?>
               </div>
-              <a href="#">Ir al curso</a>
+              <p syle="display:none">id <?=$row['id']?></p>
+              <a href="perfil1.php?id=<?=$row['id']?>">Ir al curso</a>
             </div>
 
             </article>

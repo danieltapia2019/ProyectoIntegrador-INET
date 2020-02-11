@@ -75,6 +75,9 @@ if($_SESSION["usuario"]->getFoto() != null){
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="<?=$BASE_URL?>/usuario/perfil1.php">Mi perfil</a>
+          <?php if($userA->getAcceso() == 0): ?>
+          <a class="dropdown-item" href="<?=$BASE_URL?>/abm.php">Ir al ABM</a>
+          <?php endif;?>
           <a class="dropdown-item" href="<?=$BASE_URL?>/index.php?logout=0">Cerrar Sesion</a>
         </div>
 

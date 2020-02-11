@@ -6,17 +6,17 @@ include("../data/usuario.php");
 
 session_start();
 
-$usuarios = mysqli_query($conexion,"SELECT id,username,email,pwd,foto,acceso FROM usuarios");
+$usuarios = "SELECT id,username,email,pwd,foto,acceso FROM usuarios";
 $errorExistente="-1";
 if($_POST){
   $claseUsuario = new Usuario($_POST["username"],$_POST["email"],$_POST["password"]);
   $claseUsuario->setAcceso(2);
-    while($fila = mysqli_fetch_row($usuarios)){
-      if($fila[1] == $claseUsuario->getUserName()){
+    foreach($conexion->query($consulta) as $row){
+      if($row['username'] == $claseUsuario->getUserName()){
         $errorExistente = 0;
         break;
       }
-      if($fila[2] == $claseUsuario->getEmail()){
+      if($row['email'] == $claseUsuario->getEmail()){
         $errorExistente = 1;
         break;
       }
@@ -34,7 +34,8 @@ if($_POST){
     $password = $claseUsuario->getPassword();
     $foto = $claseUsuario->getFoto();
     $acceso = $claseUsuario->getAcceso();
-    $insertarUsuario = "INSERT INTO usuarios (username,email,pwd,foto,acceso) VALUES ('$usuario','$email','$password','$foto','$acceso')";
+    $query = $conexion->prepare("INSERT INTO usuarios (username,email,pwd,foto,acceso) VALUES ('$usuario','$email','$password','$foto','$acceso')");
+    $query->execute();
     $insertar = mysqli_query($conexion,$insertarUsuario);
     header('Location:./../usuario/perfil1.php');
     move_uploaded_file($_FILES["fotoPerfil"]["tmp_name"],"../img/fotoPerfil/".$foto);

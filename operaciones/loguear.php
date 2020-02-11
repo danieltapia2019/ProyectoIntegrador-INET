@@ -14,14 +14,14 @@ if($_POST){
     $password=$_POST["password"];
     $usuario="";
 
-    $usuarios = mysqli_query($conexion,"SELECT id,username,email,pwd,foto,acceso FROM usuarios");
+    $usuarios ="SELECT id,username,email,pwd,foto,acceso FROM usuarios";
 
 
-    while($fila = mysqli_fetch_row($usuarios)){
-      if($fila[2] == $email){
-        if(password_verify($password,$fila[3])){
+    foreach($conexion->query($usuarios) as $row){
+      if($row['email'] == $email){
+        if(password_verify($password,$row['pwd'])){
             $usuarioEncontrado = -1;
-            $usuario = $fila;
+            $usuario = $row;
             break;
           }
           else {

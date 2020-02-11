@@ -1,14 +1,16 @@
 <?php
 
-$db_host = "localhost";
-$db_nombre = "promunity_db";
-$db_usuario = "root";
+$dsn = 'mysql:host=localhost;dbname=promunity_db;port:3306';
+$db_use ="root";
 $db_pass = "";
 
-$conexion = mysqli_connect($db_host, $db_usuario, $db_pass,$db_nombre);
-
-if(mysqli_connect_errno()){
-  echo "No se pudo conectar a la Base De Datos";
-  exit();
+function abrirConexion($dsn,$user,$pass){
+try{
+ return new PDO($dsn,$user,$pass);
 }
+catch(PDOException $Exception){
+  return false;
+}
+}
+$conexion = abrirConexion($dsn,$db_use,$db_pass);
  ?>

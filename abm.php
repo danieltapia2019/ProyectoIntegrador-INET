@@ -1,3 +1,10 @@
+
+<script type="text/javascript">
+function abrirModal(){
+
+      $("#modalAgregar").modal("show");
+}
+</script>
 <?php
 
 include_once ('rutas.php');
@@ -15,7 +22,18 @@ if($_SESSION){
 $elegido = "Alumnos";
 $consulta = "SELECT usuarios.id , usuarios.username ,usuarios.email FROM usuarios WHERE usuarios.acceso = 2";
 $indice = 0;
-
+$form = "display:none";
+if($_GET){
+  $idUser = $_GET["id"];
+  if(isset($_GET["operacion"])){
+    if($_GET["operacion"] == "update"){
+    $traerUsuario = "SELECT usuarios.id , usuarios.username ,usuarios.email,usuarios.pwd FROM usuarios WHERE usuarios.id ='$idUser'";
+    $form = "display:inherit;";
+  }else {
+    echo "Eliminar";
+  }
+  }
+}
 if($_POST){
   $indice = $_POST["busqueda"];
   switch ($indice) {
@@ -42,16 +60,10 @@ if($_POST){
     case 4:
     //Cursos/Alumno
     $elegido = "Cursos/Alumnos";
-    $consulta = "SELECT alumnos.username, cursos.curso_nombre FROM usuario_curso,curso AS cursos, usuarios AS alumnos WHERE usuario_curso.id_usuario = alumnos.id AND usuario_curso.id_curso = cursos.id";
-      break;
-
-    default:
-
-    $consulta = "SELECT usuario.id , usuario.username ,usuario.email FROM usuario WHERE usuario.acceso = 2";
+    $consulta = "SELECT usuarios.username, curso.titulo FROM usuario_curso,curso,usuarios WHERE usuario_curso.id_usuario = usuarios.id AND usuario_curso.id_curso = curso.id";
       break;
   }
 }
-$resultado = mysqli_query($conexion,$consulta);
  ?>
  <!DOCTYPE html>
  <html lang="es" dir="ltr">
@@ -59,7 +71,7 @@ $resultado = mysqli_query($conexion,$consulta);
      <meta charset="utf-8">
      <title>ABM Promunity</title>
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-     <link rel="stylesheet" href="css/stylePrincipal.css">
+     <link rel="stylesheet" href="css/abm.css">
    </head>
    <body>
      <div class="container-fuild">
@@ -81,6 +93,36 @@ $resultado = mysqli_query($conexion,$consulta);
            <button type="submit" class="btn btn-primary">Buscar</button>
          </form>
      </header>
+     <hr>
+     <form style=<?=$form?> class="modal-body" action="" method="post">
+       <?php foreach($conexion->query($traerUsuario) as $row){ ?>
+         <label for="username">Nombre de Usuario</label>
+       <div class="input-group mb-3">
+         <div class="input-group-prepend">
+           <span class="input-group-text"><i class="fas fa-user"></i></span>
+         </div>
+         <input type="text" name="username" class="form-control" aria-label="adn" value=<?=$row['username']?> required>
+       </div>
+
+         <label for="email">Email</label>
+       <div class="input-group mb-3">
+         <div class="input-group-prepend">
+           <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+         </div>
+         <input type="email" name="email" class="form-control" aria-label="adn" value=<?=$row['email']?> required>
+       </div>
+
+         <label for="pwd">Contraseña</label>
+       <div class="input-group mb-3">
+         <div class="input-group-prepend">
+           <span class="input-group-text"><i class="fas fa-lock"></i></span>
+         </div>
+         <input type="password" name="pwd" class="form-control" aria-label="adn" value=<?=$row['pwd']?> required>
+       </div>
+       <button type="submit" name="button" class="btn btn-info">Actualizar</button>
+     <?php } ?>
+     </form>
+     <hr>
      <main>
        <button class="btn btn-success" type="button" name="button" data-toggle="modal" data-target="#modalAgregar">Agregar</button>
        <hr>
@@ -103,31 +145,37 @@ $resultado = mysqli_query($conexion,$consulta);
               <th>Alumno</th>
               <th>Curso</th>
             <?php endif; ?>
+
+              <?php if($indice != 4): ?>
+              <th>Borrar</th>
+              <th>Editar</th>
+              <?php endif; ?>
            </tr>
          </thead>
          <tbody>
 
-           <?php while($fila = mysqli_fetch_row($resultado)){ ?>
+           <?php foreach($conexion->query($consulta) as $row){ ?>
            <tr>
              <?php if($indice == 0 || $indice == 1 || $indice == 2): ?>
-             <td><?php echo $fila[0]; ?></td>
-             <td><?php echo $fila[1]; ?></td>
-             <td><?php echo $fila[2]; ?></td>
+             <td id="id"><?php echo $row['id']; ?></td>
+             <td><?php echo $row["username"]; ?></td>
+             <td><?php echo $row["email"]; ?></td>
             <?php endif; ?>
             <?php if($indice == 3): ?>
-             <td><?php echo $fila[0]; ?></td>
-             <td><?php echo $fila[1]; ?></td>
-             <td><?php echo $fila[2]; ?></td>
-             <td><?php echo $fila[3]; ?></td>
-             <td><?php echo $fila[4]; ?></td>
+             <td><?php echo $row['id']; ?></td>
+             <td><?php echo $row['titulo']; ?></td>
+             <td><?php echo $row['lenguaje']; ?></td>
+             <td><?php echo $row['precio']; ?></td>
+             <td><?php echo $row['username']; ?></td>
             <?php endif; ?>
             <?php if($indice == 4): ?>
-             <td><?php echo $fila[0]; ?></td>
-             <td><?php echo $fila[1]; ?></td>
+             <td><?php echo $row['username']; ?></td>
+             <td><?php echo $row['titulo']; ?></td>
             <?php endif; ?>
-
-             <td> <button class="btn btn-danger" type="button" name="button">Eliminar</button> </td>
-             <td> <button class="btn btn-warning" type="button" name="button">Editar</button> </td>
+              <?php if($indice != 4): ?>
+             <td> <button class="btn btn-danger" type="button" name="button"> <a style="color:white;" href="abm.php?id=<?php echo $row['id'];?>&operacion=delete&tipo=<?php echo $elegido;?>">Eliminar</a> </button> </td>
+             <td> <button class="btn btn-warning" type="button" name="button"> <a style="color:white;" href="abm.php?id=<?php echo $row['id'];?>&operacion=update&tipo=<?php echo $elegido;?>">Editar</a> </button> </td>
+            <?php endif; ?>
            </tr>
          <?php } ?>
          </tbody>
@@ -136,7 +184,7 @@ $resultado = mysqli_query($conexion,$consulta);
      </main>
 
      <div class="modal fade" id="modalAgregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-   <div class="modal-dialog" role="document">
+       <div class="modal-dialog" role="document">
      <div class="modal-content">
        <div class="modal-header">
          <h5 class="modal-title" id="exampleModalLabel">Agregar <?=$elegido?></h5>
@@ -172,19 +220,25 @@ $resultado = mysqli_query($conexion,$consulta);
              <div class="input-group-prepend">
                <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
              </div>
-             <input type="password" name="adn" class="form-control" aria-label="adn" placeholder="Ingrese Nombre del Curso" required>
+             <input type="text" name="adn" class="form-control" aria-label="adn" placeholder="Ingrese Nombre del Curso" required>
            </div>
            <div class="input-group mb-3">
              <div class="input-group-prepend">
                <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
              </div>
-             <input type="password" name="adn" class="form-control" aria-label="adn" placeholder="Ingrese Lenguaje del curso" required>
+             <input type="text" name="lenguaje" class="form-control" aria-label="adn" placeholder="Ingrese Lenguaje del curso" required>
            </div>
            <div class="input-group mb-3">
              <div class="input-group-prepend">
                <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
              </div>
-             <input type="password" name="adn" class="form-control" aria-label="adn" placeholder="Ingrese Autor" required>
+             <input type="text" name="descripcion" class="form-control" aria-label="adn" placeholder="Ingrese Descripcion" required>
+           </div>
+           <div class="input-group mb-3">
+             <div class="input-group-prepend">
+               <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+             </div>
+             <input type="text" name="autor" class="form-control" aria-label="adn" placeholder="Ingrese Autor" required>
            </div>
            <?php endif; ?>
 
