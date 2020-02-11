@@ -4,7 +4,6 @@
   include("../data/usuario.php");
   include("../app/controller.php");
 
-  session_start();
   $usuarioEncontrado = "";
   //0=email correcto contraseña incorrecta
   //1=email incorrecto

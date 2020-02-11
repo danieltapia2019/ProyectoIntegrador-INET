@@ -32,7 +32,7 @@
          *      $flag = bandera;
          *      $objValue = objeto || string;.
          */
-        public static function hornear(string $flag,$objValue = null){
+        public static function hornear($flag,$objValue = null){
             switch ($flag) {
                 case 'mode':
                     setcookie("UserMode",$objValue,time()+60*60*24*31,"/");
