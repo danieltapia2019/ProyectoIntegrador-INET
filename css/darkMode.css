@@ -1,0 +1,115 @@
+/* General */
+body {
+    background-color: #212121 !important;
+}
+
+/* Navbar : component*/
+nav.navbar.navbar-expand-lg {
+    background-color: #39373b !important;
+}
+
+/* Footer : conponent */
+footer.footer {
+    border-top: 1px solid #f9d268;
+}
+
+/* HOME : page*/
+div#mas-vistos {
+    color: #f0f6f7;
+}
+
+div#mas-vistos>article.curso,
+div.carousel.slide article.curso {
+    background-color: #424242;
+}
+
+div.carousel.slide article.curso>h4,
+div.carousel.slide article.curso>p {
+    color: #f0f6f7;
+}
+
+#contacto div.form-row>form>div.form-group>input.form-control {
+    background-color: black !important;
+}
+
+div#contacto button.btn.btn-contact {
+    background-color: transparent;
+    border: 1px solid #d74850;
+}
+
+#contacto button.btn.btn-contact:hover {
+    background-color: #d74850;
+}
+
+div#opiniones>h2 {
+    color: #f0f6f7;
+}
+
+#opiniones div.card {
+    background-color: rgba(107, 139, 141, 0.1);
+    border: 1px solid #212121;
+    transition: 0.5s;
+}
+
+#opiniones div.card:hover {
+    background-color: rgba(107, 139, 141, 0.5);
+
+    border-color: rgba(107, 139, 141, 0.4);
+}
+
+div.carousel.slide article.opinion {
+    background-color: #424242;
+}
+
+div.carousel.slide article.opinion>span.h4,
+div.carousel.slide article.opinion>p {
+    color: #f0f6f7;
+}
+
+
+/* Perfil : Page */
+div.perfil#perfil>form>div.form-group>label,
+div.perfil#perfil>form>label {
+    color: #f0f6f7;
+}
+
+
+div.config#config>h2,
+div.config#config>h4,
+div.config#config>form label {
+    color: #f0f6f7;
+}
+
+
+/* F.A.Q : Page */
+section.seccion>div.duda>ul>li {
+    border-left: 1px solid #6b8b8d;
+}
+
+section.seccion>div.duda>ul>li>a {
+    color: #f0f6f7 !important;
+}
+
+section.seccion>div.contenido>h4,
+section.seccion>div.contenido>article{
+    color: #f0f6f7 !important;
+}
+section.seccion>div.contenido>article>ul>li>a{
+    color: #6b8b8d;
+}
+
+/* 
+pale red
+    #d74850
+green ones
+    #324448
+    #6b8b8d
+    #b6cdb1
+pseu white
+    #f0f6f7
+ yellow?
+    #f9d268
+ darks
+    #323441
+    #39373b
+*/

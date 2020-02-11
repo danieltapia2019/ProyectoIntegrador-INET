@@ -4,7 +4,7 @@
 
 /*SECCION PEFIL.PHP*/
 
-.usuario{
+.usuario {
   background-image: url('../img/faqBienvenido.png');
   text-align: center;
   margin-top: 0;
@@ -12,48 +12,61 @@
   float: left;
   height: 18vh;
 }
-#configuracion{
+#config{
+  display: none;
+}
+#config i{
+  margin-right: 1%;
+}
+#config > form{
+  margin: 3% auto 2.5% 2.5%;
+}
+#config > p{
+  margin-bottom: 10%;
+}
+
+#perfil,#config {
   margin-top: 10%;
   width: 60%;
   margin-bottom: 5%;
   margin-left: 20%;
   margin-right: 20%;
 }
-#fotoPerfil input{
+
+#fotoPerfil input {
   font-size: 15px;
 }
-.custom-file{
-  margin-top: 12px;
-  }
-  #imgNormal{
-    width: 90px;
-    height: 90px;
-  }
-  #imagenPrevisualizacion{
-    width: 90px;
-    height: 90px;
-  }
 
+.custom-file {
+  margin-top: 12px;
+}
+
+#imgNormal {
+  width: 90px;
+  height: 90px;
+}
+
+#imagenPrevisualizacion {
+  width: 90px;
+  height: 90px;
+}
 /*PERFIL MOBILE*/
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
-  .usuario h1{
+  .usuario h1 {
     font-size: 20px;
   }
 
-.topnav a ion-icon{
-}
-.opciones{
-}
-#configuracion{
-  margin-top: 10%;
-  width: 90%;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-bottom: 5%;
+  #perfil,#config {
+    margin-top: 10%;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
 
-}
-.custom-file{
-  margin-top: 12px;
+  }
+
+  .custom-file {
+    margin-top: 12px;
   }
 }
