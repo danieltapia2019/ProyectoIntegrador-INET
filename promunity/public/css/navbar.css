@@ -1,0 +1,165 @@
+nav.navbar.navbar-expand-lg {
+    background-color: #d74850;
+}
+
+.navbar.navbar-expand-lg a.nav-link {
+    color: #f0f6f7;
+    font-size: 1.20rem;
+}
+
+button.navbar-toggler {
+    color: white;
+}
+
+span#imagenNombre>img,
+span#fotoPerfil>img {
+    width: 36px;
+    border-radius: 100% !important;
+    height: 36px;
+}
+
+span#fotoPerfilNav {
+    color: white;
+}
+
+span#fotoPerfilNav>img {
+
+    width: 64px;
+    border-radius: 100% !important;
+    height: 64px;
+}
+
+#imgNormal {
+    width: 90px;
+    height: 90px;
+}
+
+#imagenPrevisualizacion {
+    width: 90px;
+    height: 90px;
+}
+
+
+/*LOGUEAR.PHP*/
+
+.modal-body {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+button.btn.btn-signIn,
+button.btn.btn-reg {
+    color: white;
+    background-color: #d74850;
+}
+
+button.btn.btn-signUp,
+button.btn.btn-regSignIn {
+    color: white;
+    background-color: #6b8b8d;
+}
+
+.custom-file {
+    margin-top: 12px;
+}
+
+#imgNormal {
+    width: 90px;
+    height: 90px;
+}
+
+#imagenPrevisualizacion {
+    width: 90px;
+    height: 90px;
+}
+
+/*Mobile*/
+
+/*MOBILE NAVBAR*/
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .barra {
+        width: 80%;
+        margin-right: 5%;
+    }
+
+    #navbarSupportedContent {
+        text-align: center;
+    }
+
+    #navbarDropdown {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    /*Barra de navegacion*/
+    nav a {
+        width: 30%;
+        margin-left: 35%;
+        margin-right: 35%;
+    }
+
+    nav a img {
+        width: 100%;
+        position: relative;
+    }
+
+    #busquedaNav {
+        width: 90%;
+        float: left;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+    }
+
+    #barrabusqueda {
+        width: 80%;
+    }
+
+    #botonLupa {
+        margin-left: 2%;
+    }
+
+    #fotoPerfil input {
+        font-size: 15px;
+    }
+
+    #fotoPerfil img {
+        height: 100px;
+        width: 100px;
+    }
+
+    /*CIERRE NAVBAR MOBILE*/
+}
+
+/*NAVBAR TABLET*/
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
+    /*Navbar*/
+    #navbarSupportedContent {
+        text-align: center;
+        justify-content: center;
+    }
+
+    #barrabusqueda {
+        margin-left: 5%;
+        margin-right: 5%;
+        width: 90%;
+        justify-content: center;
+    }
+
+    /*CIERRE NAVBAR TABLET*/
+}
+
+/*NAVBAR LAPTOT*/
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+
+    /*FOTO PERFIL NAVBAR*/
+    #fotoPerfil img {
+        height: 50px;
+        width: 50px;
+    }
+
+    /*CIERRE NAVBAR LAPTOT*/
+}

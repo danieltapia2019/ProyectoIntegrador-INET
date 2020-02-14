@@ -17,4 +17,4 @@ Route::get('/', function () {
 
 Route::get('/index','CursoController@listado');
 
-Route::get('/index/{id}','CursoController@verCurso');
+// Route::get('/index/{id}','CursoController@verCurso');

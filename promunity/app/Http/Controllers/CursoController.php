@@ -8,13 +8,11 @@ class CursoController extends Controller
 {
     public function listado(){
         $cursos = CursoModel::all();
-
         return view('index',compact('cursos'));
     }
 
     public function verCurso($id){
-        $curso = CursoModel::where('id','=',$id)->get();
-
+        $curso = CursoModel::find($id);
         return view('index',compact('curso'));
     }
 }
