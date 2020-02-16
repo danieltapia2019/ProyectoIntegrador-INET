@@ -1,10 +1,8 @@
-@extends('layout.app');
+@extends('layout.app')
 
-@section('title','Home');
+@section('css','css/index.css')
+@section('title','Home')
 
-@section('component.navbar')
-
-@endsection
 @section('content')
 <section>
     <div id=presentacion>

@@ -15,6 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/index','CursoController@listado');
+Route::get('/home',function(){
+    return view('home');
+});
+Route::get('/faq',function(){
+    return view('pages.faq');
+});
 
 // Route::get('/index/{id}','CursoController@verCurso');
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');

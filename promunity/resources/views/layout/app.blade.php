@@ -10,17 +10,17 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/app.css">
     <!-- css propios -->
-    <link rel="stylesheet" href="css/index.css">
-    <title>Promunty | @yield('title')</title>
+    <link rel="stylesheet" href="@yield('css')">
+    <title>@yield('title')</title>
 </head>
 
 <body>
     <div class="masterNavBar">
         @include('component.navbar')
     </div>
-    <div class="container-fluid">
-        @yield('content')
-    </div>
+
+    @yield('content')
+
     <div class="masterFooter">
         @include('component.footer')
     </div>
