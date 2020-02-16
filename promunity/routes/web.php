@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/home',function(){
     return view('home');
@@ -23,6 +23,10 @@ Route::get('/faq',function(){
 });
 
 // Route::get('/index/{id}','CursoController@verCurso');
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 

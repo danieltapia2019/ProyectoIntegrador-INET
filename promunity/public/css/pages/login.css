@@ -1,0 +1,17 @@
+@import '../components/navbar.css';
+@import '../components/footer.css';
+
+.modal-body {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .modal-body {
+        width: 95%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+}

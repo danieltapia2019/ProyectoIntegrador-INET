@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/app.css">
     <!-- css propios -->
     <link rel="stylesheet" href="@yield('css')">
+
+    <link rel="shortcut icon" href="../../../img/logo.png" />
     <title>@yield('title')</title>
 </head>
 

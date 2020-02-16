@@ -82,13 +82,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="" action="" method="post" enctype="multipart/form-data">
+                <form class="" action="{{ route('register') }}" method="post" enctype="multipart/form-data">
+                        @csrf
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-user"></i></span>
                         </div>
                         <input type="text" name="username" class="form-control" aria-label="text"
-                            placeholder="Nombre de usuario" required maxlength="25" minlength="5">
+                            placeholder="Nombre de usuario" required>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -102,11 +103,9 @@
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                         </div>
                         <input type="password" name="password" class="form-control" aria-label="password"
-                            placeholder="Ingrese contraseña" id="passwordRegister" maxlength="20" minlength="6"
-                            required>
+                            placeholder="Ingrese contraseña" id="passwordRegister" required>
                         <div class="input-group-append">
-                            <button class="btn btn-outline-primary" type="button" name="button"
-                                onclick="mostrarContrasena()">
+                            <button class="btn btn-outline-primary" type="button" name="button" onclick="mostrarContrasena()">
                                 <i name="eye" id="ojoRegister" class="far fa-eye"></i>
                             </button>
                         </div>
@@ -179,7 +178,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post">
+                <form action="{{ route('login') }}" method="POST">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="far fa-envelope"></i></span>
@@ -191,11 +190,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
                             </div>
-                            <input type="password" name="password" class="form-control" aria-label="password"
-                                placeholder="Ingrese contraseña" id="password" maxlength="20" minlength="6" required>
+                            <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña" id="password" maxlength="20" minlength="6" required>
                             <div class="input-group-append">
-                                <button type="button" class="btn btn-outline-primary" name="button"
-                                    onclick="mostrarContrasena()">
+                                <button type="button" class="btn btn-outline-primary" name="button" onclick="mostrarContrasena()">
                                     <i name="eye" id="ojoOn" class="far fa-eye"></i>
                                 </button>
                             </div>
@@ -208,8 +205,7 @@
                     </form>
                     <p class="text-center"> <a href="#">¿Has olvidado tu contraseña?</a></p>
                     <p class="text-center mt-3">¿No tienes cuenta?
-                        <button class="btn btn-signUp" data-toggle="modal" data-target="#modalRegistro"
-                            onclick="cerrarModalActivo()" id="button">Registrate</button>
+                        <button class="btn btn-signUp" data-toggle="modal" data-target="#modalRegistro" onclick="cerrarModalActivo()" id="button">Registrate</button>
                     </p>
                 </div>
             </div>
