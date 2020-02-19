@@ -1,33 +1,102 @@
 @extends('layout.app')
 
-@section('css','css/pages/login.css')
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/pages/login.css') }}">
+@endpush
 
-@section('title','Login')
+@section('title','F.A.Q')
 
 @section('content')
-<div class="container-fuild">
-    <div class="modal-body">
-        <form action="loguear.php" method="post" class="loguearse">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
-                </div>
-                <input type="email" name="email" class="form-control" aria-label="email" placeholder="Ingrese email"
-                    required>
-            </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                </div>
-                <input type="password" name="password" class="form-control" aria-label="password"
-                    placeholder="Ingrese contraseña" required maxlength="20" minlength="6">
-            </div>
-            <p>
-                <input type="checkbox" name="" value=""> Recordarme</p>
-            <button type="submit" class="btn btn-danger btn-lg btn-block my-3 ">Iniciar Sesión</button>
-        </form>
-        <p class="text-center"> <a href="#">¿Has olvidado tu contraseña? </a></p>
-        <p class="text-center mt-3">¿No tienes cuenta?<button class="btn btn-success my-2 my-sm-0  bg-ligth border-0 register" data-toggle="modal" data-target="#modalRegistro">Registrate</button>
-        </p>
+
+<header class="header">
+    <div class="usuario">
+        <br>
+        <h1>Hola @UserName¿Necesitas ayuda?</h1>
     </div>
-    @endsection
+</header>
+
+<section class="seccion">
+    <div class="duda">
+        <ul style="list-style : none;">
+            <li>
+                <a href="#sesion">Registrarse y Login</a>
+            </li>
+            <li>
+                <a href="#curso">Inscribirse a un curso</a>
+            </li>
+            <li>
+                <a href="#subir">Subir un curso</a>
+            </li>
+            <li>
+                <a href="#clases">¿Como son las clases?</a>
+            </li>
+            <li>
+                <a href="#pago">Metodos de pago</a>
+            </li>
+            <li>
+                <a href="#">Reportar un problema</a>
+            </li>
+        </ul>
+    </div>
+    <div class="contenido">
+        <h4>Todo lo que necesitas saber para usar Promunity</h4>
+        <article class="" id="sesion">
+            <h5>Registrarse y Login</h5>
+            <ul style="list-style: none;">
+                <li>
+                    <a href="#">Registrarse</a>
+                </li>
+                <li>
+                    <a href="#">Login</a>
+                </li>
+            </ul>
+        </article>
+
+        <article class="" id="curso">
+            <h5>Inscribirse a un curso</h5>
+            <ul style="list-style: none;">
+                <li>
+                    <a href="#">Inscribirse online</a>
+                </li>
+            </ul>
+        </article>
+
+        <article class="" id="subir">
+            <h5>Subir un curso a Promunity</h5>
+            <ul style="list-style: none;">
+                <li>
+                    <a href="#">Curso presencial</a>
+                </li>
+                <li>
+                    <a href="">Curso presencial</a>
+                </li>
+            </ul>
+        </article>
+
+        <article class="" id="clases">
+            <h5>Clases en Promunity</h5>
+            <ul style="list-style: none;">
+                <li>
+                    <a href="#">Clases presenciales</a>
+                </li>
+                <li>
+                    <a href="">Clases online</a>
+                </li>
+            </ul>
+        </article>
+
+        <article class="" id="pago">
+            <h5>Metodos de pago</h5>
+            <ul style="list-style: none;">
+                <li>
+                    <a href="#">Registrarse</a>
+                </li>
+                <li>
+                    <a href="">Login</a>
+                </li>
+            </ul>
+        </article>
+
+    </div>
+</section>
+@endsection

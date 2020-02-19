@@ -8,11 +8,10 @@
     <!--Fontawesome-->
     <script src="https://kit.fontawesome.com/918d19c8b4.js" crossorigin="anonymous"></script>
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- css propios -->
-    <link rel="stylesheet" href="@yield('css')">
-
-    <link rel="shortcut icon" href="../../../img/logo.png" />
+    @stack('styles')
+    <link rel="shortcut icon" href="{{ asset('img/logo.png') }}" />
     <title>@yield('title')</title>
 </head>
 

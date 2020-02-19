@@ -1,6 +1,8 @@
 @extends('layout.app')
 
-@section('css','css/pages/faq.css')
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/pages/faq.css') }}">
+@endpush
 
 @section('title','F.A.Q')
 

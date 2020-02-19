@@ -1,6 +1,9 @@
 @extends('layout.app')
 
-@section('css','css/index.css')
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+@endpush
+    
 @section('title','Home')
 
 @section('content')

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
         <a class="navbar-brand" href="{{url('/home')}}">
-            <img src="img/logo.png" alt="NavBarPicture" width=60px>
+            <img src="{{ asset('img/logo.png') }}" alt="NavBarPicture" width=60px>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,23 +32,53 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Acerca de </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{url('/faq')}}">F.A.Q</a>
+                        <a class="dropdown-item" href="{{url('/faq')}}">F.A.Q</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#contacto">Contacto</a>
                     </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#modalInicio">
-                        <i class="fas fa-sign-in-alt" data-toggle="tooltip" data-placement="bottom" title="Inicio de Sesión"></i>
+                        <i class="fas fa-sign-in-alt" data-toggle="tooltip" data-placement="bottom"
+                            title="Inicio de Sesión"></i>
                     </a>
                 </li>
-                {{-- Usuario Logueado --}}
-                {{-- <li class="nav-item">
+                @guest
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                </li>
+                @if (Route::has('register'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                </li>
+                @endif
+                @else
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->username }} <span class="caret"></span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+                @endguest
+            </ul>
+            {{-- Usuario Logueado --}}
+            {{-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fas fa-shopping-cart"></i>
                     </a>
                 </li> --}}
-                {{-- <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <!--Si tiene foto de perfil -->
@@ -64,7 +94,7 @@
                         <a class="dropdown-item" href="">Cerrar Sesion</a>
                     </div>
                 </li> --}}
-                <!-- /User actions -->
+            <!-- /User actions -->
             </ul>
         </div>
     </div>
@@ -83,7 +113,7 @@
             </div>
             <div class="modal-body">
                 <form class="" action="{{ route('register') }}" method="post" enctype="multipart/form-data">
-                        @csrf
+                    @csrf
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-user"></i></span>
@@ -105,7 +135,8 @@
                         <input type="password" name="password" class="form-control" aria-label="password"
                             placeholder="Ingrese contraseña" id="passwordRegister" required>
                         <div class="input-group-append">
-                            <button class="btn btn-outline-primary" type="button" name="button" onclick="mostrarContrasena()">
+                            <button class="btn btn-outline-primary" type="button" name="button"
+                                onclick="mostrarContrasena()">
                                 <i name="eye" id="ojoRegister" class="far fa-eye"></i>
                             </button>
                         </div>
@@ -178,7 +209,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <form action="{{ route('login') }}" method="POST">
+                    <form action="{{ route('login') }}" method="POST">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="far fa-envelope"></i></span>
@@ -190,9 +221,11 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
                             </div>
-                            <input type="password" name="password" class="form-control" aria-label="password" placeholder="Ingrese contraseña" id="password" maxlength="20" minlength="6" required>
+                            <input type="password" name="password" class="form-control" aria-label="password"
+                                placeholder="Ingrese contraseña" id="password" maxlength="20" minlength="6" required>
                             <div class="input-group-append">
-                                <button type="button" class="btn btn-outline-primary" name="button" onclick="mostrarContrasena()">
+                                <button type="button" class="btn btn-outline-primary" name="button"
+                                    onclick="mostrarContrasena()">
                                     <i name="eye" id="ojoOn" class="far fa-eye"></i>
                                 </button>
                             </div>
@@ -205,7 +238,8 @@
                     </form>
                     <p class="text-center"> <a href="#">¿Has olvidado tu contraseña?</a></p>
                     <p class="text-center mt-3">¿No tienes cuenta?
-                        <button class="btn btn-signUp" data-toggle="modal" data-target="#modalRegistro" onclick="cerrarModalActivo()" id="button">Registrate</button>
+                        <button class="btn btn-signUp" data-toggle="modal" data-target="#modalRegistro"
+                            onclick="cerrarModalActivo()" id="button">Registrate</button>
                     </p>
                 </div>
             </div>

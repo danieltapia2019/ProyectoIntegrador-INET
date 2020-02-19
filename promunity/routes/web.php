@@ -18,15 +18,19 @@
 Route::get('/home',function(){
     return view('home');
 });
-Route::get('/faq',function(){
+
+Route::get('/home/faq',function(){
     return view('pages.faq');
 });
 
+Route::get('/home/login',function(){
+    return view('pages.login');
+});
+
+Route::post('/logout',function(){
+    return view('home');
+});
 // Route::get('/index/{id}','CursoController@verCurso');
-
-Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
