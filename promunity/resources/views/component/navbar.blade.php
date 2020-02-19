@@ -32,69 +32,44 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Acerca de </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{url('/faq')}}">F.A.Q</a>
+                        <a class="dropdown-item" href="{{ url('/home/faq') }}">F.A.Q</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#contacto">Contacto</a>
                     </div>
                 </li>
+                @guest
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#modalInicio">
                         <i class="fas fa-sign-in-alt" data-toggle="tooltip" data-placement="bottom"
                             title="Inicio de Sesión"></i>
                     </a>
                 </li>
-                @guest
-                <li class="nav-item">
+                {{-- @guest --}}
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                 </li>
-                @if (Route::has('register'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                </li>
-                @endif
+                    @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                    @endif --}}
                 @else
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->username }} <span class="caret"></span>
                     </a>
-
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
-
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
                     </div>
                 </li>
                 @endguest
-            </ul>
-            {{-- Usuario Logueado --}}
-            {{-- <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-shopping-cart"></i>
-                    </a>
-                </li> --}}
-            {{-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <!--Si tiene foto de perfil -->
-                        <span id="fotoPerfil"><img src="" alt=""
-                                class=""></span>
-                        <!-- else-->
-                        <span id="imagenNombre"><img src="" alt="" class=""></span>
-                        <!-- fin IF -->
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="">Mi perfil</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="">Cerrar Sesion</a>
-                    </div>
-                </li> --}}
-            <!-- /User actions -->
             </ul>
         </div>
     </div>
@@ -112,14 +87,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="" action="{{ route('register') }}" method="post" enctype="multipart/form-data">
+                <form class="" action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-user"></i></span>
                         </div>
-                        <input type="text" name="username" class="form-control" aria-label="text"
-                            placeholder="Nombre de usuario" required>
+                        <input type="text" name="username" class="form-control" placeholder="Nombre de usuario" required>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -140,6 +114,18 @@
                                 <i name="eye" id="ojoRegister" class="far fa-eye"></i>
                             </button>
                         </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        </div>
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirmar contraseña">
+                        {{-- <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="button" name="button"
+                                onclick="mostrarContrasena()">
+                                <i name="eye" id="ojoRegister" class="far fa-eye"></i>
+                            </button>
+                        </div> --}}
                     </div>
 
                     <div id="imagenNombre">
@@ -210,6 +196,7 @@
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('login') }}" method="POST">
+                        @csrf
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="far fa-envelope"></i></span>

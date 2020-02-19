@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('css','css/index.css')
+{{-- @section('css','css/index.css') --}}
 @section('title','Home')
 
 @section('content')

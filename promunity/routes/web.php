@@ -23,13 +23,7 @@ Route::get('/home/faq',function(){
     return view('pages.faq');
 });
 
-Route::get('/home/login',function(){
-    return view('pages.login');
-});
-
-Route::post('/logout',function(){
-    return view('home');
-});
+Route::get('/logout','\App\http\Controller\Auth\LoginController@logout');
 // Route::get('/index/{id}','CursoController@verCurso');
 
 Auth::routes();

@@ -2,9 +2,9 @@
     <div class="lista">
       <ul>
         <h5>Navegación</h5>
-      <li><a href="{{url('/home')}}"><i class="fas fa-home mr-2"></i>Home</a></li>
+      <li><a href="{{ url('/home') }}"><i class="fas fa-home mr-2"></i>Home</a></li>
         <li><a href=""><i class="far fa-list-alt mr-2"></i>Cursos</a></li>
-      <li><a href="{{url('/faq')}}"><i class="far fa-question-circle mr-2"></i>Preguntas Frecuentes</a></li>
+      <li><a href="{{ url('/home/faq') }}"><i class="far fa-question-circle mr-2"></i>Preguntas Frecuentes</a></li>
         <li><a href="#contacto"><i class="fas fa-mail-bulk mr-2"></i>Contacto</a></li>
       </ul>
     </div>

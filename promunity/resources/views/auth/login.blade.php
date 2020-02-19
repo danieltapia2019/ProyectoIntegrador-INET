@@ -1,4 +1,10 @@
-@extends('layouts.app')
+@extends('layout.app')
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/pages/login.css') }}">
+@endpush
+
+@section('title','Inicio de sesion')
 
 @section('content')
 <div class="container">
