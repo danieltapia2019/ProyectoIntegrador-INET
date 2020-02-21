@@ -9,4 +9,8 @@ class CursoModel extends Model
     public $table = 'cursos';
 
     public $timestamps = false;
+
+    public function categoria(){
+        return $this->belongsTo(CategoriaModel::class,'categorias_id');
+    }
 }

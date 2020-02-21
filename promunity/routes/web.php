@@ -26,6 +26,12 @@ Route::get('/home/faq',function(){
 Route::get('/logout','\App\http\Controller\Auth\LoginController@logout');
 // Route::get('/index/{id}','CursoController@verCurso');
 
+// Curso
+Route::get('/curso/todos','cursoController@list');
+// Route::get('/curso/categoria','cursoController@byCategories');
+Route::get('/curso','cursoController@searchCurso');
+
+
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

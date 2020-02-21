@@ -18,14 +18,45 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cursos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="">Lenguajes de
-                            Programacion</a>
-                        <a class="dropdown-item" href="">Desarrollo de
-                            Videojuegos</a>
-                        <a class="dropdown-item" href="">Desarrollo Web</a>
-                        <a class="dropdown-item" href="">Aplicaciones Moviles</a>
+                        <a class="dropdown-item" href="{{-- url('curso/categoria') --}}"
+                            onclick="event.preventDefault();document.getElementById('lp').submit();">
+                            Lenjuages de Programación
+                        </a>
+                        <form id="lp" action="{{-- url('curso/categoria') --}}" method="GET" style="display: none;">
+                            {{-- lp = Lenguaje de Programacion --}}
+                            <input type="hidden" name="categoria" value="1">
+
+                        </form>
+
+                        <a class="dropdown-item" href="{{-- url('curso/categoria') --}}"
+                            onclick="event.preventDefault();document.getElementById('dvj').submit();">
+                            Desarrollo de Videojuegos
+                        </a>
+                        <form id="dvj" action="{{-- url('curso/categoria') --}}" method="GET" style="display: none;">
+                            {{-- dvj = Desarrollo de Videojuegos --}}
+                            <input type="hidden" name="categoria" value="videojuegos">
+                        </form>
+
+                        <a class="dropdown-item" href="{{-- url('curso/categoria') --}}"
+                            onclick="event.preventDefault();document.getElementById('dw').submit();">
+                            Desarrollo Web
+                        </a>
+                        <form id="logout-form" action="{{-- url('curso/categoria') --}}" method="GET" style="display: none;">
+                            {{-- dw = Desarrollo Web --}}
+                            <input type="hidden" name="categoria" value="web">
+                        </form>
+
+                        <a class="dropdown-item" href="{{-- url('curso/categoria') --}}"
+                            onclick="event.preventDefault();document.getElementById('dam').submit();">
+                            Desarrollo de aplicaciones moviles
+                        </a>
+                        <form id="dam" action="{{-- url('curso/categoria') --}}" method="GET" style="display: none;">
+                            {{-- dam = Desarrollo de Aplicaciones Moviles --}}
+                            <input type="hidden" name="cateoria" value="appMoviles">
+                        </form>
+
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="">Mas cursos...</a>
+                        <a class="dropdown-item" href="{{ url('/curso/todos') }}">Mas cursos...</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -48,11 +79,11 @@
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                 </li>
-                    @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
-                    @endif --}}
+                @if (Route::has('register'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                </li>
+                @endif --}}
                 @else
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -60,9 +91,9 @@
                         {{ Auth::user()->username }} <span class="caret"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            Cerrar sesión
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
@@ -93,7 +124,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-user"></i></span>
                         </div>
-                        <input type="text" name="username" class="form-control" placeholder="Nombre de usuario" required>
+                        <input type="text" name="username" class="form-control" placeholder="Nombre de usuario"
+                            required>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -119,7 +151,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                         </div>
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirmar contraseña">
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
+                            required autocomplete="new-password" placeholder="Confirmar contraseña">
                         {{-- <div class="input-group-append">
                             <button class="btn btn-outline-primary" type="button" name="button"
                                 onclick="mostrarContrasena()">

@@ -1,0 +1,80 @@
+@import url('../components/navbar.css');
+@import url('../components/footer.css');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #e2e1e0;
+}
+div.wrapper-curso{
+    overflow: hidden;
+}
+div.curso-filter{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+div.curso-filter>a.web {
+    background-image: linear-gradient(to right top, #090537, #611050, #ae2a4e, #e06736, #ebb212);
+}
+
+div.curso-filter>a.android {
+    background-image: linear-gradient(to left top, #234635, #386c4f, #519568, #6fc081, #91ec99);
+}
+
+div.curso-filter>a.prog {
+    background-image: linear-gradient(to right bottom, #090939, #053e6e, #1f749d, #51adc6, #91e8ec);
+}
+
+div.curso-filter>a.vj {
+    background-image: linear-gradient(to left bottom, #2c050e, #642b26, #9a5937, #c89047, #e7cf60);
+}
+
+div.curso-filter>a {
+    width: 20%;
+    display: block;
+    color: white;
+    border: 1px solid #e2e1e0;
+    background-color: transparent;
+    padding: 2.5% 5%;
+    border-radius: 20px;
+    margin: 2% auto;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+div.cursos{
+    width: 100%;
+}
+
+.cursos > article{
+    padding: 1%;
+    width: 80%;
+    margin: 5% 10%;
+    border: 1px solid rgba(0,0,0,0.8);
+    overflow: hidden;
+}
+
+.cursos > article > figure.img-curso{
+    float: left;
+    width: 40%;
+    height: 40%;
+}
+.cursos > article > figure.img-curso > img{
+    width: 100%;
+    height: auto;
+}
+.cursos > article > section.desc{
+    float: left;
+    width: 60%;
+}
+.cursos > article > section.desc > h2,.cursos > article > section.desc > p{
+    padding-left: 2.5%;
+}
+.cursos > article > footer{
+    float: left;
+    width: 60%;
+}

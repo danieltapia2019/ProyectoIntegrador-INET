@@ -1,9 +1,9 @@
 @extends('layout.app')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+<link rel="stylesheet" href="{{ asset('css/index.css') }}">
 @endpush
-    
+
 @section('title','Home')
 
 @section('content')
@@ -13,12 +13,16 @@
             <h5>Tomate tu tiempo. Accede a cualquier curso y terminalo cuando quieras. No hay limite de tiempo.</h5>
             <h3>¿Qué estás esperando?</h3>
             <div class="input-group mb-3 mt-4">
-                <input type="text" id="busquedaSection" class="form-control" placeholder="¿Qué quieres aprender?"
-                    aria-label="¿Qué quieres aprender?" aria-describedby="botonbusq">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-light" type="button" id="botonbusq"><i
-                            class="fas fa-search"></i></button>
-                </div>
+                <form action="{{ url('curso')}}" method="GET">
+                    {{-- @csrf --}}
+                    <div class="input-group">
+                        <input type="text" id="busquedaCurso" class="form-control" placeholder="¿Qué quieres aprender?"
+                            aria-label="¿Qué quieres aprender?" aria-describedby="botonbusq" name="search">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-light" type="submit" id="botonbusq"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div id="iconos">
                 <i class="fab fa-cc-mastercard"></i>
