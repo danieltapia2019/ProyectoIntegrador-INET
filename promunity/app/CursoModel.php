@@ -13,4 +13,7 @@ class CursoModel extends Model
     public function categoria(){
         return $this->belongsTo(CategoriaModel::class,'categorias_id');
     }
+    public function autor(){
+      return $this->belongsTo(User::class,'autor');
+    }
 }

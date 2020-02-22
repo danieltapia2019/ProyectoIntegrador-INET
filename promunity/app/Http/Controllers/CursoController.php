@@ -22,6 +22,23 @@ class CursoController extends Controller
         $cursos = CursoModel::where('titulo','LIKE','%'.$form['search'].'%')->orWhere('lenguaje','LIKE','%'.$form['search'].'%')->paginate(3);
         return view('pages.cursos',compact('cursos'));
     }
+    /**
+    *Crea un curso desde el perfil
+    */
+    public function crearCurso(Request $req){
+        $curso = new CursoModel();
+        $curso->titulo = $req["titulo"];
+        $curso->descripcion = $req["descripcion"];
+        $curso->lenguaje = $req["lenguaje"];
+        $curso->precio = $req["precio"];
+        $curso->autor = $req["autor"];
+        $curso->categorias_id = $req["categoria"];
+        $path = $req->file('foto_curso')->store('public/img/cursos');
+        $nombreArchivo = basename($path);
+        $curso->foto_curso = $nombreArchivo;
+        $curso->save();
+        return redirect ("/perfil");
+    }
 
     /**
      * Agrupa los resultados por categorias

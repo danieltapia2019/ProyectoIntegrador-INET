@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class categoriasModel extends Model
+class CategoriaModel extends Model
 {
-    public $table = 'cateorias';
+    public $table = 'categorias';
 
     public $timestamps = false;
 

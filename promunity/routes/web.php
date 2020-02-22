@@ -23,6 +23,10 @@ Route::get('/home/faq',function(){
     return view('pages.faq');
 });
 
+Route::get('/perfil',function(){
+  return view('pages.perfil');
+});
+
 Route::get('/logout','\App\http\Controller\Auth\LoginController@logout');
 // Route::get('/index/{id}','CursoController@verCurso');
 
@@ -30,8 +34,9 @@ Route::get('/logout','\App\http\Controller\Auth\LoginController@logout');
 Route::get('/curso/todos','cursoController@list');
 // Route::get('/curso/categoria','cursoController@byCategories');
 Route::get('/curso','cursoController@searchCurso');
-
-
+Route::get('/perfil','CategoriaController@listCategorias');
+Route::post('/perfil','cursoController@crearCurso');
+Route::get('/perfil/{id}','cursoController@misCursosProfesor');
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

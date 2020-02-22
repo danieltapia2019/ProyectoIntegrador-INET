@@ -1,28 +1,46 @@
 @extends('layout.app')
 
-{{-- @section('css','css/index.css') --}}
-@section('title','Home')
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/pages/perfil.css') }}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+@endpush
+@section('title','Perfil')
 
 @section('content')
 <header class="bienvenido">
-    <div class="usuario">
+    <div class="usuario" style="background-image: url({{ asset('/img/faqBienvenido.png') }});">
         <!--SideNav-->
         <div id="sideNavigation" class="sidenav">
+          <div style="color: white;">
+            @if (auth()->user()->foto == null)
+              <span id="fotoPerfilNav"> <img src="{{ asset('img/perfil.jpg') }}" alt=""> </span>
+            @else
+              <span id="fotoPerfilNav"></span>
+            @endif
+            <p>STATUS:
+              @if (auth()->user()->acceso == 2)
+                <i class="fas fa-user-graduate" id="statusIcon"></i>
+                <p>Alumno</p>
+              @endif
+              @if (auth()->user()->acceso == 1)
+                <i class="fas fa-chalkboard-teacher" id="statusIcon"></i>
+                <p>Profesor</p>
+              @endif
+              @if (auth()->user()->acceso == 0)
+                <i class="fas fa-users-cog" id="statusIcon"></i>
+                <p>Administrador</p>
+              @endif
+            </p>
+          </div>
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="#" onclick="abrirMisCursos()">
-                <ion-icon name="briefcase"></ion-icon>
-                Mis cursos
-            </a>
-            <?php //if($_SESSION["usuario"]->getAcceso() < 2): ?>
-            <a href="#">
+
+            @if (auth()->user()->acceso != 2)
+            <a href="#crearCurso" onclick="abrirDarUnCurso()">
                 <ion-icon name="add-circle"></ion-icon>
                 Dar un curso
             </a>
-            <?php //endif; ?>
-            <a href="#" onclick="abrirConfiguracion()">
-                <ion-icon name="build"></ion-icon>
-                Configuracion
-            </a>
+           @endif
         </div>
 
         <nav class="topnav">
@@ -32,41 +50,29 @@
             </a>
         </nav>
         <br>
-        <h1>Bienvenido a su cuenta <?php //echo $userName?>
+        <h1>Bienvenido a su cuenta {{auth()->user()->username}}
         </h1>
     </div>
 </header>
-<section class="opciones">
-    <!--Mis cursos-->
-    <div class="mis-cursos" id="misCursos" style="display: none;">
-        <?php //foreach($conexion->query($consulta) as $row) :?>
-        <article class="border border-secundary border-top-0 curso">
-            <div class="card" style="width: 18rem;">
-                <img src="<?php //echo $BASE_URL."/img/fotoCurso/".$row['foto_curso']?>" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title"><?php //echo $row['titulo']?></h5>
-                    <p>Lenguaje: <?php //echo $row['lenguaje']?></p>
-                    <?php //if($_SESSION["usuario"]->getAcceso() == 1): ?>
-                    <h6>Alumnos: </h6>
-                    <a href="#" class="btn btn-primary">Borrar Curso</a>
-                    <?php //endif; ?>
-                </div>
-                <p syle="display:none">id <?php //echo $row['id']?></p>
-                <a href="perfil1.php?id=<?php //echo $row['id']?>">Ir al curso</a>
-            </div>
-
-        </article>
-        <?php //endforeach;  ?>
-    </div>
-    <!--Dar curso-->
-    <div class="crear-curso" id="crearCurso" style="display: none;">
-        <form class="" action="" method="post">
-        </form>
-    </div>
-    <!--Favoritos-->
+<div class="tab">
+<div class="row">
+  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#tab-perfil" role="tab" aria-controls="tab-perfil" aria-selected="true" onclcick="abrirTab()">Perfil</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#tab-cursos" role="tab" aria-controls="tab-cursos" aria-selected="false" onclick="abrirTab()">Mis Cursos</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#tab-favoritos" role="tab" aria-controls="tab-favoritos" aria-selected="false" onclick="abrirTab()">Favoritos</a>
+    </li>
+  </ul>
+</div>
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="tab-perfil" role="tabpanel" aria-labelledby="pills-home-tab">
     <!--Configuracion-->
     <div class="configuracion" id="configuracion">
-        <form class="" action="perfil1.php" method="post">
+        <form class="" action="perfil1.php" method="post" enctype="multipart/form-data">
 
             <div id="imagenNombre">
 
@@ -119,12 +125,12 @@
             </button>
 
         </form>
-        <form class="" action="" method="post">
+        <form class="actualizacionDatos" action="" method="post">
             <hr>
             <div class="form-group">
                 <label for="exampleInputEmail1">Cambiar Email</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    placeholder="Enter email" value=<?php //echo $userEmail?>>
+                    placeholder="Enter email" value={{auth()->user()->email}}>
             </div>
             <hr>
             <label for="password">Contraseña actual</label>
@@ -156,35 +162,93 @@
                 Guardar Cambios
             </button>
         </form>
+    </div></div>
+    <div class="tab-pane fade" id="tab-cursos" role="tabpanel" aria-labelledby="pills-cursos-tab">
+     MIS cursos
+    </div>
+    <div class="tab-pane fade" id="tab-favoritos" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+    </div>
+  </div>
+</div>
+<section class="opciones">
+    <!--Dar curso-->
+    <div class="crear-curso" id="crearCurso" style="display: none;">
+      <form class="crearCurso" action="/perfil" method="post" enctype="multipart/form-data">
+          {{csrf_field()}}
+          <input style="display: none;" type="number" name="autor" value={{auth()->user()->id}}>
+          <label for="titulo">Titulo: </label>
+        <div class="input-group mb-3">
+            <input type="text" name="titulo" class="form-control" placeholder="Ingrese titulo del curso" required maxlength="30" minlength="10">
+        </div>
+        <div class="form-group">
+          <label for="descripcion">Descripcion:</label>
+          <textarea  name="descripcion" class="form-control" id="descripcion" rows="3" required></textarea>
+        </div>
+        <div class="fotoCurso">
+
+          <label for="foto_curso">Foto:</label>
+          <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <input type="file" class="form-control" name="imagen" id="imagen" maxlength="256" placeholder="Imagen">
+  <input type="hidden" class="form-control" name="foto_curso" id="imagenactual">
+  <div class="imagenPrev">
+    <img clas="rounded mx-auto d-block" src="" id="imagenmuestra">
+  </div>
+  <script type="text/javascript">
+  function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      // Asignamos el atributo src a la tag de imagen
+      $('#imagenmuestra').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+  }
+
+  // El listener va asignado al input
+  $("#imagen").change(function() {
+  readURL(this);
+  });
+  </script>
+        </div>
+<br>
+        <label for="precio">Precio:</label>
+        <div class="input-group mb-3">
+          <input type="number" name="precio" class="form-control" placeholder="Ingrese precio del curso" required maxlength="1" minlength="10">
+        </div>
+          <label for="lenguaje">Lenguaje: </label>
+          <div class="input-group mb-3">
+            <input type="text" name="lenguaje" class="form-control" placeholder="Ingrese lenguaje del curso" required maxlength="10" minlength="2">
+          </div>
+          <label for="categoria">Categoria: </label>
+          <select name="categoria" class="custom-select" id="inputGroupSelect01">
+            <option selected>Elegir categoria</option>
+          </select>
+          <br>
+          <button type="submit" name="button" class="btn btn-success">Guardar</button>
+      </form>
     </div>
 </section>
+
+<script src="https://kit.fontawesome.com/918d19c8b4.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
 <script>
-    function abrirFavoritos() {
-        document.getElementById("sideNavigation").style.width = "0";
-        document.getElementById('perfil').style.display = "none";
+    function abrirDarUnCurso() {
+        closeNav();
+        document.getElementById('pills-tabContent').style.display = "none";
+        document.getElementById("crearCurso").style.display = "inherit";
     }
-
-    function abrirMisCursos() {
-        document.getElementById("sideNavigation").style.width = "0";
-        document.getElementById('perfil').style.display = "none";
-        document.getElementById('config').style.display = "none";
-        document.getElementById("misCursos").style.display = "inherit";
+    function abrirTab(){
+          document.getElementById('crearCurso').style.display = "none";
+          document.getElementById('pills-tabContent').style.display = "inherit";
     }
-
-    function abrirPerfil() {
-        document.getElementById("sideNavigation").style.width = "0";
-        document.getElementById("misCursos").style.display = "none";
-        document.getElementById('config').style.display = "none";
-        document.getElementById('perfil').style.display = "inherit";
-    }
-
-    function abrirConfiguracion() {
-        document.getElementById("sideNavigation").style.width = "0";
-        document.getElementById('misCursos').style.display = "none";
-        document.getElementById('perfil').style.display = "none";
-        document.getElementById('config').style.display = "inherit";
-    }
-
     function openNav() {
         document.getElementById("sideNavigation").style.width = "200px";
     }
