@@ -3,7 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\CategoriaModel;
+use App\User;
 class CursoModel extends Model
 {
     public $table = 'cursos';
@@ -13,7 +14,10 @@ class CursoModel extends Model
     public function categoria(){
         return $this->belongsTo(CategoriaModel::class,'categorias_id');
     }
-    public function autor(){
+    public function creador(){
       return $this->belongsTo(User::class,'autor');
+    }
+    public function alumno(){
+      return $this->belongsToMany(User::class,'usuario_curso','id_curso','id_usuario');
     }
 }

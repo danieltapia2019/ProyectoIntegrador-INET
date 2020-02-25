@@ -99,7 +99,11 @@
                             onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             Cerrar sesión
                         </a>
-                        <a href=""></a>
+                        @if (Auth::user()->acceso == 0)
+                          <a href="/abm">
+                              Ir al ABM
+                          </a>
+                        @endif
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>

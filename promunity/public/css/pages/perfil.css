@@ -89,6 +89,26 @@
   width: 150px;
   height: 150px;
 }
+/*MIS CURSOS*/
+.contenedor{
+  width: 100%;
+  height: auto;
+  display: flex !important; / ETIQUETA QUE POSICIONA UNO AL LADO DEL OTRO */
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.card-completo{
+  width: 50%;
+  border: 1px black solid;
+}
+#foto-curso{
+  height: 50vh;
+}
+.contenedor
+{
+  width: 100%;
+
+}
 /*PERFIL MOBILE*/
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
