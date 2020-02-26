@@ -40,3 +40,6 @@ Route::get('/perfil/{id}','cursoController@misCursosProfesor');
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/carrito','CarritoController@mostrarCarrito');
+Route::get('/carrito/{id}','CarritoController@agregarAlCarrito');
+Route::get('/carritolimpiar','CarritoController@limpiarCarrito');

@@ -11,7 +11,7 @@ class CursoController extends Controller
      * Lista todos los cursos de la BD,paginado=10
      */
     public function list(){
-        $cursos = CursoModel::paginate(10);
+        $cursos = CursoModel::paginate(2);
         return view('pages.cursos',compact('cursos'));
     }
 

@@ -1,18 +1,15 @@
 @extends('layout.app')
-
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/cursos.css') }}">
 @endpush
 
-@section('title','Cursos')
+@section('title','Carro')
 
 @section('content')
-<div class="wrapper-curso">
-    <div class="curso-filter">
-        <a href="cursos.php?dev=programacion" class="prog">Programación</a>
-        <a href="cursos.php?dev=videoJueos" class="vj">Videojuegos</a>
-        <a href="cursos.php?dev=desarrolloWeb" class="web">Web</a>
-        <a href="cursos.php?dev=appMoviles" class="android">Android</a>
+  <section>
+    <div class="limpiar">
+      <a href="{{url('/carritolimpiar')}}">Limpiar Carro</a>
+
     </div>
     <div class="cursos">
         @forelse ($cursos as $curso)
@@ -29,7 +26,7 @@
                 <footer>
                     @guest
                         <a href="#">Ver Mas</a>
-                        <a href={{url("/carrito/$curso->id")}}>Carrito</a>
+
 
 
                     @else
@@ -43,8 +40,20 @@
             <h1>No se encontraron los resultados</h1>
         </div>
         @endforelse
-        {{$cursos->links()}}
+
     </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+  </section>
 @endsection

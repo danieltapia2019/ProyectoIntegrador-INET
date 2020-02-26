@@ -68,6 +68,12 @@
                         <a class="dropdown-item" href="#contacto">Contacto</a>
                     </div>
                 </li>
+                <li>
+                  <a class="nav-link" href="{{ url('/carrito')}}"><i class="fas fa-shopping-cart"></i></a>
+
+
+
+                </li>
                 @guest
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#modalInicio">

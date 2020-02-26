@@ -10,6 +10,8 @@ class CursoModel extends Model
 
     public $timestamps = false;
 
+    public $guarded = [];
+
     public function categoria(){
         return $this->belongsTo(CategoriaModel::class,'categorias_id');
     }
