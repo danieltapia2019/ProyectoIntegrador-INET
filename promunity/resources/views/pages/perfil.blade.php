@@ -5,6 +5,12 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 @endpush
+@php
+use App\User;
+
+$usuario = User::find(auth()->user()->id);
+
+@endphp
 @section('title','Perfil')
 
 @section('content')
@@ -164,7 +170,22 @@
         </form>
     </div></div>
     <div class="tab-pane fade" id="tab-cursos" role="tabpanel" aria-labelledby="pills-cursos-tab">
-     MIS cursos
+      <div class="contenedor">
+      @foreach ($usuario->cursos as $key => $value)
+<div class="card-completo">
+
+    <div class="card-body">
+      <h5 class="card-title">{{$value->titulo}}</h5>
+      <p class="card-text">{{$value->descripcion}}</p>
+      <p>Lenguaje: {{$value->lenguaje}}</p>
+      <p>Precio: {{$value->precio}}</p>
+      <p>Categoria: {{$value->categoria->nombre}}</p>
+      <a href="/">Ir al curso</a>
+    </div>
+        <img id="foto-curso" src="storage\img\cursos\{{$value->foto_curso}}" class="card-img" alt="...">
+</div>
+      @endforeach
+      </div>
     </div>
     <div class="tab-pane fade" id="tab-favoritos" role="tabpanel" aria-labelledby="pills-contact-tab">
 
@@ -224,6 +245,9 @@
           <label for="categoria">Categoria: </label>
           <select name="categoria" class="custom-select" id="inputGroupSelect01">
             <option selected>Elegir categoria</option>
+            @foreach ($categorias as $key => $value)
+              <option value={{$value->id}}>{{$value->nombre}}</option>
+            @endforeach
           </select>
           <br>
           <button type="submit" name="button" class="btn btn-success">Guardar</button>

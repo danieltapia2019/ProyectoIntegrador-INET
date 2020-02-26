@@ -26,6 +26,9 @@ Route::get('/home/faq',function(){
 Route::get('/perfil',function(){
   return view('pages.perfil');
 });
+Route::get('/abm',function(){
+  return view('pages.abm');
+});
 
 Route::get('/logout','\App\http\Controller\Auth\LoginController@logout');
 // Route::get('/index/{id}','CursoController@verCurso');
@@ -33,10 +36,12 @@ Route::get('/logout','\App\http\Controller\Auth\LoginController@logout');
 // Curso
 Route::get('/curso/todos','cursoController@list');
 // Route::get('/curso/categoria','cursoController@byCategories');
+/*PERFIL*/
 Route::get('/curso','cursoController@searchCurso');
 Route::get('/perfil','CategoriaController@listCategorias');
 Route::post('/perfil','cursoController@crearCurso');
-Route::get('/perfil/{id}','cursoController@misCursosProfesor');
+
+/*ABM*/
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

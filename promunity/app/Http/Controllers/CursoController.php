@@ -14,6 +14,10 @@ class CursoController extends Controller
         $cursos = CursoModel::paginate(2);
         return view('pages.cursos',compact('cursos'));
     }
+    public function listadoCompleto(){
+      $cursos = CursoModel::all();
+      return view('pages.perfil',compact('cursos'));
+    }
 
     /**
      * Busca los resultados por lenjuage,descripcion y titulo
