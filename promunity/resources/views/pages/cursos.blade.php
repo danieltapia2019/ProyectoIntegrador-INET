@@ -9,38 +9,39 @@
 @section('content')
 <div class="wrapper-curso">
     <div class="curso-filter">
-        <a href="cursos.php?dev=programacion" class="prog">Programación</a>
-        <a href="cursos.php?dev=videoJueos" class="vj">Videojuegos</a>
-        <a href="cursos.php?dev=desarrolloWeb" class="web">Web</a>
-        <a href="cursos.php?dev=appMoviles" class="android">Android</a>
+        <a href="#" class="prog">Programación</a>
+        <a href="#" class="vj">Videojuegos</a>
+        <a href="#" class="web">Web</a>
+        <a href="#" class="android">Android</a>
     </div>
     <div class="cursos">
         @forelse ($cursos as $curso)
         <article>
             <figure class="img-curso">
-                <img src="https://www.anerbarrena.com/wp-content/uploads/2016/04/html5.png" alt="">
+                <img src="../img/cursos.jpg" alt="">
             </figure>
             <section class="desc">
                 <h2>{{$curso->titulo}}</h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi ad voluptate expedita
-                    iure? Maxime vel officiis accusantium fuga? Cumque ipsum quas nesciunt modi doloremque enim
-                    libero fugit, molestias officia quisquam.</p>
-                <p>Lenguaje {{$curso->lenguaje}}</p>
+                <p>{{$curso->descripcion}}</p>
+                <p><b>Lenguaje: </b>{{$curso->lenguaje}}</p>
                 <footer>
                     @guest
-                        <a href="#">Ver Mas</a>
-                        <a href={{url("/carrito/$curso->id")}}>Carrito</a>
-
-
+                    <a href="#">Ver Mas</a>
                     @else
-                    <a href="">favoritos</a>
+                    <button class="btn btn-primary mr-1 ml-3">
+                        <a href="{{ url('/carrito'.'/'.$curso->id) }}"  style="color: white"><i class="fas fa-shopping-cart"></i></a>
+                    </button>
+                    <button class="btn btn-primary mr-1 ">
+                        <a href="#" style="color: white"><i class="far fa-heart"></i></a>
+                    </button>
                     @endguest
                 </footer>
             </section>
         </article>
         @empty
-        <div>
-            <h1>No se encontraron los resultados</h1>
+        <div class="empty-result mt-4">
+            <h1>No se encontraron resultados para su busqueda</h1>
+            <img src="img/mensajes/no-messages.png" alt="Sin resultados">
         </div>
         @endforelse
         {{$cursos->links()}}

@@ -12,24 +12,20 @@
         <div id=cajanegra>
             <h5>Tomate tu tiempo. Accede a cualquier curso y terminalo cuando quieras. No hay limite de tiempo.</h5>
             <h3>¿Qué estás esperando?</h3>
-            <div class="input-group mb-3 mt-4">
-                <form action="{{ url('curso')}}" method="GET">
-                    {{-- @csrf --}}
-                    <div class="input-group">
-                        <input type="text" id="busquedaCurso" class="form-control" placeholder="¿Qué quieres aprender?"
-                            aria-label="¿Qué quieres aprender?" aria-describedby="botonbusq" name="search">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-light" type="submit" id="botonbusq"><i class="fas fa-search"></i></button>
-                        </div>
+            <form action="{{ url('curso') }}" method="GET">
+                <div class="input-group mb-3 mt-4">
+                    <input type="search" id="busquedaSection" class="form-control" placeholder="¿Qué quieres aprender?" aria-label="¿Qué quieres aprender?" aria-describedby="botonbusq" name="q" style="text-align: center">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-light" type="submit" id="botonbusq"><i class="fas fa-search"></i></button>
                     </div>
-                </form>
-            </div>
-            <div id="iconos">
-                <i class="fab fa-cc-mastercard"></i>
-                <i class="fab fa-cc-visa"></i>
-                <i class="fab fa-cc-paypal"></i>
-            </div>
+                </div>
+            </form>
+        <div id="iconos">
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-paypal"></i>
         </div>
+    </div>
     </div>
     <div id="mas-vistos">
         <h2 class="mb-3">Cursos mas visitados</h2>

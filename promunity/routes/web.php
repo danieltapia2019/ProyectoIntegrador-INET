@@ -11,40 +11,34 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/home',function(){
     return view('home');
 });
-
 Route::get('/home/faq',function(){
     return view('pages.faq');
 });
-
 Route::get('/perfil',function(){
   return view('pages.perfil');
 });
-Route::get('/abm',function(){
-  return view('pages.abm');
-});
+
+/*    ABM:Admin   */
+Route::get('/admin/abm','adminController@listAll');
 
 Route::get('/logout','\App\http\Controller\Auth\LoginController@logout');
-// Route::get('/index/{id}','CursoController@verCurso');
 
-// Curso
+/*    Curso   */
 Route::get('/curso/todos','cursoController@list');
-// Route::get('/curso/categoria','cursoController@byCategories');
-/*PERFIL*/
 Route::get('/curso','cursoController@searchCurso');
+
+/*    PERFIL    */
+// Route::post('/perfil','cursoController@misCursos');
 Route::get('/perfil','CategoriaController@listCategorias');
 Route::post('/perfil','cursoController@crearCurso');
 
-/*ABM*/
-Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
+/*    ABM   */
 Route::get('/carrito','CarritoController@mostrarCarrito');
 Route::get('/carrito/{id}','CarritoController@agregarAlCarrito');
 Route::get('/carritolimpiar','CarritoController@limpiarCarrito');
+
+/*  Login,Register,PasswordReset  */
+Auth::routes();
