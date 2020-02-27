@@ -14,22 +14,25 @@ class CursoController extends Controller
         $cursos = CursoModel::paginate(10);
         return view('pages.cursos',compact('cursos'));
     }
-    public function listadoCompleto(){
+    /**
+     * Lista los cursos de un usuario
+     */
+    public function misCursos(){
       $cursos = CursoModel::all();
       return view('pages.perfil',compact('cursos'));
     }
-
     /**
-     * Busca los resultados por lenjuage,descripcion y titulo
+     * Busca los resultados por lenjuage y titulo
      */
     public function searchCurso(Request $form){
-        $cursos = CursoModel::where('titulo','LIKE','%'.$form['search'].'%')->orWhere('lenguaje','LIKE','%'.$form['search'].'%')->paginate(3);
+        $cursos = CursoModel::where('titulo','LIKE','%'.$form['search'].'%')->orWhere('lenguaje','LIKE','%'.$form['search'].'%')->paginate(5);
         return view('pages.cursos',compact('cursos'));
     }
     /**
     *Crea un curso desde el perfil
     */
     public function crearCurso(Request $req){
+
         $curso = new CursoModel();
         $curso->titulo = $req["titulo"];
         $curso->descripcion = $req["descripcion"];
@@ -47,11 +50,6 @@ class CursoController extends Controller
     /**
      * Agrupa los resultados por categorias
      */
-    public function byCategories(/*Request $form*/){
-        // $cursos = CursoModel::paginate(5);
-        // $aux = cursoModel::find("7");
-
-        // $curso = CursoModel::find("7")->categoria()->find("1");
-        return view('pages.cursos',compact('curso'));
+    public function byCategories(Request $form){
     }
 }

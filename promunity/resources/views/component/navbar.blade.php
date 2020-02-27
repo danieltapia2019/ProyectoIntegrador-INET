@@ -18,43 +18,10 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cursos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{-- url('curso/categoria') --}}"
-                            onclick="event.preventDefault();document.getElementById('lp').submit();">
-                            Lenjuages de Programación
-                        </a>
-                        <form id="lp" action="{{-- url('curso/categoria') --}}" method="GET" style="display: none;">
-                            {{-- lp = Lenguaje de Programacion --}}
-                            <input type="hidden" name="categoria" value="1">
-
-                        </form>
-
-                        <a class="dropdown-item" href="{{-- url('curso/categoria') --}}"
-                            onclick="event.preventDefault();document.getElementById('dvj').submit();">
-                            Desarrollo de Videojuegos
-                        </a>
-                        <form id="dvj" action="{{-- url('curso/categoria') --}}" method="GET" style="display: none;">
-                            {{-- dvj = Desarrollo de Videojuegos --}}
-                            <input type="hidden" name="categoria" value="videojuegos">
-                        </form>
-
-                        <a class="dropdown-item" href="{{-- url('curso/categoria') --}}"
-                            onclick="event.preventDefault();document.getElementById('dw').submit();">
-                            Desarrollo Web
-                        </a>
-                        <form id="logout-form" action="{{-- url('curso/categoria') --}}" method="GET" style="display: none;">
-                            {{-- dw = Desarrollo Web --}}
-                            <input type="hidden" name="categoria" value="web">
-                        </form>
-
-                        <a class="dropdown-item" href="{{-- url('curso/categoria') --}}"
-                            onclick="event.preventDefault();document.getElementById('dam').submit();">
-                            Desarrollo de aplicaciones moviles
-                        </a>
-                        <form id="dam" action="{{-- url('curso/categoria') --}}" method="GET" style="display: none;">
-                            {{-- dam = Desarrollo de Aplicaciones Moviles --}}
-                            <input type="hidden" name="cateoria" value="appMoviles">
-                        </form>
-
+                        <a href="#" class="dropdown-item">Programación</a>
+                        <a href="#" class="dropdown-item">Desarrollo Web</a>
+                        <a href="#" class="dropdown-item">Desarrollo de Videojuegos</a>
+                        <a href="#" class="dropdown-item">Desarrollo de App moviles</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ url('/curso/todos') }}">Mas cursos...</a>
                     </div>
@@ -75,15 +42,6 @@
                             title="Inicio de Sesión"></i>
                     </a>
                 </li>
-                {{-- @guest --}}
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                </li>
-                @if (Route::has('register'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                </li>
-                @endif --}}
                 @else
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -92,18 +50,20 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                      <a class="dropdown-item" href="/perfil">
-                        Perfil
-                      </a>
+                        <a class="dropdown-item" href="/perfil">
+                            Perfil
+                        </a>
+                        @if (Auth::user()->acceso == 0)
+                        <div class="dropdown-divider"></div>
+                        <a href="{{url('/admin/abm')}}" class="dropdown-item">
+                            Ir al ABM
+                        </a>
+                        @endif
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             Cerrar sesión
                         </a>
-                        @if (Auth::user()->acceso == 0)
-                          <a href="/abm">
-                              Ir al ABM
-                          </a>
-                        @endif
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
@@ -244,8 +204,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="far fa-envelope"></i></span>
                             </div>
-                            <input type="email" name="email" class="form-control" aria-label="email"
-                                placeholder="Ingrese email" required>
+                            <input type="email" name="email" class="form-control" aria-label="email" placeholder="Ingrese email" required>
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">

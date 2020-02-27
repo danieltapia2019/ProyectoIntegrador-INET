@@ -10,7 +10,7 @@ class CategoriaModel extends Model
 
     public $timestamps = false;
 
-    public function curso(){
-        return $this->hasMany(CursoModel::class,'categorias_id');
-    }
+    // public function curso(){
+    //     return $this->hasMany(CursoModel::class,'categorias_id');
+    // }
 }

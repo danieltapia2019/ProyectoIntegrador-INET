@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{ asset('css/pages/abm.css') }}">
 @endpush
 
-@php
+{{-- @php
   use App\CursoModel;
   use App\CategoriaModel;
   use App\User;
@@ -14,84 +14,70 @@
   $administradores = User::where('acceso','=','0')->get();
   $categorias = CategoriaModel::all();
   $cursos = CursoModel::all();
-@endphp
+@endphp --}}
 
 @section('title','ABM')
 
 @section('content')
-
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="alumnos-tab" data-toggle="tab" href="#alumnos" role="tab" aria-controls="home" aria-selected="true">Alumnos</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="profesores-tab" data-toggle="tab" href="#profesores" role="tab" aria-controls="profile" aria-selected="false">Profesores</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="administradores-tab" data-toggle="tab" href="#administradores" role="tab" aria-controls="contact" aria-selected="false">Administradores</a>
-  </li>
-  <li clas="nav-item">
-    <a class="nav-link" id="cursos-tab" data-toggle="tab" href="#cursos" role="tab" aria-controls="contact" aria-selected="false">Cursos</a>
-  </li>
-  <li clas="nav-item">
-    <a class="nav-link" id="alumnos-cursos-tab" data-toggle="tab" href="#alumnos-cursos" role="tab" aria-controls="contact" aria-selected="false">Alumnos/Cursos</a>
-  </li>
-  <li clas="nav-item">
-    <a class="nav-link" id="categorias-tab" data-toggle="tab" href="#categorias" role="tab" aria-controls="contact" aria-selected="false">Categorias</a>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="alumnos" role="tabpanel" aria-labelledby="alumnos-tab">
-    <table class="table table-dark">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre de Usuario</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach ($alumnos as $key => $value)
+<div class="container">
+  <nav class="row">
+    <ul class="nav nav-tabs " id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="alumnos-tab" data-toggle="tab" href="#alumnos" role="tab" aria-controls="home" aria-selected="true">Alumnos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="profesores-tab" data-toggle="tab" href="#profesores" role="tab" aria-controls="profile" aria-selected="false">Profesores</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="administradores-tab" data-toggle="tab" href="#administradores" role="tab" aria-controls="contact" aria-selected="false">Administradores</a>
+      </li>
+      <li clas="nav-item">
+        <a class="nav-link" id="cursos-tab" data-toggle="tab" href="#cursos" role="tab" aria-controls="contact" aria-selected="false">Cursos</a>
+      </li>
+      <li clas="nav-item">
+        <a class="nav-link" id="alumnos-cursos-tab" data-toggle="tab" href="#alumnos-cursos" role="tab" aria-controls="contact" aria-selected="false">Alumnos/Cursos</a>
+      </li>
+      <li clas="nav-item">
+        <a class="nav-link" id="categorias-tab" data-toggle="tab" href="#categorias" role="tab" aria-controls="contact" aria-selected="false">Categorias</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="alumnos" role="tabpanel" aria-labelledby="alumnos-tab">
+      <table class="table table-light mt-3 mb-5">
+        <thead>
           <tr>
-            <td>{{$value->id}}</td>
-            <td>{{$value->username}}</td>
-            <td>{{$value->email}}</td>
-            <td> <button class="btn btn-danger" name="button" >
-            <a href="/abm?id={{$value->id}}&tipo=usuario&operacion=eliminar" style="color:white"> Eliminar </a> </button> </td>
-            <td> <button class="btn btn-primary" name="button" >
-            <a href="/abm?id={{$value->id}}&tipo=usuario&operacion=editar" style="color:white"> Editar </a> </button> </td>
-            <td></td>
+            <th>ID</th>
+            <th>Nombre de Usuario</th>
+            <th>Email</th>
+            <th>Acciones</th>
           </tr>
-        @endforeach
-      </tbody>
-    </table>
-    <button type="button" class="btn btn-success" name="button" data-toggle="modal" data-target="#modalUsuario">Agregar</button>
-
-  </div>
-  <div class="tab-pane fade" id="administradores" role="tabpanel" aria-labelledby="profesores-tab">
-    <table class="table table-dark">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre de Usuario</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody>
-
-          @foreach ($administradores as $key => $value)
+        </thead>
+        <tbody>
+          @forelse ($alumnos as $key => $value)
             <tr>
-              <td>{{$value->id}}</td>
+              <th scope="row">{{$value->id}}</th>
               <td>{{$value->username}}</td>
               <td>{{$value->email}}</td>
+              <td> 
+                <button class="btn btn-danger" name="button" >
+                  <a href="/abm?id={{$value->id}}&tipo=usuario&operacion=eliminar" style="color:white"> Eliminar </a> 
+                </button>
+                <button class="btn btn-primary" name="button" >
+                  <a href="/abm?id={{$value->id}}&tipo=usuario&operacion=editar" style="color:white"> Editar </a> 
+                </button> 
+              </td>
             </tr>
-          @endforeach
-      </tbody>
-    </table>
-  </div>
-  <div class="tab-pane fade" id="profesores" role="tabpanel" aria-labelledby="administradores-tab">
+          @empty
+          <h3 class="mt-5 mb-5">No hay Alumnos :(</h3>
+          @endforelse
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-success mb-3" name="button" data-toggle="modal" data-target="#modalUsuario">Agregar</button>
 
-      <table class="table table-dark">
+    </div>
+    <div class="tab-pane fade" id="administradores" role="tabpanel" aria-labelledby="profesores-tab">
+      <table class="table table-light mt-3 mb-5">
         <thead>
           <tr>
             <th>ID</th>
@@ -100,110 +86,149 @@
           </tr>
         </thead>
         <tbody>
-
-            @foreach ($profesores as $key => $value)
+            @forelse ($admins as $key => $value)
               <tr>
                 <td>{{$value->id}}</td>
                 <td>{{$value->username}}</td>
                 <td>{{$value->email}}</td>
-                <td> <button class="btn btn-danger" name="button" >
-                <a href="/abm?id={{$value->id}}&tipo=usuario&operacion=eliminar" style="color:white"> Eliminar </a> </button> </td>
-                <td> <button class="btn btn-primary" name="button" >
-                <a href="/abm?id={{$value->id}}&tipo=usuario&operacion=editar" style="color:white"> Editar </a> </button> </td>
               </tr>
-            @endforeach
+            @empty
+            <h3 class="mt-5 mb-5">No hay Admins :(</h3>
+            @endforelse
         </tbody>
       </table>
+    </div>
+    <div class="tab-pane fade" id="profesores" role="tabpanel" aria-labelledby="administradores-tab">
+      <table class="table table-light mt-3 mb-5">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre de Usuario</th>
+              <th>Email</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
 
-      <button type="button" class="btn btn-success" name="button" data-toggle="modal" data-target="#modalUsuario">Agregar</button>
-  </div>
-  <div class="tab-pane fade" id="cursos" role="tabpanel" aria-labelledby="cursos-tab">
+              @forelse ($profesores as $key => $value)
+                <tr>
+                  <th scope="row">{{$value->id}}</th>
+                  <td>{{$value->username}}</td>
+                  <td>{{$value->email}}</td>
+                  <td> 
+                    <button class="btn btn-danger" name="button" >
+                      <a href="/abm?id={{$value->id}}&tipo=usuario&operacion=eliminar" style="color:white"> Eliminar </a> 
+                    </button> 
+                    <button class="btn btn-primary" name="button" >
+                      <a href="/abm?id={{$value->id}}&tipo=usuario&operacion=editar" style="color:white"> Editar </a> 
+                    </button> 
+                  </td>
+                </tr>
+              @empty
+              <h3 class="mt-5 mb-5">No hay profesores :(</h3>
+              @endforelse
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-success mb-3" name="button" data-toggle="modal" data-target="#modalUsuario">Agregar</button>
+    </div>
+    <div class="tab-pane fade" id="cursos" role="tabpanel" aria-labelledby="cursos-tab">
+      <table class="table table-light mt-3 mb-5">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Titulo</th>
+              <th>Lenguaje</th>
+              <th>Precio</th>
+              <th>Categoria</th>
+              <th>Autor</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @forelse ($cursos as $key => $value)
+              <tr>
+                <th scope="row">{{$value->id}}</th>
+                <td>{{$value->titulo}}</td>
+                <td>{{$value->lenguaje}}</td>
+                <td>{{$value->precio}}</td>
+                <td>{{$value->categoria->nombre}}</td>
+                <td>{{$value->creador->username}}</td>
+                <td> 
+                  <button class="btn btn-danger" name="button" >
+                    <a href="/abm?id={{$value->id}}&tipo=curso&operacion=eliminar" style="color:white"> Eliminar </a> 
+                  </button>
+                  <button class="btn btn-primary" name="button" >
+                    <a href="/abm?id={{$value->id}}&tipo=curso&operacion=editar" style="color:white"> Editar </a>
+                  </button>
+                </td>
+              </tr>
+            @empty
+            <h3 class="mt-5 mb-5">No hay Cursos :(</h3>
+            @endforelse
+          </tbody>
+        </table>
 
-      <table class="table table-dark">
+        <button type="button" class="btn btn-success mb-3" name="button">Agregar</button>
+
+    </div>
+    <div class="tab-pane fade" id="alumnos-cursos" role="tabpanel" aria-labelledby="alumnos-cursos-tab">
+      <table class="table table-light mt-3 mb-5">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Titulo</th>
-            <th>Lenguaje</th>
-            <th>Precio</th>
-            <th>Categoria</th>
-            <th>Autor</th>
+            <th>Curso</th>
+            <th>Alumno</th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($cursos as $key => $value)
+          @forelse ($cursos as $key => $value)
             <tr>
-              <td>{{$value->id}}</td>
-              <td>{{$value->titulo}}</td>
-              <td>{{$value->lenguaje}}</td>
-              <td>{{$value->precio}}</td>
-              <td>{{$value->categoria->nombre}}</td>
-              <td>{{$value->creador->username}}</td>
-              <td> <button class="btn btn-danger" name="button" >
-              <a href="/abm?id={{$value->id}}&tipo=curso&operacion=eliminar" style="color:white"> Eliminar </a> </button> </td>
-              <td> <button class="btn btn-primary" name="button" >
-              <a href="/abm?id={{$value->id}}&tipo=curso&operacion=editar" style="color:white"> Editar </a> </button> </td>
+              {{--<td>{{$value->titulo}}</td>
+              @foreach ($value->alumno as $key => $alumno)
+                <td>{{$alumno->username}}</td>
+              @endforeach --}}
             </tr>
-          @endforeach
+            @empty
+            <h3 class="mt-5 mb-5">No hay Cursos :(</h3>
+          @endforelse
         </tbody>
       </table>
-
-      <button type="button" class="btn btn-success" name="button">Agregar</button>
-
-  </div>
-  <div class="tab-pane fade" id="alumnos-cursos" role="tabpanel" aria-labelledby="alumnos-cursos-tab">
-    <table class="table table-dark">
-      <thead>
-        <tr>
-          <th>Curso</th>
-          <th>Alumno</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach ($cursos as $key => $value)
-          @php
-          @endphp
+    </div>
+    <div class="tab-pane fade" id="categorias" role="tabpanel" aria-labelledby="categorias-tab">
+      <table class="table table-light mt-3 mb-5">
+        <thead>
           <tr>
-            <td>{{$value->titulo}}</td>
-            @foreach ($value->alumno as $key => $alumno)
-              <td>{{$alumno->username}}</td>
-            @endforeach
+            <th>ID</th>
+            <th>Categoria</th>
+            <th>Acciones</th>
           </tr>
-        @endforeach
-      </tbody>
-    </table>
-  </div>
-  <div class="tab-pane fade" id="categorias" role="tabpanel" aria-labelledby="categorias-tab">
-    <table class="table table-dark">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Categoria</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach ($categorias as $key => $value)
-          <tr>
-            <td>{{$value->id}}</td>
-            <td>{{$value->nombre}}</td>
-            <td> <button class="btn btn-danger" name="button" >
-            <a href="/abm?id={{$value->id}}&tipo=categoria&operacion=eliminar" style="color:white"> Eliminar </a> </button> </td>
-            <td> <button class="btn btn-primary" name="button" >
-            <a href="/abm?id={{$value->id}}&tipo=categoria&operacion=editar" style="color:white"> Editar </a> </button> </td>
-          </tr>
-        @endforeach
-      </tbody>
+        </thead>
+        <tbody>
+          @forelse ($categorias as $key => $value)
+            <tr>
+              <th scope="row">{{$value->id}}</th>
+              <td>{{$value->nombre}}</td>
+              <td> 
+                <button class="btn btn-danger" name="button" >
+                  <a href="/abm?id={{$value->id}}&tipo=categoria&operacion=eliminar" style="color:white"> Eliminar </a> 
+                </button>
+                <button class="btn btn-primary" name="button" >
+                  <a href="/abm?id={{$value->id}}&tipo=categoria&operacion=editar" style="color:white"> Editar </a> 
+                </button>
+              </td>
+            </tr>
+          @empty
+          <h3 class="mt-5 mb-5">No hay Categorias :(</h3>
+          @endforelse
+        </tbody>
 
-    </table>
+      </table>
 
-    <button type="button" class="btn btn-success" name="button">Agregar</button>
+      <button type="button" class="btn btn-success mb-3" name="button">Agregar</button>
+
+    </div>
 
   </div>
-
-</div>
-
-
-
+</div>{{-- /Conteiner--}}
 <!-- Modal Categoria-->
 <!-- Modal Usuario-->
 <div class="modal fade" id="modalUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -269,6 +294,4 @@
     </div>
 </div>
 <!-- -->
-
-
 @endsection

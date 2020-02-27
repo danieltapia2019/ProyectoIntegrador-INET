@@ -17,7 +17,7 @@ class CursoModel extends Model
     public function creador(){
       return $this->belongsTo(User::class,'autor');
     }
-    public function alumno(){
-      return $this->belongsToMany(User::class,'usuario_curso','id_curso','id_usuario');
-    }
+    // public function alumno(){
+    //   return $this->belongsToMany(User::class,'usuario_curso','id_curso','id_usuario');
+    // }
 }
