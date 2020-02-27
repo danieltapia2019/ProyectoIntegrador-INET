@@ -9,8 +9,7 @@ class UserController extends Controller
     //
     public function listadoAlumnos(){
 
-      //$alumnos = UserModel::where('acceso','=','2')->get();
-      $alumnos = User::all();
+      $alumnos = UserModel::where('acceso','=','2')->get();
       return view('pages.abm',compact('alumnos'));
     }
     public function listadoProfesores(){

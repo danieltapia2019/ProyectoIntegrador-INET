@@ -59,13 +59,13 @@
               <th scope="row">{{$value->id}}</th>
               <td>{{$value->username}}</td>
               <td>{{$value->email}}</td>
-              <td> 
+              <td>
                 <button class="btn btn-danger" name="button" >
-                  <a href="/abm?id={{$value->id}}&tipo=usuario&operacion=eliminar" style="color:white"> Eliminar </a> 
+                  <a href="" style="color:white"> Eliminar </a>
                 </button>
                 <button class="btn btn-primary" name="button" >
-                  <a href="/abm?id={{$value->id}}&tipo=usuario&operacion=editar" style="color:white"> Editar </a> 
-                </button> 
+                  <a href="" style="color:white"> Editar </a>
+                </button>
               </td>
             </tr>
           @empty
@@ -115,13 +115,13 @@
                   <th scope="row">{{$value->id}}</th>
                   <td>{{$value->username}}</td>
                   <td>{{$value->email}}</td>
-                  <td> 
+                  <td>
                     <button class="btn btn-danger" name="button" >
-                      <a href="/abm?id={{$value->id}}&tipo=usuario&operacion=eliminar" style="color:white"> Eliminar </a> 
-                    </button> 
+                      <a href="" style="color:white"> Eliminar </a>
+                    </button>
                     <button class="btn btn-primary" name="button" >
-                      <a href="/abm?id={{$value->id}}&tipo=usuario&operacion=editar" style="color:white"> Editar </a> 
-                    </button> 
+                      <a href="" style="color:white"> Editar </a>
+                    </button>
                   </td>
                 </tr>
               @empty
@@ -153,12 +153,12 @@
                 <td>{{$value->precio}}</td>
                 <td>{{$value->categoria->nombre}}</td>
                 <td>{{$value->creador->username}}</td>
-                <td> 
+                <td>
                   <button class="btn btn-danger" name="button" >
-                    <a href="/abm?id={{$value->id}}&tipo=curso&operacion=eliminar" style="color:white"> Eliminar </a> 
+                    <a href="" style="color:white"> Eliminar </a>
                   </button>
                   <button class="btn btn-primary" name="button" >
-                    <a href="/abm?id={{$value->id}}&tipo=curso&operacion=editar" style="color:white"> Editar </a>
+                    <a href="" style="color:white"> Editar </a>
                   </button>
                 </td>
               </tr>
@@ -182,10 +182,12 @@
         <tbody>
           @forelse ($cursos as $key => $value)
             <tr>
-              {{--<td>{{$value->titulo}}</td>
-              @foreach ($value->alumno as $key => $alumno)
+              <td>{{$value->titulo}}</td>
+              @forelse ($value->alumno as $key => $alumno)
                 <td>{{$alumno->username}}</td>
-              @endforeach --}}
+              @empty
+                <td>No hay alumnos inscriptos</td>
+              @endforelse
             </tr>
             @empty
             <h3 class="mt-5 mb-5">No hay Cursos :(</h3>
@@ -207,12 +209,12 @@
             <tr>
               <th scope="row">{{$value->id}}</th>
               <td>{{$value->nombre}}</td>
-              <td> 
+              <td>
                 <button class="btn btn-danger" name="button" >
-                  <a href="/abm?id={{$value->id}}&tipo=categoria&operacion=eliminar" style="color:white"> Eliminar </a> 
+                  <a href="" style="color:white"> Eliminar </a>
                 </button>
                 <button class="btn btn-primary" name="button" >
-                  <a href="/abm?id={{$value->id}}&tipo=categoria&operacion=editar" style="color:white"> Editar </a> 
+                  <a href="" style="color:white"> Editar </a>
                 </button>
               </td>
             </tr>
@@ -223,13 +225,35 @@
 
       </table>
 
-      <button type="button" class="btn btn-success mb-3" name="button">Agregar</button>
+      <button type="button" class="btn btn-success mb-3" name="button" data-toggle="modal" data-target="#modalCategoria">Agregar</button>
 
     </div>
 
   </div>
 </div>{{-- /Conteiner--}}
 <!-- Modal Categoria-->
+
+<div class="modal fade" id="modalCategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar categoria</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="" action="/admin/abm/categoria" method="post">
+        {{csrf_field()}}
+          <div class="input-grup mb-3">
+            <input type="text" name="nombre" class="form-control" placeholder="Categoria" required>
+          </div>
+          <button type="submit" class="btn btn-reg btn-lg btn-block my-3 ">Agregar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Modal Usuario-->
 <div class="modal fade" id="modalUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -242,7 +266,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="" action="/abm/usuario" method="POST">
+                <form class="" action="/admin/abm/usuario" method="POST">
                     {{csrf_field()}}
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -278,9 +302,8 @@
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
                             required autocomplete="new-password" placeholder="Confirmar contraseña">
                     </div>
-                    <div class="input-group mb-3">
                       <label for="acceso">Nivel de acceso:</label>
-                      <br>
+                    <div class="input-group mb-3">
                       <select  name="acceso">
                         <option value="2">Alumno</option>
                         <option value="1">Profesor</option>
