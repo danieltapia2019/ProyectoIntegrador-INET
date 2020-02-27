@@ -18,7 +18,7 @@
         @forelse ($cursos as $curso)
         <article>
             <figure class="img-curso">
-                <img src="../img/cursos.jpg" alt="">
+            <img src="..\storage\img\cursos\{{$curso->foto_curso}}" alt="">
             </figure>
             <section class="desc">
                 <h2>{{$curso->titulo}}</h2>
