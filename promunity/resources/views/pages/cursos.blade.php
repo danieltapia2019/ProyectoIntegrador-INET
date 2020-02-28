@@ -41,7 +41,7 @@
         @empty
         <div class="empty-result mt-4">
             <h1>No se encontraron resultados para su busqueda</h1>
-            <img src="img/mensajes/no-messages.png" alt="Sin resultados">
+            <img src="{{ asset('img/mensajes/no-messages.png')}}" alt="Sin resultados">
         </div>
         @endforelse
         {{$cursos->links()}}

@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.admin')
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/abm.css') }}">
@@ -205,7 +205,7 @@
           </tr>
         </thead>
         <tbody>
-          @forelse ($categorias as $key => $value)
+          {{-- @forelse ($categorias as $key => $value)
             <tr>
               <th scope="row">{{$value->id}}</th>
               <td>{{$value->nombre}}</td>
@@ -220,7 +220,7 @@
             </tr>
           @empty
           <h3 class="mt-5 mb-5">No hay Categorias :(</h3>
-          @endforelse
+          @endforelse --}}
         </tbody>
 
       </table>

@@ -15,8 +15,8 @@ class adminController extends Controller
         $admins = User::where('acceso','=','0')->get();
 
         $cursos = CursoModel::all();
-        $categorias = CategoriaModel::all();
-        $vac = compact('alumnos','profesores','admins','cursos','categorias');
+        // $categorias = CategoriaModel::all();
+        $vac = compact('alumnos','profesores','admins','cursos');
         return view('pages.abm',$vac);
     }
 }

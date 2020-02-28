@@ -252,12 +252,12 @@ $usuario = User::find(auth()->user()->id);
                     required maxlength="10" minlength="2">
             </div>
             <label for="categoria">Categoria: </label>
-            <select name="categoria" class="custom-select" id="inputGroupSelect01">
+            {{-- <select name="categoria" class="custom-select" id="inputGroupSelect01">
                 <option selected>Elegir categoria</option>
                 @foreach ($categorias as $key => $value)
                 <option value={{$value->id}}>{{$value->nombre}}</option>
                 @endforeach
-            </select>
+            </select> --}}
             <br>
             <button type="submit" name="button" class="btn btn-success">Guardar</button>
         </form>

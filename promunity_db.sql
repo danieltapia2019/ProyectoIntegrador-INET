@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v9.63 
-MySQL - 5.5.5-10.4.11-MariaDB : Database - promunity_db
+MySQL - 5.5.5-10.3.16-MariaDB : Database - promunity_db
 *********************************************************************
 */
 
@@ -16,16 +16,6 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`promunity_db` /*!40100 DEFAULT CHARACTE
 
 USE `promunity_db`;
 
-/*Table structure for table `categorias` */
-
-DROP TABLE IF EXISTS `categorias`;
-
-CREATE TABLE `categorias` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(25) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-
 /*Table structure for table `cursos` */
 
 DROP TABLE IF EXISTS `cursos`;
@@ -38,13 +28,30 @@ CREATE TABLE `cursos` (
   `lenguaje` varchar(50) DEFAULT NULL,
   `precio` double DEFAULT NULL,
   `autor` int(11) DEFAULT NULL,
-  `categorias_id` int(11) NOT NULL,
+  `tipo_id` int(11) NOT NULL,
+  `uso_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `autor` (`autor`),
-  KEY `fk_categoriasId` (`categorias_id`),
+  KEY `tipo_id` (`tipo_id`),
+  KEY `uso_id` (`uso_id`),
   CONSTRAINT `autor` FOREIGN KEY (`autor`) REFERENCES `users` (`id`),
-  CONSTRAINT `fk_categoriasId` FOREIGN KEY (`categorias_id`) REFERENCES `categorias` (`id`)
+  CONSTRAINT `tipo_id` FOREIGN KEY (`tipo_id`) REFERENCES `tipo` (`id`),
+  CONSTRAINT `uso_id` FOREIGN KEY (`uso_id`) REFERENCES `uso` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+/*Data for the table `cursos` */
+
+/*Table structure for table `tipo` */
+
+DROP TABLE IF EXISTS `tipo`;
+
+CREATE TABLE `tipo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tnombre` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `tipo` */
 
 /*Table structure for table `users` */
 
@@ -61,6 +68,20 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
+/*Data for the table `users` */
+
+/*Table structure for table `uso` */
+
+DROP TABLE IF EXISTS `uso`;
+
+CREATE TABLE `uso` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `snombre` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `uso` */
+
 /*Table structure for table `usuario_curso` */
 
 DROP TABLE IF EXISTS `usuario_curso`;
@@ -73,6 +94,8 @@ CREATE TABLE `usuario_curso` (
   CONSTRAINT `id_curso` FOREIGN KEY (`id_curso`) REFERENCES `cursos` (`id`),
   CONSTRAINT `id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `usuario_curso` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

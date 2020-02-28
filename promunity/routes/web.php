@@ -32,7 +32,6 @@ Route::get('/curso','cursoController@searchCurso');
 
 /*    PERFIL    */
 // Route::post('/perfil','cursoController@misCursos');
-Route::get('/perfil','CategoriaController@listCategorias');
 Route::post('/perfil','cursoController@crearCurso');
 
 /*    ABM   */
