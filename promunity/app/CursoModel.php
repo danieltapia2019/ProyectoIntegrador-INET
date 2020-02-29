@@ -3,7 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\CategoriaModel;
+use App\TipoModel;
+use App\UsoModel;
 use App\User;
 class CursoModel extends Model
 {
@@ -13,8 +14,11 @@ class CursoModel extends Model
 
     public $guarded = [];
 
-    public function categoria(){
-        return $this->belongsTo(CategoriaModel::class,'categorias_id');
+    public function tipo(){
+        return $this->belongsTo(TipoModel::class,'tipo_id');
+    }
+    public function uso(){
+      return $this->belongsTo(UsoModel::class,'uso_id');
     }
     public function creador(){
       return $this->belongsTo(User::class,'autor');

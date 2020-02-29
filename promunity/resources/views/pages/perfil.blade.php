@@ -9,7 +9,6 @@
 use App\User;
 
 $usuario = User::find(auth()->user()->id);
-
 @endphp
 @section('title','Perfil')
 
@@ -178,13 +177,13 @@ $usuario = User::find(auth()->user()->id);
             <div class="contenedor">
                 @forelse ($usuario->cursos as $key => $value)
                 <div class="card-completo">
-
                     <div class="card-body">
                         <h5 class="card-title">{{$value->titulo}}</h5>
                         <p class="card-text">{{$value->descripcion}}</p>
                         <p>Lenguaje: {{$value->lenguaje}}</p>
                         <p>Precio: {{$value->precio}}</p>
-                        <p>Categoria: {{$value->categoria->nombre}}</p>
+                        <p>Tipo: {{$value->tipo->tnombre}}</p>
+                        <p>Uso: {{$value->uso->snombre}}</p>
                         <a href="/">Ir al curso</a>
                     </div>
                     <img id="foto-curso" src="storage\img\cursos\{{$value->foto_curso}}" class="card-img" alt="...">
@@ -215,30 +214,8 @@ $usuario = User::find(auth()->user()->id);
                 <textarea name="descripcion" class="form-control" id="descripcion" rows="3" required></textarea>
             </div>
             <div class="fotoCurso">
-
                 <label for="foto_curso">Foto:</label>
-                {{-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> --}}
                 <input type="file" class="form-control" name="foto_curso" >
-                {{-- <input type="hidden" class="form-control" name="foto_curso" id="imagenactual">
-                <div class="imagenPrev">
-                    <img clas="rounded mx-auto d-block" src="" id="imagenmuestra">
-                </div> --}}
-                {{-- <script type="text/javascript">
-                    function readURL(input) {
-                        if (input.files && input.files[0]) {
-                            var reader = new FileReader();
-                            reader.onload = function (e) {
-                                // Asignamos el atributo src a la tag de imagen
-                                $('#imagenmuestra').attr('src', e.target.result);
-                            }
-                            reader.readAsDataURL(input.files[0]);
-                        }
-                    }
-                    // El listener va asignado al input
-                    $("#imagen").change(function () {
-                        readURL(this);
-                    });
-                </script> --}}
             </div>
             <br>
             <label for="precio">Precio:</label>
@@ -251,13 +228,26 @@ $usuario = User::find(auth()->user()->id);
                 <input type="text" name="lenguaje" class="form-control" placeholder="Ingrese lenguaje del curso"
                     required maxlength="10" minlength="2">
             </div>
-            <label for="categoria">Categoria: </label>
-            {{-- <select name="categoria" class="custom-select" id="inputGroupSelect01">
-                <option selected>Elegir categoria</option>
-                @foreach ($categorias as $key => $value)
-                <option value={{$value->id}}>{{$value->nombre}}</option>
-                @endforeach
-            </select> --}}
+
+            <label for="tipo" >Tipo: </label>
+             <select name="tipo" class="custom-select" id="inputGroupSelect01" required>
+                <option selected>Elegir tipo</option>
+
+                @forelse ($tipos as $key => $tipo)
+                <option value={{$tipo->id}}>{{$tipo->tnombre}}</option>
+                @empty
+                <option value="">No hay Tipos</option>
+                @endforelse
+            </select>
+            <label for="uso" >Uso: </label>
+             <select name="uso" class="custom-select" id="inputGroupSelect01" required>
+                <option selected>Elegir uso</option>
+                @forelse ($usos as $key => $uso)
+                <option value={{$uso->id}}>{{$uso->snombre}}</option>
+                @empty
+                <option value="">No hay Usos</option>
+                @endforelse
+            </select>
             <br>
             <button type="submit" name="button" class="btn btn-success">Guardar</button>
         </form>
