@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
     // public $table = "usuarios";
 
-    public $timestamps = false;
+    // public $timestamps = false;
 
     use Notifiable;
 

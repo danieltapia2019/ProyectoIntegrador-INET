@@ -38,7 +38,8 @@ class CursoController extends Controller
         $curso->lenguaje = $req["lenguaje"];
         $curso->precio = $req["precio"];
         $curso->autor = $req["autor"];
-        $curso->categorias_id = $req["categoria"];
+        $curso->tipo_id = $req['tipo'];
+        $curso->uso_id = $req['uso'];
         $path = $req->file('foto_curso')->store('public/img/cursos');
         $nombreArchivo = basename($path);
         $curso->foto_curso = $nombreArchivo;
