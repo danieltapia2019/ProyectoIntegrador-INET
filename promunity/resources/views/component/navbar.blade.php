@@ -139,7 +139,7 @@
                             <img src="/img/perfil.jpg" alt="" id="imgNormal">
                             <img id="imagenPrevisualizacion" class="rounded-circle mx-2" style="display: none;">
                             <div class="custom-file">
-                                <input name="fotoPerfil" type="file" class="custom-file-input" id="seleccionArchivos"
+                                <input name="foto" type="file" class="custom-file-input" id="seleccionArchivos"
                                     accept="image/*" data-max-size="2048">
                                 <label accept="image/* " class="custom-file-label" for="inputGroupFile01">Foto</label>
                             </div>

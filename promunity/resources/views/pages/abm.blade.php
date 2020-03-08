@@ -4,17 +4,20 @@
 <link rel="stylesheet" href="{{ asset('css/pages/abm.css') }}">
 @endpush
 
-
 @section('title','ABM')
 
 @section('content')
 
 <div class="conteiner">
     <div class="sideNavigation" id="sideNAV">
-        {{-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> --}}
+        @if (isset(auth()->user()->foto))
+        <img src="storage\img\avatar\{{auth()->user()->foto}}" alt="" id="imgSideNav">
+        @else
         <img src="/img/perfil.jpg" alt="" class="" id="imgSideNav">
+        @endif
         <a>Administrador:</a>
         <a href="/perfil">{{auth()->user()->username}}</a>
+        <a href="/home"> <img src="/img/logo.png" alt=""  id="logoHOME"> </a>
         <a href="/configuracion" onclick="abrirConfig()"><i class="fas fa-cogs"></i>Settings</a>
     </div>
 
@@ -117,7 +120,6 @@
                         </tr>
                     </thead>
                     <tbody>
-
                         @forelse ($profesores as $key => $profesor)
                         <tr>
                             <th scope="row">{{$profesor->id}}</th>
@@ -166,16 +168,21 @@
                             <td>{{$curso->titulo}}</td>
                             <td>{{$curso->lenguaje}}</td>
                             <td>{{$curso->precio}}</td>
-                            <td>{{$curso->tipo->tnombre}}</td>
-                            <td>{{$curso->uso->snombre}}</td>
+                            <td>{{$curso->tipo->tipoNombre}}</td>
+                            <td>{{$curso->uso->usoNombre}}</td>
                             <td>{{$curso->creador->username}}</td>
                             <td>
-                                <button class="btn btn-danger" name="button">
-                                    <a href="" style="color:white"> Eliminar </a>
-                                </button>
-                                <button class="btn btn-primary" name="button">
-                                    <a href="" style="color:white"> Editar </a>
-                                </button>
+                                <div class="row">
+                                    <form class="" action="/borrar/curso" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="id" value={{$curso->id}}>
+                                        <button type="submit" name="button" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                    <hr>
+                                    <button class="btn btn-primary" name="button">
+                                        <a href="/editar/usuario/{{$profesor->id}}" style="color:white"> Editar </a>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                         @empty
@@ -198,12 +205,15 @@
                     <tbody>
                         @forelse ($cursos as $key => $curso)
                         <tr>
-                            <td>{{$curso->titulo}}</td>
                             @forelse ($curso->alumno as $key => $alumno)
-                            <td>{{$alumno->username}}</td>
+                              <tr>
+
+                              <td>{{$curso->titulo}}</td>
+                              <td>{{$alumno->username}}</td>
                             @empty
                             <td>No hay alumnos inscriptos</td>
                             @endforelse
+                            </tr>
                         </tr>
                         @empty
                         <h3 class="mt-5 mb-5">No hay Cursos :(</h3>
@@ -223,7 +233,7 @@
                     <tbody>
                         @forelse ($tipos as $key => $tipo)
                         <td>{{$tipo->id}}</td>
-                        <td>{{$tipo->tnombre}}</td>
+                        <td>{{$tipo->tipoNombre}}</td>
                         <td>
                             <div class="row">
                                 <form class="" action="/borrar/uso" method="POST">
@@ -261,7 +271,7 @@
                     <tbody>
                         @forelse ($usos as $key => $uso)
                         <td>{{$uso->id}}</td>
-                        <td>{{$uso->snombre}}</td>
+                        <td>{{$uso->usoNombre}}</td>
                         <td>
                             <div class="row">
                                 <form class="" action="/borrar/uso" method="POST">
@@ -369,7 +379,7 @@
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                         </div>
                         <input type="password" name="password" class="form-control" aria-label="password"
-                            placeholder="Ingrese contraseña" id="passwordRegister" required>
+                            placeholder="Ingrese contraseña" id="passwordRegister" required minlength="8">
                         <div class="input-group-append">
                             <button class="btn btn-outline-primary" type="button" name="button"
                                 onclick="mostrarContrasena()">
@@ -382,7 +392,7 @@
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                         </div>
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
-                            required autocomplete="new-password" placeholder="Confirmar contraseña">
+                            required autocomplete="new-password" placeholder="Confirmar contraseña" minlength="8">
                     </div>
                     <label for="acceso">Nivel de acceso:</label>
                     <div class="input-group mb-3">

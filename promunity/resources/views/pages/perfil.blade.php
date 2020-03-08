@@ -80,12 +80,9 @@ $usuario = User::find(auth()->user()->id);
                     <div id="imagenNombre">
 
                         <div class="input-group mb-3">
-                            <?php //if($fotoPerfil == "no"): ?>
                             <img src="/img/perfil.jpg" alt="" id="imgNormal">
-                            <?php //else: ?>
-                            <img src="/img/fotoPerfil/<?php //echo $fotoPerfil?>" alt=""
+                            <img src="/img/fotoPerfil/" alt=""
                                 class="rounded-circle mx-2" id="imgNormal"></span>
-                            <?php //endif; ?>
                             <img id="imagenPrevisualizacion" class="rounded-circle mx-2" style="display: none;">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="seleccionArchivos" required>
@@ -175,18 +172,18 @@ $usuario = User::find(auth()->user()->id);
         {{--  --}}
         <div class="tab-pane fade" id="tab-cursos" role="tabpanel" aria-labelledby="pills-cursos-tab">
             <div class="contenedor">
-                @forelse ($usuario->cursos as $key => $value)
+                @forelse ($usuario->cursos as $key => $curso)
                 <div class="card-completo">
                     <div class="card-body">
-                        <h5 class="card-title">{{$value->titulo}}</h5>
-                        <p class="card-text">{{$value->descripcion}}</p>
-                        <p>Lenguaje: {{$value->lenguaje}}</p>
-                        <p>Precio: {{$value->precio}}</p>
-                        <p>Tipo: {{$value->tipo->tnombre}}</p>
-                        <p>Uso: {{$value->uso->snombre}}</p>
+                        <h5 class="card-title">{{$curso->titulo}}</h5>
+                        <p class="card-text">{{$curso->descripcion}}</p>
+                        <p>Lenguaje: {{$curso->lenguaje}}</p>
+                        <p>Precio: {{$curso->precio}}</p>
+                        <p>Tipo: {{$curso->tipo->tipoNombre}}</p>
+                        <p>Uso: {{$curso->uso->usoNombre}}</p>
                         <a href="/">Ir al curso</a>
                     </div>
-                    <img id="foto-curso" src="storage\img\cursos\{{$value->foto_curso}}" class="card-img" alt="...">
+                    <img id="foto-curso" src="storage\img\cursos\{{$curso->foto_curso}}" class="card-img" alt="...">
                 </div>
                 @empty
                 <h3>No has comprado ningun curso</h3>
@@ -234,7 +231,7 @@ $usuario = User::find(auth()->user()->id);
                 <option selected>Elegir tipo</option>
 
                 @forelse ($tipos as $key => $tipo)
-                <option value={{$tipo->id}}>{{$tipo->tnombre}}</option>
+                <option value={{$tipo->id}}>{{$tipo->tipoNombre}}</option>
                 @empty
                 <option value="">No hay Tipos</option>
                 @endforelse
@@ -243,7 +240,7 @@ $usuario = User::find(auth()->user()->id);
              <select name="uso" class="custom-select" id="inputGroupSelect01" required>
                 <option selected>Elegir uso</option>
                 @forelse ($usos as $key => $uso)
-                <option value={{$uso->id}}>{{$uso->snombre}}</option>
+                <option value={{$uso->id}}>{{$uso->usoNombre}}</option>
                 @empty
                 <option value="">No hay Usos</option>
                 @endforelse

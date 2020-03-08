@@ -34,7 +34,7 @@ class CursoController extends Controller
     public function crearCurso(Request $req){
         $curso = new CursoModel();
         $curso->titulo = $req["titulo"];
-        $curso->descripcion = $req["descripcion"];
+        $curso->desc = $req["descripcion"];
         $curso->lenguaje = $req["lenguaje"];
         $curso->precio = $req["precio"];
         $curso->autor = $req["autor"];

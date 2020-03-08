@@ -10,7 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/',function(){
+  return view('home');
+});
 Route::get('/home',function(){
     return view('home');
 });
@@ -24,13 +26,18 @@ Route::get('/perfil',function(){
 /*    ABM:Admin   */
 Route::get('/admin/abm','adminController@listAll');
 Route::post('/crear/usuario','adminController@crearUsuario');
-Route::post('/borrar/usuario','adminController@borrarUsuario');
 Route::post('/admin/crear/tipo','adminController@crearTipo');
 Route::post('/admin/crear/uso','adminController@crearUso');
 Route::get('/editar/usuario/{id}','adminController@editarUsuario');
+Route::get('/editar/curso/{id}','adminController@editarCurso');
 Route::post('/actualizar/usuario','adminController@actualizarUsuario');
+Route::post('/actualizar/curso','adminController@actualizarCurso');
+/*    ABM:Admin   BORRAR  */
+Route::post('/borrar/usuario','adminController@borrarUsuario');
 Route::post('/borrar/tipo','adminController@borrarTipo');
 Route::post('/borrar/uso','adminController@borrarUso');
+Route::post('/borrar/curso','adminController@borrarCurso');
+
 
 Route::get('/logout','\App\http\Controller\Auth\LoginController@logout');
 

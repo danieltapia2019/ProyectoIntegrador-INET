@@ -24,6 +24,6 @@ class CursoModel extends Model
       return $this->belongsTo(User::class,'autor');
     }
     public function alumno(){
-       return $this->belongsToMany(User::class,'usuario_curso','id_curso','id_usuario');
+       return $this->belongsToMany(User::class,'usuario_curso','curso_id','user_id');
     }
 }
