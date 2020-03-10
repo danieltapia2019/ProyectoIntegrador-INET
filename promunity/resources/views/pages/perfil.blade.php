@@ -19,9 +19,9 @@ $usuario = User::find(auth()->user()->id);
         <div id="sideNavigation" class="sidenav">
             <ul style="color: white;">
                 @if (auth()->user()->foto == null)
-                    <span id="fotoPerfilNav"> <img src="{{ asset('img/perfil.jpg') }}" alt=""> </span>
+                    <span id="fotoPerfilNav"> <img src="{{ asset('/img/perfil.jpg') }}" alt=""> </span>
                 @else
-                    <span id="fotoPerfilNav">{{--<img src="{{ asset('img/user/...')}}" alt="{{auth()->user()->username}}">--}}</span>
+                    <span id="fotoPerfilNav"><img src="{{ asset('/storage/img/avatar/'.auth()->user()->foto) }}" alt="{{auth()->user()->username}}"</span>
                 @endif
                 <p>STATUS:
                     @if (auth()->user()->acceso == 2)

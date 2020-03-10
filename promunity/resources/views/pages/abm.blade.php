@@ -180,7 +180,7 @@
                                     </form>
                                     <hr>
                                     <button class="btn btn-primary" name="button">
-                                        <a href="/editar/usuario/{{$profesor->id}}" style="color:white"> Editar </a>
+                                        <a href="/editar/curso/{{$curso->id}}" style="color:white"> Editar </a>
                                     </button>
                                 </div>
                             </td>

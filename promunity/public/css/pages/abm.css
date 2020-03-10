@@ -52,3 +52,10 @@ a i{
   margin-right: 25%;
   margin-top: 2vh;
 }
+
+.editar-curso{
+  width: 50%;
+  justify-content: center;
+  margin: auto;
+  margin-top: 2vh;
+}

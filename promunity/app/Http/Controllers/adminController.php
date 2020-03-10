@@ -34,7 +34,7 @@ class adminController extends Controller
     public function editarCurso(Request $form){
         $curso = CursoModel::find($form['id']);
         $tipos = TipoModel::all();
-        $usos = UsosModel::all();
+        $usos = UsoModel::all();
         $vac = compact('curso','tipos','usos');
         return view ("pages.editarCurso",$vac);
     }
