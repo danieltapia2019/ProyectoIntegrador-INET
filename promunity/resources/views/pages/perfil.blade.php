@@ -21,7 +21,7 @@ $usuario = User::find(auth()->user()->id);
                 @if (auth()->user()->foto == null)
                     <span id="fotoPerfilNav"> <img src="{{ asset('/img/perfil.jpg') }}" alt=""> </span>
                 @else
-                    <span id="fotoPerfilNav"><img src="{{ asset('/storage/img/avatar/'.auth()->user()->foto) }}" alt="{{auth()->user()->username}}"</span>
+                    <span id="fotoPerfilNav"><img src="{{ asset('/storage/img/avatar/'.auth()->user()->foto) }}" alt="{{auth()->user()->username}}"></span>
                 @endif
                 <p>STATUS:
                     @if (auth()->user()->acceso == 2)
@@ -75,93 +75,60 @@ $usuario = User::find(auth()->user()->id);
         <div class="tab-pane fade show active container" id="tab-perfil" role="tabpanel" aria-labelledby="nav-form-tab">
             <!--Configuracion-->
             <div class="configuracion" id="configuracion">
-                <form class="" action="perfil1.php" method="post" enctype="multipart/form-data">
-
-                    <div id="imagenNombre">
-
-                        <div class="input-group mb-3">
-                            <img src="/img/perfil.jpg" alt="" id="imgNormal">
-                            <img src="/img/fotoPerfil/" alt=""
-                                class="rounded-circle mx-2" id="imgNormal"></span>
-                            <img id="imagenPrevisualizacion" class="rounded-circle mx-2" style="display: none;">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="seleccionArchivos" required>
-                                <label accept="image/* " class="custom-file-label" for="inputGroupFile01">Elegir
-                                    archivo</label>
-                            </div>
-                        </div>
-
-                        <!-- La imagen que vamos a usar para previsualizar lo que el usuario selecciona -->
-                        <script>
-                            const $seleccionArchivos = document.querySelector("#seleccionArchivos"),
-                                $imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");
-
-                            // Escuchar cuando cambie
-                            $seleccionArchivos.addEventListener("change", () => {
-                                imagenNormal = document.getElementById('imgNormal').style.display = "none";
-                                imagenElegida = document.getElementById('imagenPrevisualizacion').style
-                                    .display =
-                                    "inherit";
-                                // Los archivos seleccionados, pueden ser muchos o uno
-                                const archivos = $seleccionArchivos.files;
-                                // Si no hay archivos salimos de la función y quitamos la imagen
-                                if (!archivos || !archivos.length) {
-                                    $imagenPrevisualizacion.src = "";
-                                    imagenNormal = document.getElementById('imgNormal').style.display =
-                                        "inherit";
-                                    imagenElegida = document.getElementById('imagenPrevisualizacion').style
-                                        .display =
-                                        "none";
-                                    return;
-                                }
-                                // Ahora tomamos el primer archivo, el cual vamos a previsualizar
-                                const primerArchivo = archivos[0];
-                                // Lo convertimos a un objeto de tipo objectURL
-                                const objectURL = URL.createObjectURL(primerArchivo);
-                                // Y a la fuente de la imagen le ponemos el objectURL
-                                $imagenPrevisualizacion.src = objectURL;
-                            });
-
-                        </script>
-                    </div>
-                    <button class="btn btn-success btn-sm" type="submit" name="button">
-                        Guardar foto
-                    </button>
-
-                </form>
-                <form class="actualizacionDatos mb-5" action="" method="post">
+                <form class="actualizacionDatos mb-5" action="/actualizarDatos" method="post">
+                  @csrf
+                  <input type="hidden" name="id" value="{{auth()->user()->id}}">
+                  <input type="hidden" name="acceso" value="{{auth()->user()->acceso}}">
+                  <input type="hidden" name="estado" value="{{auth()->user()->estado}}">
                     <hr>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Cambiar Email</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            placeholder="Enter email" value={{auth()->user()->email}}>
-                    </div>
-                    <hr>
-                    <label for="password">Contraseña actual</label>
+                    <label for="username">Nombre de usuario nuevo</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            <span class="input-group-text"><i class="far fa-user"></i></span>
                         </div>
-                        <input type="password" name="password" class="form-control" aria-label="password"
-                            placeholder="Ingrese contraseña" id="passwordRegister" required>
-                        <button class="btn btn-primary" type="button" name="button" onclick="mostrarContrasena()">
-                            <ion-icon name="eye" id="ojoRegister"></ion-icon>
-                        </button>
-
+                        <input type="text" name="username" class="form-control" required value="{{auth()->user()->username}}">
                     </div>
-                    <hr>
+                    <label for="email">Email nuevo</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                        </div>
+                        <input type="email" name="email" class="form-control" aria-label="email"
+                            value="{{auth()->user()->email}}" required>
+                    </div>
                     <label for="password">Contraseña nueva</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                         </div>
-                        <input type="password" name="password" class="form-control" aria-label="password"
-                            placeholder="Ingrese contraseña" id="passwordRegister">
-                        <button class="btn btn-primary" type="button" name="button" onclick="mostrarContrasena()"
-                            required>
-                            <ion-icon name="eye" id="ojoRegister"></ion-icon>
-                        </button>
+                        <input type="password" name="password" class="form-control password" aria-label="password"
+                            placeholder="Ingrese contraseña" id="password" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="button" name="button" aria-label="password-on"
+                            onclick="mostrarContrasena()">
+                                <i name="eye" id="ojo" class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <label for="password_confirmation">Repetir contraseña nueva</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        </div>
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
+                            required autocomplete="new-password" placeholder="Confirmar contraseña">
+                    </div>
+                    <div class="input-group mb-3">
+                        @if (auth()->user()->foto == null)
+                            <span id="fotoPerfilNav"> <img src="{{ asset('/img/perfil.jpg') }}" alt=""> </span>
+                        @else
+                            <span id="fotoPerfilNav"><img src="{{ asset('/storage/img/avatar/'.auth()->user()->foto) }}" alt="{{auth()->user()->username}}"></span>
+                        @endif
+                      <div class="input-group-prepend">
 
+                        <label for="foto">Cambiar foto</label>
+                        <input type="file" name="foto" data-max-size="2048" accept="image/*">
+                      </div>
                     </div>
                     <button type="submit" name="button" class="btn btn-success">
                         Guardar Cambios
@@ -277,45 +244,12 @@ $usuario = User::find(auth()->user()->id);
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
 </script> --}}
 <script>
-    function abrirDarUnCurso() {
-        closeNav();
-        document.getElementById('UserProfileContent').style.display = "none";
-        document.getElementById("crearCurso").style.display = "inherit";
-    }
-    function abrirTab() {
-        document.getElementById('crearCurso').style.display = "none";
-        document.getElementById('PageSetting').style.display = "none";
-        document.getElementById('UserProfileContent').style.display = "inherit";
-    }
+window.addEventListener("load", function() {
 
-    function openNav() {
-        document.getElementById("sideNavigation").style.width = "200px";
-    }
-
-    function closeNav() {
-        document.getElementById("sideNavigation").style.width = "0";
-    }
-
-    function mostrarContrasena() {
-        var tipoLogin = document.getElementById("password");
-        var ojoLogin = document.getElementById("ojoOn");
-        var tipoRegister = document.getElementById("passwordRegister");
-        var ojoRegister = document.getElementById("ojoRegister");
-        if (tipoLogin.type == "password") {
-            tipoLogin.type = "text";
-            ojoLogin.name = "eye-off";
-        } else {
-            tipoLogin.type = "password";
-            ojoLogin.name = "eye";
-        }
-        if (tipoRegister.type == "password") {
-            tipoRegister.type = "text";
-            ojoRegister.name = "eye-off";
-        } else {
-            tipoRegister.type = "password";
-            ojoRegister.name = "eye";
-        }
-    }
+  // Tu código va acá!
+});
 
 </script>
+
+<script type="text/javascript" src="/js/main.js"></script>
 @endsection

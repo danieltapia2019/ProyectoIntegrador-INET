@@ -40,10 +40,13 @@
                 </li>
                 @guest
                 <li class="nav-item">
+                  {{--
                     <a class="nav-link" data-toggle="modal" data-target="#modalInicio">
                         <i class="fas fa-sign-in-alt" data-toggle="tooltip" data-placement="bottom"
                             title="Inicio de Sesión"></i>
-                    </a>
+                    </a>--}}
+                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="/register">Register</a>
                 </li>
                 @else
                 <li class="nav-item dropdown">
@@ -146,31 +149,6 @@
                         </div>
                         <!-- La imagen que vamos a usar para previsualizar lo que el usuario selecciona -->
                         <script>
-                            const $seleccionArchivos = document.querySelector("#seleccionArchivos"),
-                                $imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");
-                            // Escuchar cuando cambie
-                            $seleccionArchivos.addEventListener("change", () => {
-                                imagenNormal = document.getElementById('imgNormal').style.display = "none";
-                                imagenElegida = document.getElementById('imagenPrevisualizacion').style
-                                    .display = "inherit";
-                                // Los archivos seleccionados, pueden ser muchos o uno
-                                const archivos = $seleccionArchivos.files;
-                                // Si no hay archivos salimos de la función y quitamos la imagen
-                                if (!archivos || !archivos.length) {
-                                    $imagenPrevisualizacion.src = "";
-                                    imagenNormal = document.getElementById('imgNormal').style.display =
-                                        "inherit";
-                                    imagenElegida = document.getElementById('imagenPrevisualizacion').style
-                                        .display = "none";
-                                    return;
-                                }
-                                // Ahora tomamos el primer archivo, el cual vamos a previsualizar
-                                const primerArchivo = archivos[0];
-                                // Lo convertimos a un objeto de tipo objectURL
-                                const objectURL = URL.createObjectURL(primerArchivo);
-                                // Y a la fuente de la imagen le ponemos el objectURL
-                                $imagenPrevisualizacion.src = objectURL;
-                            });
 
                         </script>
                     </div>

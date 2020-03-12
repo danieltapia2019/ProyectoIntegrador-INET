@@ -49,6 +49,8 @@ Route::get('/curso','cursoController@searchCurso');
 // Route::post('/perfil','cursoController@misCursos');
 Route::post('/perfil','cursoController@crearCurso');
 Route::get('/perfil','profesorController@listadoTipoUso');
+/*PERFIL Actualizar Datos*/
+Route::post('/actualizarDatos','UserController@actualizarDatos');
 
 /*    ABM   */
 Route::get('/carrito','CarritoController@mostrarCarrito');

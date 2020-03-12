@@ -46,16 +46,20 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right"><i class="fas fa-lock"></i>{{ __('Contraseña') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
-
+                                <input id="password" type="password" class="form-control password " name="password" required>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="button" name="button"  onclick="mostrarContrasena()">
+                                    <i name="eye" id="ojo" class="fas fa-eye"></i>
+                                </button>
                             </div>
                         </div>
 
@@ -66,6 +70,16 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                                               {{----}}
+                              <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('Foto perfil') }}</label>
+                              <div class="col-md-6">
+                                  <input style="" id="seleccionArchivos" type="file" class="form-control" name="foto" data-max-size="2048" accept="image/*">
+                                  <img src="/img/perfil.jpg" alt="" id="imgNormal">
+                                  <img id="imagenPrevisualizacion" class="rounded-circle mx-2" style="display: none;">
+                            </div>
+                       </div>
 
                         {{-- <div class="form-group row">
 
@@ -86,5 +100,7 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="/js/main.js">
+    </script>
 </div>
 @endsection

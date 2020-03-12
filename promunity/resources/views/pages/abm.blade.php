@@ -11,7 +11,7 @@
 <div class="conteiner">
     <div class="sideNavigation" id="sideNAV">
         @if (isset(auth()->user()->foto))
-        <img src="storage\img\avatar\{{auth()->user()->foto}}" alt="" id="imgSideNav">
+        <img src="{{ asset('/storage/img/avatar/'.auth()->user()->foto) }}" alt="{{auth()->user()->username}}" id="sideNAV">
         @else
         <img src="/img/perfil.jpg" alt="" class="" id="imgSideNav">
         @endif
@@ -346,7 +346,7 @@
         </div>
     </div>
 </div>
-<!-- Modal Usuario-->
+<!-- Modal Crear Usuario-->
 <div class="modal fade" id="modalUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -378,12 +378,12 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                         </div>
-                        <input type="password" name="password" class="form-control" aria-label="password"
-                            placeholder="Ingrese contraseña" id="passwordRegister" required minlength="8">
+                        <input type="password" name="password" class="form-control password" aria-label="password"
+                            placeholder="Ingrese contraseña" id="password" required minlength="8">
                         <div class="input-group-append">
                             <button class="btn btn-outline-primary" type="button" name="button"
                                 onclick="mostrarContrasena()">
-                                <i name="eye" id="ojoRegister" class="far fa-eye"></i>
+                                <i name="" id="ojo" class="fas fa-eye-slash"></i>
                             </button>
                         </div>
                     </div>
@@ -409,5 +409,9 @@
     </div>
 </div>
 
+
+
+
+<script type="text/javascript" src="/js/main.js"></script>
 <!-- -->
 @endsection

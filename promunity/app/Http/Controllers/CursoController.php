@@ -43,6 +43,7 @@ class CursoController extends Controller
         $path = $req->file('foto_curso')->store('public/img/cursos');
         $nombreArchivo = basename($path);
         $curso->foto_curso = $nombreArchivo;
+        $curso->estado = 1;
         $curso->save();
         return redirect ("/perfil");
     }
