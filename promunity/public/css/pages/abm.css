@@ -59,3 +59,44 @@ a i{
   margin: auto;
   margin-top: 2vh;
 }
+.nav.flex-column{
+  display: none;
+}
+/*PERFIL MOBILE*/
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+
+  /*SIDE NAV*/
+  .sideNavigation{
+    height: auto;
+    width: 100%;
+    justify-content: center;
+  }
+  .sideNavigation a:last-child{
+    position: relative;
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+  a i{
+    margin-right: 5px;
+  }
+  #logoHOME{
+  }
+
+  #imgSideNav{
+    margin-top: 5px;
+    height: 75px;
+    width: 75px;
+    border-radius: 150px;
+  }
+  /*TAB*/
+  #navPC{
+    display: none;
+  }
+  .nav.flex-column{
+    display: inherit;
+  }
+  #IDregistro{
+    display: none;
+  }
+}

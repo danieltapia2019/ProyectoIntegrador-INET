@@ -9,12 +9,38 @@
 @section('content')
 
 <div class="conteiner">
+  @if(session('message'))
+    @if (session('message') == 'ERROR')
+      <script type="text/javascript">
+      window.addEventListener("load", function() {
+      alert('NO SE PUDO CREAR, YA EXISTE UN REGISTRO CON EL NOMBRE DE USUARIO Y/O EMAIL')
+      })
+
+      </script>
+    @elseif(session('message') == 'ELIMNAR')
+        <script type="text/javascript">
+        window.addEventListener("load", function() {
+        alert('¡¡¡¡EL REGISTRO NO SE ELIMINA POR COMPLETO''''')
+        })
+
+        </script>
+    @else
+      <script type="text/javascript">
+
+      window.addEventListener("load", function() {
+      alert('CREADO CON EXITO')
+      })
+      </script>
+    @endif
+@endif
     <div class="sideNavigation" id="sideNAV">
+        <a href="#">
         @if (isset(auth()->user()->foto))
         <img src="{{ asset('/storage/img/avatar/'.auth()->user()->foto) }}" alt="{{auth()->user()->username}}" id="sideNAV">
         @else
         <img src="/img/perfil.jpg" alt="" class="" id="imgSideNav">
         @endif
+        </a>
         <a>Administrador:</a>
         <a href="/perfil">{{auth()->user()->username}}</a>
         <a href="/home"> <img src="/img/logo.png" alt=""  id="logoHOME"> </a>
@@ -22,7 +48,7 @@
     </div>
 
     <div class="abm-tablist">
-        <nav class="row">
+        <nav class="row" id="navPC">
             <ul class="nav nav-tabs " id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="alumnos-tab" data-toggle="tab" href="#alumnos" role="tab" aria-controls="home" aria-selected="true">Alumnos</a>
@@ -47,12 +73,28 @@
                 </li>
             </ul>
         </nav>
+        <nav class="nav flex-column">
+          <script type="text/javascript">
+            window.addEventListener("load", function() {
+              if(window.innerWidth <= 425 ){
+                alert('ATENCION, PARA UNA MEJOR EXPERIENCIA EN EL ABM SE RECOMIENDA UTILIZAR UNA COMPUTADORA');
+              }
+            });
+          </script>
+          <a class="nav-link active" id="alumnos-tab" data-toggle="tab" href="#alumnos" role="tab" aria-controls="home" aria-selected="true">Alumnos</a>
+          <a class="nav-link" id="profesores-tab" data-toggle="tab" href="#profesores" role="tab" aria-controls="profile" aria-selected="false">Profesores</a>
+          <a class="nav-link" id="administradores-tab" data-toggle="tab" href="#administradores" role="tab" aria-controls="contact" aria-selected="false">Administradores</a>
+          <a class="nav-link" id="cursos-tab" data-toggle="tab" href="#cursos" role="tab" aria-controls="contact" aria-selected="false">Cursos</a>
+          <a class="nav-link" id="alumnos-cursos-tab" data-toggle="tab" href="#alumnos-cursos" role="tab" aria-controls="contact" aria-selected="false">Alumnos/Cursos</a>
+          <a class="nav-link" id="tipos-tab" data-toggle="tab" href="#tipos" role="tab" aria-controls="contact" aria-selected="false">Tipos</a>
+          <a class="nav-link" id="usos-tab" data-toggle="tab" href="#usos" role="tab" aria-controls="contact" aria-selected="false">Usos</a>
+        </nav>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="alumnos" role="tabpanel" aria-labelledby="alumnos-tab">
                 <table class="table table-light mt-3 mb-5">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th id="IDregistro">ID</th>
                             <th>Nombre de Usuario</th>
                             <th>Email</th>
                             <th>Acciones</th>
@@ -61,7 +103,7 @@
                     <tbody>
                         @forelse ($alumnos as $key => $alumno)
                         <tr>
-                            <th scope="row">{{$alumno->id}}</th>
+                            <th id="IDregistro">{{$alumno->id}}</th>
                             <td>{{$alumno->username}}</td>
                             <td>{{$alumno->email}}</td>
                             <td>
@@ -80,6 +122,7 @@
                         </tr>
                         @empty
                         <h3 class="mt-5 mb-5">No hay Alumnos :(</h3>
+                        {{$alumnos->links()}}
                         @endforelse
                     </tbody>
                 </table>
@@ -91,7 +134,7 @@
                 <table class="table table-light mt-3 mb-5">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th id="IDregistro">ID</th>
                             <th>Nombre de Usuario</th>
                             <th>Email</th>
                         </tr>
@@ -99,13 +142,14 @@
                     <tbody>
                         @forelse ($admins as $key => $admin)
                         <tr>
-                            <td>{{$admin->id}}</td>
+                            <td id="IDregistro">{{$admin->id}}</td>
                             <td>{{$admin->username}}</td>
                             <td>{{$admin->email}}</td>
                         </tr>
                         @empty
                         <h3 class="mt-5 mb-5">No hay Admins :(</h3>
                         @endforelse
+                        {{$admins->links()}}
                     </tbody>
                 </table>
             </div>
@@ -113,7 +157,7 @@
                 <table class="table table-light mt-3 mb-5">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th id="IDregistro">ID</th>
                             <th>Nombre de Usuario</th>
                             <th>Email</th>
                             <th>Acciones</th>
@@ -122,7 +166,7 @@
                     <tbody>
                         @forelse ($profesores as $key => $profesor)
                         <tr>
-                            <th scope="row">{{$profesor->id}}</th>
+                            <th id="IDregistro">{{$profesor->id}}</th>
                             <td>{{$profesor->username}}</td>
                             <td>{{$profesor->email}}</td>
                             <td>
@@ -142,6 +186,8 @@
                         @empty
                         <h3 class="mt-5 mb-5">No hay profesores :(</h3>
                         @endforelse
+
+                        {{$profesores->links()}}
                     </tbody>
                 </table>
                 <button type="button" class="btn btn-success mb-3" name="button" data-toggle="modal"
@@ -151,7 +197,7 @@
                 <table class="table table-light mt-3 mb-5">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th id="IDregistro">ID</th>
                             <th>Titulo</th>
                             <th>Lenguaje</th>
                             <th>Precio</th>
@@ -164,7 +210,7 @@
                     <tbody>
                         @forelse ($cursos as $key => $curso)
                         <tr>
-                            <th scope="row">{{$curso->id}}</th>
+                            <th id="IDregistro">{{$curso->id}}</th>
                             <td>{{$curso->titulo}}</td>
                             <td>{{$curso->lenguaje}}</td>
                             <td>{{$curso->precio}}</td>
@@ -188,6 +234,7 @@
                         @empty
                         <h3 class="mt-5 mb-5">No hay Cursos :(</h3>
                         @endforelse
+                        {{$cursos->links()}}
                     </tbody>
                 </table>
                 <a href="/perfil">
@@ -250,6 +297,7 @@
                         @empty
                         <h3 class="mt-5 mb-5">No hay Tipo :(</h3>
                         @endforelse
+                        {{$tipos->links()}}
                     </tbody>
 
                 </table>
@@ -288,6 +336,7 @@
                         @empty
                         <h3 class="mt-5 mb-5">No hay Uso :(</h3>
                         @endforelse
+                        {{$usos->links()}}
                     </tbody>
 
                 </table>
@@ -408,10 +457,5 @@
         </div>
     </div>
 </div>
-
-
-
-
-<script type="text/javascript" src="/js/main.js"></script>
 <!-- -->
 @endsection

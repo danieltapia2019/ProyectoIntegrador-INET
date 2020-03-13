@@ -14,6 +14,16 @@ $usuario = User::find(auth()->user()->id);
 
 @section('content')
 <header class="bienvenido">
+
+    @if (session('message') == 'ERROR')
+      <script type="text/javascript">
+      window.addEventListener("load", function() {
+      alert('NO SE PUDO ACTUALIZAR, YA EXISTE UN REGISTRO CON EL NOMBRE DE USUARIO Y/O EMAIL')
+      })
+
+      </script>
+    @endif
+
     <div class="usuario" style="background-image: url({{ asset('/img/faqBienvenido.png') }});">
         <!--SideNav-->
         <div id="sideNavigation" class="sidenav">
@@ -44,7 +54,7 @@ $usuario = User::find(auth()->user()->id);
                     @endif
                 </li>
                 <li>
-                    <a href="#PageSetting" onclick="abrirConfig()">
+                    <a href="/settings" id="settinsIcon">
                         <i class="fas fa-cogs"></i>Settings
                     </a>
                 </li>
@@ -64,18 +74,21 @@ $usuario = User::find(auth()->user()->id);
 <div class="tab container" id="UserProfileContent">
     <nav class="row">
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-form-tab" data-toggle="tab" href="#tab-perfil" role="tab" aria-controls="tab-perfil" aria-selected="true" onclcick="abrirTab()">Perfil</a>
+            <a class="nav-item nav-link active" id="nav-perfil-tab" data-toggle="tab" href="#tab-perfil" role="tab"
+            aria-controls="tab-perfil" aria-selected="true" onclick="abrirTab()">Perfil</a>
             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#tab-cursos" role="tab"
             aria-controls="tab-cursos" aria-selected="false" onclick="abrirTab()">Mis Cursos</a>
             <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#tab-favoritos" role="tab"
             aria-controls="tab-favoritos" aria-selected="false" onclick="abrirTab()">Favoritos</a>
+            <a class="nav-item nav-link" id="nav-crear-curso" data-toggle="tab" href="#tab-vacio" role="tab"
+            aria-controls="tab-vacio" aria-selected="false"></a>
         </div>
     </nav>
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active container" id="tab-perfil" role="tabpanel" aria-labelledby="nav-form-tab">
             <!--Configuracion-->
             <div class="configuracion" id="configuracion">
-                <form class="actualizacionDatos mb-5" action="/actualizarDatos" method="post">
+                <form class="actualizacionDatos mb-5" action="/actualizarDatos" method="post" enctype="multipart/form-data">
                   @csrf
                   <input type="hidden" name="id" value="{{auth()->user()->id}}">
                   <input type="hidden" name="acceso" value="{{auth()->user()->acceso}}">
@@ -124,11 +137,12 @@ $usuario = User::find(auth()->user()->id);
                         @else
                             <span id="fotoPerfilNav"><img src="{{ asset('/storage/img/avatar/'.auth()->user()->foto) }}" alt="{{auth()->user()->username}}"></span>
                         @endif
-                      <div class="input-group-prepend">
-
-                        <label for="foto">Cambiar foto</label>
-                        <input type="file" name="foto" data-max-size="2048" accept="image/*">
+                      <div class="input-group mb-3">
+                      <div class="custom-file">
+                        <input type="file" name="foto" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" data-max-size="2048" accept="image/*">
+                        <label class="custom-file-label" for="foto">Choose file</label>
                       </div>
+                    </div>
                     </div>
                     <button type="submit" name="button" class="btn btn-success">
                         Guardar Cambios
@@ -159,6 +173,8 @@ $usuario = User::find(auth()->user()->id);
         </div>
         <div class="tab-pane fade" id="tab-favoritos" role="tabpanel" aria-labelledby="pills-contact-tab">
 
+        </div>
+        <div class="tab-pane fade" id="tab-vacio" role="tabpanel" aria-labelledby="pills-contact-tab">
         </div>
     </div>
 </div>
@@ -217,39 +233,4 @@ $usuario = User::find(auth()->user()->id);
         </form>
     </div>
 </section>
-{{-- <section class="config" id="PageSetting">
-    <h2 class="">Configuracion de la página</h2>
-      <h4 class="mt-5 mb-3"><i class="fas fa-adjust"></i>Dark Mode</h4>
-      <form action="" method="POST" class="form-dark">
-        <div class="form-check">
-          @if( !isset($_COOKIE['UserMode']) )
-          <input class="form-check-input" type="checkbox" value="dark" id="darkmode" name="userPreference">
-          <label class="form-check-label" for="darkmode">Dark Mode</label>
-          @else
-          <input class="form-check-input" type="checkbox" value="light" id="lightMode" name="userPreference">
-          <label class="form-check-label" for="lightMode">Light Mode</label>
-          @endif
-        </div>
-        <button class="btn btn-outline-primary">Guardar</button>
-      </form>
-      <p class="text-danger"><strong>*Advertencia</strong>, el 'Modo Oscuro' no ha sido implementado <b>:| *</b></p>
-</section> --}}
-
-{{-- <script src="https://kit.fontawesome.com/918d19c8b4.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-</script> --}}
-<script>
-window.addEventListener("load", function() {
-
-  // Tu código va acá!
-});
-
-</script>
-
-<script type="text/javascript" src="/js/main.js"></script>
 @endsection

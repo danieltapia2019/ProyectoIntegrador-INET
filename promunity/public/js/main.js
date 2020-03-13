@@ -20,15 +20,14 @@ function mostrarContrasena() {
 //Perfil
 function abrirDarUnCurso() {
         closeNav();
-        document.getElementById('UserProfileContent').style.display = "none";
+        document.getElementById('pills-tabContent').style.display = "none";
         document.getElementById("crearCurso").style.display = "inherit";
     }
     function abrirTab() {
         document.getElementById('crearCurso').style.display = "none";
-        document.getElementById('PageSetting').style.display = "none";
-        document.getElementById('UserProfileContent').style.display = "inherit";
-    }
 
+        document.getElementById('pills-tabContent').style.display = "inherit";
+    }
     function openNav() {
         document.getElementById("sideNavigation").style.width = "200px";
     }

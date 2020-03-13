@@ -129,7 +129,15 @@ button.btn.btn-regSignIn {
         height: 100px;
         width: 100px;
     }
-
+    .dropdown-menu{
+      justify-content: center;
+    }
+    .dropdown-item{
+      width: 25%;
+      margin-left: 35%;
+      margin-right: 35%;
+      font-size: 12px;
+    }
     /*CIERRE NAVBAR MOBILE*/
 }
 

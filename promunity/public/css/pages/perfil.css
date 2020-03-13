@@ -66,9 +66,9 @@
     margin-left: 10%;
     margin-right: 10%;
 }
-
-
-
+#nav-crear-curso{
+  display: none;
+}
 .tab {
     margin-top: 5%;
 }
@@ -124,8 +124,13 @@
 
 .contenedor {
     width: 100%;
-
 }
+#settinsIcon{
+    position: absolute;
+    bottom: 0;
+    margin-left: auto;
+}
+
 /*PERFIL MOBILE*/
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {

@@ -24,19 +24,19 @@ Route::get('/perfil',function(){
 });
 
 /*    ABM:Admin   */
-Route::get('/admin/abm','adminController@listAll');
-Route::post('/crear/usuario','adminController@crearUsuario');
-Route::post('/admin/crear/tipo','adminController@crearTipo');
-Route::post('/admin/crear/uso','adminController@crearUso');
-Route::get('/editar/usuario/{id}','adminController@editarUsuario');
-Route::get('/editar/curso/{id}','adminController@editarCurso');
-Route::post('/actualizar/usuario','adminController@actualizarUsuario');
-Route::post('/actualizar/curso','adminController@actualizarCurso');
+Route::get('/admin/abm','adminController@listAll')->middleware('auth','rol:auth');
+Route::post('/crear/usuario','adminController@crearUsuario')->middleware('auth','rol:auth');
+Route::post('/admin/crear/tipo','adminController@crearTipo')->middleware('auth','rol:auth');
+Route::post('/admin/crear/uso','adminController@crearUso')->middleware('auth','rol:auth');
+Route::get('/editar/usuario/{id}','adminController@editarUsuario')->middleware('auth','rol:auth');
+Route::get('/editar/curso/{id}','adminController@editarCurso')->middleware('auth','rol:auth');
+Route::post('/actualizar/usuario','adminController@actualizarUsuario')->middleware('auth','rol:auth');
+Route::post('/actualizar/curso','adminController@actualizarCurso')->middleware('auth','rol:auth');
 /*    ABM:Admin   BORRAR  */
-Route::post('/borrar/usuario','adminController@borrarUsuario');
-Route::post('/borrar/tipo','adminController@borrarTipo');
-Route::post('/borrar/uso','adminController@borrarUso');
-Route::post('/borrar/curso','adminController@borrarCurso');
+Route::post('/borrar/usuario','adminController@borrarUsuario')->middleware('auth','rol:auth');
+Route::post('/borrar/tipo','adminController@borrarTipo')->middleware('auth','rol:auth');
+Route::post('/borrar/uso','adminController@borrarUso')->middleware('auth','rol:auth');
+Route::post('/borrar/curso','adminController@borrarCurso')->middleware('auth','rol:auth');
 
 
 Route::get('/logout','\App\http\Controller\Auth\LoginController@logout');
@@ -48,11 +48,11 @@ Route::get('/curso','cursoController@searchCurso');
 /*    PERFIL    */
 // Route::post('/perfil','cursoController@misCursos');
 Route::post('/perfil','cursoController@crearCurso');
-Route::get('/perfil','profesorController@listadoTipoUso');
+Route::get('/perfil','profesorController@listadoTipoUso')->middleware('auth');
 /*PERFIL Actualizar Datos*/
 Route::post('/actualizarDatos','UserController@actualizarDatos');
 
-/*    ABM   */
+/*    CARRITO   */
 Route::get('/carrito','CarritoController@mostrarCarrito');
 Route::get('/carrito/{id}','CarritoController@agregarAlCarrito');
 Route::get('/carritolimpiar','CarritoController@limpiarCarrito');

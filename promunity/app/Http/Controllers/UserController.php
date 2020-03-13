@@ -10,18 +10,20 @@ class UserController extends Controller
     //
     public function actualizarDatos(Request $form){
       $usuario = User::find($form['id']);
+      $email = User::where('email',$form['email'])->exists();
+      $username = User::where('username',$form['username'])->exists();
+      if($email || $username){
+        return redirect('/perfil')->with('message','ERROR');
+      }else{
       if(isset($form['foto'])){
-        Storage::delete('avatar/'.$usuario->foto);
-
-        //unlink('/public/storage/img/avatar/'.$usuario->foto);
-        //unlink(asset('/storage/img/avatar/'.$usuario->foto));
-        //asset('/storage/img/avatar/'.auth()->user()->foto)')*/
-        dd($form->file('foto'));
-
-        $path = $form->file('foto')->store('public/img/avatar');
-        $archivo = basename($path);
-        $usuario->foto = $archivo;
-      }
+      Storage::delete('avatar/'.$usuario->foto);
+          //unlink('/public/storage/img/avatar/'.$usuario->foto);
+          //unlink(asset('/storage/img/avatar/'.$usuario->foto));
+          //asset('/storage/img/avatar/'.auth()->user()->foto)')*/
+          $path = $form->file('foto')->store('public/img/avatar');
+          $archivo = basename($path);
+          $usuario->foto = $archivo;
+        }
       $usuario->email = $form['email'];
       $usuario->username = $form['username'];
       $usuario->password = password_hash($form['password'],PASSWORD_DEFAULT);
@@ -29,5 +31,6 @@ class UserController extends Controller
       $usuario->estado = $form['estado'];
       $usuario->update();
       return redirect('/perfil');
+      }
     }
 }
