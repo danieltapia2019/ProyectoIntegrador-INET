@@ -21,7 +21,8 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->string('foto',50)->nullable($value = true);
             $table->tinyInteger('acceso');
-            $table->tinyInteger('estado');
+            $table->text('opinion')->nullable($value = true);
+            $table->tinyInteger('estado')->nullable($value = true);
             $table->timestamps();
         });
     }

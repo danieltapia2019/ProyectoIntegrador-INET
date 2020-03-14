@@ -4,10 +4,10 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAddForeignTable extends Migration
+class AddForeign extends Migration
 {
     /**
-     * Agrega las foreign key
+     * Run the migrations.
      *
      * @return void
      */
@@ -24,6 +24,7 @@ class CreateAddForeignTable extends Migration
 
             $table->unsignedBigInteger('uso_id');
             $table->foreign('uso_id')->references('id')->on('usos');
+
         });
         Schema::table('usuario_curso',function(Blueprint $table){
             $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
@@ -44,7 +45,6 @@ class CreateAddForeignTable extends Migration
         //     $table->dropForeign('tipo_id');
         //     $table->dropForeign('uso_id');
         // });
-
         // Schema::table('usuario_curso',function(Blueprint $table){
         //     $table->dropForeign('curso_id');
         //     $table->dropForeign('user_id');

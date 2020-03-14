@@ -10,6 +10,12 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- css propios -->
+    @if( Cookie::get('theme')==='dark' )
+    <link rel="stylesheet" href="{{ asset('css/theme/dark.css') }}">
+    @else
+    <link rel="stylesheet" href="{{ asset('css/theme/light.css') }}">
+    @endif
+
     @stack('styles')
     <link rel="shortcut icon" href="{{ asset('img/logo.png') }}" />
     <title>@yield('title')</title>

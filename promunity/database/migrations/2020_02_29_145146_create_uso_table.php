@@ -16,7 +16,7 @@ class CreateUsoTable extends Migration
         Schema::create('usos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('usoNombre',50);
-            $table->tinyInteger('estado');
+            $table->tinyInteger('estado')->nullable($value = true);
             $table->timestamps();
         });
     }

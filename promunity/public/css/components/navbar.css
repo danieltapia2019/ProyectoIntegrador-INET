@@ -1,5 +1,5 @@
 nav.navbar.navbar-expand-lg {
-    background-color: #d74850;
+    background-color: var(--mainColor);
 }
 
 .navbar.navbar-expand-lg a.nav-link {

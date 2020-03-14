@@ -16,8 +16,8 @@ class CarritoController extends Controller
       $cursos=$request->session()->get('carrito');
     }
     $vac=compact('cursos');
-    return view('pages.carrito',$vac);
 
+    return view('pages.carrito',$vac);
   }
 
   /**
@@ -42,6 +42,7 @@ class CarritoController extends Controller
   public function limpiarCarrito(Request $request){
     $request->session()->flush();
     $cursos=[];
+    
     return view('pages.carrito',compact('cursos'));
   }
 }

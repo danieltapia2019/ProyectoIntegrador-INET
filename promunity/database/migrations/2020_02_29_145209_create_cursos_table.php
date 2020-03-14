@@ -21,7 +21,8 @@ class CreateCursosTable extends Migration
             $table->string('foto_curso',50);
             $table->string('lenguaje',50);
             $table->double('precio',8,2);
-            $table->tinyInteger('estado');
+            $table->string('duracion',50)->nullable($value = true);
+            $table->tinyInteger('estado')->nullable($value = true);
             $table->timestamps();
         });
     }

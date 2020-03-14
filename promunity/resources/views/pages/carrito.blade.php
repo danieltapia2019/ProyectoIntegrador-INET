@@ -26,9 +26,6 @@
                 <footer>
                     @guest
                         <a href="#">Ver Mas</a>
-
-
-
                     @else
                     <a href="">favoritos</a>
                     @endguest

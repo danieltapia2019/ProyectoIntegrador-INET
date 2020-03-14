@@ -32,7 +32,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ url('/home/faq') }}">F.A.Q</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#contacto">Contacto</a>
+                        <a class="dropdown-item" href="{{ url('/home#contacto')}}">Contacto</a>
                     </div>
                 </li>
                 <li>
@@ -46,7 +46,7 @@
                             title="Inicio de Sesión"></i>
                     </a>--}}
                         <a class="nav-link" href="/login">Login</a>
-                        <a class="nav-link" href="/register">Register</a>
+                        {{-- <a class="nav-link" href="/register">Register</a> --}}
                 </li>
                 @else
                 <li class="nav-item dropdown">

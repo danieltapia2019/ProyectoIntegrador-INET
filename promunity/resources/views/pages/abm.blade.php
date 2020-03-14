@@ -44,7 +44,7 @@
         <a>Administrador:</a>
         <a href="/perfil">{{auth()->user()->username}}</a>
         <a href="/home"> <img src="/img/logo.png" alt=""  id="logoHOME"> </a>
-        <a href="/configuracion" onclick="abrirConfig()"><i class="fas fa-cogs"></i>Settings</a>
+        <a href="/setting"><i class="fas fa-cogs"></i>Settings</a>
     </div>
 
     <div class="abm-tablist">
@@ -250,7 +250,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($cursos as $key => $curso)
+                        {{-- @forelse ($cursos as $key => $curso)
                         <tr>
                             @forelse ($curso->alumno as $key => $alumno)
                               <tr>
@@ -264,7 +264,7 @@
                         </tr>
                         @empty
                         <h3 class="mt-5 mb-5">No hay Cursos :(</h3>
-                        @endforelse
+                        @endforelse --}}
                     </tbody>
                 </table>
             </div>

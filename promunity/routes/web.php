@@ -10,12 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',function(){
-  return view('home');
-});
-Route::get('/home',function(){
-    return view('home');
-});
+
+/*    Home    */
+Route::get('/','HomeController@listFav');
+Route::get('/home','HomeController@listFav');
+/*    Pages   */
 Route::get('/home/faq',function(){
     return view('pages.faq');
 });
@@ -38,7 +37,6 @@ Route::post('/borrar/tipo','adminController@borrarTipo')->middleware('auth','rol
 Route::post('/borrar/uso','adminController@borrarUso')->middleware('auth','rol:auth');
 Route::post('/borrar/curso','adminController@borrarCurso')->middleware('auth','rol:auth');
 
-
 Route::get('/logout','\App\http\Controller\Auth\LoginController@logout');
 
 /*    Curso   */
@@ -52,10 +50,16 @@ Route::get('/perfil','profesorController@listadoTipoUso')->middleware('auth');
 /*PERFIL Actualizar Datos*/
 Route::post('/actualizarDatos','UserController@actualizarDatos');
 
-/*    CARRITO   */
+/*    Carrito   */
 Route::get('/carrito','CarritoController@mostrarCarrito');
 Route::get('/carrito/{id}','CarritoController@agregarAlCarrito');
 Route::get('/carritolimpiar','CarritoController@limpiarCarrito');
 
 /*  Login,Register,PasswordReset  */
 Auth::routes();
+
+/*Settings*/
+Route::get('/setting',function(){
+  return view('pages.setting');
+});
+Route::post('/setting','UserController@theme');

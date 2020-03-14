@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Response;
+use Cookie;
+
 use App\User;
+
 class UserController extends Controller
 {
     //
@@ -32,5 +36,17 @@ class UserController extends Controller
       $usuario->update();
       return redirect('/perfil');
       }
+    }
+
+    /**
+     * Crea una cookie en la cual se almacena el tema elegido por el @Usuario
+     */
+    public function theme(Request $form){
+      // dd($form);
+      // return redirect('/setting')->withCookie(cookie('theme', $form['userPreference'], 60));
+      Cookie::queue('theme', $form['userPreference'], 60*24*30);
+      // if( Cookie::get('theme')==='dark'){
+        return redirect('/setting');
+      // }
     }
 }

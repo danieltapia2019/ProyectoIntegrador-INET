@@ -29,9 +29,10 @@ $usuario = User::find(auth()->user()->id);
         <div id="sideNavigation" class="sidenav">
             <ul style="color: white;">
                 @if (auth()->user()->foto == null)
-                    <span id="fotoPerfilNav"> <img src="{{ asset('/img/perfil.jpg') }}" alt=""> </span>
+                <span id="fotoPerfilNav"> <img src="{{ asset('/img/perfil.jpg') }}" alt=""> </span>
                 @else
-                    <span id="fotoPerfilNav"><img src="{{ asset('/storage/img/avatar/'.auth()->user()->foto) }}" alt="{{auth()->user()->username}}"></span>
+                <span id="fotoPerfilNav"><img src="{{ asset('/storage/img/avatar/'.auth()->user()->foto) }}"
+                        alt="{{auth()->user()->username}}"></span>
                 @endif
                 <p>STATUS:
                     @if (auth()->user()->acceso == 2)
@@ -54,7 +55,7 @@ $usuario = User::find(auth()->user()->id);
                     @endif
                 </li>
                 <li>
-                    <a href="/settings" id="settinsIcon">
+                    <a href="/setting" onclick="abrirConfig()">
                         <i class="fas fa-cogs"></i>Settings
                     </a>
                 </li>
@@ -74,32 +75,31 @@ $usuario = User::find(auth()->user()->id);
 <div class="tab container" id="UserProfileContent">
     <nav class="row">
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-perfil-tab" data-toggle="tab" href="#tab-perfil" role="tab"
-            aria-controls="tab-perfil" aria-selected="true" onclick="abrirTab()">Perfil</a>
+            <a class="nav-item nav-link active" id="nav-form-tab" data-toggle="tab" href="#tab-perfil" role="tab"
+                aria-controls="tab-perfil" aria-selected="true" onclcick="abrirTab()">Perfil</a>
             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#tab-cursos" role="tab"
-            aria-controls="tab-cursos" aria-selected="false" onclick="abrirTab()">Mis Cursos</a>
+                aria-controls="tab-cursos" aria-selected="false" onclick="abrirTab()">Mis Cursos</a>
             <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#tab-favoritos" role="tab"
-            aria-controls="tab-favoritos" aria-selected="false" onclick="abrirTab()">Favoritos</a>
-            <a class="nav-item nav-link" id="nav-crear-curso" data-toggle="tab" href="#tab-vacio" role="tab"
-            aria-controls="tab-vacio" aria-selected="false"></a>
+                aria-controls="tab-favoritos" aria-selected="false" onclick="abrirTab()">Favoritos</a>
         </div>
     </nav>
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active container" id="tab-perfil" role="tabpanel" aria-labelledby="nav-form-tab">
             <!--Configuracion-->
             <div class="configuracion" id="configuracion">
-                <form class="actualizacionDatos mb-5" action="/actualizarDatos" method="post" enctype="multipart/form-data">
-                  @csrf
-                  <input type="hidden" name="id" value="{{auth()->user()->id}}">
-                  <input type="hidden" name="acceso" value="{{auth()->user()->acceso}}">
-                  <input type="hidden" name="estado" value="{{auth()->user()->estado}}">
+                <form class="actualizacionDatos mb-5" action="/actualizarDatos" method="post">
+                    @csrf
+                    <input type="hidden" name="id" value="{{auth()->user()->id}}">
+                    <input type="hidden" name="acceso" value="{{auth()->user()->acceso}}">
+                    <input type="hidden" name="estado" value="{{auth()->user()->estado}}">
                     <hr>
                     <label for="username">Nombre de usuario nuevo</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-user"></i></span>
                         </div>
-                        <input type="text" name="username" class="form-control" required value="{{auth()->user()->username}}">
+                        <input type="text" name="username" class="form-control" required
+                            value="{{auth()->user()->username}}">
                     </div>
                     <label for="email">Email nuevo</label>
                     <div class="input-group mb-3">
@@ -118,7 +118,7 @@ $usuario = User::find(auth()->user()->id);
                             placeholder="Ingrese contraseña" id="password" required>
                         <div class="input-group-append">
                             <button class="btn btn-outline-primary" type="button" name="button" aria-label="password-on"
-                            onclick="mostrarContrasena()">
+                                onclick="mostrarContrasena()">
                                 <i name="eye" id="ojo" class="fas fa-eye"></i>
                             </button>
                         </div>
@@ -133,15 +133,16 @@ $usuario = User::find(auth()->user()->id);
                     </div>
                     <div class="input-group mb-3">
                         @if (auth()->user()->foto == null)
-                            <span id="fotoPerfilNav"> <img src="{{ asset('/img/perfil.jpg') }}" alt=""> </span>
+                        <span id="fotoPerfilNav"> <img src="{{ asset('/img/perfil.jpg') }}" alt=""> </span>
                         @else
-                            <span id="fotoPerfilNav"><img src="{{ asset('/storage/img/avatar/'.auth()->user()->foto) }}" alt="{{auth()->user()->username}}"></span>
+                        <span id="fotoPerfilNav"><img src="{{ asset('/storage/img/avatar/'.auth()->user()->foto) }}"
+                                alt="{{auth()->user()->username}}"></span>
                         @endif
-                      <div class="input-group mb-3">
-                      <div class="custom-file">
-                        <input type="file" name="foto" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" data-max-size="2048" accept="image/*">
-                        <label class="custom-file-label" for="foto">Choose file</label>
-                      </div>
+                        <div class="input-group-prepend">
+
+                            <label for="foto">Cambiar foto</label>
+                            <input type="file" name="foto" data-max-size="2048" accept="image/*">
+                        </div>
                     </div>
                     </div>
                     <button type="submit" name="button" class="btn btn-success">
@@ -195,7 +196,7 @@ $usuario = User::find(auth()->user()->id);
             </div>
             <div class="fotoCurso">
                 <label for="foto_curso">Foto:</label>
-                <input type="file" class="form-control" name="foto_curso" >
+                <input type="file" class="form-control" name="foto_curso">
             </div>
             <br>
             <label for="precio">Precio:</label>
@@ -209,8 +210,8 @@ $usuario = User::find(auth()->user()->id);
                     required maxlength="10" minlength="2">
             </div>
 
-            <label for="tipo" >Tipo: </label>
-             <select name="tipo" class="custom-select" id="inputGroupSelect01" required>
+            <label for="tipo">Tipo: </label>
+            <select name="tipo" class="custom-select" id="inputGroupSelect01" required>
                 <option selected>Elegir tipo</option>
 
                 @forelse ($tipos as $key => $tipo)
@@ -219,8 +220,8 @@ $usuario = User::find(auth()->user()->id);
                 <option value="">No hay Tipos</option>
                 @endforelse
             </select>
-            <label for="uso" >Uso: </label>
-             <select name="uso" class="custom-select" id="inputGroupSelect01" required>
+            <label for="uso">Uso: </label>
+            <select name="uso" class="custom-select" id="inputGroupSelect01" required>
                 <option selected>Elegir uso</option>
                 @forelse ($usos as $key => $uso)
                 <option value={{$uso->id}}>{{$uso->usoNombre}}</option>
@@ -233,4 +234,22 @@ $usuario = User::find(auth()->user()->id);
         </form>
     </div>
 </section>
+
+{{-- <script src="https://kit.fontawesome.com/918d19c8b4.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script> --}}
+{{-- <script>
+window.addEventListener("load", function() {
+
+  // Tu código va acá!
+});
+
+</script> --}}
+
+<script type="text/javascript" src="/js/main.js"></script>
 @endsection

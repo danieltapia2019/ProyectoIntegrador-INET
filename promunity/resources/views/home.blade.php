@@ -13,22 +13,25 @@
             <h3>¿Qué estás esperando?</h3>
             <form action="{{ url('curso') }}" method="GET">
                 <div class="input-group mb-3 mt-4">
-                    <input type="search" id="busquedaSection" class="form-control" placeholder="¿Qué quieres aprender?" aria-label="¿Qué quieres aprender?" aria-describedby="botonbusq" name="q" style="text-align: center">
+                    <input type="search" id="busquedaSection" class="form-control" placeholder="¿Qué quieres aprender?"
+                        aria-label="¿Qué quieres aprender?" aria-describedby="botonbusq" name="q"
+                        style="text-align: center">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-light" type="submit" id="botonbusq"><i class="fas fa-search"></i></button>
+                        <button class="btn btn-outline-light" type="submit" id="botonbusq"><i
+                                class="fas fa-search"></i></button>
                     </div>
                 </div>
             </form>
-        <div id="iconos">
-            <i class="fab fa-cc-mastercard"></i>
-            <i class="fab fa-cc-visa"></i>
-            <i class="fab fa-cc-paypal"></i>
+            <div id="iconos">
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-paypal"></i>
+            </div>
         </div>
-    </div>
     </div>
     <div id="mas-vistos">
         <h2 class="mb-3">Cursos mas visitados</h2>
-        <article class="curso">
+        {{-- <article class="curso">
             <img src="img/cursos.jpg" alt="">
             <h4>"Titulo"</h4>
             <p>Autor</p>
@@ -55,7 +58,18 @@
             <p>Autor</p>
             <p>Precio</p>
             <p>Duracion</p>
+        </article> --}}
+        @forelse ($cursosFav as $curso)
+        <article class="curso">
+        <img src="{{ asset('/storage/img/cursos/'.$curso->foto_curso) }}" alt="">
+            <h4>{{$curso->titulo}}</h4>
+            <p>{{$curso->creador->username}}</p>
+            {{-- <p>{{$curso->precio}}</p> --}}
+            <p>{{$curso->desc}}</p>
         </article>
+        @empty
+            <h4>No hay Favoritos</h4>
+        @endforelse
     </div>
 </section>
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
