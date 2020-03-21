@@ -1,5 +1,5 @@
 # ProyectoIntegrador-INET
-
+Proyecto Integrador Final del Curso de DIGIAL HOUSE 
 _Página web E-Commerce_
 
 ### **Contribuidores**
