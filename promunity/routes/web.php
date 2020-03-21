@@ -32,11 +32,10 @@ Route::get('/editar/curso/{id}','adminController@editarCurso')->middleware('auth
 Route::post('/actualizar/usuario','adminController@actualizarUsuario')->middleware('auth','rol:auth');
 Route::post('/actualizar/curso','adminController@actualizarCurso')->middleware('auth','rol:auth');
 /*    ABM:Admin   BORRAR  */
-Route::post('/borrar/usuario','adminController@borrarUsuario')->middleware('auth','rol:auth');
-Route::post('/borrar/tipo','adminController@borrarTipo')->middleware('auth','rol:auth');
-Route::post('/borrar/uso','adminController@borrarUso')->middleware('auth','rol:auth');
-Route::post('/borrar/curso','adminController@borrarCurso')->middleware('auth','rol:auth');
-
+Route::delete('/borrar/usuario/{id}','adminController@borrarUsuario')->middleware('auth','rol:auth');
+Route::delete('/borrar/tipo/{id}','adminController@borrarTipo')->middleware('auth','rol:auth');
+Route::delete('/borrar/uso/{id}','adminController@borrarUso')->middleware('auth','rol:auth');
+Route::delete('/borrar/curso/{id}','adminController@borrarCurso')->middleware('auth','rol:auth');
 Route::get('/logout','\App\http\Controller\Auth\LoginController@logout');
 
 /*    Curso   */

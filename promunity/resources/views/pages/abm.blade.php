@@ -108,9 +108,9 @@
                             <td>{{$alumno->email}}</td>
                             <td>
                                 <div class="row">
-                                    <form class="" action="/borrar/usuario" method="POST">
+                                    <form class="" action="/borrar/usuario/{{$alumno->id}}" method="POST" onsubmit="return confirmar()">
                                         @csrf
-                                        <input type="hidden" name="id" value={{$alumno->id}}>
+                                        {{ method_field('DELETE') }}
                                         <button type="submit" name="button" class="btn btn-danger">Eliminar</button>
                                     </form>
                                     <hr>
@@ -171,9 +171,9 @@
                             <td>{{$profesor->email}}</td>
                             <td>
                                 <div class="row">
-                                    <form class="" action="/borrar/usuario" method="POST">
+                                    <form class="" action="/borrar/usuario/{{$profesor->id}}" method="POST" onsubmit="return confirmar()">
                                         @csrf
-                                        <input type="hidden" name="id" value={{$profesor->id}}>
+                                        {{ method_field('DELETE') }}
                                         <button type="submit" name="button" class="btn btn-danger">Eliminar</button>
                                     </form>
                                     <hr>
@@ -219,9 +219,9 @@
                             <td>{{$curso->creador->username}}</td>
                             <td>
                                 <div class="row">
-                                    <form class="" action="/borrar/curso" method="POST">
+                                    <form class="" action="/borrar/curso/{{$curso->id}}" method="POST" onsubmit="return confirmar()">
                                         @csrf
-                                        <input type="hidden" name="id" value={{$curso->id}}>
+                                        {{ method_field('DELETE') }}
                                         <button type="submit" name="button" class="btn btn-danger">Eliminar</button>
                                     </form>
                                     <hr>
@@ -250,7 +250,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @forelse ($cursos as $key => $curso)
+                        @forelse ($cursos as $key => $curso)
                         <tr>
                             @forelse ($curso->alumno as $key => $alumno)
                               <tr>
@@ -264,7 +264,7 @@
                         </tr>
                         @empty
                         <h3 class="mt-5 mb-5">No hay Cursos :(</h3>
-                        @endforelse --}}
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -283,9 +283,9 @@
                         <td>{{$tipo->tipoNombre}}</td>
                         <td>
                             <div class="row">
-                                <form class="" action="/borrar/uso" method="POST">
+                                <form class="" action="/borrar/tipo/{{$tipo->id}}" method="POST" onsubmit="return confirmar()">
                                     @csrf
-                                    <input type="hidden" name="id" value={{$tipo->id}}>
+                                    {{ method_field('DELETE') }}
                                     <button type="submit" name="button" class="btn btn-danger">Eliminar</button>
                                 </form>
                                 <hr>
@@ -322,9 +322,9 @@
                         <td>{{$uso->usoNombre}}</td>
                         <td>
                             <div class="row">
-                                <form class="" action="/borrar/uso" method="POST">
+                                <form class="" action="/borrar/uso/{{$uso->id}}" method="POST" onsubmit="return confirmar()">
                                     @csrf
-                                    <input type="hidden" name="id" value={{$uso->id}}>
+                                    {{ method_field('DELETE') }}
                                     <button type="submit" name="button" class="btn btn-danger">Eliminar</button>
                                 </form>
                                 <hr>

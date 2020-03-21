@@ -22,8 +22,8 @@ class adminController extends Controller
         $vac = compact('alumnos','profesores','admins','cursos','tipos','usos');
         return view('pages.abm',$vac);
     }
-    public function borrarCurso(Request $form){
-        $curso = CursoModel::find($form['id']);
+    public function borrarCurso($id){
+        $curso = CursoModel::find($id);
         $curso->estado = 0;
         $curso->update();
         return redirect ('/admin/abm')->with('message','ERROR');
@@ -69,8 +69,8 @@ class adminController extends Controller
         return redirect ("/admin/abm")->with('message','SUCCESS');
         }
     }
-    public function borrarUsuario(Request $form){
-        $usuario = User::find($form['id']);
+    public function borrarUsuario($id){
+        $usuario = User::find($id);
         $usuario->estado = 0;
         $usuario->update();
         return redirect ("/admin/abm")->with('message','ELIMINAR');
@@ -98,8 +98,8 @@ class adminController extends Controller
        $uso->save();
        return redirect ("/admin/abm")->with('message','SUCCESS');
     }
-    public function borrarUso(Request $form){
-       $uso = UsoModel::find($form['id']);
+    public function borrarUso($id){
+       $uso = UsoModel::find($id);
        $uso->estado = 0;
        $uso->update();
        return redirect ("/admin/abm");
@@ -112,8 +112,8 @@ class adminController extends Controller
        $tipo->save();
        return redirect ("/admin/abm")->with('message','SUCCESS');
     }
-    function borrarTipo(Request $form){
-       $tipo = TipoModel::find($form['id']);
+    function borrarTipo($id){
+       $tipo = TipoModel::find($id);
        $tipo->estado = 0;
        $tipo->update();
        return redirect ("/admin/abm")->with('message','ELIMINAR');

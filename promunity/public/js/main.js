@@ -36,3 +36,17 @@ function abrirDarUnCurso() {
         document.getElementById("sideNavigation").style.width = "0";
     }
 //Cierre Perfil
+
+//ABM
+
+//ABM
+function confirmar(){
+  if(confirm('¿Esta seguro que desea eliminar?')){
+    return true;
+  }else {
+    return false;
+  }
+
+}
+
+//CIERRE ABM
