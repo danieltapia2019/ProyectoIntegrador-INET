@@ -39,14 +39,6 @@ function abrirDarUnCurso() {
 
 //ABM
 
-//ABM
-function confirmar(){
-  if(confirm('¿Esta seguro que desea eliminar?')){
-    return true;
-  }else {
-    return false;
-  }
 
-}
 
 //CIERRE ABM

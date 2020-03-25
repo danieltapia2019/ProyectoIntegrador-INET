@@ -7,32 +7,7 @@
 @section('title','ABM')
 
 @section('content')
-
 <div class="conteiner">
-  @if(session('message'))
-    @if (session('message') == 'ERROR')
-      <script type="text/javascript">
-      window.addEventListener("load", function() {
-      alert('NO SE PUDO CREAR, YA EXISTE UN REGISTRO CON EL NOMBRE DE USUARIO Y/O EMAIL')
-      })
-
-      </script>
-    @elseif(session('message') == 'ELIMNAR')
-        <script type="text/javascript">
-        window.addEventListener("load", function() {
-        alert('¡¡¡¡EL REGISTRO NO SE ELIMINA POR COMPLETO''''')
-        })
-
-        </script>
-    @else
-      <script type="text/javascript">
-
-      window.addEventListener("load", function() {
-      alert('CREADO CON EXITO')
-      })
-      </script>
-    @endif
-@endif
     <div class="sideNavigation" id="sideNAV">
         <a href="#">
         @if (isset(auth()->user()->foto))
@@ -90,8 +65,8 @@
           <a class="nav-link" id="usos-tab" data-toggle="tab" href="#usos" role="tab" aria-controls="contact" aria-selected="false">Usos</a>
         </nav>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="alumnos" role="tabpanel" aria-labelledby="alumnos-tab">
-                <table class="table table-light mt-3 mb-5">
+            <div class="tab-pane fade show active usuarios" id="alumnos" role="tabpanel" aria-labelledby="alumnos-tab">
+                <table class="table table-light mt-3 mb-5 usuario">
                     <thead>
                         <tr>
                             <th id="IDregistro">ID</th>
@@ -103,20 +78,14 @@
                     <tbody>
                         @forelse ($alumnos as $key => $alumno)
                         <tr>
-                            <th id="IDregistro">{{$alumno->id}}</th>
+                            <td id="IDregistro">{{$alumno->id}}</td>
                             <td>{{$alumno->username}}</td>
                             <td>{{$alumno->email}}</td>
                             <td>
                                 <div class="row">
-                                    <form class="" action="/borrar/usuario/{{$alumno->id}}" method="POST" onsubmit="return confirmar()">
-                                        @csrf
-                                        {{ method_field('DELETE') }}
-                                        <button type="submit" name="button" class="btn btn-danger">Eliminar</button>
-                                    </form>
+                                   <button type="button" onclick="borrarRegistro({{$alumno->id}},this,1)" name="button" class="btn-delete btn btn-danger">Eliminar</button>
                                     <hr>
-                                    <button class="btn btn-primary" name="button">
-                                        <a href="/editar/usuario/{{$alumno->id}}" style="color:white"> Editar </a>
-                                    </button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalUsuario" onclick="editarUsuario({{$alumno}},this)">Editar</button>
                                 </div>
                             </td>
                         </tr>
@@ -130,7 +99,7 @@
                     data-target="#modalUsuario">Agregar</button>
 
             </div>
-            <div class="tab-pane fade" id="administradores" role="tabpanel" aria-labelledby="profesores-tab">
+            <div class="tab-pane fade usuarios" id="administradores" role="tabpanel" aria-labelledby="profesores-tab">
                 <table class="table table-light mt-3 mb-5">
                     <thead>
                         <tr>
@@ -154,7 +123,7 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="profesores" role="tabpanel" aria-labelledby="administradores-tab">
-                <table class="table table-light mt-3 mb-5">
+                <table class="table table-light mt-3 mb-5 usuarios">
                     <thead>
                         <tr>
                             <th id="IDregistro">ID</th>
@@ -166,20 +135,14 @@
                     <tbody>
                         @forelse ($profesores as $key => $profesor)
                         <tr>
-                            <th id="IDregistro">{{$profesor->id}}</th>
+                            <td id="IDregistro">{{$profesor->id}}</td>
                             <td>{{$profesor->username}}</td>
                             <td>{{$profesor->email}}</td>
                             <td>
                                 <div class="row">
-                                    <form class="" action="/borrar/usuario/{{$profesor->id}}" method="POST" onsubmit="return confirmar()">
-                                        @csrf
-                                        {{ method_field('DELETE') }}
-                                        <button type="submit" name="button" class="btn btn-danger">Eliminar</button>
-                                    </form>
+                                   <button type="button" onclick="borrarRegistro({{$profesor->id}},this,1)" name="button" class="btn-delete btn btn-danger">Eliminar</button>
                                     <hr>
-                                    <button class="btn btn-primary" name="button">
-                                        <a href="/editar/usuario/{{$profesor->id}}" style="color:white"> Editar </a>
-                                    </button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalUsuario" onclick="editarUsuario({{$profesor}},this)">Editar</button>
                                 </div>
                             </td>
                         </tr>
@@ -219,11 +182,7 @@
                             <td>{{$curso->creador->username}}</td>
                             <td>
                                 <div class="row">
-                                    <form class="" action="/borrar/curso/{{$curso->id}}" method="POST" onsubmit="return confirmar()">
-                                        @csrf
-                                        {{ method_field('DELETE') }}
-                                        <button type="submit" name="button" class="btn btn-danger">Eliminar</button>
-                                    </form>
+                                    <button type="button" onclick="borrarRegistro({{$curso->id}},this,2)" name="button" class="btn-delete btn btn-danger">Eliminar</button>
                                     <hr>
                                     <button class="btn btn-primary" name="button">
                                         <a href="/editar/curso/{{$curso->id}}" style="color:white"> Editar </a>
@@ -269,7 +228,7 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="tipos" role="tabpanel" aria-labelledby="tipos-tab">
-                <table class="table table-light mt-3 mb-5">
+                <table class="table table-light mt-3 mb-5 tipos">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -279,21 +238,17 @@
                     </thead>
                     <tbody>
                         @forelse ($tipos as $key => $tipo)
+                        <tr>
                         <td>{{$tipo->id}}</td>
                         <td>{{$tipo->tipoNombre}}</td>
                         <td>
                             <div class="row">
-                                <form class="" action="/borrar/tipo/{{$tipo->id}}" method="POST" onsubmit="return confirmar()">
-                                    @csrf
-                                    {{ method_field('DELETE') }}
-                                    <button type="submit" name="button" class="btn btn-danger">Eliminar</button>
-                                </form>
+                                <button type="button" onclick="borrarRegistro({{$tipo->id}},this,3)" name="button" class="btn-delete btn btn-danger">Eliminar</button>
                                 <hr>
-                                <button class="btn btn-primary" name="button">
-                                    <a href="/editar/tipo/{{$tipo->id}}" style="color:white"> Editar </a>
-                                </button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTipo" onclick="editarTipo({{$tipo}},this)">Editar</button>
                             </div>
                         </td>
+                        </tr>
                         @empty
                         <h3 class="mt-5 mb-5">No hay Tipo :(</h3>
                         @endforelse
@@ -308,7 +263,7 @@
             </div>
 
             <div class="tab-pane fade" id="usos" role="tabpanel" aria-labelledby="usos-tab">
-                <table class="table table-light mt-3 mb-5">
+                <table class="table table-light mt-3 mb-5 usos">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -318,21 +273,17 @@
                     </thead>
                     <tbody>
                         @forelse ($usos as $key => $uso)
+                        <tr>
                         <td>{{$uso->id}}</td>
                         <td>{{$uso->usoNombre}}</td>
                         <td>
                             <div class="row">
-                                <form class="" action="/borrar/uso/{{$uso->id}}" method="POST" onsubmit="return confirmar()">
-                                    @csrf
-                                    {{ method_field('DELETE') }}
-                                    <button type="submit" name="button" class="btn btn-danger">Eliminar</button>
-                                </form>
+                                <button type="button" onclick="borrarRegistro({{$uso->id}},this,4)" name="button" class="btn-delete btn btn-danger">Eliminar</button>
                                 <hr>
-                                <button class="btn btn-primary" name="button">
-                                    <a href="/editar/uso/{{$uso->id}}" style="color:white"> Editar </a>
-                                </button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalUso" onclick="editarUso({{$uso}},this)">Editar</button>
                             </div>
                         </td>
+                        </tr>
                         @empty
                         <h3 class="mt-5 mb-5">No hay Uso :(</h3>
                         @endforelse
@@ -361,12 +312,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="" action="/admin/crear/tipo" method="post">
+                <form class="tipo-form" action="" method="post">
                     {{csrf_field()}}
                     <div class="input-grup mb-3">
                         <input type="text" name="tnombre" class="form-control" placeholder="Tipo" required>
                     </div>
-                    <button type="submit" class="btn btn-reg btn-lg btn-block my-3 ">Agregar</button>
+                    <button type="submit" class="btn btn-reg btn-lg btn-block my-3 btn-submit-tipo">Agregar</button>
                 </form>
             </div>
         </div>
@@ -384,12 +335,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="" action="/admin/crear/uso" method="post">
+                <form class="uso-form" action="" method="post">
                     {{csrf_field()}}
                     <div class="input-grup mb-3">
                         <input type="text" name="snombre" class="form-control" placeholder="Uso" required>
                     </div>
-                    <button type="submit" class="btn btn-reg btn-lg btn-block my-3 ">Agregar</button>
+                    <button type="submit" class="btn btn-reg btn-lg btn-block my-3 btn-submit-uso">Agregar</button>
                 </form>
             </div>
         </div>
@@ -407,8 +358,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="" action="/crear/usuario" method="POST">
-                    {{csrf_field()}}
+                <form class="user-form" action="" method="POST">
+                    @csrf
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-user"></i></span>
@@ -451,11 +402,10 @@
                             <option value="0">Administrador</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-reg btn-lg btn-block my-3 ">Crear</button>
+                    <button type="submit" class="btn btn-reg btn-lg btn-block my-3 btn-submit-user">Crear Usuario</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<!-- -->
 @endsection

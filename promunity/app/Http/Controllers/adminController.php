@@ -11,7 +11,7 @@ use App\TipoModel;
 use App\UsoModel;
 
 class adminController extends Controller
-{
+{   /*LISTAR CURSOS,USUARIOS,TIPOS,USOS*/
     public function listAll(){
         $alumnos = User::where('acceso','=','2')->where('estado','=','1')->paginate(10);
         $profesores = User::where('acceso','=','1')->where('estado','=','1')->paginate(10);
@@ -22,11 +22,18 @@ class adminController extends Controller
         $vac = compact('alumnos','profesores','admins','cursos','tipos','usos');
         return view('pages.abm',$vac);
     }
+
+    /*CURSO*/
+
     public function borrarCurso($id){
         $curso = CursoModel::find($id);
         $curso->estado = 0;
         $curso->update();
-        return redirect ('/admin/abm')->with('message','ERROR');
+        $response = array(
+            'status' => 'success',
+            'msg' => 'Element delete successfully',
+        );
+        return response()->json($response);
     }
     public function editarCurso(Request $form){
         $curso = CursoModel::find($form['id']);
@@ -50,73 +57,140 @@ class adminController extends Controller
        $curso->update();
        return redirect ("/admin/abm")->with('message','SUCCESS');;;
     }
-
-    public function crearUsuario(Request $form){
-        $usuario = new User();
-        $email = User::where('email',$form['email'])->exists();
-        $username = User::where('username',$form['username'])->exists();
-        if($email || $username){
-          return redirect('/admin/abm')->with('message','ERROR');
-        }else{
-        $usuario->username = $form['username'];
-        $usuario->email = $form['email'];
-        $usuario->password = password_hash($form['password'],PASSWORD_DEFAULT);
-        $usuario->foto = NULL;
-        $usuario->acceso = $form['acceso'];
-        $usuario->remember_token = NULL;
-        $usuario->estado = 1;
-        $usuario->save();
-        return redirect ("/admin/abm")->with('message','SUCCESS');
+    /*USUARIO*/
+    public function crearUsuario(Request $request){
+        if($request){
+          $nombre = $request['username'];
+          $email = $request['email'];
+          $password = $request['password'];
+          $acceso = $request['acceso'];
+          $emailRepetido = User::where('email',$email)->exists();
+          $usernameRepetido = User::where('username',$nombre)->exists();
+          if($emailRepetido || $usernameRepetido){
+          $response = array(
+                'status' => 'failure',
+                'msg' => 'Element already exists',
+          );
+          return response()->json($response);
+          }else{
+          $usuario = new User();
+          $usuario->username = $nombre;
+          $usuario->email = $email;
+          $usuario->password = password_hash($password,PASSWORD_DEFAULT);
+          $usuario->estado = 1;
+          $usuario->acceso = $acceso;
+          $usuario->foto = NULL;
+          $usuario->remember_token = NULL;
+          $usuario->opinion = NULL;
+          $usuario->save();
+          return response()->json($usuario);  // <<<<<<<<< see this line
         }
+      }else{
+          return 'No se pudo crear';
+      }
     }
     public function borrarUsuario($id){
         $usuario = User::find($id);
         $usuario->estado = 0;
         $usuario->update();
-        return redirect ("/admin/abm")->with('message','ELIMINAR');
+        $response = array(
+            'status' => 'success',
+            'msg' => 'Element delete successfully',
+        );
+        return response()->json($response);
     }
     public function editarUsuario(Request $form){
        $usuario = User::find($form['id']);
        return view ("pages.editarUsuario",compact("usuario"));
     }
-    public function actualizarUsuario(Request $form){
-       $usuario = User::find($form['id']);
-       $usuario->username = $form['username'];
-       $usuario->email = $form['email'];
-       $usuario->password = password_hash($form['password'],PASSWORD_DEFAULT);
-       $usuario->foto = NULL;
-       $usuario->acceso = $form['acceso'];
-       $usuario->remember_token = NULL;
-       $usuario->update();
-       return redirect ("/admin/abm")->with('message','SUCCESS');;;
-    }
+    public function actualizarUsuario($id,Request $request){
+       if($request){
+       $usuario = User::findOrFail($id);
+       $nombre = $request['username'];
+       $email = $request['email'];
+       $password = $request['password'];
+       $acceso = $request['acceso'];
+       $emailRepetido = User::where('email',$email)->where('id',"!=",$id)->exists();
+       $usernameRepetido = User::where('username',$nombre)->where('id',"!=",$id)->exists();
+       if($emailRepetido || $usernameRepetido){
+       $response = array(
+             'status' => 'failure',
+             'msg' => 'Element already exists',
+       );
+       return response()->json($response);
+      }else{
+      if($password != NULL){
+        $usuario->password = password_hash($password,PASSWORD_DEFAULT);
+      }
+      $usuario->username = $nombre;
+      $usuario->email = $email;
+      $usuario->acceso = $acceso;
+      $usuario->update();
+      return response()->json($usuario);
+      }
+      }else{
+      return 'No se pudo actualizar';
+  }
+}
 
-    public function crearUso(Request $form){
+    /*USO*/
+
+    public function crearUso(Request $request){
+       if($request){
        $uso = new UsoModel();
-       $uso->usoNombre = $form['nombre'];
+       $uso->usoNombre = $request['snombre'];
        $uso->estado = 1;
        $uso->save();
-       return redirect ("/admin/abm")->with('message','SUCCESS');
+       return response()->json($uso);
+       }else{
+         return 'NO';
+       }
+    }
+    public function actualizarUso($id,Request $request){
+       $uso = UsoModel::findOrFail($id);
+       $uso->usoNombre = $request['snombre'];
+       $uso->update();
+       return response()->json($uso);
     }
     public function borrarUso($id){
        $uso = UsoModel::find($id);
        $uso->estado = 0;
        $uso->update();
-       return redirect ("/admin/abm");
+       $response = array(
+           'status' => 'success',
+           'msg' => 'Element delete successfully',
+       );
+       return response()->json($response);
     }
 
-    public function crearTipo(Request $form){
-       $tipo = new TipoModel();
-       $tipo->tipoNombre = $form['tnombre'];
-       $tipo->estado = 1;
-       $tipo->save();
-       return redirect ("/admin/abm")->with('message','SUCCESS');
+    /*TIPO*/
+
+    public function crearTipo(Request $request){
+      if($request){
+        $tipo = new TipoModel();
+        $tipo->tipoNombre = $request['tnombre'];
+        $tipo->estado = 1;
+        $tipo->save();
+        return response()->json($tipo);
+      }else{
+        return 'NO se pudo crear';
+      }
     }
     function borrarTipo($id){
        $tipo = TipoModel::find($id);
        $tipo->estado = 0;
        $tipo->update();
-       return redirect ("/admin/abm")->with('message','ELIMINAR');
+       $response = array(
+           'status' => 'success',
+           'msg' => 'Element delete successfully',
+       );
+       return response()->json($response);
+    }
+    public function actualizarTipo($id,Request $request){
+      $tipo = TipoModel::findOrFail($id);
+      $tipo->tipoNombre = $request['tipoNombre'];
+      $tipo->update();
+      return response()->json($tipo);
     }
 
 
