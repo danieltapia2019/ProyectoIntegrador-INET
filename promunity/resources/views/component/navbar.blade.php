@@ -18,12 +18,12 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cursos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a href="#" class="dropdown-item">Programación</a>
-                        <a href="#" class="dropdown-item">Desarrollo Web</a>
-                        <a href="#" class="dropdown-item">Desarrollo de Videojuegos</a>
-                        <a href="#" class="dropdown-item">Desarrollo de App moviles</a>
+                        <a href="{{ url('/search?q=curso&tip=all&uso=1&valState=2') }}" class="dropdown-item">Programación</a>
+                        <a href="{{ url('/search?q=curso&tip=all&uso=2&valState=2') }}" class="dropdown-item">Desarrollo Web</a>
+                        <a href="{{ url('/search?q=curso&tip=all&uso=4&valState=2') }}" class="dropdown-item">Desarrollo de Videojuegos</a>
+                        <a href="{{ url('/search?q=curso&tip=all&uso=3&valState=2') }}" class="dropdown-item">Desarrollo de App moviles</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ url('/curso/todos') }}">Mas cursos...</a>
+                        <a class="dropdown-item" href="{{ url('/search') }}">Mas cursos...</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

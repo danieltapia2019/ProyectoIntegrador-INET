@@ -39,5 +39,9 @@ class TipoUsoSeeder extends Seeder
             'usoNombre' => "Movil",
             'estado'=>1
         ]);
+        DB::table('usos')->insert([
+            'usoNombre' => "Videjuegos",
+            'estado'=>1
+        ]);
     }
 }

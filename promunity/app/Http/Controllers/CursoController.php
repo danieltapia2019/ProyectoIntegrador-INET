@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
+
 use App\CursoModel;
+
 
 class CursoController extends Controller
 {
     /**
      * Lista todos los cursos de la BD,paginado=10
      */
-    public function list(){
-        $cursos = CursoModel::paginate(10);
-        return view('pages.cursos',compact('cursos'));
-    }
+    // public function list(){
+    //     $cursos = CursoModel::paginate(10);
+    //     return view('pages.cursos',compact('cursos'));
+    // }
     /**
      * Lista los cursos de un usuario
      */
@@ -21,13 +24,8 @@ class CursoController extends Controller
         $cursos = CursoModel::all();
         return view('pages.perfil',compact('cursos'));
     }
-    /**
-     * Busca los resultados por lenjuage y titulo
-     */
-    public function searchCurso(Request $form){
-        $cursos = CursoModel::where('titulo','LIKE','%'.$form['q'].'%')->orWhere('lenguaje','LIKE','%'.$form['q'].'%')->paginate(5);
-        return view('pages.cursos',compact('cursos'));
-    }
+    
+
     /**
     *Crea un curso desde el perfil
     */
@@ -51,6 +49,6 @@ class CursoController extends Controller
     /**
      * Agrupa los resultados por categorias
      */
-    public function byCategories(Request $form){
-    }
+    // public function byCategories(Request $form){
+    // }
 }

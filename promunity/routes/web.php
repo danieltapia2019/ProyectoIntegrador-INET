@@ -11,6 +11,7 @@
 |
 */
 
+
 /*    Home    */
 Route::get('/','HomeController@listFav');
 Route::get('/home','HomeController@listFav');
@@ -40,16 +41,27 @@ Route::delete('/borrar/usuario/{id}','adminController@borrarUsuario')->middlewar
 Route::delete('/borrar/tipo/{id}','adminController@borrarTipo')->middleware('auth','rol:auth');
 Route::delete('/borrar/uso/{id}','adminController@borrarUso')->middleware('auth','rol:auth');
 Route::delete('/borrar/curso/{id}','adminController@borrarCurso')->middleware('auth','rol:auth');
+
+
 Route::get('/logout','\App\http\Controller\Auth\LoginController@logout');
 
-/*    Curso   */
-Route::get('/curso/todos','cursoController@list');
-Route::get('/curso','cursoController@searchCurso');
+
+/*    Search    */
+Route::get('/search','searchController@indexSearch');
+Route::get('/search','searchController@searchCurso');
+
+
+/*    Curso    */
+// Route::get('/curso',function(){
+//   return view('pages.cursos');
+// });
 
 /*    PERFIL    */
 // Route::post('/perfil','cursoController@misCursos');
 Route::post('/perfil','cursoController@crearCurso');
 Route::get('/perfil','profesorController@listadoTipoUso')->middleware('auth');
+
+
 /*PERFIL Actualizar Datos*/
 Route::post('/actualizarDatos','UserController@actualizarDatos');
 

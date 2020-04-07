@@ -6,9 +6,9 @@
 @section('title','Carro')
 
 @section('content')
-  <section>
+<section>
     <div class="limpiar">
-      <a href="{{url('/carritolimpiar')}}">Limpiar Carro</a>
+        <a href="{{url('/carritolimpiar')}}">Limpiar Carro</a>
 
     </div>
     <div class="cursos">
@@ -25,7 +25,7 @@
                 <p>Lenguaje {{$curso->lenguaje}}</p>
                 <footer>
                     @guest
-                        <a href="#">Ver Mas</a>
+                    <a href="#">Ver Mas</a>
                     @else
                     <a href="">favoritos</a>
                     @endguest
@@ -39,18 +39,6 @@
         @endforelse
 
     </div>
-</div>
 
-
-
-
-
-
-
-
-
-
-
-
-  </section>
+</section>
 @endsection

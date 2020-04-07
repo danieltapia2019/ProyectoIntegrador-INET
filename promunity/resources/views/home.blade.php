@@ -11,7 +11,7 @@
         <div id=cajanegra>
             <h5>Tomate tu tiempo. Accede a cualquier curso y terminalo cuando quieras. No hay limite de tiempo.</h5>
             <h3>¿Qué estás esperando?</h3>
-            <form action="{{ url('curso') }}" method="GET">
+            <form action="{{ url('/search') }}" method="GET">
                 <div class="input-group mb-3 mt-4">
                     <input type="search" id="busquedaSection" class="form-control" placeholder="¿Qué quieres aprender?"
                         aria-label="¿Qué quieres aprender?" aria-describedby="botonbusq" name="q"

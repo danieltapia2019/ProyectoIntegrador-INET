@@ -1,6 +1,5 @@
-window.addEventListener("load", function() {
-
-  // Tu código va acá!
+window.addEventListener("load", function () {
+    // Tu código va acá!
 })
 //funcion mostrar contraseña
 function mostrarContrasena() {
@@ -10,35 +9,35 @@ function mostrarContrasena() {
     if (pass.type == "password") {
         pass.type = "text";
         ojo.removeAttribute('class');
-        ojo.setAttribute('class','fas fa-eye');
+        ojo.setAttribute('class', 'fas fa-eye');
     } else {
         pass.type = "password";
         ojo.removeAttribute('class');
-        ojo.setAttribute('class','fas fa-eye-slash');
+        ojo.setAttribute('class', 'fas fa-eye-slash');
     }
 }
 //Perfil
 function abrirDarUnCurso() {
-        closeNav();
-        document.getElementById('pills-tabContent').style.display = "none";
-        document.getElementById("crearCurso").style.display = "inherit";
-    }
-    function abrirTab() {
-        document.getElementById('crearCurso').style.display = "none";
+    closeNav();
+    document.getElementById('pills-tabContent').style.display = "none";
+    document.getElementById("crearCurso").style.display = "inherit";
+}
 
-        document.getElementById('pills-tabContent').style.display = "inherit";
-    }
-    function openNav() {
-        document.getElementById("sideNavigation").style.width = "200px";
-    }
+function abrirTab() {
+    document.getElementById('crearCurso').style.display = "none";
 
-    function closeNav() {
-        document.getElementById("sideNavigation").style.width = "0";
-    }
+    document.getElementById('pills-tabContent').style.display = "inherit";
+}
+
+function openNav() {
+    document.getElementById("sideNavigation").style.width = "200px";
+}
+
+function closeNav() {
+    document.getElementById("sideNavigation").style.width = "0";
+}
 //Cierre Perfil
 
 //ABM
-
-
 
 //CIERRE ABM
