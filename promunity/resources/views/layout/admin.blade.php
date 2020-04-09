@@ -19,9 +19,8 @@
 </head>
 
 <body>
-
     @yield('content')
-
+    
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
     <script type="text/javascript" src="/js/main.js"></script>

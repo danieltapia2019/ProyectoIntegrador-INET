@@ -11,7 +11,7 @@
 <header class="header">
     <div class="usuario">
         <br>
-        <h1>Hola @UserName¿Necesitas ayuda?</h1>
+        <h1>Hola ¿Necesitas ayuda?</h1>
     </div>
 </header>
 
@@ -19,7 +19,7 @@
     <div class="duda">
         <ul style="list-style : none;">
             <li>
-                <a href="#sesion">Registrarse y Login</a>
+              <a href="#sesion">Registrarse y Login</a>
             </li>
             <li>
                 <a href="#curso">Inscribirse a un curso</a>
@@ -44,7 +44,10 @@
             <h5>Registrarse y Login</h5>
             <ul style="list-style: none;">
                 <li>
-                    <a href="#">Registrarse</a>
+                    <a href="#" class="registarse">Registrarse</a>
+                    <div class="register">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
                 </li>
                 <li>
                     <a href="#">Login</a>

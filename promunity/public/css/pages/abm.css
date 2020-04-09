@@ -1,5 +1,3 @@
-@import url('../components/navbar.css');
-@import url('../components/footer.css');
 .conteiner{
   display: flex !important;/* ETIQUETA QUE POSICIONA UNO AL LADO DEL OTRO */
   flex-wrap: wrap;

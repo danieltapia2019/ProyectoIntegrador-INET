@@ -11,7 +11,7 @@ use App\TipoModel;
 use App\UsoModel;
 
 class adminController extends Controller
-{   /*LISTAR CURSOS,USUARIOS,TIPOS,USOS*/
+{   /*LISTAR CURSOS,USUARIOS,TIPOS,USOS
     public function listAll(){
         $alumnos = User::where('acceso','=','2')->where('estado','=','1')->paginate(10);
         $profesores = User::where('acceso','=','1')->where('estado','=','1')->paginate(10);
@@ -22,7 +22,7 @@ class adminController extends Controller
         $vac = compact('alumnos','profesores','admins','cursos','tipos','usos');
         return view('pages.abm',$vac);
     }
-
+    */
     /*CURSO*/
 
     public function borrarCurso($id){
@@ -99,16 +99,11 @@ class adminController extends Controller
         );
         return response()->json($response);
     }
-    public function editarUsuario(Request $form){
-       $usuario = User::find($form['id']);
-       return view ("pages.editarUsuario",compact("usuario"));
-    }
     public function actualizarUsuario($id,Request $request){
        if($request){
        $usuario = User::findOrFail($id);
        $nombre = $request['username'];
        $email = $request['email'];
-       $password = $request['password'];
        $acceso = $request['acceso'];
        $emailRepetido = User::where('email',$email)->where('id',"!=",$id)->exists();
        $usernameRepetido = User::where('username',$nombre)->where('id',"!=",$id)->exists();
@@ -119,9 +114,6 @@ class adminController extends Controller
        );
        return response()->json($response);
       }else{
-      if($password != NULL){
-        $usuario->password = password_hash($password,PASSWORD_DEFAULT);
-      }
       $usuario->username = $nombre;
       $usuario->email = $email;
       $usuario->acceso = $acceso;
@@ -192,6 +184,32 @@ class adminController extends Controller
       $tipo->update();
       return response()->json($tipo);
     }
+
+    public function getUsuarios(){
+      $usuarios = User::orderBy('acceso','desc')->where('estado','=','1')->paginate(5);
+      return view("pages.abm.usuarios",compact('usuarios'));
+    }
+
+    public function getCursos(){
+      $cursos = CursoModel::where('estado','=','1')->paginate(10);
+      return view("pages.abm.cursos",compact('cursos'));
+    }
+
+    public function getTipos(){
+      $tipos = TipoModel::where('estado','=','1')->paginate(10);
+      return view("pages.abm.tipos",compact('tipos'));
+
+    }
+    public function getUsos(){
+      $usos = UsoModel::where('estado','=','1')->paginate(10);
+      return view("pages.abm.usos",compact('usos'));
+    }
+
+    public function getAlumnosCursos(){
+      $cursos = CursoModel::where('estado','=','1')->paginate(10);
+      return view("pages.abm.cursos_alumnos",compact('cursos'));
+    }
+
 
 
 }

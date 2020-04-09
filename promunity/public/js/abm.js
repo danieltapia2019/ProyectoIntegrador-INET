@@ -90,18 +90,16 @@ function borrarRegistro(id,boton,url){
 function editarUsuario(persona,boton){
   var username = $("input[name=username]").val(persona.username);
   var email = $("input[name=email]").val(persona.email);
-  var password = $("input[name=password]").val();
+  $(".pass").hide();
   $("select[name=acceso] option[value="+ persona.acceso +"]").prop("selected",true);
   $(".btn-submit-user").hide();
   var botonActualizar ="<button type='submit' class='btn btn-warning btn-block my-3 btn-put-user'>Actualizar</button>";
   $(".user-form").append(botonActualizar);
     $(".btn-put-user").click(function(e){
         e.preventDefault();
-        var campos = validarCamposUsuario($("input[name=username]").val(),$("input[name=email]").val(),$("input[name=password]").val(),$("input[name=password_confirmation]").val());
+        var campos = validarCamposUsuario($("input[name=username]").val(),persona.password,persona.password);
         switch (campos) {
           case 1: alert('HAY CAMPOS VACIOS');break;
-          case 2: alert('LA CONTRASEÑA TIENE QUE TENER MINIMO 8 CARACTERES');break;
-          case 3: alert('LA CONTRASEÑAS NO COINCIDEN');break;
           case 4: alert('EL EMAIL NO UTILIZA @');break;
             break;
           default:
@@ -120,6 +118,8 @@ function editarUsuario(persona,boton){
                 $("input[name=email]").val("");
                 $("input[name=password]").val("");
                 $("input[name=password_confirmation]").val("");
+                $("input[name=password]").show();
+                $("input[name=password]_confirmation").show();
                 return false;
               }
               console.log(data);
@@ -145,6 +145,8 @@ function editarUsuario(persona,boton){
               $('#modalUsuario').modal('hide');
               $(".btn-put-user").remove();
               $("btn-submit-user").show();
+              $("input[name=password]").show();
+              $("input[name=password]_confirmation").show();
               $("div.modal-backdrop.fade.show").remove();
              },
              error:function(e){
@@ -356,5 +358,10 @@ function validarCamposUsuario(username,email,password,password_confirm){
   4-EL EMAIL DEBE CONTENER UN @
   0-TODO OK
   */
-
 }
+
+  window.addEventListener("load", function() {
+    if(window.innerWidth <= 425 ){
+      alert('ATENCION, PARA UNA MEJOR EXPERIENCIA EN EL ABM SE RECOMIENDA UTILIZAR UNA COMPUTADORA');
+    }
+  });
