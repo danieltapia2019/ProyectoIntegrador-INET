@@ -13,6 +13,23 @@
       {{$usos->links()}}
       <button type="button" class="btn btn-success mb-3" name="button" data-toggle="modal"
       data-target="#modalUso">Agregar</button>
+
+      <hr>
+  <h5>Ordenar Por</h5>
+  <form class="" action="/abm/usos" method="GET">
+    <div class="row">
+      <select class="" name="atributo">
+        <option value="id">ID</option>
+        <option value="usoNombre">Uso Nombre</option>
+      </select>
+      <br>
+      <select class="" name="tipo">
+        <option value="asc">Ascendente</option>
+        <option value="desc">Descendente</option>
+      </select>
+    </div>
+    <button type="submit" name="button" class="btn btn-dark">Ordenar</button>
+  </form>
       <table class="table table-light mt-3 mb-5 usos">
         <thead>
           <tr>

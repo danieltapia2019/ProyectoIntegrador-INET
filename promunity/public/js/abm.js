@@ -42,9 +42,9 @@ $(".btn-submit-user").click(function(e){
             "<td>"+data.email+ "</td>" +
             "<td>"+
             "<div class='row'>"+
-                    "<button type='button' onclick='borrarRegistro({{$alumno->id}},this,1)' name='button' class='btn-delete btn btn-danger'>Eliminar</button>"+
+                    "<button type='button' onclick='borrarRegistro({{$usuario->id}},this,1)' name='button' class='btn-delete btn btn-danger'>Eliminar</button>"+
                     "<hr>"+
-                    "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalUsuario' onclick='editarUsuario({{$alumno}},this)'>Editar</button>"+
+                    "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalUsuario' onclick='editarUsuario({{$usuario}},this)'>Editar</button>"+
               "</div>"+
             "</tr>";
             $(".usuarios tbody").append(tr_str);

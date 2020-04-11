@@ -18,22 +18,18 @@ Route::get('/home','HomeController@listFav');
 Route::get('/home/faq',function(){
     return view('pages.faq');
 });
-Route::get('/perfil',function(){
-  return view('pages.perfil');
-});
-
-Route::get('/admin/abm',function(){
-  return view('pages.abm');
-});
 
 /*    ABM:Admin   */
 
 /*ABM GET*/
-Route::get('/abm/usuarios','adminController@getUsuarios');
-Route::get('/abm/cursos','adminController@getCursos');
-Route::get('/abm/usos','adminController@getUsos');
-Route::get('/abm/tipos','adminController@getTipos');
-Route::get('/abm/cursos-alumnos','adminController@getAlumnosCursos');
+Route::get('/admin/abm','adminController@abm')->middleware('auth','rol:auth');
+Route::get('/abm/usuarios','adminController@getUsuarios')->middleware('auth','rol:auth');
+
+Route::get('/abm/usuarios/order','adminController@order')->middleware('auth','rol:auth');
+Route::get('/abm/cursos','adminController@getCursos')->middleware('auth','rol:auth');
+Route::get('/abm/usos','adminController@getUsos')->middleware('auth','rol:auth');
+Route::get('/abm/tipos','adminController@getTipos')->middleware('auth','rol:auth');
+Route::get('/abm/cursos-alumnos','adminController@getAlumnosCursos')->middleware('auth','rol:auth');
 
 Route::get('/editar/usuario/{id}','adminController@editarUsuario')->middleware('auth','rol:auth');
 Route::get('/editar/curso/{id}','adminController@editarCurso')->middleware('auth','rol:auth');
@@ -59,7 +55,7 @@ Route::get('/curso','cursoController@searchCurso');
 
 /*    PERFIL    */
 // Route::post('/perfil','cursoController@misCursos');
-Route::post('/perfil','cursoController@crearCurso');
+Route::post('/perfil','cursoController@crearCurso')->middleware('auth');
 Route::get('/perfil','profesorController@listadoTipoUso')->middleware('auth');
 /*PERFIL Actualizar Datos*/
 Route::post('/actualizarDatos','UserController@actualizarDatos');

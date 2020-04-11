@@ -66,6 +66,7 @@
             <p>{{$curso->creador->username}}</p>
             {{-- <p>{{$curso->precio}}</p> --}}
             <p>{{$curso->desc}}</p>
+            <p> <a href="/curso/id"> Ver Curso</a> </p>
         </article>
         @empty
             <h4>No hay Favoritos</h4>
@@ -74,42 +75,31 @@
 </section>
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <article class="border border-secundary border-top-0 curso">
-                <img src="img/cursos.jpg" alt="">
-                <h4>"Titulo"</h4>
-                <p>Autor</p>
-                <p>Precio</p>
-                <p>Duracion</p>
-            </article>
-        </div>
+      @forelse ($cursosFav as $key => $curso)
+        @if ($key == 0)
+          <div class="carousel-item active">
+                <article class="border border-secundary border-top-0 curso">
+                    <img src="img/cursos.jpg" alt="">
+                    <h4>{{$curso->titulo}}</h4>
+                    <p>{{$curso->creador->username}}</p>
+                    <p>{{$curso->precio}} ARS</p>
+                    <p> <a href="/curso/id"> Ver Curso</a> </p>
+                </article>
+          </div>
+        @else
         <div class="carousel-item">
             <article class="border border-secundary border-top-0 curso">
                 <img src="img/cursos.jpg" alt="">
-                <h4>"Titulo"</h4>
-                <p>Autor</p>
-                <p>Precio</p>
-                <p>Duracion</p>
+                <h4>{{$curso->titulo}}</h4>
+                <p>{{$curso->creador->username}}</p>
+                <p>{{$curso->precio}} ARS</p>
+                <p> <a href="/curso/id"> Ver Curso</a> </p>
             </article>
         </div>
-        <div class="carousel-item">
-            <article class="border border-secundary border-top-0 curso">
-                <img src="img/cursos.jpg" alt="">
-                <h4>"Titulo"</h4>
-                <p>Autor</p>
-                <p>Precio</p>
-                <p>Duracion</p>
-            </article>
-        </div>
-        <div class="carousel-item">
-            <article class="border border-secundary border-top-0 curso">
-                <img src="img/cursos.jpg" alt="">
-                <h4>"Titulo"</h4>
-                <p>Autor</p>
-                <p>Precio</p>
-                <p>Duracion</p>
-            </article>
-        </div>
+      @endif
+      @empty
+        <h4>No hay cursos fav</h4>
+      @endforelse
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

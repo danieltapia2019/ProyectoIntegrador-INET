@@ -15,13 +15,31 @@
 
       <button type="button" class="btn btn-success mb-3" name="button" data-toggle="modal"
           data-target="#modalUsuario">Agregar</button>
+          <hr>
+      <h5>Ordenar Por</h5>
+      <form class="" action="/abm/usuarios" method="GET">
+        <div class="row">
+          <select class="" name="atributo">
+            <option value="id">ID</option>
+            <option value="username">Nombre de usuario</option>
+            <option value="email">Email</option>
+            <option value="acceso">Acceso</option>
+          </select>
+          <br>
+          <select class="" name="tipo">
+            <option value="asc">Ascendente</option>
+            <option value="desc">Descendente</option>
+          </select>
+        </div>
+        <button type="submit" name="button" class="btn btn-dark">Ordenar</button>
+      </form>
       <table class="table table-light mt-1 usuario">
           <thead>
               <tr>
                   <th id="IDregistro">ID</th>
                   <th>Nombre de Usuario</th>
                   <th>Email</th>
-                  <th>Acceso</th>
+                  <th id="IDAcceso">Acceso</th>
                   <th>Acciones</th>
               </tr>
           </thead>
@@ -32,11 +50,11 @@
                   <td>{{$usuario->username}}</td>
                   <td>{{$usuario->email}}</td>
                   @if ($usuario->acceso == 2)
-                  <td>Alumno</td>
+                  <td id="IDAcceso">Alumno</td>
                   @elseif ($usuario->acceso == 1)
-                  <td>Profesor</td>
+                  <td id="IDAcceso">Profesor</td>
                   @else
-                  <td>Admin</td>
+                  <td id="IDAcceso">Admin</td>
                   @endif
                   @if ($usuario->acceso != 0)
                     <td>
@@ -49,8 +67,7 @@
                   @endif
               </tr>
               @empty
-              <h3 class="mt-5 mb-5">No hay Alumnos :(</h3>
-              {{$alumnos->links()}}
+              <h3 class="mt-5 mb-5">No hay Usuarios :(</h3>
               @endforelse
           </tbody>
       </table>

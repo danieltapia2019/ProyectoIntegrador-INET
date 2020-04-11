@@ -15,6 +15,25 @@
     <a href="/perfil">
       <button type="button" class="btn btn-success mb-3" name="button">Agregar</button>
     </a>
+
+    <hr>
+<h5>Ordenar Por</h5>
+<form class="" action="/abm/cursos" method="GET">
+  <div class="row">
+    <select class="" name="atributo">
+      <option value="id">ID</option>
+      <option value="titulo">Titulo</option>
+      <option value="lenguaje">Lenfuaje</option>
+      <option value="precio">precio</option>
+    </select>
+    <br>
+    <select class="" name="tipo">
+      <option value="asc">Ascendente</option>
+      <option value="desc">Descendente</option>
+    </select>
+  </div>
+  <button type="submit" name="button" class="btn btn-dark">Ordenar</button>
+</form>
     <table class="table table-light mt-3 mb-5">
         <thead>
             <tr>

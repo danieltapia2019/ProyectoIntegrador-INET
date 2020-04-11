@@ -88,13 +88,16 @@ a i{
     border-radius: 150px;
   }
   /*TAB*/
-  #navPC{
-    display: none;
-  }
-  .nav.flex-column{
-    display: inherit;
-  }
   #IDregistro{
     display: none;
+  }
+  #IDAcceso{
+    display: none;
+  }
+  th{
+    font-size: 10px;
+  }
+  td{
+    font-size: 10px;
   }
 }
