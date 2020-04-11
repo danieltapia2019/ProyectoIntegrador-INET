@@ -88,15 +88,16 @@
                 <p><b>Lenguaje: </b>{{$curso->lenguaje}}</p>
                 <footer>
                     @guest
-                    <a href="">Ver Mas</a>
+                    <a href="{{ url("/curso/$curso->id") }}">Ver Mas</a>
                     @else
                     <button class="btn btn-primary mr-1 ml-3">
-                        <a href="{{ url('/carrito'.'/'.$curso->id) }}" style="color: white"><i
-                                class="fas fa-shopping-cart"></i></a>
+                        <a href="{{ url('/carrito'.'/'.$curso->id) }}" style="color: white">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
                     </button>
-                    <button class="btn btn-primary mr-1 ">
+                    {{-- <button class="btn btn-primary mr-1 ">
                         <a href="#" style="color: white"><i class="far fa-heart"></i></a>
-                    </button>
+                    </button> --}}
                     @endguest
                 </footer>
             </section>

@@ -47,8 +47,17 @@ class CursoController extends Controller
     }
 
     /**
-     * Agrupa los resultados por categorias
+     * Está función corresponde a la vista detCurso
+     * 
+     * Le muestra al usuario el curso con los datos completos
      */
-    // public function byCategories(Request $form){
-    // }
+    public function detalle($cursoId){
+        $cursoSelect = CursoModel::find($cursoId);//Curso seleccionado
+        // dd($cursoSelect);
+        $q = $cursoSelect->lenguaje;
+
+        $cursosRecom = CursoModel::where('titulo','LIKE','%'.$q.'%')->orWhere('lenguaje','LIKE','%'.$q.'%')->limit(5)->get();//Cursos recomendados
+
+        return view('pages.detCurso',compact('cursoSelect','cursosRecom'));
+    }
 }

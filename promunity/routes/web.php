@@ -56,6 +56,10 @@ Route::get('/search','searchController@searchCurso');
 //   return view('pages.cursos');
 // });
 
+/*    Curso detalle   */
+Route::get('/curso/{curso_id}','cursoController@detalle');
+
+
 /*    PERFIL    */
 // Route::post('/perfil','cursoController@misCursos');
 Route::post('/perfil','cursoController@crearCurso');
