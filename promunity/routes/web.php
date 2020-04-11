@@ -50,3 +50,7 @@ Route::get('/carritolimpiar','CarritoController@limpiarCarrito');
 
 /*  Login,Register,PasswordReset  */
 Auth::routes();
+
+/* CARRITO*/
+Route::post('/agregar/{id}','CarritoController@agregarAlCarrito')->name('agregarAlCarrito');
+Route::post('/borrar-uno/{id}','CarritoController@borrarUno')->name('borrarUno');

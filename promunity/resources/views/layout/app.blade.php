@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    @yield('metadatos')
     <!--Fontawesome-->
     <script src="https://kit.fontawesome.com/918d19c8b4.js" crossorigin="anonymous"></script>
     <!-- Bootstrap -->
@@ -27,6 +28,7 @@
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
+    @yield('scripts')
 </body>
 
 </html>

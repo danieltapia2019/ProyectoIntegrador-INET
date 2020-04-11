@@ -3,7 +3,9 @@
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/cursos.css') }}">
 @endpush
-
+@section('metadatos')
+<meta name="csrf-token" content="{{csrf_token()}}"/>
+@endsection
 @section('title','Cursos')
 
 @section('content')
@@ -28,8 +30,8 @@
                     @guest
                     <a href="#">Ver Mas</a>
                     @else
-                    <button class="btn btn-primary mr-1 ml-3">
-                        <a href="{{ url('/carrito'.'/'.$curso->id) }}"  style="color: white"><i class="fas fa-shopping-cart"></i></a>
+                    <button class="btn btn-primary mr-1 ml-3 agregar" href="{{route('agregarAlCarrito',$curso->id)}}" cursoId="{{$curso->id}}">
+                        <i class="fas fa-shopping-cart"></i></a>
                     </button>
                     <button class="btn btn-primary mr-1 ">
                         <a href="#" style="color: white"><i class="far fa-heart"></i></a>
@@ -47,5 +49,12 @@
         {{$cursos->links()}}
     </div>
 </div>
+<!--"composer require "laravelcollective/html"   comando para ejecutar y que funcione form-->
+{!! Form::open(['route'=>['agregarAlCarrito',':USER_ID'],'method'=>'POST','id'=>'formAgregar'])!!}
+{!! Form::close()!!}
 
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/carrito.js') }}"></script>
 @endsection

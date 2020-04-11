@@ -70,4 +70,5 @@ class RegisterController extends Controller
             'acceso' => 2
         ]);
     }
+    
 }
