@@ -1,0 +1,56 @@
+@import url('../components/navbar.css');
+@import url('../components/footer.css');
+
+div#detalleCurso{
+    height: 100vh;
+    /* background-color: lightcyan; */
+}
+div#recomend-wrapper{
+    height: 100vh;
+    /* background-color: lightyellow */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #e2e1e0;
+}
+
+/* div.cursos{
+    width: 100%;
+} */
+
+#detalleCurso > article{
+    padding: 1%;
+    width: 80%;
+    margin: 5% 10%;
+    border: 1px solid rgba(0,0,0,0.1);
+    overflow: hidden;
+    background-color: whitesmoke;
+}
+
+#detalleCurso > article > figure.img-curso{
+    float: left;
+    width: 40%;
+    height: 40%;
+}
+#detalleCurso > article > figure.img-curso > img{
+    width: 100%;
+    height: auto;
+}
+#detalleCurso > article > section.desc{
+    float: left;
+    width: 60%;
+}
+#detalleCurso > article > section.desc > h2,#detalleCurso > article > section.desc > p,h2{
+    padding-left: 2.5%;
+}
+#detalleCurso > article > footer{
+    float: left;
+    width: 60%;
+}
+#detalleCurso > article >section.desc> footer a{
+    padding-left: 2.5%;
+}
