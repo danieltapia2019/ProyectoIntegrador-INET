@@ -54,11 +54,11 @@ $usuario = User::find(auth()->user()->id);
                     </a>
                     @endif
                 </li>
-                <li>
+                {{-- <li>
                     <a href="/setting" onclick="abrirConfig()">
                         <i class="fas fa-cogs"></i>Settings
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
         <nav class="topnav">

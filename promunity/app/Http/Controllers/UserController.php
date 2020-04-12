@@ -41,12 +41,12 @@ class UserController extends Controller
     /**
      * Crea una cookie en la cual se almacena el tema elegido por el @Usuario
      */
-    public function theme(Request $form){
-      // dd($form);
-      // return redirect('/setting')->withCookie(cookie('theme', $form['userPreference'], 60));
-      Cookie::queue('theme', $form['userPreference'], 60*24*30);
-      // if( Cookie::get('theme')==='dark'){
-        return redirect('/setting');
-      // }
-    }
+    // public function theme(Request $form){
+    //   // dd($form);
+    //   // return redirect('/setting')->withCookie(cookie('theme', $form['userPreference'], 60));
+    //   Cookie::queue('theme', $form['userPreference'], 60*24*30);
+    //   // if( Cookie::get('theme')==='dark'){
+    //     return redirect('/setting');
+    //   // }
+    // }
 }

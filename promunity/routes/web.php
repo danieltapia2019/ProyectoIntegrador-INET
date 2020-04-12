@@ -24,6 +24,7 @@ Route::get('/home/faq',function(){
 
 /*ABM GET*/
 Route::get('/admin/abm','adminController@abm')->middleware('auth','rol:auth');
+
 Route::get('/abm/usuarios','adminController@getUsuarios')->middleware('auth','rol:auth');
 
 Route::get('/abm/usuarios/order','adminController@order')->middleware('auth','rol:auth');
