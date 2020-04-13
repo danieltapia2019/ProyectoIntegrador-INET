@@ -5,7 +5,8 @@ window.addEventListener("load", function () {
 function mostrarContrasena() {
     var ojo = document.getElementById("ojo");
     //var pass= document.getElementById('password');
-    var pass = document.querySelector('input.password');
+    //var pass = document.querySelector('input.password');
+    var pass = document.querySelector('input[name=password]');
     if (pass.type == "password") {
         pass.type = "text";
         ojo.removeAttribute('class');
@@ -17,16 +18,31 @@ function mostrarContrasena() {
     }
 }
 //Perfil
+
+$.ajaxSetup({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+$(".btn-submit-opinion").click(function(e){
+  e.preventDefault();
+  var opinion = $("textarea[name=opinion]").val();
+  $.ajax({
+    type:'POST',
+    url:'http://localhost:8000/opinion',
+    data:{opinion: opinion},
+    success:function(data){
+      console.log(data);
+      alert('Opinion Creada CORRECTAMENTE');
+      $("textarea[name=opinion]").val('');
+    },
+    error:function(e){
+      alert('ERROR '+e);
+    },
+  })
+});
 function abrirDarUnCurso() {
     closeNav();
-    document.getElementById('pills-tabContent').style.display = "none";
-    document.getElementById("crearCurso").style.display = "inherit";
-}
-
-function abrirTab() {
-    document.getElementById('crearCurso').style.display = "none";
-
-    document.getElementById('pills-tabContent').style.display = "inherit";
 }
 
 function openNav() {

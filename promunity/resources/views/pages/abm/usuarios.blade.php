@@ -13,7 +13,7 @@
     <div class="contenido col-md-8">
       {{$usuarios->links()}}
 
-      <button type="button" class="btn btn-success mb-3" name="button" data-toggle="modal"
+      <button type="button" class="btn btn-success mb-3 btn-agregar" name="button" data-toggle="modal"
           data-target="#modalUsuario">Agregar</button>
           <hr>
       <h5>Ordenar Por</h5>
@@ -55,6 +55,7 @@
                   <td id="IDAcceso">Profesor</td>
                   @else
                   <td id="IDAcceso">Admin</td>
+                  <td>No hay acciones</td>
                   @endif
                   @if ($usuario->acceso != 0)
                     <td>

@@ -31,34 +31,6 @@
     </div>
     <div id="mas-vistos">
         <h2 class="mb-3">Cursos mas visitados</h2>
-        {{-- <article class="curso">
-            <img src="img/cursos.jpg" alt="">
-            <h4>"Titulo"</h4>
-            <p>Autor</p>
-            <p>Precio</p>
-            <p>Duracion</p>
-        </article>
-        <article class="curso">
-            <img src="img/cursos.jpg" alt="">
-            <h4>"Titulo"</h4>
-            <p>Autor</p>
-            <p>Precio</p>
-            <p>Duracion</p>
-        </article>
-        <article class="curso">
-            <img src="img/cursos.jpg" alt="">
-            <h4>"Titulo"</h4>
-            <p>Autor</p>
-            <p>Precio</p>
-            <p>Duracion</p>
-        </article>
-        <article class="curso">
-            <img src="img/cursos.jpg" alt="">
-            <h4>"Titulo"</h4>
-            <p>Autor</p>
-            <p>Precio</p>
-            <p>Duracion</p>
-        </article> --}}
         @forelse ($cursosFav as $curso)
         <article class="curso">
         <img src="{{ asset('/storage/img/cursos/'.$curso->foto_curso) }}" alt="">
@@ -144,76 +116,62 @@
 </div>
 
 <div id="opiniones">
-    <h2 class="mb-5">¿Qué opinan nuestros alumnos?</h2>
+    <h2 class="mb-5">¿Qué opinan nuestros usuarios?</h2>
     <div class="articuloOpiniones d-flex justify-content-around">
-        <div class="card" style="width: 12rem;">
+        @forelse ($usuarios as $key => $usuario)
+          <div class="card" style="width: 12rem;">
             <div class="card-body">
-                <span>
-                    <img src="img/alumno1.jpeg" alt="Estudiante" style="width: 5rem;" class="rounded-circle shadow">
-                    <h6 class="card-title mt-2">Estudiante</h6>
-                </span>
-                <p class="card-text">Promunity es una muy buena pagina para aprender programacion desde 0 excelente
-                    cursos y
-                    la informacion es
-                    didactica</p>
+              <span>
+                <img src="{{$usuario->foto}}" alt="">
+                @if ($usuario->acceso == 2)
+                  <h6 class="card-title mt-2">Estudiante</h6>
+                @elseif($usuario->acceso == 1)
+                  <h6 class="card-title mt-2">Profesor</h6>
+                @else
+                  <h6 class="card-title mt-2">Administrador</h6>
+                @endif
+              </span>
+              <p class="card-text">
+                {{$usuario->opinion}}
+              </p>
             </div>
-        </div>
-        <div class="card" style="width: 12rem;">
-            <div class="card-body">
-                <span>
-                    <img src="img/alumno2.jpeg" alt="Estudiante" style="width: 5rem;" class="rounded-circle shadow">
-                    <h6 class="card-title mt-2">Estudiante</h6>
-                </span>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, molestiae
-                    accusantium?</p>
-            </div>
-        </div>
-        <div class="card" style="width: 12rem;">
-            <div class="card-body">
-                <span>
-                    <img src="img/alumno3.jpeg" alt="Estudiante" style="width: 5rem;" class="rounded-circle shadow">
-                    <h6 class="card-title mt-2">Estudiante</h6>
-                </span>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, molestiae
-                    accusantium?</p>
-            </div>
-        </div>
-        <div class="card" style="width: 12rem;">
-            <div class="card-body">
-                <span>
-                    <img src="img/alumno4.jpeg" alt="Estudiante" style="width: 5rem;" class="rounded-circle shadow">
-                    <h6 class="card-title mt-2">Estudiante</h6>
-                </span>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, molestiae
-                    accusantium?</p>
-            </div>
-        </div>
+          </div>
+        @empty
+        <h4>No hay usuarios</h4>
+      @endforelse
     </div>
-</div><!-- /Opiniones -->
+</div>
+<!-- /Opiniones -->
 <!--Carrusel solo para mobile-->
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <article class="border border-secundary border-bottom-0 opinion">
-                <span class="h4"><img src="img/alumno1.jpeg" alt="">Estudiante</span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis consequatur repellendus sint in
-                    temporibus! Beatae!</p>
-            </article>
-        </div>
-        <div class="carousel-item">
-            <article class="border border-secundary border-bottom-0 opinion">
-                <span class="h4"><img src="img/alumno2.jpeg" alt="">Estudiante</span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis consequatur repellendus sint in
-                    temporibus! Beatae!</p>
-            </article>
-        </div>
-        <div class="carousel-item">
-            <article class="border border-secundary border-bottom-0 opinion">
-                <span class="h4"><img src="img/alumno3.jpeg" alt="">Estudiante</span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis consequatur repellendus sint in
-                    temporibus! Beatae!</p>
-            </article>
-        </div>
+      @forelse ($usuarios as $key => $usuario)
+        @if ($key==0)
+            <div class="carousel-item active">
+                <article class="border border-secundary border-bottom-0 opinion">
+                    <span class="h4"><img src="{{$usuario->foto}}" alt="">
+                      @if ($usuario->acceso == 2)
+                        Estudiante
+                      @elseif($usuario->acceso == 1)
+                        Profesor
+                      @else
+                        Administrador
+                      @endif
+                    </span>
+                    <p>{{$usuario->opinion}}</p>
+                </article>
+            </div>
+        @else
+          <div class="carousel-item">
+              <article class="border border-secundary border-bottom-0 opinion">
+                  <span class="h4"><img src="{{$usuario->foto}}" alt="">Estudiante</span>
+                  <p>{{$usuario->opinion}}</p>
+              </article>
+          </div>
+        @endif
+      @empty
+        <h4>No hay usuarios</h4>
+      @endforelse
     </div>
 </div>
 @endsection

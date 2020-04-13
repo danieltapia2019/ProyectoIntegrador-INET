@@ -5,11 +5,6 @@
 {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> --}}
 @endpush
-@php
-use App\User;
-
-$usuario = User::find(auth()->user()->id);
-@endphp
 @section('title','Perfil')
 
 @section('content')
@@ -28,36 +23,43 @@ $usuario = User::find(auth()->user()->id);
         <!--SideNav-->
         <div id="sideNavigation" class="sidenav">
             <ul style="color: white;">
-                @if (auth()->user()->foto == null)
+                @if ($usuario->foto == null)
                 <span id="fotoPerfilNav"> <img src="{{ asset('/img/perfil.jpg') }}" alt=""> </span>
                 @else
                 <span id="fotoPerfilNav"><img src="{{ asset('/storage/img/avatar/'.auth()->user()->foto) }}"
-                        alt="{{auth()->user()->username}}"></span>
+                        alt="{{$usuario->username}}"></span>
                 @endif
                 <p>STATUS:
-                    @if (auth()->user()->acceso == 2)
+                    @if ($usuario->acceso == 2)
                     <i class="fas fa-user"></i>
                     @endif
-                    @if (auth()->user()->acceso == 1)
+                    @if ($usuario->acceso == 1)
                     <i class="fas fa-user-tie"></i>
                     @endif
-                    @if (auth()->user()->acceso == 0)
+                    @if ($usuario->acceso == 0)
                     <i class="fas fa-users-cog" id="statusIcon"></i>
                     @endif
                 </p>
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <li>
-                    @if (auth()->user()->acceso != 2)
-                    <a href="#crearCurso" onclick="abrirDarUnCurso()">
+                    @if ($usuario->acceso != 2)
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link" id="nav-create-tab" data-toggle="tab" href="#create" role="tab" aria-controls="create" aria-selected="false"  onclick="abrirDarUnCurso()">
                         <i class="fas fa-folder-plus"></i>
                         Dar un curso
                     </a>
+                    <a class="nav-item nav-link" id="nav-created-tab" data-toggle="tab" href="#created" role="tab" aria-controls="created" aria-selected="false" onclick="abrirDarUnCurso()">Cursos Creados</a>
+                  </div>
                     @endif
                 </li>
                 <li>
                     <a href="/setting" onclick="abrirConfig()">
                         <i class="fas fa-cogs"></i>Settings
                     </a>
+                </li>
+                <li>
+                  @if ($usuario->acceso == 1)
+                  @endif
                 </li>
             </ul>
         </div>
@@ -69,122 +71,96 @@ $usuario = User::find(auth()->user()->id);
             </a>
         </nav>
         <br>
-        <h1>Bienvenido a su cuenta {{auth()->user()->username}}</h1>
+        <h1>Bienvenido a su cuenta {{$usuario->username}}</h1>
     </div>
 </header>
-<div class="tab container" id="UserProfileContent">
+  <div class="tab container" id="UserProfileContent">
     <nav class="row">
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-form-tab" data-toggle="tab" href="#tab-perfil" role="tab"
-                aria-controls="tab-perfil" aria-selected="true" onclcick="abrirTab()">Perfil</a>
-            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#tab-cursos" role="tab"
-                aria-controls="tab-cursos" aria-selected="false" onclick="abrirTab()">Mis Cursos</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#tab-favoritos" role="tab"
-                aria-controls="tab-favoritos" aria-selected="false" onclick="abrirTab()">Favoritos</a>
-        </div>
-    </nav>
-    <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active container" id="tab-perfil" role="tabpanel" aria-labelledby="nav-form-tab">
-            <!--Configuracion-->
-            <div class="configuracion" id="configuracion">
-                <form class="actualizacionDatos mb-5" action="/actualizarDatos" method="post">
-                    @csrf
-                    <input type="hidden" name="id" value="{{auth()->user()->id}}">
-                    <input type="hidden" name="acceso" value="{{auth()->user()->acceso}}">
-                    <input type="hidden" name="estado" value="{{auth()->user()->estado}}">
-                    <hr>
-                    <label for="username">Nombre de usuario nuevo</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="far fa-user"></i></span>
-                        </div>
-                        <input type="text" name="username" class="form-control" required
-                            value="{{auth()->user()->username}}">
-                    </div>
-                    <label for="email">Email nuevo</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
-                        </div>
-                        <input type="email" name="email" class="form-control" aria-label="email"
-                            value="{{auth()->user()->email}}" required>
-                    </div>
-                    <label for="password">Contraseña nueva</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                        </div>
-                        <input type="password" name="password" class="form-control password" aria-label="password"
-                            placeholder="Ingrese contraseña" id="password" required>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary" type="button" name="button" aria-label="password-on"
-                                onclick="mostrarContrasena()">
-                                <i name="eye" id="ojo" class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <label for="password_confirmation">Repetir contraseña nueva</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                        </div>
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
-                            required autocomplete="new-password" placeholder="Confirmar contraseña">
-                    </div>
-                    <div class="input-group mb-3">
-                        @if (auth()->user()->foto == null)
-                        <span id="fotoPerfilNav"> <img src="{{ asset('/img/perfil.jpg') }}" alt=""> </span>
-                        @else
-                        <span id="fotoPerfilNav"><img src="{{ asset('/storage/img/avatar/'.auth()->user()->foto) }}"
-                                alt="{{auth()->user()->username}}"></span>
-                        @endif
-                        <div class="input-group-prepend">
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#editar" role="tab" aria-controls="editar" aria-selected="true">Mis datos</a>
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#cursos" role="tab" aria-controls="cursos" aria-selected="false">Cursos Inscriptos</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#opinion" role="tab" aria-controls="opinion" aria-selected="false">¡Dejanos tu opinion!</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="editar" role="tabpanel" aria-labelledby="nav-home-tab">
 
-                            <label for="foto">Cambiar foto</label>
-                            <input type="file" name="foto" data-max-size="2048" accept="image/*">
-                        </div>
-                    </div>
-                    </div>
-                    <button type="submit" name="button" class="btn btn-success">
-                        Guardar Cambios
-                    </button>
-                </form>
-            </div>
-        </div>
-        {{--  --}}
-        <div class="tab-pane fade" id="tab-cursos" role="tabpanel" aria-labelledby="pills-cursos-tab">
-            <div class="contenedor">
-                @forelse ($usuario->cursos as $key => $curso)
-                <div class="card-completo">
-                    <div class="card-body">
-                        <h5 class="card-title">{{$curso->titulo}}</h5>
-                        <p class="card-text">{{$curso->descripcion}}</p>
-                        <p>Lenguaje: {{$curso->lenguaje}}</p>
-                        <p>Precio: {{$curso->precio}}</p>
-                        <p>Tipo: {{$curso->tipo->tipoNombre}}</p>
-                        <p>Uso: {{$curso->uso->usoNombre}}</p>
-                        <a href="/">Ir al curso</a>
-                    </div>
-                    <img id="foto-curso" src="storage\img\cursos\{{$curso->foto_curso}}" class="card-img" alt="...">
-                </div>
-                @empty
-                <h3>No has comprado ningun curso</h3>
-                @endforelse
-            </div>
-        </div>
-        <div class="tab-pane fade" id="tab-favoritos" role="tabpanel" aria-labelledby="pills-contact-tab">
+    <form class="" action="/actualizarDatos" method="post">
 
+          @csrf
+          <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="far fa-user"></i></span>
+              </div>
+              <input type="text" name="username" class="form-control" placeholder="Nombre de usuario"
+                  required value="{{$usuario->username}}">
+          </div>
+          <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="far fa-envelope"></i></span>
+              </div>
+              <input type="email" name="email" class="form-control" aria-label="email"
+                  placeholder="Ingrese email" required value="{{$usuario->email}}">
+          </div>
+          <div class="input-group mb-3 pass">
+              <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-lock"></i></span>
+              </div>
+              <input type="password" name="password" class="form-control password" aria-label="password"
+                  placeholder="Ingrese contraseña" id="password" required minlength="8">
+              <div class="input-group-append">
+                  <button class="btn btn-outline-primary" type="button" name="button"
+                      onclick="mostrarContrasena()">
+                      <i name="" id="ojo" class="fas fa-eye-slash"></i>
+                  </button>
+              </div>
+          </div>
+          <div class="input-group mb-3 pass">
+              <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-lock"></i></span>
+              </div>
+              <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
+                  required autocomplete="new-password" placeholder="Confirmar contraseña nueva" minlength="8">
+          </div>
+          <button type="submit" class="btn btn-reg btn-lg btn-block my-3">Actualizar Datos</button>
+    </form>
+
+  </div>
+  <div class="tab-pane fade" id="cursos" role="tabpanel" aria-labelledby="nav-profile-tab">
+    <div class="contenedor">
+        @forelse ($usuario->alumno_curso as $key => $curso)
+        <div class="card-completo">
+            <div class="card-body">
+                <h5 class="card-title">{{$curso->titulo}}</h5>
+                <p class="card-text">{{$curso->descripcion}}</p>
+                <p>Lenguaje: {{$curso->lenguaje}}</p>
+                <p>Precio: {{$curso->precio}} ARS</p>
+                <p>Tipo: {{$curso->tipo->tipoNombre}}</p>
+                <p>Uso: {{$curso->uso->usoNombre}}</p>
+                <a href="/">Ir al curso</a>
+            </div>
+            {{--<img id="foto-curso" src="storage\img\cursos\{{$curso->foto_curso}}" class="card-img" alt="...">--}}
+            <img id="foto-curso" src="{{$curso->foto_curso}}" alt="" class="card-img">
         </div>
-        <div class="tab-pane fade" id="tab-vacio" role="tabpanel" aria-labelledby="pills-contact-tab">
-        </div>
+        @empty
+        <h3>No has comprado ningun curso</h3>
+        @endforelse
     </div>
-</div>
-<section class="opciones">
-    <!--Dar curso-->
-    <div class="crear-curso" id="crearCurso" style="display: none;">
+  </div>
+  <div class="tab-pane fade" id="opinion" role="tabpanel" aria-labelledby="nav-contact-tab">
+    <h2>Dejanos tu opinion</h2>
+    <form class="opinion" action="/opinion" method="post">
+      <textarea name="opinion" rows="8" cols="80" required>
+
+      </textarea>
+    </form>
+    <button type="submit" name="button" class="btn btn-info btn-submit-opinion">Enviar tu opinion</button>
+  </div>
+  @if ($usuario->acceso != 2)
+  <div class="tab-pane fade" id="create" role="tabpanel" aria-labelledby="nav-create-tab">
         <form class="crearCurso" action="/perfil" method="post" enctype="multipart/form-data">
             {{csrf_field()}}
-            <input style="display: none;" type="number" name="autor" value={{auth()->user()->id}}>
+            <input style="display: none;" type="number" name="autor" value={{$usuario->id}}>
             <label for="titulo">Titulo: </label>
             <div class="input-group mb-3">
                 <input type="text" name="titulo" class="form-control" placeholder="Ingrese titulo del curso" required
@@ -233,6 +209,38 @@ $usuario = User::find(auth()->user()->id);
             <button type="submit" name="button" class="btn btn-success">Guardar</button>
         </form>
     </div>
+
+    <div class="tab-pane fade" id="created" role="tabpanel" aria-labelledby="nav-created-tab">
+
+        <div class="contenedor">
+            @forelse ($cursos as $key => $curso)
+            <div class="card-completo">
+                <div class="card-body">
+                    <h5 class="card-title">{{$curso->titulo}}</h5>
+                    <p class="card-text">{{$curso->descripcion}}</p>
+                    <p>Lenguaje: {{$curso->lenguaje}}</p>
+                    <p>Precio: {{$curso->precio}} ARS</p>
+                    <p>Tipo: {{$curso->tipo->tipoNombre}}</p>
+                    <p>Uso: {{$curso->uso->usoNombre}}</p>
+                    <a href="/">Ir al curso</a>
+                </div>
+                {{--<img id="foto-curso" src="storage\img\cursos\{{$curso->foto_curso}}" class="card-img" alt="...">--}}
+                <img id="foto-curso" src="{{$curso->foto_curso}}" alt="" class="card-img">
+            </div>
+            @empty
+            <h3>No has comprado ningun curso</h3>
+            @endforelse
+        </div>
+      </div>
+    @endif
+  </div>
+  </div>
+
+  </div>
+</div>
+
+<section class="opciones">
+
 </section>
 
 {{-- <script src="https://kit.fontawesome.com/918d19c8b4.js" crossorigin="anonymous"></script>

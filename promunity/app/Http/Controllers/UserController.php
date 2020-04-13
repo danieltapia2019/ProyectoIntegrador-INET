@@ -8,10 +8,30 @@ use Illuminate\Http\Response;
 use Cookie;
 
 use App\User;
+use App\CursoModel;
+use App\TipoModel;
+use App\UsoModel;
 
 class UserController extends Controller
 {
-    //
+    //Abrir Perfil
+    public function miPerfil(){
+        $cursos;
+        $usuario = User::find(auth()->user()->id);
+        $tipos = TipoModel::all();
+        $usos = UsoModel::all();
+        $vac;
+        if($usuario->acceso != 2){
+        $cursos = $usuario->cursos;
+        $vac = compact('tipos','usos','cursos','usuario');
+        return view('pages.perfil',$vac);
+        }else{
+        $cursos = $usuario->alumno_curso;
+        $vac = compact('usuario','cursos');
+        return view('pages.perfil',$vac);
+        }
+    }
+    //Actualizacion de datos
     public function actualizarDatos(Request $form){
       $usuario = User::find($form['id']);
       $email = User::where('email',$form['email'])->exists();
@@ -38,6 +58,17 @@ class UserController extends Controller
       }
     }
 
+    //Dejar opinion
+    public function darOpinion(Request $request){
+      $usuario = User::find(auth()->user()->id);
+      $usuario->opinion = $request['opinion'];
+      $usuario->update();
+      $response = array(
+        'status' => 'success',
+        'msg' => 'opinion created successfully',
+      );
+      return response()->json($response);
+    }
     /**
      * Crea una cookie en la cual se almacena el tema elegido por el @Usuario
      */
@@ -49,4 +80,5 @@ class UserController extends Controller
         return redirect('/setting');
       // }
     }
+
 }

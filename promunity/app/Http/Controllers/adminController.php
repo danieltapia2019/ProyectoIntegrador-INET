@@ -113,7 +113,11 @@ class adminController extends Controller{
         return response()->json($usuario);
       }
     }else{
-      return 'No se pudo actualizar';
+        $response = array(
+          'status' => 'failure',
+          'msg' => 'Error',
+        );
+      return response()->json($response);
     }
   }
 

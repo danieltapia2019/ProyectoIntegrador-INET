@@ -150,6 +150,12 @@
     .custom-file {
         margin-top: 12px;
     }
+    .card-completo{
+      width: 100%;
+    }
+    .opinion textarea{
+    width: 100%;
+    }
 }
 
 

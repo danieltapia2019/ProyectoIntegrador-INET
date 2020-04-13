@@ -33,6 +33,8 @@ class HomeController extends Controller
      */
     public function listFav(){
         $cursosFav = CursoModel::paginate(4);
-        return view('home',compact('cursosFav'));
+        $usuarios = User::inRandomOrder()->where('opinion','!=',null)->paginate(4);
+        $vac = compact('cursosFav','usuarios');
+        return view('home',$vac);
     }
 }

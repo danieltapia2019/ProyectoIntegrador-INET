@@ -5,6 +5,9 @@ headers: {
 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
 });
+$(".btn-agregar").click(function(e){
+  e.preventDefault();
+})
 $(".btn-submit-user").click(function(e){
   e.preventDefault();
   var username = $("input[name=username]").val();
@@ -97,19 +100,13 @@ function editarUsuario(persona,boton){
   $(".user-form").append(botonActualizar);
     $(".btn-put-user").click(function(e){
         e.preventDefault();
-        var campos = validarCamposUsuario($("input[name=username]").val(),persona.password,persona.password);
-        switch (campos) {
-          case 1: alert('HAY CAMPOS VACIOS');break;
-          case 4: alert('EL EMAIL NO UTILIZA @');break;
-            break;
-          default:
-        }
-        if(campos==0){
-
+        var username=$("input[name=username]").val();
+        var email =$("input[name=email]").val();
+        var acceso = $("select[name=acceso]").val();
           $.ajax({
              type:'PUT',
              url:'http://localhost:8000/actualizar/usuario/'+persona.id,
-             data:{username: $("input[name=username]").val(), email:$("input[name=email]").val(), password:$("input[name=password]").val(),acceso:$("select[name=acceso]").val()},
+             data:{username: username, email: email,acceso:acceso},
              success:function(data){
                 if(data.status == 'failure'){
                 alert('ERROR YA EXISTE UN REGISTRO CON EL TIPO DE EMAIL y/o USUARIO');
@@ -123,25 +120,30 @@ function editarUsuario(persona,boton){
                 return false;
               }
               console.log(data);
+              var tpoAcceso ;
+              if(data.acceso == 2){
+                tipoAcceso = "Alumno";
+              }else if (data.acceso == 1) {
+                tipoAcceso = "Profesor";
+              }else{
+                tipoAcceso = "Administrador";
+              }
               var tr =
-              "<tr>"+
-              "<td>" + data.id + "</td>"+
+              "<td id='IDregistro'>" + data.id + "</td>"+
               "<td>" + data.username + "</td>" +
               "<td>"+data.email+ "</td>" +
+              "<td>"+tipoAcceso+"</td>"+
               "<td>"+
                 "<div class='row'>"+
-                      "<button type='button' onclick='borrarRegistro({{$alumno->id}},this,1)' name='button' class='btn-delete btn btn-danger'>Eliminar</button>"+
+                      "<button type='button' onclick='borrarRegistro("+data.id+","+boton+","+1+")' name='button' class='btn-delete btn btn-danger'>Eliminar</button>"+
                       "<hr>"+
-                      "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalUsuario' onclick='editarUsuario({{$alumno}},this)'>Editar</button>"+
+                      "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalUsuario' onclick='editarUsuario("+data.id+","+boton+")'>Editar</button>"+
                 "</div>"+
               "</td>"+
-              "</tr>";
               $(boton).closest('tr').html(tr);
               alert('Actualizado correctamente');
               $("input[name=username]").val("");
               $("input[name=email]").val("");
-              $("input[name=password]").val("");
-              $("input[name=password_confirmation]").val("");
               $('#modalUsuario').modal('hide');
               $(".btn-put-user").remove();
               $("btn-submit-user").show();
@@ -153,11 +155,12 @@ function editarUsuario(persona,boton){
                alert('ERROR NO SE PUDO ACTUALIZAR'+e);
              }
           });
-        }
     });
 
     $("#modalUsuario").on('hidden.bs.modal', function () {
     $(".btn-put-user").remove();
+    $("input[name=password]").show();
+    $("input[name=password]_confirmation").show();
     $(".btn-submit-user").show();
     });
 

@@ -69,8 +69,8 @@ Route::get('/curso/{curso_id}','cursoController@detalle');
 /*    PERFIL    */
 // Route::post('/perfil','cursoController@misCursos');
 Route::post('/perfil','cursoController@crearCurso')->middleware('auth');
-Route::get('/perfil','profesorController@listadoTipoUso')->middleware('auth');
-
+Route::get('/perfil','UserController@miPerfil')->middleware('auth');
+Route::post('/opinion','UserController@darOpinion')->middleware('auth');
 
 /*PERFIL Actualizar Datos*/
 Route::post('/actualizarDatos','UserController@actualizarDatos');
