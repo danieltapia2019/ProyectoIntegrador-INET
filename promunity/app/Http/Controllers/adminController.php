@@ -12,7 +12,8 @@ use App\UsoModel;
 
 class adminController extends Controller{
   public function abm(){
-    $totales = array(CursoModel::count(),User::count());
+    // $views = CursoModel::sum('views');
+    $totales = array(CursoModel::count(),User::count(),CursoModel::sum('views'));
     // $userTotal = ;
     return view('pages.abm',compact('totales'));
   }

@@ -28,7 +28,7 @@
             <div class="icon" id="i-view"><i class="fas fa-eye"></i></div>
             <div class="content">
                 <h1 class="mt-1">Views</h1>
-                <p><b>Total: </b><span class="badge badge-dark">null</span></p>
+                <p><b>Total: </b><span class="badge badge-dark">{{$totales[2]}}</span></p>
             </div>
         </div>
     </div>

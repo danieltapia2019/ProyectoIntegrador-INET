@@ -22,6 +22,7 @@ class CreateCursosTable extends Migration
             $table->string('lenguaje',50);
             $table->double('precio',8,2);
             $table->string('duracion',50)->nullable($value = true);
+            $table->integer('views');
             $table->tinyInteger('estado')->nullable($value = true);
             $table->timestamps();
         });
