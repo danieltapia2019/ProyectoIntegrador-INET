@@ -38,14 +38,12 @@
       <button class="btn btn-secondary" onclick="location.href = '/abm/cursos-alumnos'">Usuario-Cursos</button>
       <button class="btn btn-secondary" onclick="location.href = '/abm/tipos'">Tipo</button>
       <button class="btn btn-secondary" onclick="location.href = '/abm/usos'">Uso</button>
+      <button class="btn btn-secondary" onclick="location.href = '/abm/consultas'">Consultas</button>
     </div>
 </div>
 
 <script>
   $(window).resize(function () {
-      // var alto = $(window).height();
-      // var ancho = $(window).width();
-      // alert("alto: " + alto + " ancho:" + ancho);
       if( window.matchMedia("(max-width: 900px)") ){
         alert('Este sitio no esta optimizado para su dispositivos');
       }
