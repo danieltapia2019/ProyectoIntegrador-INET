@@ -69,7 +69,7 @@
                         <hr>
                         <p>
                             <span class="font-weight-bold mr-5">TOTAL:</span ><span id="total" value="{{$total}}">$<?=$total?></span>
-                            <button class="btn btn-danger ml-4">Comprar</button>
+                            <a class="btn btn-danger ml-4" href="{{route('pagar')}}">Comprar</a>
                             <button class="btn ml-2"><i class="fas fa-trash-alt"></i></button>
                             <div>
                                 <img class="img-center" src="{{ asset('img/merca.jpg') }}" alt="">

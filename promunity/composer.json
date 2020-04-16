@@ -11,8 +11,10 @@
         "php": "^7.1.3",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
+        "ixudra/curl": "^6.19",
         "laravel/framework": "5.8.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "mercadopago/dx-php": "2.0.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

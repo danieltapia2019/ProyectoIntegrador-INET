@@ -8,6 +8,7 @@ use App\CategoriaModel;
 use App\User;
 use App\TipoModel;
 use App\UsoModel;
+use App\Transaccion;
 
 class adminController extends Controller
 {
@@ -18,14 +19,15 @@ class adminController extends Controller
         $tipos = TipoModel::all();
         $usos = UsoModel::all();
         $cursos = CursoModel::all();
-        $vac = compact('alumnos','profesores','admins','cursos','tipos','usos');
+        $transacciones= Transaccion::all();
+        $vac = compact('alumnos','profesores','admins','cursos','tipos','usos','transacciones');
         return view('pages.abm',$vac);
     }
     public function editarCurso(){
 
     }
     public function actualizarCurso(){
-      
+
     }
     public function crearUsuario(Request $form){
         $usuario = new User();
@@ -77,11 +79,22 @@ class adminController extends Controller
       $tipo->save();
       return redirect ("/admin/abm");
     }
-    function borrarTipo(Request $form){
+    public function borrarTipo(Request $form){
       $tipo = TipoModel::find($form['id']);
       $tipo->delete();
       return redirect ("/admin/abm");
     }
-
+    public function activarCurso(Request $request,$id){
+        if($request->ajax()){
+            $transaccion=Transaccion::find($id);
+            $curso=$transaccion->curso;
+            $alumno=$transaccion->usuario;
+            $curso->alumno()->attach($alumno->id);
+            return response()->json([
+                "mensaje"=>"Curso habilitado correctamente",
+                "cursos"=>$curso->alumno
+            ]);
+        }
+    }
 
 }

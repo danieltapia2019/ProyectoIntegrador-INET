@@ -47,6 +47,7 @@ Route::get('/perfil','profesorController@listadoTipoUso');
 Route::get('/carrito','CarritoController@mostrarCarrito');
 Route::get('/carrito/{id}','CarritoController@agregarAlCarrito');
 Route::get('/carritolimpiar','CarritoController@limpiarCarrito');
+Route::post('/activar/{id}','adminController@activarCurso')->name('activar');
 
 /*  Login,Register,PasswordReset  */
 Auth::routes();
@@ -54,3 +55,9 @@ Auth::routes();
 /* CARRITO*/
 Route::post('/agregar/{id}','CarritoController@agregarAlCarrito')->name('agregarAlCarrito');
 Route::post('/borrar-uno/{id}','CarritoController@borrarUno')->name('borrarUno');
+Route::get('/pagar','CarritoController@pagar')->name('pagar');
+Route::get('/exito',function(){
+    return view('pages.exito');
+});
+/*    Curso detalle   */
+Route::get('/curso/{curso_id}','cursoController@detalle');

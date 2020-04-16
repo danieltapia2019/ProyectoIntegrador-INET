@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\CursoModel;
-
+use MercadoPago\SDK;
+use App\Transaccion;
+use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Auth;
 class CarritoController extends Controller
 {
   /**
@@ -79,6 +82,52 @@ class CarritoController extends Controller
 
           ]);
       }
+  }
+  public function pagar(Request $request,Faker $faker){
+    $carrito=$request->session()->get('carrito');
+    $transacciones=[];
+    foreach($carrito as $p){
+        $transaccion=new Transaccion();
+        $transaccion->referencia=$p->id.$faker->hexcolor.Auth::user()->id;
+        $transaccion->estado=1;   //0=en proceso , 1=listo
+        $transaccion->user_id=Auth::user()->id;
+        $transaccion->curso_id=$p->id;
+        $transaccion->save();
+    }
+
+    $vac=compact('carrito');
+    $this->limpiarCarrito($request);
+
+    return view('pages.exito',$vac);
+
+
+
+
+    /*\MercadoPago\SDK::setClientId("1379163887781279");
+    \MercadoPago\SDK::setClientSecret("LpXQvwCSeNCZXL5OYvcO96bEdXKI6LHX");
+
+    $preference = new \MercadoPago\Preference();
+    $carrito=$request->session()->get('carrito');
+    $items=[];
+    foreach($carrito as $p){
+        $item= new \MercadoPago\Item();
+        $item->id=$p->id;
+        $item->title=$p->titulo;
+        $item->quantity=1;
+        $item->unit_price=$p->precio;
+        $item->currency_id="ARS";
+        array_push($items,$item);
+    }
+
+
+    $preference->items = $items;
+
+    $preference->save(); # Save the preference and send the HTTP Request to create
+
+    # Return the HTML code for button
+
+    return redirect($preference->sandbox_init_point);
+    */
   }
 }
 ?>

@@ -49,9 +49,7 @@
         {{$cursos->links()}}
     </div>
 </div>
-<!--"composer require "laravelcollective/html"   comando para ejecutar y que funcione form-->
-{!! Form::open(['route'=>['agregarAlCarrito',':USER_ID'],'method'=>'POST','id'=>'formAgregar'])!!}
-{!! Form::close()!!}
+
 
 @endsection
 

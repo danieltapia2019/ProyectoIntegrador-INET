@@ -175,7 +175,7 @@ $usuario = User::find(auth()->user()->id);
         {{--  --}}
         <div class="tab-pane fade" id="tab-cursos" role="tabpanel" aria-labelledby="pills-cursos-tab">
             <div class="contenedor">
-                @forelse ($usuario->cursos as $key => $value)
+                @forelse ($usuario->alumno_curso as $key => $value)
                 <div class="card-completo">
                     <div class="card-body">
                         <h5 class="card-title">{{$value->titulo}}</h5>
@@ -184,7 +184,7 @@ $usuario = User::find(auth()->user()->id);
                         <p>Precio: {{$value->precio}}</p>
                         <p>Tipo: {{$value->tipo->tnombre}}</p>
                         <p>Uso: {{$value->uso->snombre}}</p>
-                        <a href="/">Ir al curso</a>
+                        <a href="{{url('/curso/'.$value->id)}}">Ir al curso</a>
                     </div>
                     <img id="foto-curso" src="storage\img\cursos\{{$value->foto_curso}}" class="card-img" alt="...">
                 </div>

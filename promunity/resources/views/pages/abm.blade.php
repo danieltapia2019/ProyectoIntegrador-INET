@@ -3,7 +3,9 @@
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/abm.css') }}">
 @endpush
-
+@section('metadatos')
+<meta name="csrf-token" content="{{csrf_token()}}"/>
+@endsection
 
 @section('title','ABM')
 
@@ -41,6 +43,9 @@
                 </li>
                 <li clas="nav-item">
                     <a class="nav-link" id="usos-tab" data-toggle="tab" href="#usos" role="tab" aria-controls="contact" aria-selected="false">Usos</a>
+                </li>
+                <li clas="nav-item">
+                    <a class="nav-link" id="transacciones-tab" data-toggle="tab" href="#transacciones" role="tab" aria-controls="contact" aria-selected="false">Transacciones</a>
                 </li>
             </ul>
         </nav>
@@ -127,7 +132,7 @@
                                 <div class="row">
                                     <form class="" action="/borrar/usuario" method="POST">
                                         @csrf
-                                        <input type="hidden" name="id" value={{$profesor->id}}>
+                                        <input type="hidden" name="id" value="{{$profesor->id}}">
                                         <button type="submit" name="button" class="btn btn-danger">Eliminar</button>
                                     </form>
                                     <hr>
@@ -286,6 +291,46 @@
                     data-target="#modalUso">Agregar</button>
 
             </div>
+            <div class="tab-pane fade" id="transacciones" role="tabpanel" aria-labelledby="transacciones-tab">
+                <table class="table table-light mt-3 mb-5">
+                    <thead>
+                        <tr>
+                            <th>Referencia</th>
+                            <th>Estado</th>
+                            <th>Usuario</th>
+                            <th>Curso</th>
+                            <th>Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @forelse ($transacciones as $tra)
+                        <tr>
+                            <td>{{$tra->referencia}}</td>
+                            @if($tra->estado==0)
+                            <td>En proceso</td>
+                            @else
+                            <td>Pagado</td>
+                            @endif
+                            <td>{{$tra->usuario->username}}</td>
+                            <td>{{$tra->curso->titulo}}</td>
+                            <td>
+                                <a class="btn btn-success activar" href="{{route('activar',$tra->id)}}" id="{{$tra->id}}">Activar</a>
+                            </td>
+                        </tr>
+                    @empty
+                        <h3 class="mt-5 mb-5">No hay Transacciones :(</h3>
+                    @endforelse
+
+
+
+                    </tbody>
+
+                </table>
+
+                <button type="button" class="btn btn-success mb-3" name="button" data-toggle="modal"
+                    data-target="#modalUso">Agregar</button>
+
+            </div>
         </div>
     </div>
 </div>{{-- /Conteiner--}}
@@ -400,4 +445,7 @@
 </div>
 
 <!-- -->
+@endsection
+@section('scripts')
+<script src="{{ asset('js/abm.js') }}"></script>
 @endsection
