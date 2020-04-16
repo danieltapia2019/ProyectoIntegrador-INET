@@ -12,7 +12,10 @@ use App\UsoModel;
 
 class adminController extends Controller{
   public function abm(){
-    return view('pages.abm');
+    // $views = CursoModel::sum('views');
+    $totales = array(CursoModel::count(),User::count(),CursoModel::sum('views'));
+    // $userTotal = ;
+    return view('pages.abm',compact('totales'));
   }
 
   /*CURSO*/

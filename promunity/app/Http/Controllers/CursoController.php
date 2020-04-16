@@ -56,8 +56,21 @@ class CursoController extends Controller
         // dd($cursoSelect);
         $q = $cursoSelect->lenguaje;
 
-        $cursosRecom = CursoModel::where('titulo','LIKE','%'.$q.'%')->orWhere('lenguaje','LIKE','%'.$q.'%')->limit(5)->get();//Cursos recomendados
+        Self::viewIncrement($cursoId);
+
+        $cursosRecom = CursoModel::where([
+            ['id','!=',$cursoId],
+            ['titulo','LIKE','%'.$q.'%']
+            ])->orWhere([
+                ['id','!=',$cursoId],
+                ['lenguaje','LIKE','%'.$q.'%']
+            ])->limit(5)->get();//Cursos recomendados
 
         return view('pages.detCurso',compact('cursoSelect','cursosRecom'));
+    }
+
+    private function viewIncrement($id){
+        $curso = CursoModel::find($id);
+        $curso->increment('views');
     }
 }

@@ -1,103 +1,185 @@
-.conteiner{
-  display: flex !important;/* ETIQUETA QUE POSICIONA UNO AL LADO DEL OTRO */
-  flex-wrap: wrap;
-}
-.sideNavigation{
-  background-color: black;
-  height: 100vh;
-  width: 150px;
-  margin-right: 2%;
-  justify-content: center;
-
-}
-.sideNavigation a{
-  list-style: none;
-  color: white;
-  display: block;
-  justify-content: center;
-  text-align: center;
-  font-size: 18px;
-}
-.sideNavigation a:last-child{
-  position: absolute;
-  bottom: 0;
-  margin-left: 25px;
-  margin-right: 25px;
-}
-a i{
-  margin-right: 5px;
-}
-#imgSideNav{
-  height: 100px;
-  width: 100px;
-  border-radius: 150px;
-  margin-left: 25px;
-  margin-right: 25px;
-}
-.abm-tablist{
+.conteiner {
+    display: flex !important;
+    /* ETIQUETA QUE POSICIONA UNO AL LADO DEL OTRO */
+    flex-wrap: wrap;
 }
 
-#logoHOME{
-  width: 50px;
-  height: 50px;
+.sideNavigation {
+    background-color: black;
+    height: 100vh;
+    width: 150px;
+    margin-right: 2%;
+    justify-content: center;
+
+}
+
+.sideNavigation a {
+    list-style: none;
+    color: white;
+    display: block;
+    justify-content: center;
+    text-align: center;
+    font-size: 18px;
+}
+
+.sideNavigation a:last-child {
+    position: absolute;
+    bottom: 0;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+a i {
+    margin-right: 5px;
+}
+
+#imgSideNav {
+    height: 100px;
+    width: 100px;
+    border-radius: 150px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+div.row#abm-home {
+    width: 80%;
+}
+
+div.wrapper {
+    min-width: 25%;
+    height: 150px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 3%;
+    overflow: hidden;
+}
+
+.wrapper>div.icon {
+    float: left;
+    /* border: 1px solid red; */
+    width: 40%;
+    height: fit-content;
+}
+
+.wrapper>.icon>i {
+    margin: 40%;
+    font-size: 35px;
+}
+
+.wrapper>.icon#i-user {
+    background-color: #81C784;
+}
+
+.wrapper>.icon#i-curso {
+    background-color: #64B5F6;
+}
+
+.wrapper>.icon#i-view {
+    background-color: #E57373;
+}
+
+.wrapper>div.content {
+    float: right;
+    /* border: 1px solid green; */
+    width: 60%;
+    height: 150px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+div.conteiner{
+  position: relative;
+}
+
+div.abm-directions-panel {
+    /* border: 1px solid rgba(0,0,0,0.5); */
+    background-color: rgba(0, 0, 0, 0.1);
+    /* margin: 1% auto; */
+    /* width: 50%;
+  height: 50%; */
+    overflow: hidden;
+    border-radius: 25px;
+    position: absolute;
+
+    left:30%;
+    bottom: 15%;
+}
+
+.abm-directions-panel>button {
+    width: 40%;
+    height: 100px;
+    margin: 4.5%;
+    font-size: 2rem;
+}
+
+
+#logoHOME {
+    width: 50px;
+    height: 50px;
 }
 
 /*EDITAR FORMULARIO*/
-.editar-usuario{
-  width: 50%;
-  justify-content: center;
-  margin-left: 25%;
-  margin-right: 25%;
-  margin-top: 2vh;
+.editar-usuario {
+    width: 50%;
+    justify-content: center;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 2vh;
 }
 
-.editar-curso{
-  width: 50%;
-  justify-content: center;
-  margin: auto;
-  margin-top: 2vh;
+.editar-curso {
+    width: 50%;
+    justify-content: center;
+    margin: auto;
+    margin-top: 2vh;
 }
-.nav.flex-column{
-  display: none;
+
+.nav.flex-column {
+    display: none;
 }
+
 /*PERFIL MOBILE*/
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 
-  /*SIDE NAV*/
-  .sideNavigation{
-    height: auto;
-    width: 100%;
-    justify-content: center;
-  }
-  .sideNavigation a:last-child{
-    position: relative;
-    margin-left: 25px;
-    margin-right: 25px;
-  }
-  a i{
-    margin-right: 5px;
-  }
-  #logoHOME{
-  }
+    /*SIDE NAV*/
+    .sideNavigation {
+        height: auto;
+        width: 100%;
+        justify-content: center;
+    }
 
-  #imgSideNav{
-    margin-top: 5px;
-    height: 75px;
-    width: 75px;
-    border-radius: 150px;
-  }
-  /*TAB*/
-  #IDregistro{
-    display: none;
-  }
-  #IDAcceso{
-    display: none;
-  }
-  th{
-    font-size: 10px;
-  }
-  td{
-    font-size: 10px;
-  }
+    .sideNavigation a:last-child {
+        position: relative;
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+
+    a i {
+        margin-right: 5px;
+    }
+
+    #logoHOME {}
+
+    #imgSideNav {
+        margin-top: 5px;
+        height: 75px;
+        width: 75px;
+        border-radius: 150px;
+    }
+
+    /*TAB*/
+    #IDregistro {
+        display: none;
+    }
+
+    #IDAcceso {
+        display: none;
+    }
+
+    th {
+        font-size: 10px;
+    }
+
+    td {
+        font-size: 10px;
+    }
 }

@@ -18,6 +18,7 @@ function filterSearch() {
     // console.log(valTipo,valUso);
     // console.log(typeof valUso);
     var aux = "";
+
     if( (valTipo === 'all') && (valUso === 'all') ){
         console.log('1 if');
         console.log(valTipo,valUso);
@@ -41,8 +42,6 @@ function filterSearch() {
     iptHidden.setAttribute('name',"valState");
     iptHidden.setAttribute('value',aux);
     iptHidden.setAttribute('hidden',true);
-
-    document.getElementById('filtForm').appendChild(iptHidden);
 
     $('form#filtForm').submit();
 }

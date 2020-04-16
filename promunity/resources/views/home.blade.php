@@ -33,7 +33,7 @@
         <h2 class="mb-3">Cursos mas visitados</h2>
         @forelse ($cursosFav as $curso)
         <article class="curso">
-        <img src="{{ asset('/storage/img/cursos/'.$curso->foto_curso) }}" alt="">
+            <img src="{{ asset('/storage/img/cursos/'.$curso->foto_curso) }}" alt="">
             <h4>{{$curso->titulo}}</h4>
             <p>{{$curso->creador->username}}</p>
             {{-- <p>{{$curso->precio}}</p> --}}
@@ -41,23 +41,23 @@
             <p> <a href="/curso/id"> Ver Curso</a> </p>
         </article>
         @empty
-            <h4>No hay Favoritos</h4>
+        <h4>No hay Favoritos</h4>
         @endforelse
     </div>
 </section>
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-      @forelse ($cursosFav as $key => $curso)
+        @forelse ($cursosFav as $key => $curso)
         @if ($key == 0)
-          <div class="carousel-item active">
-                <article class="border border-secundary border-top-0 curso">
-                    <img src="img/cursos.jpg" alt="">
-                    <h4>{{$curso->titulo}}</h4>
-                    <p>{{$curso->creador->username}}</p>
-                    <p>{{$curso->precio}} ARS</p>
-                    <p> <a href="/curso/id"> Ver Curso</a> </p>
-                </article>
-          </div>
+        <div class="carousel-item active">
+            <article class="border border-secundary border-top-0 curso">
+                <img src="img/cursos.jpg" alt="">
+                <h4>{{$curso->titulo}}</h4>
+                <p>{{$curso->creador->username}}</p>
+                <p>{{$curso->precio}} ARS</p>
+                <p> <a href="/curso/id"> Ver Curso</a> </p>
+            </article>
+        </div>
         @else
         <div class="carousel-item">
             <article class="border border-secundary border-top-0 curso">
@@ -68,10 +68,10 @@
                 <p> <a href="/curso/id"> Ver Curso</a> </p>
             </article>
         </div>
-      @endif
-      @empty
+        @endif
+        @empty
         <h4>No hay cursos fav</h4>
-      @endforelse
+        @endforelse
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -84,35 +84,43 @@
 </div>
 
 <div id="contacto">
-    <h5 class="h2 mb-5">Contacto</h5>
-    <form>
-        <div class="form-row">
-            <form class="" action="index.html" method="POST">
-                <div class="datosContacto">
-                    <div class="form-group">
+    <h5 class="h2 mb-5 ml-5">Contacto</h5>
+    <div class="container">
+        <form action="{{ url('/anon') }}" method="POST">
+            @csrf
+            <div class="form-row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="form-group mr-5">
                         <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre" required>
+                        <input name="nombre" type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre" >
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mr-5">
                         <label for="nombre">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Direccion de email" required>
+                        <input name="email" type="email" class="form-control" id="email" placeholder="Direccion de email" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mr-5">
                         <label for="telefono">Telefono</label>
-                        <input type="text" class="form-control" id="telefono"
-                            placeholder="Cod.Area-Numero ej. 261-155232343" required>
+                        <input name="tel" type="text" class="form-control" id="telefono" placeholder="Cod.Area-Numero ej. 261-155232343" required>
                     </div>
                 </div>
-                <div class="col-md-5 mx-4 textArea">
-                    <div class="form-group mb-4">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="form-group">
                         <label for="textoarea">Consulta</label>
-                        <textarea class="form-control" id="textoarea" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-contact btn-lg btn-block my-3">Enviar</button>
+                        <textarea name="consulta" class="form-control" id="textoarea" rows="5" placeholder="Consulta ..." required></textarea>
+                    </div>                                        
                 </div>
-            </form>
-        </div>
-    </form>
+            </div>
+            <div class="form-row">
+                <div class="col-5"></div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-contact btn-lg btn-block my-3">Enviar</button>
+                    </div>                                    
+                </div>
+                <div class="col-5"></div>
+            </div>
+        </form>
+    </div>
 </div>
 
 <div id="opiniones">

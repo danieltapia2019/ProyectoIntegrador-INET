@@ -52,7 +52,7 @@
                   </div>
                     @endif
                 </li>
-                <li>
+                {{-- <li>
                     <a href="/setting" onclick="abrirConfig()">
                         <i class="fas fa-cogs"></i>Settings
                     </a>
@@ -61,6 +61,7 @@
                   @if ($usuario->acceso == 1)
                   @endif
                 </li>
+                </li> --}}
             </ul>
         </div>
         <nav class="topnav">

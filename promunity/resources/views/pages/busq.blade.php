@@ -14,7 +14,7 @@
             <div class="form-row">
                 <div class="form-group col-12">
                     <div class="input-group">
-                        <input type="search" id="busquedaSection" class="form-control" placeholder="buscar" aria-label="¿Qué quieres aprender?" aria-describedby="botonbusq" name="q" style="text-align: center">
+                        <input type="search" id="busquedaSection" class="form-control" placeholder="buscar" aria-describedby="botonbusq" name="q" value="{{$query}}" style="text-align: center">
                         <div class="input-group-append">
                             <button class="btn btn-outline-light " id="botonBusq" type="button" onclick="filterSearch()">
                                 <i class="fas fa-search"></i>
@@ -67,7 +67,7 @@
                             <label class="input-group-text" for="orden">Ordenar por</label>
                         </div>
                         <select class="custom-select" id="orden" name="ord">
-                            <option value="null" selected>Todos</option>
+                            <option value="all" selected>Todos</option>
                             <option value="new">Más nuevos</option>
                             <option value="old">Más viejos</option>
                         </select>
@@ -90,7 +90,8 @@
                     @guest
                     <a href="{{ url("/curso/$curso->id") }}">Ver Mas</a>
                     @else
-                    <button class="btn btn-primary mr-1 ml-3">
+                    <a href="{{ url("/curso/$curso->id") }}">Ver Mas</a>
+                    <button class="btn btn-primary mr-1" style="margin-left: 75%;">
                         <a href="{{ url('/carrito'.'/'.$curso->id) }}" style="color: white">
                             <i class="fas fa-shopping-cart"></i>
                         </a>

@@ -21,6 +21,7 @@ class searchController extends Controller
         // dd($form);
         $tipos = TipoModel::all();
         $usos = UsoModel::all();
+        $query = "";
         if( isset($form['q']) ){
             switch ($form['valState']) {
                 case 0:
@@ -39,10 +40,12 @@ class searchController extends Controller
                     $cursos = CursoModel::where('titulo','LIKE','%'.$form['q'].'%')->orWhere('lenguaje','LIKE','%'.$form['q'].'%')->paginate(5);
                     break;
             }
+            $query = $form['q'];
         } else {
             $cursos = CursoModel::paginate(5);
         }
-        return view('pages.busq',compact('tipos','usos','cursos'));
+        
+        return view('pages.busq',compact('tipos','usos','cursos','query'));
     }
 
     /**
