@@ -5,7 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\TipoModel;
 use App\UsoModel;
+use App\LenguajeModel;
 use App\User;
+
+
 class CursoModel extends Model
 {
     public $table = 'cursos';
@@ -19,6 +22,9 @@ class CursoModel extends Model
     }
     public function uso(){
       return $this->belongsTo(UsoModel::class,'uso_id');
+    }
+    public function lenguaje(){
+      return $this->belongsTo(LenguajeModel::class,'lenguaje_id');
     }
     public function creador(){
       return $this->belongsTo(User::class,'autor');

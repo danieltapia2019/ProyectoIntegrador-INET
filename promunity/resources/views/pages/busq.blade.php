@@ -2,7 +2,6 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/cursos.css') }}">
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
 @endpush
 
 @section('title','Cursos')
@@ -31,7 +30,7 @@
             </div>
 
             <div class="form-row mt-3 filt-form" hidden>
-                <div class="form-group col-4">
+                <div class="form-group col-3">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="tipo">Tipo</label>
@@ -46,7 +45,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group col-4">
+                <div class="form-group col-3">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="uso">Uso</label>
@@ -55,6 +54,21 @@
                             <option value="all" selected>todos</option>
                             @forelse ($usos as $uso)
                             <option value="{{$uso->id}}">{{$uso->usoNombre}}</option>
+                            @empty
+                            <option value="all" selected>todos</option>
+                            @endforelse
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-3">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="uso">Lenguaje</label>
+                        </div>
+                        <select class="custom-select" id="lnj" name="lnj">
+                            <option value="all" selected>todos</option>
+                            @forelse ($lenguajes as $lenguaje)
+                            <option value="{{$lenguaje->id}}">{{$lenguaje->nombreLenguaje}}</option>
                             @empty
                             <option value="all" selected>todos</option>
                             @endforelse
@@ -85,7 +99,7 @@
             <section class="desc">
                 <h2>{{$curso->titulo}}</h2>
                 <p>{{$curso->descripcion}}</p>
-                <p><b>Lenguaje: </b>{{$curso->lenguaje}}</p>
+                <p><b>Lenguaje: </b>{{$curso->lenguaje->nombreLenguaje}}</p>
                 <footer>
                     @guest
                     <a href="{{ url("/curso/$curso->id") }}">Ver Mas</a>
@@ -116,5 +130,6 @@
 @endsection
 
 @section('scripting')
-<script type="text/javascript" src="{{ asset('js/search.js') }}"></script>
+{{-- No Borrar comentario de abajo --}}
+{{-- <script type="text/javascript" src="{{ asset('js/search.js') }}"></script> --}}
 @endsection

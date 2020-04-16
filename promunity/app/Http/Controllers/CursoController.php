@@ -54,17 +54,14 @@ class CursoController extends Controller
     public function detalle($cursoId){
         $cursoSelect = CursoModel::find($cursoId);//Curso seleccionado
         // dd($cursoSelect);
-        $q = $cursoSelect->lenguaje;
+        $q = $cursoSelect->lenguaje->id;
 
         Self::viewIncrement($cursoId);
 
         $cursosRecom = CursoModel::where([
             ['id','!=',$cursoId],
-            ['titulo','LIKE','%'.$q.'%']
-            ])->orWhere([
-                ['id','!=',$cursoId],
-                ['lenguaje','LIKE','%'.$q.'%']
-            ])->limit(5)->get();//Cursos recomendados
+            ['lenguaje_id','=',$q]
+        ])->limit(5)->get();//Cursos recomendados
 
         return view('pages.detCurso',compact('cursoSelect','cursosRecom'));
     }

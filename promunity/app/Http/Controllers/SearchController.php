@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\CursoModel;
 use App\TipoModel;
 use App\UsoModel;
+use App\LenguajeModel;
 
 
 /**
@@ -21,6 +22,8 @@ class searchController extends Controller
         // dd($form);
         $tipos = TipoModel::all();
         $usos = UsoModel::all();
+        $lenguajes = LenguajeModel::all();
+
         $query = "";
         if( isset($form['q']) ){
             switch ($form['valState']) {
@@ -45,7 +48,7 @@ class searchController extends Controller
             $cursos = CursoModel::paginate(5);
         }
         
-        return view('pages.busq',compact('tipos','usos','cursos','query'));
+        return view('pages.busq',compact('tipos','usos','lenguajes','cursos','query'));
     }
 
     /**
@@ -54,7 +57,9 @@ class searchController extends Controller
     public function indexSearch(){
         $tipos = TipoModel::all();
         $usos = UsoModel::all();
+        $lenguajes = LenguajeModel::all();
+        
         $cursos = CursoModel::paginate(5);
-        return view('pages.busq',compact('tipos','usos','cursos'));
+        return view('pages.busq',compact('tipos','usos','lenguajes','cursos'));
     }
 }

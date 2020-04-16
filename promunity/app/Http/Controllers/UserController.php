@@ -11,6 +11,8 @@ use App\User;
 use App\CursoModel;
 use App\TipoModel;
 use App\UsoModel;
+use App\LenguajeModel;
+
 
 class UserController extends Controller
 {
@@ -20,10 +22,11 @@ class UserController extends Controller
         $usuario = User::find(auth()->user()->id);
         $tipos = TipoModel::all();
         $usos = UsoModel::all();
+        $lenguajes = LenguajeModel::all();
         $vac;
         if($usuario->acceso != 2){
         $cursos = $usuario->cursos;
-        $vac = compact('tipos','usos','cursos','usuario');
+        $vac = compact('tipos','usos','cursos','lenguajes','usuario');
         return view('pages.perfil',$vac);
         }else{
         $cursos = $usuario->alumno_curso;

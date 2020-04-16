@@ -11,7 +11,6 @@
 <div class="conteiner">
       @include('component.sidenav')
 <div class="contenido col-md-10">
-    {{$cursos->links()}}
     <a href="/perfil">
       <button type="button" class="btn btn-success mb-3" name="button">Agregar</button>
     </a>
@@ -53,7 +52,7 @@
             <tr>
                 <th id="IDregistro">{{$curso->id}}</th>
                 <td>{{$curso->titulo}}</td>
-                <td>{{$curso->lenguaje}}</td>
+                <td>{{$curso->lenguaje->nombreLenguaje}}</td>
                 <td><a href="/storage/img/cursos/{{$curso->foto_curso}}">Ver imagen</a></td>
                 <td>{{$curso->precio}}</td>
                 <td>{{$curso->tipo->tipoNombre}}</td>

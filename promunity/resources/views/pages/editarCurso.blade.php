@@ -34,7 +34,7 @@
       </div>
       <label for="lenguaje">Lenguaje: </label>
       <div class="input-group mb-3">
-          <input type="text" name="lenguaje" class="form-control" placeholder="{{$curso->lenguaje}}"
+          <input type="text" name="lenguaje" class="form-control" placeholder="{{$curso->lenguaje->nombreLenguaje}}"
               required maxlength="50" minlength="2">
       </div>
 

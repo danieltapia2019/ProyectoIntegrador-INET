@@ -18,7 +18,7 @@
                 <section class="desc col-xl-5 col-lg-5 col-md-12 col-sm-12">
                     <h2>{{$cursoSelect->titulo}}</h2>
                     <p>{{$cursoSelect->descripcion}}</p>
-                    <p><b>Lenguaje: </b>{{$cursoSelect->lenguaje}}</p>
+                    <p><b>Lenguaje: </b>{{$cursoSelect->lenguaje->nombreLenguaje}}</p>
                     <p><b>Precio: </b>{{$cursoSelect->precio}}</p>
                     <p><b>Duracion: </b>{{$cursoSelect->duracion}}</p>
                 </section>
@@ -34,9 +34,6 @@
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                     </button>
-                    {{-- <button class="btn btn-primary mr-1 ">
-                        <a href="#" style="color: white"><i class="far fa-heart"></i></a>
-                    </button> --}}
                     @endguest
                 </footer>
             </article>

@@ -134,7 +134,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{$curso->titulo}}</h5>
                 <p class="card-text">{{$curso->descripcion}}</p>
-                <p>Lenguaje: {{$curso->lenguaje}}</p>
+                <p>Lenguaje: {{$curso->lenguaje->nombreLenguaje}}</p>
                 <p>Precio: {{$curso->precio}} ARS</p>
                 <p>Tipo: {{$curso->tipo->tipoNombre}}</p>
                 <p>Uso: {{$curso->uso->usoNombre}}</p>
@@ -187,6 +187,15 @@
                     required maxlength="10" minlength="2">
             </div>
 
+            <select name="lenguaje" class="custom-select" id="inputGroupSelect01" required>
+            <option selected>Elegir tipo</option>
+                @forelse ($lenguajes as $key => $lenguaje)
+                <option value={{$lenguaje->id}}>{{$lenguaje->nombreLenguaje}}</option>
+                @empty
+                <option value="">No hay Tipos</option>
+                @endforelse
+            </select>
+
             <label for="tipo">Tipo: </label>
             <select name="tipo" class="custom-select" id="inputGroupSelect01" required>
                 <option selected>Elegir tipo</option>
@@ -219,7 +228,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{$curso->titulo}}</h5>
                     <p class="card-text">{{$curso->descripcion}}</p>
-                    <p>Lenguaje: {{$curso->lenguaje}}</p>
+                    <p>Lenguaje: {{$curso->lenguaje->nombreLenguaje}}</p>
                     <p>Precio: {{$curso->precio}} ARS</p>
                     <p>Tipo: {{$curso->tipo->tipoNombre}}</p>
                     <p>Uso: {{$curso->uso->usoNombre}}</p>

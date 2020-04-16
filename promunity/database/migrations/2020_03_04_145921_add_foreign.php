@@ -25,7 +25,10 @@ class AddForeign extends Migration
             $table->unsignedBigInteger('uso_id');
             $table->foreign('uso_id')->references('id')->on('usos');
 
+            $table->unsignedBigInteger('lenguaje_id');
+            $table->foreign('lenguaje_id')->references('id')->on('lenguajes');
         });
+
         Schema::table('usuario_curso',function(Blueprint $table){
             $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
 
@@ -44,6 +47,7 @@ class AddForeign extends Migration
         //     $table->dropForeign('autor');
         //     $table->dropForeign('tipo_id');
         //     $table->dropForeign('uso_id');
+        //     $table->dropForeign('lenguaje_id');
         // });
         // Schema::table('usuario_curso',function(Blueprint $table){
         //     $table->dropForeign('curso_id');
