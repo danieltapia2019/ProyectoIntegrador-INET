@@ -16,7 +16,10 @@ class searchController extends Controller
 {
     
     /**
-     * Busca los resultados por lenjuage y titulo 
+     * Busca los resultados por el atr título de los cursos.
+     * En caso de de contener parametros de 'filtro' se llamará a la funcion axuliar
+     * 
+     * 
      */
     public function searchCurso(Request $form){
         // dd($form);
@@ -24,30 +27,43 @@ class searchController extends Controller
         $usos = UsoModel::all();
         $lenguajes = LenguajeModel::all();
 
-        $query = "";
-        if( isset($form['q']) ){
-            switch ($form['valState']) {
-                case 0:
-                    $cursos = CursoModel::where('titulo','LIKE','%'.$form['q'].'%')->orWhere('lenguaje','LIKE','%'.$form['q'].'%')->paginate(5);
-                    break;
-                case 1:
-                    $cursos = CursoModel::where('titulo','LIKE','%'.$form['q'].'%')->where('tipo_id','=',$form['tip'])->paginate(5);
-                    break;
-                case 2:
-                    $cursos = CursoModel::where('titulo','LIKE','%'.$form['q'].'%')->where('uso_id','=',$form['uso'])->paginate(5);
-                    break;
-                case 3:
-                    $cursos = CursoModel::where('titulo','LIKE','%'.$form['q'].'%')->where('tipo_id','=',$form['tip'])->where('uso_id','=',$form['uso'])->paginate(5);
-                    break;
-                default:
-                    $cursos = CursoModel::where('titulo','LIKE','%'.$form['q'].'%')->orWhere('lenguaje','LIKE','%'.$form['q'].'%')->paginate(5);
-                    break;
+        
+        //El primer if contiene los cursos solicitados por 'Home' 
+        // if( isset( $form['q'] ) && !( $form->has( ['tip', 'uso','lng','ord'] ) ) ){
+        if( isset( $form['q'] ) ){
+
+            $cursosAux = CursoModel::where('titulo','like','%'.$form['q'].'%')->paginate(5);
+
+            if( $form->has( ['state','setTime'] ) ){
+                //Uso de los filtros para la busqueda
+                $ac = array( $form['tip'], $form['uso'], $form['lng'] ); //arrays 'comprimidos'
+
+                switch ( $form['setTime'] ) {
+                    case 'd':
+                        $cursosAux = Self::getCursoByDefault( array($form['q'], $form['state']), $ac );
+                        break;
+                    case 'n':
+                        $cursosAux = Self::getCursoByNew( array($form['q'], $form['state']), $ac );
+                        break;
+                    case 'o':
+                        $cursosAux = Self::getCursoByOld( array($form['q'], $form['state']), $ac );
+                        break;     
+                    default:
+                    case 'd':
+                        $cursosAux = CursoModel::paginate(5);
+                        break;
+                }
+            } else {
+                dd('1 else');
             }
-            $query = $form['q'];
+            // $cursos = $cursosAux;
         } else {
-            $cursos = CursoModel::paginate(5);
+            dd('1 else');
         }
         
+
+        $query = $form['q'];
+
         return view('pages.busq',compact('tipos','usos','lenguajes','cursos','query'));
     }
 
@@ -61,5 +77,138 @@ class searchController extends Controller
         
         $cursos = CursoModel::paginate(5);
         return view('pages.busq',compact('tipos','usos','lenguajes','cursos'));
+    }
+
+
+    /**
+     * Funcion Auxiliar que permite 'filtrar' los resultados *por defecto*
+     * 
+     * @return collection
+     */
+    private function getCursoByDefault($qState, $filters){
+        $q = $qState['0'];
+        $state = $qState['1'];
+
+        $tipo = $filters['0'];
+        $uso = $filters['1'];
+        $lng = $filters['2'];
+
+        switch ($state) {
+            case 0:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->paginate(5);
+                break;
+            case 1:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('tipo_id','=',$tipo)->paginate(5);
+                break;
+            case 2:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('uso_id','=',$uso)->paginate(5);
+                break;
+            case 3:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('lenguaje_id','=',$lng)->paginate(5);
+                break;
+            case 4:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('tipo_id','=',$tipo)->where('uso_id','=',$uso)->paginate(5);
+                break;
+            case 5:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('uso_id','=',$uso)->where('lenguaje_id','=',$lng)->paginate(5);
+                break;
+            case 6:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('tipo_id','=',$tipo)->where('lenguaje_id','=',$lng)->paginate(5);
+                break;
+            case 7:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('tipo_id','=',$tipo)->where('uso_id','=',$uso)->where('lenguaje_id','=',$lng)->paginate(5);
+                break;
+            default:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->paginate(5);
+                break;
+        }
+    }
+
+    /**
+     * Funcion Auxiliar que permite 'filtrar' los resultados *mas nuevos*
+     * 
+     * @return collection
+     */
+    private function getCursoByNew($qState, $filters){
+        $q = $qState['0'];
+        $state = $qState['1'];
+
+        $tipo = $filters['0'];
+        $uso = $filters['1'];
+        $lng = $filters['2'];
+
+        switch ($state) {
+            case 0:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->latest()->paginate(5);
+                break;
+            case 1:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('tipo_id','=',$tipo)->latest()->paginate(5);
+                break;
+            case 2:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('uso_id','=',$uso)->latest()->paginate(5);
+                break;
+            case 3:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('lenguaje_id','=',$lng)->latest()->paginate(5);
+                break;
+            case 4:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('tipo_id','=',$tipo)->where('uso_id','=',$uso)->latest()->paginate(5);
+                break;
+            case 5:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('uso_id','=',$uso)->where('lenguaje_id','=',$lng)->latest()->paginate(5);
+                break;
+            case 6:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('tipo_id','=',$tipo)->where('lenguaje_id','=',$lng)->latest()->paginate(5);
+                break;
+            case 7:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('tipo_id','=',$tipo)->where('uso_id','=',$uso)->where('lenguaje_id','=',$lng)->latest()->paginate(5);
+                break;
+            default:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->latest()->paginate(5);
+                break;
+        }
+    }
+
+    /**
+     * Funcion Auxiliar que permite 'filtrar' los resultados *mas viejos*
+     * 
+     * @return collection
+     */
+    private function getCursoByOld($qState, $filters){
+        $q = $qState['0'];
+        $state = $qState['1'];
+
+        $tipo = $filters['0'];
+        $uso = $filters['1'];
+        $lng = $filters['2'];
+
+        switch ($state) {
+            case 0:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->oldest()->paginate(5);
+                break;
+            case 1:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('tipo_id','=',$tipo)->oldest()->paginate(5);
+                break;
+            case 2:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('uso_id','=',$uso)->oldest()->paginate(5);
+                break;
+            case 3:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('lenguaje_id','=',$lng)->oldest()->paginate(5);
+                break;
+            case 4:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('tipo_id','=',$tipo)->where('uso_id','=',$uso)->oldest()->paginate(5);
+                break;
+            case 5:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('uso_id','=',$uso)->where('lenguaje_id','=',$lng)->oldest()->paginate(5);
+                break;
+            case 6:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('tipo_id','=',$tipo)->where('lenguaje_id','=',$lng)->oldest()->paginate(5);
+                break;
+            case 7:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->where('tipo_id','=',$tipo)->where('uso_id','=',$uso)->where('lenguaje_id','=',$lng)->oldest()->paginate(5);
+                break;
+            default:
+                return CursoModel::where('titulo','LIKE','%'.$q.'%')->oldest()->paginate(5);
+                break;
+        }
     }
 }

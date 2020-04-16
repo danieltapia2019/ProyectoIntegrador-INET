@@ -63,9 +63,9 @@
                 <div class="form-group col-3">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="uso">Lenguaje</label>
+                            <label class="input-group-text" for="lenguaje">Lenguaje</label>
                         </div>
-                        <select class="custom-select" id="lnj" name="lnj">
+                        <select class="custom-select" id="lenguaje" name="lng">
                             <option value="all" selected>todos</option>
                             @forelse ($lenguajes as $lenguaje)
                             <option value="{{$lenguaje->id}}">{{$lenguaje->nombreLenguaje}}</option>
@@ -75,7 +75,7 @@
                         </select>
                     </div>
                 </div>
-                {{-- <div class="form-group col-4">
+                <div class="form-group col-3">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="orden">Ordenar por</label>
@@ -86,7 +86,7 @@
                             <option value="old">Más viejos</option>
                         </select>
                     </div>
-                </div> --}}
+                </div>
             </div>
         </form>
     </div>
@@ -98,8 +98,9 @@
             </figure>
             <section class="desc">
                 <h2>{{$curso->titulo}}</h2>
-                <p>{{$curso->descripcion}}</p>
+                {{-- <p>{{$curso->desc}}</p> --}}
                 <p><b>Lenguaje: </b>{{$curso->lenguaje->nombreLenguaje}}</p>
+                <p><b>Fecha: </b>{{$curso->created_at}}</p>
                 <footer>
                     @guest
                     <a href="{{ url("/curso/$curso->id") }}">Ver Mas</a>
@@ -131,5 +132,5 @@
 
 @section('scripting')
 {{-- No Borrar comentario de abajo --}}
-{{-- <script type="text/javascript" src="{{ asset('js/search.js') }}"></script> --}}
+<script type="text/javascript" src="{{ asset('js/search.js') }}"></script>
 @endsection
