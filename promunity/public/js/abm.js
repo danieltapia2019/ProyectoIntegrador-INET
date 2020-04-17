@@ -45,9 +45,9 @@ $(".btn-submit-user").click(function(e){
             "<td>"+data.email+ "</td>" +
             "<td>"+
             "<div class='row'>"+
-                    "<button type='button' onclick='borrarRegistro({{$usuario->id}},this,1)' name='button' class='btn-delete btn btn-danger'>Eliminar</button>"+
+                    "<button type='button' onclick='borrarRegistro("+data.id+",this,1)' name='button' class='btn-delete btn btn-danger'>Borrar</button>"+
                     "<hr>"+
-                    "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalUsuario' onclick='editarUsuario({{$usuario}},this)'>Editar</button>"+
+                    "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalUsuario' onclick='editarUsuario("+data.id+",this'>Editar</button>"+
               "</div>"+
             "</tr>";
             $(".usuarios tbody").append(tr_str);
@@ -73,6 +73,7 @@ function borrarRegistro(id,boton,url){
       case 2: url = 'http://localhost:8000/borrar/curso/';break;
       case 3: url = 'http://localhost:8000/borrar/tipo/';break;
       case 4: url = 'http://localhost:8000/borrar/uso/';break;
+      case 5: url = 'http://localhost:8000/borrar/lenguaje/';break;
     }
     if(confirm('Esta Seguro')){
     $.ajax({
@@ -135,9 +136,9 @@ function editarUsuario(persona,boton){
               "<td>"+tipoAcceso+"</td>"+
               "<td>"+
                 "<div class='row'>"+
-                      "<button type='button' onclick='borrarRegistro("+data.id+","+boton+","+1+")' name='button' class='btn-delete btn btn-danger'>Eliminar</button>"+
+                      "<button type='button' onclick='borrarRegistro("+data.id+",this,1)' name='button' class='btn-delete btn btn-danger'>Borrar</button>"+
                       "<hr>"+
-                      "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalUsuario' onclick='editarUsuario("+data.id+","+boton+")'>Editar</button>"+
+                      "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalUsuario' onclick='editarUsuario("+data.id+",'this)'>Editar</button>"+
                 "</div>"+
               "</td>"+
               $(boton).closest('tr').html(tr);
@@ -215,9 +216,9 @@ function editarTipo(tipo,boton){
         "<td>"+data.tipoNombre+"</td>"+
         "<td>"+
         "<div class='row'>"+
-        "<button type='button' onclick='borrarRegistro({{$tipo->id}},this,3)' name='button' class='btn-delete btn btn-danger'>Eliminar</button>"+
+        "<button type='button' onclick='borrarRegistro("+ tipo.id +",this,3)' name='button' class='btn-delete btn btn-danger'>Eliminar</button>"+
         "<hr>"+
-        "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalUso' onclick='editar({{$tipo}},this)'>Editar</button>"+
+        "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalUso' onclick='editar("+ tipo.id +",this)'>Editar</button>"+
         "</div>"+
         "</td>";
         $(boton).closest('tr').html(tr);
@@ -256,9 +257,9 @@ function editarTipo(tipo,boton){
         "<td>"+data.usoNombre+"</td>"+
         "<td>"+
         "<div class='row'>"+
-        "<button type='button' onclick='borrarRegistro({{$uso->id}},this,4)' name='button' class='btn-delete btn btn-danger'>Eliminar</button>"+
+        "<button type='button' onclick='borrarRegistro("+ uso.id +",this,4)' name='button' class='btn-delete btn btn-danger'>Eliminar</button>"+
         "<hr>"+
-        "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalUso' onclick='editar({{$tipo}},this)'>Editar</button>"+
+        "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalUso' onclick='editar("+ uso.id +",this)'>Editar</button>"+
         "</div>"+
         "</td>";
         $(".usos tbody").append(tr);
@@ -294,9 +295,9 @@ function editarUso(uso,boton){
         "<td>"+data.usoNombre+"</td>"+
         "<td>"+
         "<div class='row'>"+
-        "<button type='button' onclick='borrarRegistro({{$uso->id}},this,3)' name='button' class='btn-delete btn btn-danger'>Eliminar</button>"+
+        "<button type='button' onclick='borrarRegistro("+uso.id+",this,3)' name='button' class='btn-delete btn btn-danger'>Eliminar</button>"+
         "<hr>"+
-        "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalUso' onclick='editar({{$uso}},this)'>Editar</button>"+
+        "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalUso' onclick='editar("+uso.id+",this)'>Editar</button>"+
         "</div>"+
         "</td>";
         $(boton).closest('tr').html(tr);
@@ -319,24 +320,116 @@ function editarUso(uso,boton){
   });
 
 }
+
+/*CREAR LENGUAJE*/
+$(".btn-submit-lenguaje").click(function(e){
+  e.preventDefault();
+  var nombreLenguaje = $("input[name=nlenguaje]").val();
+  if(nombreLenguaje.length == null){
+    alert('CAMPO VACIO')
+  }else {
+    $.ajax({
+      type:'POST',
+      url: 'http://localhost:8000/admin/crear/lenguaje',
+      data: {lnombre:nombreLenguaje},
+      success: function(data){
+        alert('Creado con exito');
+        $("#modalLenguaje").hide();
+      },
+      error: function(e){
+        alert('ERROR '+e);
+      }
+    });
+  }
+})
+
+function editarLenguaje(lenguaje,boton){
+  $(".modal-title").text('Editar Lenguaje');
+  $("input[name=nlenguaje]").val(lenguaje.nombreLenguaje);
+  $(".btn-submit-lenguaje").hide();
+  var botonActualizar ="<button type='submit' class='btn btn-warning btn-block my-3 btn-put-lenguaje'>Actualizar</button>";
+  $(".lenguaje-form").append(botonActualizar);
+  $(".btn-put-lenguaje").click(function(e){
+    e.preventDefault();
+    var nombreLenguaje = $("input[name=nlenguaje]").val();
+    if(nombreLenguaje.length == null){
+      alert('CAMPO VACIO')
+    }else {
+      $.ajax({
+        type:'PUT',
+        url: 'http://localhost:8000/actualizar/lenguaje/'+lenguaje.id,
+        data: {lnombre:nombreLenguaje},
+        success: function(data){
+          var tr = "<td>"+data.id+"</td>"+
+          "<td>"+data.nombreLenguaje+"</td>"+
+          "<td>"+
+          "<div class='row'>"+
+          "<button type='button' onclick='borrarRegistro("+data.id+",this,5)' name='button' class='btn-delete btn btn-danger'>Eliminar</button>"+
+          "<hr>"+
+          "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalLenguaje' onclick='editar("+data.id+",this)'>Editar</button>"+
+          "</div>"+
+          "</td>";
+          $(boton).closest('tr').html(tr);
+          alert('Actualizado con exito');
+          $(".btn-submit-lenguaje").show();
+          $(".btn-put-lenguaje").remove();
+          $(".modal-title").text('Crear Lenguaje');
+          $("#modalLenguaje").hide();
+          $("div.modal-backdrop.fade.show").remove();
+        },
+        error: function(e){
+          alert('ERROR '+e);
+          $(".btn-submit-lenguaje").show();
+          $(".btn-put-lenguaje").remove();
+          $(".modal-title").text('Crear Lenguaje');
+          $("#modalLenguaje").hide();
+          $("div.modal-backdrop.fade.show").remove();
+        }
+      });
+    }
+  })
+  $('#modalLenguaje').on('hidden.bs.modal', function () {
+      $(this).find('form').trigger('reset');
+      $(".btn-submit-lenguaje").show();
+      $(".btn-put-lenguaje").remove();
+      $(".modal-title").text('Crear Lenguaje');
+    })
+}
+
+
+$('#modalLenguaje').on('hidden.bs.modal', function () {
+      $(this).find('form').trigger('reset');
+  })
 /*MODALES AL CERRAR LOS CAMPOS SE LIMPIAN*/
 $("#modalUso").on('hidden.bs.modal', function () {
-$("input[name=snombre]").val("");
+    $(this).find('form').trigger('reset');
 });
 $("#modalTipo").on('hidden.bs.modal', function () {
-$("input[name=tnombre]").val("");
+    $(this).find('form').trigger('reset');
 });
 $("#modalUsuario").on('hidden.bs.modal',function(){
-$("input[name=username]").val("");
-$("input[name=email]").val("");
-$("input[name=password]").val("");
-$("input[name=password_confirmation]").val("");
+    $(this).find('form').trigger('reset');
 });
 
 
 
+function verPropiedades(curso,boton){
+  $(".modal-title").text(curso.titulo);
+  $(".descripcion-mobile").text('Descripcion:'+curso.desc);
+  $(".lenguaje-mobile").text("Lenguaje: "+curso.lenguaje.nombreLenguaje);
+  $(".precio-mobile").text("Precio: "+curso.precio);
+  $(".uso-mobile").text('Uso: '+curso.uso.usoNombre);
+  $(".tipo-mobile").text('Tipo: '+curso.tipo.tipoNombre);
+  $(".autor-mobile").text('Autor: '+curso.creador.username);
+  var buttonDelete = $(".delete-mobile");
+  var buttonEdit = $(".edit-mobile");
+  var button = document.querySelector('button.delete-mobile');
+  console.log(button);
+  console.log(boton);
+  buttonDelete.attr('onclick',"borrarRegistro("+curso.id+",this,2)");
+  buttonEdit.attr('href','/editar/curso/'+curso.id);
 
-
+}
 
 
 
@@ -362,9 +455,9 @@ function validarCamposUsuario(username,email,password,password_confirm){
   0-TODO OK
   */
 }
-
+/*
   window.addEventListener("load", function() {
     if(window.innerWidth <= 425 ){
       alert('ATENCION, PARA UNA MEJOR EXPERIENCIA EN EL ABM SE RECOMIENDA UTILIZAR UNA COMPUTADORA');
     }
-  });
+  });*/

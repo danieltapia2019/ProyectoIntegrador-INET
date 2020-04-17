@@ -5,8 +5,9 @@ window.addEventListener("load", function () {
 function mostrarContrasena() {
     var ojo = document.getElementById("ojo");
     //var pass= document.getElementById('password');
-    //var pass = document.querySelector('input.password');
-    var pass = document.querySelector('input[name=password]');
+    var pass = document.querySelector('input.password');
+    //var pass = document.querySelector('input[name=password]');
+    console.log(pass);
     if (pass.type == "password") {
         pass.type = "text";
         ojo.removeAttribute('class');
@@ -53,7 +54,29 @@ function closeNav() {
     document.getElementById("sideNavigation").style.width = "0";
 }
 //Cierre Perfil
+//Previsualizacion imagen
+$(function() {
+  $('#file-input').change(function(e) {
+      addImage(e);
+     });
 
+     function addImage(e){
+      var file = e.target.files[0],
+      imageType = /image.*/;
+
+      if (!file.type.match(imageType))
+       return;
+
+      var reader = new FileReader();
+
+      reader.onload = function(e){
+         var result=e.target.result;
+        $('#imgSalida').attr("src",result);
+      }
+
+      reader.readAsDataURL(file);
+     }
+    });
 //ABM
 
 //CIERRE ABM

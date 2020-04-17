@@ -9,6 +9,8 @@ use App\CategoriaModel;
 use App\User;
 use App\TipoModel;
 use App\UsoModel;
+use App\AlumnoCurso;
+use App\LenguajeModel;
 
 class adminController extends Controller{
   public function abm(){
@@ -184,9 +186,76 @@ class adminController extends Controller{
     return response()->json($tipo);
   }
 
+  /*LENGUAJES*/
+  public function crerLenguaje(Request $request){
+    if($request){
+      $lenguaje = new LenguajeModel();
+      $lenguaje->nombreLenguaje = $request['lnombre'];
+      $lenguaje->estado = 1;
+      $lenguaje->save();
+      return response()->json($lenguaje);
+    }else{
+      $response = array(
+        'status' => 'failure',
+        'msg' => 'Element has not been created',
+      );
+      return response()->json($response);
+    }
+  }
+  public function borrarLenguaje($id,Request $request){
+      $lenguaje = LenguajeModel::find($id);
+      $lenguaje->estado = 0;
+      $lenguaje->update();
+      $response = array(
+        'status' => 'success',
+        'msg' => 'Element delete successfully',
+      );
+      return response()->json($response);
+  }
+  public function actualizarLenguaje($id,Request $request){
+    $lenguaje = LenguajeModel::find($id);
+    $lenguaje->nombreLenguaje = $request['lnombre'];
+    $lenguaje->update();
+    return response()->json($lenguaje);
+  }
+
   public function getUsuarios(Request $request){
+    $orden;
+    $usuarios;
     if($request['tipo']){
-      $usuarios = User::orderBy($request['atributo'],$request['tipo'])->where('estado','=','1')->paginate(5);
+      switch ($request['tipo']) {
+        case 0:$orden = "asc";break;
+        case 1:$orden = "desc";break;
+        default:
+          $orden = "asc";
+          break;
+      }
+      switch ($request['atributo']) {
+        case 0:
+          // ID
+          $usuarios = User::orderBy('id',$orden)->where('estado','=','1')->paginate(5);
+          break;
+        case 1:
+          // Nombre de usuario
+          $usuarios = User::orderBy('username',$orden)->where('estado','=','1')->paginate(5);
+          break;
+        case 2:
+          // Email
+          $usuarios = User::orderBy('email',$orden)->where('estado','=','1')->paginate(5);
+          break;
+        case 3:
+          // Acceso
+          $usuarios = User::orderBy('acceso',$orden)->where('estado','=','1')->paginate(5);
+          break;
+        case 4:
+          // Creacion
+          $usuarios = User::orderBy('created_at',$orden)->where('estado','=','1')->paginate(5);
+          break;
+        default:
+          // ID
+          $usuarios = User::orderBy('id',$orden)->where('estado','=','1')->paginate(5);
+          break;
+      }
       return view('pages.abm.usuarios',compact('usuarios'));
     }else {
       $usuarios = User::orderBy('acceso','desc')->where('estado','=','1')->paginate(5);
@@ -195,38 +264,157 @@ class adminController extends Controller{
   }
 
   public function getCursos(Request $request){
+    $orden;
+    $cursos;
     if($request['tipo']){
-      $cursos = CursoModel::orderBy($request['atributo'],$request['tipo'])->where('estado','=','1')->paginate(10);
+      switch ($request['tipo']) {
+        case 0:
+          // code...
+        $orden = "desc";
+          break;
+        case 1:
+        $orden = "desc";
+        break;
+        default:
+          // code...
+          $orden = "asc";
+          break;
+      }
+      switch ($request['atributo']) {
+        case 0:
+        // ID
+        $cursos = CursoModel::orderBy('id',$orden)->where('estado','=','1')->paginate(5);
+        break;
+
+        case 1:
+        // code...
+        $cursos = CursoModel::orderBy('titulo',$orden)->where('estado','=','1')->paginate(5);
+        break;
+
+        case 2:
+        // code...
+        $cursos = CursoModel::orderBy('lenguaje_id',$orden)->where('estado','=','1')->paginate(5);
+        break;
+
+        case 3:
+        // code...
+        $cursos = CursoModel::orderBy('precio',$orden)->where('estado','=','1')->paginate(5);
+        break;
+
+        case 4:
+        // code...
+        $cursos = CursoModel::orderBy('created_at',$orden)->where('estado','=','1')->paginate(5);
+        break;
+
+        default:
+          // code...
+        $cursos = CursoModel::orderBy('id',$orden)->where('estado','=','1')->paginate(5);
+          break;
+      }
       return view('pages.abm.cursos',compact('cursos'));
     }else{
-      $cursos = CursoModel::where('estado','=','1')->paginate(10);
+      $cursos = CursoModel::where('estado','=','1')->paginate(5);
       return view("pages.abm.cursos",compact('cursos'));
     }
   }
 
   public function getTipos(Request $request){
+    $tipos;
+    $orden;
     if($request['tipo']){
-    $tipos = TipoModel::orderBy($request['atributo'],$request['tipo'])->where('estado','=','1')->paginate(10);
+      switch ($request['tipo']) {
+        case 0:
+        // code...
+        $orden = "desc";
+        break;
+        case 1:
+        $orden = "desc";
+        break;
+        default:
+        // code...
+        $orden = "asc";
+        break;
+      }
+      switch ($request['atributo']) {
+        case 0:
+        // code...
+      $tipos = TipoModel::orderBy('id',$orden)->where('estado','=','1')->paginate(5);
+        break;
+
+        case 1:
+        // code...
+      $tipos = TipoModel::orderBy('usoNombre',$orden)->where('estado','=','1')->paginate(5);
+        break;
+
+        case 2:
+        // code...
+      $tipos = TipoModel::orderBy('created_at',$orden)->where('estado','=','1')->paginate(5);
+        break;
+        default:
+        // code...
+
+      $tipos = TipoModel::orderBy('id',$orden)->where('estado','=','1')->paginate(5);
+        break;
+      }
     return view('pages.abm.tipos',compact('tipos'));
     }else{
-    $tipos = TipoModel::where('estado','=','1')->paginate(10);
+    $tipos = TipoModel::where('estado','=','1')->paginate(5);
     return view("pages.abm.tipos",compact('tipos'));
   }
-
   }
   public function getUsos(Request $request){
+    $usos;
+    $orden;
     if($request['tipo']){
-    $usos = UsoModel::orderBy($request['atributo'],$request['tipo'])->where('estado','=','1')->paginate(10);
-    return view('pages.abm.tipos',compact('usos'));
+      switch ($request['tipo']) {
+        case 0:
+        // code...
+        $orden = "desc";
+        break;
+        case 1:
+        $orden = "desc";
+        break;
+        default:
+        // code...
+        $orden = "asc";
+        break;
+      }
+      switch ($request['atributo']) {
+        case 0:
+        // code...
+      $usos = UsoModel::orderBy('id',$orden)->where('estado','=','1')->paginate(5);
+        break;
+
+        case 1:
+        // code...
+      $usos = UsoModel::orderBy('usoNombre',$orden)->where('estado','=','1')->paginate(5);
+        break;
+
+        case 2:
+        // code...
+      $usos = UsoModel::orderBy('created_at',$orden)->where('estado','=','1')->paginate(5);
+        break;
+        default:
+        // code...
+
+      $usos = UsoModel::orderBy('id',$orden)->where('estado','=','1')->paginate(5);
+        break;
+      }
+    return view('pages.abm.usos',compact('usos'));
     }else{
-    $usos = UsoModel::where('estado','=','1')->paginate(10);
+    $usos = UsoModel::where('estado','=','1')->paginate(5);
     return view("pages.abm.usos",compact('usos'));
   }
   }
 
   public function getAlumnosCursos(){
-    $cursos = CursoModel::where('estado','=','1')->paginate(10);
-    return view("pages.abm.cursos_alumnos",compact('cursos'));
+    $alumnos_cursos = AlumnoCurso::paginate(5);
+    return view("pages.abm.cursos_alumnos",compact('alumnos_cursos'));
+  }
+
+  public function getLenguajes(){
+    $lenguajes = LenguajeModel::where('estado','=','1')->paginate(5);
+    return view('pages.abm.lenguajes',compact('lenguajes'));
   }
 
 

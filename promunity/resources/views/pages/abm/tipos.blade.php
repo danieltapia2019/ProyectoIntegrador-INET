@@ -7,30 +7,39 @@
 @section('title','ABM-TIPOS')
 
 @section('content')
-  <div class="conteiner">
+  <div class="contenedor">
     @include('component.sidenav')
-    <div class="contenido col-md-10">
-      {{$tipos->links()}}
-      <button type="button" class="btn btn-success mb-3" name="button" data-toggle="modal"
-      data-target="#modalTipo">Agregar</button>
-
-      <hr>
-  <h5>Ordenar Por</h5>
-  <form class="" action="/abm/tipos" method="GET">
-    <div class="row">
-      <select class="" name="atributo">
-        <option value="id">ID</option>
-        <option value="tipoNombre">Nombre de usuario</option>
-      </select>
-      <br>
-      <select class="" name="tipo">
-        <option value="asc">Ascendente</option>
-        <option value="desc">Descendente</option>
-      </select>
-    </div>
-    <button type="submit" name="button" class="btn btn-dark">Ordenar</button>
-  </form>
-      <table class="table table-light mt-3 mb-5 tipos">
+    <div class="contenido-tabla col-md-8">
+        <div class="ordenamiento">
+          <h5>Ordenar Por</h5>
+          <form class="" action="/abm/tipos" method="GET">
+            <div class="col-md-12">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">Campo</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" name="atributo">
+                  <option value="0">ID</option>
+                  <option value="1">Tipo Nombre</option>
+                  <option value="2">Fecha de Creacion</option>
+                </select>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect02">Tipo</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect02" name="tipo">
+                  <option value="0">Ascendente</option>
+                  <option value="1">Descendente</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" name="button" class="btn btn-dark btn-block">ORDENAR</button>
+          </form>
+        </div>
+        <hr>
+        <br>
+      <table class="table table-light mt-1 tipos">
         <thead>
           <tr>
             <th>ID</th>
@@ -56,6 +65,9 @@
           @endforelse
         </tbody>
       </table>
+      {{$tipos->links()}}
+      <button type="button" class="btn btn-success btn-block btn-lg" name="button" data-toggle="modal"
+      data-target="#modalTipo">Agregar</button>
     </div>
   </div>
 

@@ -1,18 +1,24 @@
-.conteiner {
+.contenedor {
     display: flex !important;
     /* ETIQUETA QUE POSICIONA UNO AL LADO DEL OTRO */
     flex-wrap: wrap;
+    height: auto;
 }
-
+.contenido-tabla{
+  margin-top: 2.5%;
+  /*border: 1px solid black;*/
+}
+.ordenamiento{
+  margin-bottom: 2.5%;
+}
 .sideNavigation {
     background-color: black;
-    height: 100vh;
+    height: auto;
     width: 150px;
     margin-right: 2%;
     justify-content: center;
 
 }
-
 .sideNavigation a {
     list-style: none;
     color: white;
@@ -20,13 +26,6 @@
     justify-content: center;
     text-align: center;
     font-size: 18px;
-}
-
-.sideNavigation a:last-child {
-    position: absolute;
-    bottom: 0;
-    margin-left: 25px;
-    margin-right: 25px;
 }
 
 a i {
@@ -85,9 +84,6 @@ div.wrapper {
     text-align: center;
     background-color: rgba(0, 0, 0, 0.3);
 }
-div.conteiner{
-  position: relative;
-}
 
 div.abm-directions-panel {
     /* border: 1px solid rgba(0,0,0,0.5); */
@@ -135,6 +131,14 @@ div.abm-directions-panel {
 .nav.flex-column {
     display: none;
 }
+.listaABM{
+  text-align: center;
+  margin: auto;
+}
+.listaABM button{
+  margin-top: 1.5%;
+}
+/*PERFIL TABLET*/
 
 /*PERFIL MOBILE*/
 
@@ -145,6 +149,7 @@ div.abm-directions-panel {
         height: auto;
         width: 100%;
         justify-content: center;
+        margin-right: 0%;
     }
 
     .sideNavigation a:last-child {
@@ -152,11 +157,21 @@ div.abm-directions-panel {
         margin-left: 25px;
         margin-right: 25px;
     }
-
+    .ordenamiento{
+      text-align: center;
+    }
+    .contenido-tabla{
+      margin: auto;
+    }
+    .wrapper{
+      width: 100%;
+    }
     a i {
         margin-right: 5px;
     }
-
+    button{
+      font-size: 5px;
+    }
     #logoHOME {}
 
     #imgSideNav {
@@ -174,12 +189,42 @@ div.abm-directions-panel {
     #IDAcceso {
         display: none;
     }
+    #Email{
+      display: none;
+    }
 
     th {
-        font-size: 10px;
+        font-size: 12px;
     }
 
     td {
-        font-size: 10px;
+        font-size: 12px;
     }
+    .table-desktop{
+      display: none;
+    }
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .tipos{
+    border: 1px solid black;
+  }
+  .contenedor{
+    text-align:center;
+  }
+  .sideNavigation {
+      height: auto;
+      width: 100%;
+      justify-content: center;
+      margin-right: 0%;
+  }
+  .wrapper.content h1{
+  }
+  .contenido-tabla{
+    margin: auto;
+  }
+  td{
+    font-size: 13px;
+  }
 }

@@ -26,31 +26,32 @@ Route::get('/home/faq',function(){
 Route::get('/admin/abm','adminController@abm')->middleware('auth','rol:auth');
 
 Route::get('/abm/usuarios','adminController@getUsuarios')->middleware('auth','rol:auth');
-
-Route::get('/abm/usuarios/order','adminController@order')->middleware('auth','rol:auth');
 Route::get('/abm/cursos','adminController@getCursos')->middleware('auth','rol:auth');
 Route::get('/abm/usos','adminController@getUsos')->middleware('auth','rol:auth');
 Route::get('/abm/tipos','adminController@getTipos')->middleware('auth','rol:auth');
 Route::get('/abm/cursos-alumnos','adminController@getAlumnosCursos')->middleware('auth','rol:auth');
-
+Route::get('/abm/lenguajes','adminController@getLenguajes')->middleware('auth','rol:auth');
 Route::get('/abm/consultas','ConsultaController@getConsultas')->middleware('auth','rol:auth');
-Route::delete('/abm/consultas/borrar','ConsultaController@deleteConsulta')->middleware('auth','rol:auth');
 
 Route::get('/editar/usuario/{id}','adminController@editarUsuario')->middleware('auth','rol:auth');
 Route::get('/editar/curso/{id}','adminController@editarCurso')->middleware('auth','rol:auth');
 Route::post('/crear/usuario','adminController@crearUsuario')->middleware('auth','rol:auth');
 Route::post('/admin/crear/tipo','adminController@crearTipo')->middleware('auth','rol:auth');
 Route::post('/admin/crear/uso','adminController@crearUso')->middleware('auth','rol:auth');
+Route::post('/admin/crear/lenguaje','adminController@crerLenguaje')->middleware('auth','rol:auth');
 Route::post('/actualizar/curso','adminController@actualizarCurso')->middleware('auth','rol:auth');
 /*ACTUALIZAR */
 Route::put('/actualizar/usuario/{id}','adminController@actualizarUsuario')->middleware('auth','rol:auth');
 Route::put('/actualizar/tipo/{id}','adminController@actualizarTipo')->middleware('auth','rol:auth');
 Route::put('/actualizar/uso/{id}','adminController@actualizarUso')->middleware('auth','rol:auth');
+Route::put('/actualizar/lenguaje/{id}','adminController@actualizarLenguaje')->middleware('auth','rol:auth');
 /*    ABM:Admin   BORRAR  */
 Route::delete('/borrar/usuario/{id}','adminController@borrarUsuario')->middleware('auth','rol:auth');
 Route::delete('/borrar/tipo/{id}','adminController@borrarTipo')->middleware('auth','rol:auth');
 Route::delete('/borrar/uso/{id}','adminController@borrarUso')->middleware('auth','rol:auth');
 Route::delete('/borrar/curso/{id}','adminController@borrarCurso')->middleware('auth','rol:auth');
+Route::delete('/abm/consultas/borrar','ConsultaController@deleteConsulta')->middleware('auth','rol:auth');
+Route::delete('/borrar/lenguaje/{id}','adminController@borrarLenguaje')->middleware('auth','rol:auth');
 
 
 Route::get('/logout','\App\http\Controller\Auth\LoginController@logout');

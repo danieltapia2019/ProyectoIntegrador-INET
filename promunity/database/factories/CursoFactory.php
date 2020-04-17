@@ -36,9 +36,6 @@ $factory->define(CursoModel::class, function (Faker $faker) {
             return $lng->id;
           },
           'views' => 0,
-          'tipo_id' => $faker->randomElement(array(1,2,3,4)),
-          'uso_id' => $faker->randomElement(array(1,2,3,4)),
-          'autor'=> 2,
-          'created_at'=>$faker->randomElement(array('2020-01-01 00:00:00','2019-01-01 00:00:00'))
+          'created_at'=>$faker->randomElement(array('2020-01-01 00:00:00','2019-01-01 00:00:00')),
     ];
 });
