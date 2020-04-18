@@ -4,6 +4,16 @@
 <link rel="stylesheet" href="{{ asset('css/pages/abm.css') }}">
 @endpush
 
+@php
+  $currentPage = $lenguajes->currentPage(); //Página actual
+  $maxPages = $currentPage + 3; //Máxima numeración de páginas
+  $firstPage = 1; //primera página
+  $lastPage = $lenguajes->lastPage(); //última página
+  $nextPage = $currentPage+1; //Siguiente página
+  $forwardPage = $currentPage-1; //Página anterior
+  $lenguajes->setPath('');
+@endphp
+
 @section('title','ABM-LENGUAJES')
 
 @section('content')
@@ -13,7 +23,7 @@
   <div class="contenido-tabla col-md-8">
       <div class="ordenamiento">
         <h5>Ordenar Por</h5>
-        <form class="" action="/abm/tipos" method="GET">
+        <form class="" action="/abm/lenguajes" method="GET">
           <div class="col-md-12">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
@@ -66,7 +76,34 @@
           @endforelse
         </tbody>
       </table>
-      {{$lenguajes->links()}}
+      {{--$lenguajes->links()--}}
+
+      <ul class="pagination nav-link">
+              <!-- Botón para navegar a la primera página -->
+              <li class="@if($currentPage==$firstPage){{'disabled'}}@endif">
+                      <a href="@if($currentPage>1){{$lenguajes->url($firstPage).$link}}@else{{$lenguajes->url($firstPage).$link}}@endif" class='btn'>Primera</a>
+              </li>
+              <!-- Botón para navegar a la página anterior -->
+              <li class="@if($currentPage==$firstPage){{'disabled'}}@endif">
+                      <a href="@if($currentPage>1){{$lenguajes->url($forwardPage).$link}}@else{{$lenguajes->url($firstPage).$link}}@endif" class='btn'>«</a>
+              </li>
+              <!-- Mostrar la numeración de páginas, partiendo de la página actual hasta el máximo definido en $maxPages -->
+              @for($x=$currentPage;$x<$maxPages;$x++)
+                      @if($x <= $lastPage)
+                      <li class="@if($x==$currentPage){{'active'}}@endif">
+                              <a href="{{$lenguajes->url($x).$link}}" class='btn'>{{$x}}</a>
+                      </li>
+                      @endif
+              @endfor
+              <!-- Botón para navegar a la pagina siguiente -->
+              <li class="@if($currentPage==$lastPage){{'disabled'}}@endif">
+                      <a href="@if($currentPage<$lastPage){{$lenguajes->url($nextPage).$link}}@else{{'#'}}@endif" class='btn'>»</a>
+              </li>
+              <!-- Botón para navegar a la última página -->
+              <li class="@if($currentPage==$lastPage){{'disabled'}}@endif">
+                      <a href="@if($currentPage<$lastPage){{$lenguajes->url($lastPage).$link}}@else{{'#'}}@endif" class='btn'>Última</a>
+              </li>
+      </ul>
       <button type="button" class="btn btn-success btn-block btn-lg" name="button" data-toggle="modal"
       data-target="#modalLenguaje">Agregar</button>
   </div>

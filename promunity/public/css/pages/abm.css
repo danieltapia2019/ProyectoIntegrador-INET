@@ -166,6 +166,14 @@ div.abm-directions-panel {
     .wrapper{
       width: 100%;
     }
+    .nav-link{
+      width: 90%;
+      margin-left: 5%;
+      margin-right: 5%;
+    }
+    .nav-link li a{
+      font-size: 12px;
+    }
     a i {
         margin-right: 5px;
     }

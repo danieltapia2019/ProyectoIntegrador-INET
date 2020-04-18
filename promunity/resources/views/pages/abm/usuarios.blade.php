@@ -4,6 +4,17 @@
 <link rel="stylesheet" href="{{ asset('css/pages/abm.css') }}">
 @endpush
 
+@php
+
+$currentPage = $usuarios->currentPage(); //Página actual
+$maxPages = $currentPage + 3; //Máxima numeración de páginas
+$firstPage = 1; //primera página
+$lastPage = $usuarios->lastPage(); //última página
+$nextPage = $currentPage+1; //Siguiente página
+$forwardPage = $currentPage-1; //Página anterior
+$usuarios->setPath('');
+@endphp
+
 @section('title','ABM')
 
 @section('content')
@@ -78,13 +89,39 @@
               @endforelse
           </tbody>
       </table>
-        {{$usuarios->links()}}
+        {{-- $usuarios->links() --}}
+        <ul class="pagination nav-link">
+                <!-- Botón para navegar a la primera página -->
+                <li class="@if($currentPage==$firstPage){{'disabled'}}@endif">
+                        <a href="@if($currentPage>1){{$usuarios->url($firstPage).$link}}@else{{$usuarios->url($firstPage).$link}}@endif" class='btn'>Primera</a>
+                </li>
+                <!-- Botón para navegar a la página anterior -->
+                <li class="@if($currentPage==$firstPage){{'disabled'}}@endif">
+                        <a href="@if($currentPage>1){{$usuarios->url($forwardPage).$link}}@else{{$usuarios->url($firstPage).$link}}@endif" class='btn'>«</a>
+                </li>
+                <!-- Mostrar la numeración de páginas, partiendo de la página actual hasta el máximo definido en $maxPages -->
+                @for($x=$currentPage;$x<$maxPages;$x++)
+                        @if($x <= $lastPage)
+                        <li class="@if($x==$currentPage){{'active'}}@endif">
+                                <a href="{{$usuarios->url($x).$link}}" class='btn'>{{$x}}</a>
+                        </li>
+                        @endif
+                @endfor
+                <!-- Botón para navegar a la pagina siguiente -->
+                <li class="@if($currentPage==$lastPage){{'disabled'}}@endif">
+                        <a href="@if($currentPage<$lastPage){{$usuarios->url($nextPage).$link}}@else{{'#'}}@endif" class='btn'>»</a>
+                </li>
+                <!-- Botón para navegar a la última página -->
+                <li class="@if($currentPage==$lastPage){{'disabled'}}@endif">
+                        <a href="@if($currentPage<$lastPage){{$usuarios->url($lastPage).$link}}@else{{'#'}}@endif" class='btn'>Última</a>
+                </li>
+        </ul>
+
           <button type="button" class="btn btn-success mb-3 btn-agregar btn-block btn-lg" name="button" data-toggle="modal"
               data-target="#modalUsuario">AGREGAR</button>
     </div>
 
 </div>
-
 
 
 <!-- Modal Crear Usuario-->
