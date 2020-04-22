@@ -5,6 +5,26 @@ headers: {
 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
 });
+$(document).on('click','.activar',function(e){
+    e.preventDefault();
+    let element=$(this)[0];
+    let url=$(element).attr("href");
+    let id=$(element).attr("tranId");
+    let estado=$("td[id="+id+"]")[0];
+
+    $.post(url,function(response){
+
+        console.log(response.mensaje)
+        alert(response.mensaje);
+        estado.innerHTML="Pagado"
+        element.disabled=true;
+        element.className="btn btn-danger"
+
+
+    }).fail(function(){
+        console.log("esto no funca")
+    })
+})
 $(".btn-agregar").click(function(e){
   e.preventDefault();
 })

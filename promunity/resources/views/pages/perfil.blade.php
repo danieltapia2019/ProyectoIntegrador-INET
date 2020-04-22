@@ -24,9 +24,9 @@
         <div id="sideNavigation" class="sidenav">
             <ul style="color: white;">
                 @if ($usuario->foto == null)
-                <span id="fotoPerfilNav"> <img src="{{ asset('/img/perfil.jpg') }}" alt=""> </span>
+                <span id="fotoPerfilNav"> <img src="/img/perfil.jpg" alt=""> </span>
                 @else
-                <span id="fotoPerfilNav"><img src="{{ asset('/storage/img/avatar/'.auth()->user()->foto) }}"
+                <span id="fotoPerfilNav"><img src="{{asset('storage/img/avatar/'.auth()->user()->foto)}}"
                         alt="{{$usuario->username}}"></span>
                 @endif
                 <p>STATUS:
@@ -182,13 +182,8 @@
                     maxlength="1" minlength="10">
             </div>
             <label for="lenguaje">Lenguaje: </label>
-            <div class="input-group mb-3">
-                <input type="text" name="lenguaje" class="form-control" placeholder="Ingrese lenguaje del curso"
-                    required maxlength="10" minlength="2">
-            </div>
-
             <select name="lenguaje" class="custom-select" id="inputGroupSelect01" required>
-            <option selected>Elegir tipo</option>
+            <option selected>Lenguaje</option>
                 @forelse ($lenguajes as $key => $lenguaje)
                 <option value={{$lenguaje->id}}>{{$lenguaje->nombreLenguaje}}</option>
                 @empty

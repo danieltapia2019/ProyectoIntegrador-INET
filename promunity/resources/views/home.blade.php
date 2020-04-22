@@ -38,7 +38,7 @@
             <p>{{$curso->creador->username}}</p>
             {{-- <p>{{$curso->precio}}</p> --}}
             <p>{{$curso->desc}}</p>
-            <p> <a href="/curso/id"> Ver Curso</a> </p>
+            <p> <a href="{{'/curso/'.$curso->id}}"> Ver Curso</a> </p>
         </article>
         @empty
         <h4>No hay Favoritos</h4>
@@ -55,7 +55,7 @@
                 <h4>{{$curso->titulo}}</h4>
                 <p>{{$curso->creador->username}}</p>
                 <p>{{$curso->precio}} ARS</p>
-                <p> <a href="/curso/id"> Ver Curso</a> </p>
+                <p> <a href="{{'/curso/'.$curso->id}}"> Ver Curso</a> </p>
             </article>
         </div>
         @else
@@ -65,7 +65,7 @@
                 <h4>{{$curso->titulo}}</h4>
                 <p>{{$curso->creador->username}}</p>
                 <p>{{$curso->precio}} ARS</p>
-                <p> <a href="/curso/id"> Ver Curso</a> </p>
+                <p> <a href="{{'/curso/'.$curso->id}}"> Ver Curso</a> </p>
             </article>
         </div>
         @endif
@@ -107,7 +107,7 @@
                     <div class="form-group">
                         <label for="textoarea">Consulta</label>
                         <textarea name="consulta" class="form-control" id="textoarea" rows="5" placeholder="Consulta ..." required></textarea>
-                    </div>                                        
+                    </div>
                 </div>
             </div>
             <div class="form-row">
@@ -115,7 +115,7 @@
                 <div class="col-2">
                     <div class="form-group">
                         <button type="submit" class="btn btn-contact btn-lg btn-block my-3">Enviar</button>
-                    </div>                                    
+                    </div>
                 </div>
                 <div class="col-5"></div>
             </div>

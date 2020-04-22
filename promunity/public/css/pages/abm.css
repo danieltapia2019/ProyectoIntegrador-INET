@@ -1,14 +1,11 @@
-.conteiner {
-    display: flex !important;
-    /* ETIQUETA QUE POSICIONA UNO AL LADO DEL OTRO */
-    flex-wrap: wrap;
-}
+.row{
+    width: 100%;
 
+}
 .sideNavigation {
     background-color: black;
     height: 100vh;
-    width: 150px;
-    margin-right: 2%;
+
     justify-content: center;
 
 }
@@ -40,9 +37,9 @@ a i {
     margin-left: 25px;
     margin-right: 25px;
 }
-
-div.row#abm-home {
-    width: 80%;
+div.container{
+    display: flex;
+    flex-wrap: wrap;
 }
 
 div.wrapper {
@@ -50,7 +47,8 @@ div.wrapper {
     height: 150px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     margin: 3%;
-    overflow: hidden;
+    display:flex;
+    flex-wrap: wrap;
 }
 
 .wrapper>div.icon {
@@ -85,9 +83,7 @@ div.wrapper {
     text-align: center;
     background-color: rgba(0, 0, 0, 0.3);
 }
-div.conteiner{
-  position: relative;
-}
+
 
 div.abm-directions-panel {
     /* border: 1px solid rgba(0,0,0,0.5); */
@@ -95,19 +91,18 @@ div.abm-directions-panel {
     /* margin: 1% auto; */
     /* width: 50%;
   height: 50%; */
-    overflow: hidden;
     border-radius: 25px;
-    position: absolute;
-
-    left:30%;
-    bottom: 15%;
+    width: 90%;
+    justify-content: center;
+    margin:0 auto;
 }
 
 .abm-directions-panel>button {
-    width: 40%;
+    min-width: 27%;
     height: 100px;
-    margin: 4.5%;
+    margin: 3%;
     font-size: 2rem;
+    flex-grow: 1;
 }
 
 

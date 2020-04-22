@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -64,11 +65,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
          $path;
          $nombreArchivo = NULL;
+
          if(isset($data['foto'])){
-           $path = $data['foto']->store('public/img/avatar');
-           $nombreArchivo = basename($path);
+            //lo convierto a request porque store es un metodo de request no de array
+            $request = new \Illuminate\Http\Request($data);
+            $path=$request->get('foto')->store('public/img/avatar');
+            $nombreArchivo=basename($path);
          }
         return User::create([
             'username' => $data['username'],

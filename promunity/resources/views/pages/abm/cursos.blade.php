@@ -8,8 +8,10 @@
 
 @section('content')
 
-<div class="conteiner">
-      @include('component.sidenav')
+<div class="conteiner row">
+<div class="col-md-2">
+    @include('component.sidenav')
+    </div>
 <div class="contenido col-md-10">
     <a href="/perfil">
       <button type="button" class="btn btn-success mb-3" name="button">Agregar</button>

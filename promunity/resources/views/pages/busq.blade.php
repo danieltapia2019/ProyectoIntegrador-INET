@@ -105,10 +105,8 @@
                     <a href="{{ url("/curso/$curso->id") }}">Ver Mas</a>
                     @else
                     <a href="{{ url("/curso/$curso->id") }}">Ver Mas</a>
-                    <button class="btn btn-primary mr-1" style="margin-left: 75%;">
-                        <a href="{{ url('/carrito'.'/'.$curso->id) }}" style="color: white">
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
+                    <button style="margin-left: 75%;" class="btn btn-primary mr-1 ml-3 agregar" href="{{route('agregarAlCarrito',$curso->id)}}" cursoId="{{$curso->id}}">
+                        <i class="fas fa-shopping-cart"></i>
                     </button>
                     {{-- <button class="btn btn-primary mr-1 ">
                         <a href="#" style="color: white"><i class="far fa-heart"></i></a>
@@ -132,4 +130,5 @@
 @section('scripting')
 {{-- No Borrar comentario de abajo --}}
 {{-- <script type="text/javascript" src="{{ asset('js/search.js') }}"></script> --}}
+<script src="{{ asset('js/carrito.js') }}"></script>
 @endsection

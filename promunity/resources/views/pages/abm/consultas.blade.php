@@ -7,9 +7,11 @@
 @section('title','ABM')
 
 @section('content')
-<div class="conteiner">
+<div class="conteiner row">
+<div class="col-md-2">
     @include('component.sidenav')
-    <div class="contenido">
+    </div>
+    <div class="contenido col-md-10">
         <div class="card-columns">
             @forelse ($consultas as $consulta)
             <div class="card mt-5">

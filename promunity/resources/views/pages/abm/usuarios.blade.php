@@ -7,10 +7,12 @@
 @section('title','ABM')
 
 @section('content')
-  <div class="conteiner">
-
+  <div class="conteiner row">
+    <div class="col-md-2">
     @include('component.sidenav')
-    <div class="contenido col-md-8">
+    </div>
+
+    <div class="contenido col-md-10">
       {{$usuarios->links()}}
 
       <button type="button" class="btn btn-success mb-3 btn-agregar" name="button" data-toggle="modal"

@@ -24,7 +24,7 @@ class CursoController extends Controller
         $cursos = CursoModel::all();
         return view('pages.perfil',compact('cursos'));
     }
-    
+
 
     /**
     *Crea un curso desde el perfil
@@ -33,7 +33,7 @@ class CursoController extends Controller
         $curso = new CursoModel();
         $curso->titulo = $req["titulo"];
         $curso->desc = $req["descripcion"];
-        $curso->lenguaje = $req["lenguaje"];
+        $curso->lenguaje_id = $req["lenguaje"];
         $curso->precio = $req["precio"];
         $curso->autor = $req["autor"];
         $curso->tipo_id = $req['tipo'];
@@ -42,13 +42,14 @@ class CursoController extends Controller
         $nombreArchivo = basename($path);
         $curso->foto_curso = $nombreArchivo;
         $curso->estado = 1;
+        $curso->views=0;
         $curso->save();
         return redirect ("/perfil");
     }
 
     /**
      * Está función corresponde a la vista detCurso
-     * 
+     *
      * Le muestra al usuario el curso con los datos completos
      */
     public function detalle($cursoId){

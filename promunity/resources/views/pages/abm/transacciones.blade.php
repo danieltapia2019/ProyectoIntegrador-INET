@@ -4,35 +4,55 @@
   <link rel="stylesheet" href="{{ asset('css/pages/abm.css') }}">
 @endpush
 
-@section('title','ABM-CURSO-ALUMNO')
+@section('title','Transacciones')
 
 @section('content')
-  <div class="conteiner">
+  <div class="conteiner row">
+  <div class="col-md-2">
     @include('component.sidenav')
+    </div>
     <div class="contenido col-md-10">
+    @if($transacciones)
       <table class="table table-light mt-3 mb-5 usos">
         <thead>
           <tr>
-            <th>Titulo</th>
-            <th>Usuario</th>
+            <th>Referencia</th>
+            <th>Estado</th>
+            <th>Alumno</th>
+            <th>Curso</th>
+            <th>Accion</th>
           </tr>
         </thead>
         <tbody>
-          @forelse ($cursos as $key => $curso)
+          @foreach($transacciones as $tran)
             <tr>
-              @forelse ($curso->alumno as $key => $alumno)
-                <td>{{$curso->titulo}}</td>
-                <td>{{$alumno->username}}</td>
-              @empty
-              @endforelse
+                <td>{{$tran->referencia}}</td>
+                <td id="{{$tran->id}}">
+                    @if($tran->estado==1)
+                    Pagado
+                    @else
+                    En proceso
+                    @endif
+                </td>
+                <td>{{$tran->usuario->username}}</td>
+                <td>{{$tran->curso->titulo}}</td>
+                <td>
+                    @if($tran->estado==0)
+                    <button tranId="{{$tran->id}}"class="btn btn-success activar" href="{{route('activarCurso',$tran->id)}}">Habilitar</button>
+                    @else
+                    <button class="btn btn-danger" disabled=true>Habilitar</button>
+                    @endif
+                </td>
             </tr>
-          @empty
 
-            <h3 class="mt-5 mb-5">No hay Alumnos Inscriptos :(</h3>
-          @endforelse
+
+          @endforeach
         </tbody>
 
       </table>
+      @else
+      <h3 class="mt-5 mb-5">No hay Alumnos Inscriptos :(</h3>
+      @endif
     </div>
   </div>
 

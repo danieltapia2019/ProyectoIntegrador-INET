@@ -9,6 +9,7 @@ use App\CategoriaModel;
 use App\User;
 use App\TipoModel;
 use App\UsoModel;
+use App\Transaccion;
 
 class adminController extends Controller{
   public function abm(){
@@ -224,10 +225,24 @@ class adminController extends Controller{
   }
   }
 
-  public function getAlumnosCursos(){
-    $cursos = CursoModel::where('estado','=','1')->paginate(10);
-    return view("pages.abm.cursos_alumnos",compact('cursos'));
+  public function getTransacciones(){
+    $transacciones=Transaccion::all();
+    return view("pages.abm.transacciones",compact('transacciones'));
   }
-
+  public function activarCurso(Request $request,$id){
+    if($request->ajax()){
+        $transaccion=Transaccion::find($id);
+        $curso=$transaccion->curso;
+        $alumno=$transaccion->usuario;
+        $curso->alumno()->attach($alumno->id);
+        $curso->save();
+        $alumno->save();
+        $transaccion->estado=1;
+        $transaccion->save();
+        return response()->json([
+            "mensaje"=>"Curso habilitado correctamente"
+        ]);
+    }
+}
 
 }

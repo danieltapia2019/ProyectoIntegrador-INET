@@ -2,7 +2,7 @@
     <a href="#">
         @if (isset(auth()->user()->foto))
         <img src="{{ asset('/storage/img/avatar/'.auth()->user()->foto) }}" alt="{{auth()->user()->username}}"
-            id="sideNAV">
+        id="imgSideNav">
         @else
         <img src="/img/perfil.jpg" alt="" class="" id="imgSideNav">
         @endif

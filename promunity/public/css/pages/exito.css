@@ -1,0 +1,56 @@
+@import url('../components/navbar.css');
+@import url('../components/footer.css');
+* {
+    box-sizing: border-box;
+
+}
+
+.titulo img{
+    width: 80px;
+}
+.titulo {
+    text-align: center;
+    font-size: 30px;
+
+}
+.cuerpo{
+    position:relative;
+    overflow: hidden;
+    margin:0 auto;
+}
+.curso{
+    margin:0 10px ;
+    width:200px;
+    text-align: center;
+    border-radius: 4px;
+    border:1px solid gray;
+    float:left;
+}
+.curso h5{
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.curso img{
+    width:100%;
+    margin:0 auto;
+
+}
+.curso a{
+
+    text-decoration: none;
+}
+.recordatorio{
+    width:200px;
+    background-color: yellow;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 3px;
+}
+
+.texto{
+    font-size: 30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: thistle;
+}

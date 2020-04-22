@@ -31,8 +31,8 @@ Route::get('/abm/usuarios/order','adminController@order')->middleware('auth','ro
 Route::get('/abm/cursos','adminController@getCursos')->middleware('auth','rol:auth');
 Route::get('/abm/usos','adminController@getUsos')->middleware('auth','rol:auth');
 Route::get('/abm/tipos','adminController@getTipos')->middleware('auth','rol:auth');
-Route::get('/abm/cursos-alumnos','adminController@getAlumnosCursos')->middleware('auth','rol:auth');
-
+Route::get('/abm/transacciones','adminController@getTransacciones')->middleware('auth','rol:auth');
+Route::post('/activar/{id}','adminController@activarCurso')->name('activarCurso');
 Route::get('/abm/consultas','ConsultaController@getConsultas')->middleware('auth','rol:auth');
 Route::delete('/abm/consultas/borrar','ConsultaController@deleteConsulta')->middleware('auth','rol:auth');
 
@@ -79,10 +79,13 @@ Route::post('/opinion','UserController@darOpinion')->middleware('auth');
 Route::post('/actualizarDatos','UserController@actualizarDatos');
 
 /*    Carrito   */
+Route::post('/agregar/{id}','CarritoController@agregarAlCarrito')->name('agregarAlCarrito');
+Route::post('/borrar-uno/{id}','CarritoController@borrarUno')->name('borrarUno');
+Route::get('/pagar','CarritoController@pagar')->name('pagar');
+Route::get('/exito',function(){
+    return view('pages.exito');
+});
 Route::get('/carrito','CarritoController@mostrarCarrito');
-Route::get('/carrito/{id}','CarritoController@agregarAlCarrito');
-Route::get('/carritolimpiar','CarritoController@limpiarCarrito');
-
 /*  Login,Register,PasswordReset  */
 Auth::routes();
 
