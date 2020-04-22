@@ -48,34 +48,43 @@
 
           @endforeach
         </tbody>
-
       </table>
+<<<<<<< HEAD:promunity/resources/views/pages/abm/transacciones.blade.php
       @else
       <h3 class="mt-5 mb-5">No hay Alumnos Inscriptos :(</h3>
       @endif
     </div>
   </div>
+=======
+      {{--$alumnos_cursos->links()--}}
+>>>>>>> 8cfa3e0cbf4faa86c12f0db40463b83154b92951:promunity/resources/views/pages/abm/cursos_alumnos.blade.php
 
-  <div class="modal fade" id="modalUso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Agregar uso</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-              <div class="modal-body">
-                  <form class="uso-form" action="" method="post">
-                      {{csrf_field()}}
-                      <div class="input-grup mb-3">
-                          <input type="text" name="snombre" class="form-control" placeholder="Uso" required>
-                      </div>
-                      <button type="submit" class="btn btn-reg btn-lg btn-block my-3 btn-submit-uso">Agregar</button>
-                  </form>
-              </div>
-          </div>
-      </div>
+      <ul class="pagination nav-link">
+              <!-- Botón para navegar a la primera página -->
+              <li class="@if($currentPage==$firstPage){{'disabled'}}@endif">
+                      <a href="@if($currentPage>1){{$alumnos_cursos->url($firstPage).$link}}@else{{$alumnos_cursos->url($firstPage).$link}}@endif" class='btn'>Primera</a>
+              </li>
+              <!-- Botón para navegar a la página anterior -->
+              <li class="@if($currentPage==$firstPage){{'disabled'}}@endif">
+                      <a href="@if($currentPage>1){{$alumnos_cursos->url($forwardPage).$link}}@else{{$alumnos_cursos->url($firstPage).$link}}@endif" class='btn'>«</a>
+              </li>
+              <!-- Mostrar la numeración de páginas, partiendo de la página actual hasta el máximo definido en $maxPages -->
+              @for($x=$currentPage;$x<$maxPages;$x++)
+                      @if($x <= $lastPage)
+                      <li class="@if($x==$currentPage){{'active'}}@endif">
+                              <a href="{{$alumnos_cursos->url($x).$link}}" class='btn'>{{$x}}</a>
+                      </li>
+                      @endif
+              @endfor
+              <!-- Botón para navegar a la pagina siguiente -->
+              <li class="@if($currentPage==$lastPage){{'disabled'}}@endif">
+                      <a href="@if($currentPage<$lastPage){{$alumnos_cursos->url($nextPage).$link}}@else{{'#'}}@endif" class='btn'>»</a>
+              </li>
+              <!-- Botón para navegar a la última página -->
+              <li class="@if($currentPage==$lastPage){{'disabled'}}@endif">
+                      <a href="@if($currentPage<$lastPage){{$alumnos_cursos->url($lastPage).$link}}@else{{'#'}}@endif" class='btn'>Última</a>
+              </li>
+      </ul>
+    </div>
   </div>
 @endsection

@@ -14,10 +14,10 @@ class AlumnoCurso extends Model
     public $guarded = [];
 
     public function alumno(){
-     return $this->belongsTo(User::class,'id');
+     return $this->belongsTo(User::class,'user_id');
    }
    public function curso(){
-     return $this->belongsTo(CursoModel::class,'id');
+     return $this->belongsTo(CursoModel::class,'curso_id');
   }
 
 }

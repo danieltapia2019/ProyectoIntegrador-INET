@@ -76,9 +76,9 @@
                                                {{----}}
                               <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('Foto perfil') }}</label>
                               <div class="col-md-6">
-                                  <input style="" id="seleccionArchivos" type="file" class="form-control" name="foto" data-max-size="2048" accept="image/*">
-                                  <img src="/img/perfil.jpg" alt="" id="imgNormal">
-                                  <img id="imagenPrevisualizacion" class="rounded-circle mx-2" style="display: none;">
+                                  <input type="file" id="file-input"  class="form-control" name="foto" data-max-size="2048" accept="image/*">
+                                  <br />
+                                  <img id="imgSalida" class="rounded-circle mx-2" src="/img/perfil.jpg" />
                             </div>
                        </div>
 

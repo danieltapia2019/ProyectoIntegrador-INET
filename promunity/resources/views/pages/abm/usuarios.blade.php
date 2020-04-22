@@ -4,43 +4,58 @@
 <link rel="stylesheet" href="{{ asset('css/pages/abm.css') }}">
 @endpush
 
+@php
+
+$currentPage = $usuarios->currentPage(); //Página actual
+$maxPages = $currentPage + 3; //Máxima numeración de páginas
+$firstPage = 1; //primera página
+$lastPage = $usuarios->lastPage(); //última página
+$nextPage = $currentPage+1; //Siguiente página
+$forwardPage = $currentPage-1; //Página anterior
+$usuarios->setPath('');
+@endphp
+
 @section('title','ABM')
 
 @section('content')
-  <div class="conteiner row">
-    <div class="col-md-2">
+  <div class="contenedor">
     @include('component.sidenav')
-    </div>
-
-    <div class="contenido col-md-10">
-      {{$usuarios->links()}}
-
-      <button type="button" class="btn btn-success mb-3 btn-agregar" name="button" data-toggle="modal"
-          data-target="#modalUsuario">Agregar</button>
-          <hr>
-      <h5>Ordenar Por</h5>
-      <form class="" action="/abm/usuarios" method="GET">
-        <div class="row">
-          <select class="" name="atributo">
-            <option value="id">ID</option>
-            <option value="username">Nombre de usuario</option>
-            <option value="email">Email</option>
-            <option value="acceso">Acceso</option>
-          </select>
-          <br>
-          <select class="" name="tipo">
-            <option value="asc">Ascendente</option>
-            <option value="desc">Descendente</option>
-          </select>
-        </div>
-        <button type="submit" name="button" class="btn btn-dark">Ordenar</button>
-      </form>
+    <div class="contenido-tabla col-md-8">
+      <div class="ordenamiento">
+        <h5>Ordenar Por</h5>
+        <form class="" action="/abm/usuarios" method="GET">
+          <div class="col-md-12">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Campo</label>
+              </div>
+              <select class="custom-select" id="inputGroupSelect01" name="atributo">
+                <option value="0">ID</option>
+                <option value="1">Nombre de usuario</option>
+                <option value="2">Email</option>
+                <option value="3">Acceso</option>
+                <option value="4">Fecha de Creacion</option>
+              </select>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect02">Tipo</label>
+              </div>
+              <select class="custom-select" id="inputGroupSelect02" name="tipo">
+                <option value="0">Ascendente</option>
+                <option value="1">Descendente</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" name="button" class="btn btn-dark btn-block">ORDENAR</button>
+        </form>
+      </div>
       <table class="table table-light mt-1 usuario">
           <thead>
               <tr>
                   <th id="IDregistro">ID</th>
                   <th>Nombre de Usuario</th>
-                  <th>Email</th>
+                  <th id="Email">Email</th>
                   <th id="IDAcceso">Acceso</th>
                   <th>Acciones</th>
               </tr>
@@ -50,7 +65,7 @@
               <tr>
                   <td id="IDregistro">{{$usuario->id}}</td>
                   <td>{{$usuario->username}}</td>
-                  <td>{{$usuario->email}}</td>
+                  <td id="Email">{{$usuario->email}}</td>
                   @if ($usuario->acceso == 2)
                   <td id="IDAcceso">Alumno</td>
                   @elseif ($usuario->acceso == 1)
@@ -62,7 +77,7 @@
                   @if ($usuario->acceso != 0)
                     <td>
                         <div class="row">
-                           <button type="button" onclick="borrarRegistro({{$usuario->id}},this,1)" name="button" class="btn-delete btn btn-danger">Eliminar</button>
+                           <button type="button" onclick="borrarRegistro({{$usuario->id}},this,1)" name="button" class="btn-delete btn btn-danger">Borrar</button>
                             <hr>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalUsuario" onclick="editarUsuario({{$usuario}},this)">Editar</button>
                         </div>
@@ -74,10 +89,39 @@
               @endforelse
           </tbody>
       </table>
+        {{-- $usuarios->links() --}}
+        <ul class="pagination nav-link">
+                <!-- Botón para navegar a la primera página -->
+                <li class="@if($currentPage==$firstPage){{'disabled'}}@endif">
+                        <a href="@if($currentPage>1){{$usuarios->url($firstPage).$link}}@else{{$usuarios->url($firstPage).$link}}@endif" class='btn'>Primera</a>
+                </li>
+                <!-- Botón para navegar a la página anterior -->
+                <li class="@if($currentPage==$firstPage){{'disabled'}}@endif">
+                        <a href="@if($currentPage>1){{$usuarios->url($forwardPage).$link}}@else{{$usuarios->url($firstPage).$link}}@endif" class='btn'>«</a>
+                </li>
+                <!-- Mostrar la numeración de páginas, partiendo de la página actual hasta el máximo definido en $maxPages -->
+                @for($x=$currentPage;$x<$maxPages;$x++)
+                        @if($x <= $lastPage)
+                        <li class="@if($x==$currentPage){{'active'}}@endif">
+                                <a href="{{$usuarios->url($x).$link}}" class='btn'>{{$x}}</a>
+                        </li>
+                        @endif
+                @endfor
+                <!-- Botón para navegar a la pagina siguiente -->
+                <li class="@if($currentPage==$lastPage){{'disabled'}}@endif">
+                        <a href="@if($currentPage<$lastPage){{$usuarios->url($nextPage).$link}}@else{{'#'}}@endif" class='btn'>»</a>
+                </li>
+                <!-- Botón para navegar a la última página -->
+                <li class="@if($currentPage==$lastPage){{'disabled'}}@endif">
+                        <a href="@if($currentPage<$lastPage){{$usuarios->url($lastPage).$link}}@else{{'#'}}@endif" class='btn'>Última</a>
+                </li>
+        </ul>
+
+          <button type="button" class="btn btn-success mb-3 btn-agregar btn-block btn-lg" name="button" data-toggle="modal"
+              data-target="#modalUsuario">AGREGAR</button>
     </div>
 
 </div>
-
 
 
 <!-- Modal Crear Usuario-->

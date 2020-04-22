@@ -8,6 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--Fontawesome-->
     <script src="https://kit.fontawesome.com/918d19c8b4.js" crossorigin="anonymous"></script>
+    <!--Jquery-->
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- css propios -->

@@ -49,10 +49,11 @@
 
 
 <script>
+/*
   $(window).resize(function () {
       if( window.matchMedia("(max-width: 900px)") ){
         alert('Este sitio no esta optimizado para su dispositivos');
       }
-  })
+  })*/
 </script>
 @endsection
