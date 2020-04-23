@@ -16,8 +16,10 @@
 
 @section('content')
 
-<div class="contenedor">
+<div class="contenedor row">
+<div class="col-md-2">
       @include('component.sidenav')
+      </div>
 <div class="contenido-tabla col-md-10">
     <div class="ordenamiento">
       <h5>Ordenar Por</h5>

@@ -30,7 +30,7 @@ class ConsultaController extends Controller
     $consulta->consulta = $form['consulta'];
 
     $consulta->save();
-    return view('home');
+    return redirect('/home');
   }
 
 

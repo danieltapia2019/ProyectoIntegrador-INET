@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsuarioCursoTable extends Migration
+class AddForeign2 extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateUsuarioCursoTable extends Migration
      */
     public function up()
     {
-        Schema::create('usuario_curso', function (Blueprint $table) {
-            $table->unsignedBigInteger('curso_id');
-            $table->unsignedBigInteger('user_id');
+        //
+        Schema::enableForeignKeyConstraints();
+        Schema::table('transaccion',function(Blueprint $table){
+            $table->foreign('curso_id')->references('id')->on('cursos');
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -26,6 +29,6 @@ class CreateUsuarioCursoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usuario_curso');
+        //
     }
 }

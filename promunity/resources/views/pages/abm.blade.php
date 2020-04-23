@@ -41,6 +41,7 @@
             <button class="btn btn-secondary" onclick="location.href = '/abm/tipos'">Tipo</button>
             <button class="btn btn-secondary" onclick="location.href = '/abm/usos'">Uso</button>
             <button class="btn btn-secondary" onclick="location.href = '/abm/consultas'">Consultas</button>
+            <button class="btn btn-secondary" onclick="location.href = '/abm/lenguajes'">Lenguajes</button>
         </div>
     </div>
 

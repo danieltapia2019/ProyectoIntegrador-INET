@@ -19,8 +19,10 @@
 @section('content')
 
 <div class="contenedor">
-  @include('component.sidenav')
-  <div class="contenido-tabla col-md-8">
+<div class="col-md-2">
+      @include('component.sidenav')
+      </div>
+  <div class="contenido-tabla col-md-10">
       <div class="ordenamiento">
         <h5>Ordenar Por</h5>
         <form class="" action="/abm/lenguajes" method="GET">

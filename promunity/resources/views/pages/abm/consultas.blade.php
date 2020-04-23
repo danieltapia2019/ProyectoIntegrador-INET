@@ -16,8 +16,10 @@
 @section('title','ABM')
 
 @section('content')
-<div class="contenedor">
-    @include('component.sidenav')
+<div class="contenedor row">
+<div class="col-md-2">
+      @include('component.sidenav')
+      </div>
     <div class="contenido col-md-10">
 
         <div class="ordenamiento">
