@@ -9,7 +9,7 @@
 @section('content')
 <div class="container wrapper-curso">
     <div class="row curso-search">
-        <form action="{{ url('/search') }}" class="col-12 mt-5 mb-5" method="GET" id="filtForm">
+        <form action="{{ url('/search/filter') }}" class="col-12 mt-5 mb-5" method="GET" id="filtForm">
             <div class="form-row">
                 <div class="form-group col-12">
                     <div class="input-group">
@@ -23,14 +23,8 @@
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="col-12">
-                    <button class="btn btn-default-outline filt" onclick="ocultar()" type="button"><i class="fas fa-filter"></i>filtrar</button>
-                </div>
-            </div>
-
-            <div class="form-row mt-3 filt-form" hidden>
-                <div class="form-group col-3">
+            <div class="form-row mt-3 filt-form">
+                <div class="form-group col-lg-3 col-md-3 col-sm-6">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="tipo">Tipo</label>
@@ -45,7 +39,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group col-3">
+                <div class="form-group col-lg-3 col-md-3 col-sm-6">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="uso">Uso</label>
@@ -60,12 +54,12 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group col-3">
+                <div class="form-group col-lg-3 col-md-3 col-sm-6">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="uso">Lenguaje</label>
+                            <label class="input-group-text" for="lenguaje">Lenguaje</label>
                         </div>
-                        <select class="custom-select" id="lnj" name="lnj">
+                        <select class="custom-select" id="lenguaje" name="lng">
                             <option value="all" selected>todos</option>
                             @forelse ($lenguajes as $lenguaje)
                             <option value="{{$lenguaje->id}}">{{$lenguaje->nombreLenguaje}}</option>
@@ -75,7 +69,7 @@
                         </select>
                     </div>
                 </div>
-                {{-- <div class="form-group col-4">
+                <div class="form-group col-lg-3 col-md-3 col-sm-6">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="orden">Ordenar por</label>
@@ -86,7 +80,7 @@
                             <option value="old">Más viejos</option>
                         </select>
                     </div>
-                </div> --}}
+                </div>
             </div>
         </form>
     </div>
@@ -98,8 +92,9 @@
             </figure>
             <section class="desc">
                 <h2>{{$curso->titulo}}</h2>
-                <p>{{$curso->descripcion}}</p>
+                {{-- <p>{{$curso->desc}}</p> --}}
                 <p><b>Lenguaje: </b>{{$curso->lenguaje->nombreLenguaje}}</p>
+                <p><b>Fecha: </b>{{$curso->created_at}}</p>
                 <footer>
                     @guest
                     <a href="{{ url("/curso/$curso->id") }}">Ver Mas</a>
@@ -121,7 +116,6 @@
             <img src="{{ asset('img/mensajes/no-messages.png')}}" alt="Sin resultados">
         </div>
         @endforelse
-        {{$cursos->links()}}
     </div>
 </div>
 
@@ -129,6 +123,6 @@
 
 @section('scripting')
 {{-- No Borrar comentario de abajo --}}
-{{-- <script type="text/javascript" src="{{ asset('js/search.js') }}"></script> --}}
 <script src="{{ asset('js/carrito.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/search.js') }}"></script>
 @endsection

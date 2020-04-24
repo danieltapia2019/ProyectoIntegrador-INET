@@ -18,12 +18,13 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cursos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a href="{{ url('/search?q=curso&tip=all&uso=1&valState=2') }}" class="dropdown-item">Programación</a>
-                        <a href="{{ url('/search?q=curso&tip=all&uso=2&valState=2') }}" class="dropdown-item">Desarrollo Web</a>
-                        <a href="{{ url('/search?q=curso&tip=all&uso=4&valState=2') }}" class="dropdown-item">Desarrollo de Videojuegos</a>
-                        <a href="{{ url('/search?q=curso&tip=all&uso=3&valState=2') }}" class="dropdown-item">Desarrollo de App moviles</a>
+                        {{-- search?q=a&tip=all&uso=all&lng=all&ord=all&state=0&setTime=d --}}
+                        <a href="{{ url('/search/filter?q=&tip=all&uso=1&lng=all&ord=all&state=2&setTime=d') }}" class="dropdown-item">Programación</a>
+                        <a href="{{ url('/search/filter?q=&tip=all&uso=2&lng=all&ord=all&state=2&setTime=d') }}" class="dropdown-item">Desarrollo Web</a>
+                        <a href="{{ url('/search/filter?q=&tip=all&uso=4&lng=all&ord=all&state=2&setTime=d') }}" class="dropdown-item">Desarrollo de Videojuegos</a>
+                        <a href="{{ url('/search/filter?q=&tip=all&uso=3&lng=all&ord=all&state=2&setTime=d') }}" class="dropdown-item">Desarrollo de App moviles</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ url('/search') }}">Mas cursos...</a>
+                        <a class="dropdown-item" href="{{ url('/search?q=') }}">Mas cursos...</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

@@ -62,6 +62,7 @@ Route::get('/logout','\App\http\Controller\Auth\LoginController@logout');
 /*    Search    */
 Route::get('/search','searchController@indexSearch');
 Route::get('/search','searchController@searchCurso');
+Route::get('/search/filter','searchController@filtering');
 
 
 /*    Curso    */
