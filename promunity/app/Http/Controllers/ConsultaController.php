@@ -37,8 +37,10 @@ class ConsultaController extends Controller
   public function getConsultas(Request $request){
     $consultas;
     $orden;
+    $link = "";
+    $numOrden;
     if($request['tipo']){
-
+      $numOrden = $request['tipo'];
       switch ($request['tipo']) {
         case 0:
         // code...
@@ -55,27 +57,33 @@ class ConsultaController extends Controller
       switch ($request['atributo']) {
         case 0:
         $consultas = ConsultaModel::orderBy('id',$orden)->paginate(5);
+        $link = "&atributo=0&tipo=$numOrden";
         break;
         case 1:
         $consultas = ConsultaModel::orderBy('nombre',$orden)->paginate(5);
+        $link = "&atributo=1&tipo=$numOrden";
         break;
         case 2:
         $consultas = ConsultaModel::orderBy('email',$orden)->paginate(5);
+        $link = "&atributo=2&tipo=$numOrden";
         break;
         case 3:
         $consultas = ConsultaModel::orderBy('telefono',$orden)->paginate(5);
+        $link = "&atributo=3&tipo=$numOrden";
         break;
         case 4:
         $consultas = ConsultaModel::orderBy('created_at',$orden)->paginate(5);
+        $link = "&atributo=4&tipo=$numOrden";
         break;
         default:
         $consultas = ConsultaModel::orderBy('id',$orden)->paginate(5);
+        $link = "&atributo=0&tipo=$numOrden";
         break;
       }
-    return view('pages.abm.consultas',compact('consultas'));
+    return view('pages.abm.consultas',compact('consultas','link'));
     }else{
     $consultas = ConsultaModel::paginate(5);
-    return view('pages.abm.consultas',compact('consultas'));
+    return view('pages.abm.consultas',compact('consultas','link'));
     }
   }
 

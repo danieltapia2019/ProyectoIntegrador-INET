@@ -13,15 +13,16 @@
   $forwardPage = $currentPage-1; //Página anterior
   $usos->setPath('');
 @endphp
-@section('title','ABM')
+@section('title','ABM-USOS')
 
 @section('content')
-  <div class="contenedor row">
-  <div class="col-md-2">
+  <div class="contenedor">
+  <div class="">
       @include('component.sidenav')
       </div>
     <div class="contenido-tabla col-md-10">
           <div class="ordenamiento">
+            @if (count($usos) != 0)
             <h5>Ordenar Por</h5>
             <form class="" action="/abm/usos" method="GET">
               <div class="col-md-12">
@@ -47,6 +48,7 @@
               </div>
               <button type="submit" name="button" class="btn btn-dark btn-block">ORDENAR</button>
             </form>
+            @endif
           </div>
           <hr>
       <table class="table table-light mt-3 mb-5 usos">

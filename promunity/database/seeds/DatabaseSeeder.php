@@ -6,7 +6,7 @@ use App\User;
 use App\CursoModel;
 use App\AlumnoCurso;
 use App\ConsultaModel;
-
+use App\Transaccion;
 
 
 class DatabaseSeeder extends Seeder

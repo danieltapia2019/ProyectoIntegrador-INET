@@ -19,11 +19,12 @@
 @section('content')
 
 <div class="contenedor">
-<div class="col-md-2">
+<div>
       @include('component.sidenav')
       </div>
   <div class="contenido-tabla col-md-10">
       <div class="ordenamiento">
+        @if (count($lengujaes) != 0)
         <h5>Ordenar Por</h5>
         <form class="" action="/abm/lenguajes" method="GET">
           <div class="col-md-12">
@@ -49,6 +50,7 @@
           </div>
           <button type="submit" name="button" class="btn btn-dark btn-block">ORDENAR</button>
         </form>
+        @endif
       </div>
       <hr>
       <br>

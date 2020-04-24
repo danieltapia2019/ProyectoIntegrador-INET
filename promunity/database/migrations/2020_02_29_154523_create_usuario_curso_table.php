@@ -16,6 +16,7 @@ class CreateUsuarioCursoTable extends Migration
         Schema::create('usuario_curso', function (Blueprint $table) {
             $table->unsignedBigInteger('curso_id');
             $table->unsignedBigInteger('user_id');
+            $table->timestamps();
         });
     }
 

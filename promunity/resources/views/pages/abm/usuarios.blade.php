@@ -18,13 +18,13 @@ $usuarios->setPath('');
 @section('title','ABM')
 
 @section('content')
-  <div class="contenedor row">
-      <div class="col-md-2">
+  <div class="contenedor">
+      <div class="">
       @include('component.sidenav')
       </div>
-
     <div class="contenido-tabla col-md-10">
       <div class="ordenamiento">
+        @if (count($usuarios) != 0)
         <h5>Ordenar Por</h5>
         <form class="" action="/abm/usuarios" method="GET">
           <div class="col-md-12">
@@ -52,6 +52,7 @@ $usuarios->setPath('');
           </div>
           <button type="submit" name="button" class="btn btn-dark btn-block">ORDENAR</button>
         </form>
+        @endif
       </div>
       <table class="table table-light mt-1 usuario">
           <thead>

@@ -7,20 +7,22 @@ use Illuminate\Support\Str;
 use App\AlumnoCurso;
 use App\Model;
 use App\User;
+use App\Transaccion;
 use App\CursoModel;
 use Faker\Generator as Faker;
 
 $factory->define(AlumnoCurso::class, function (Faker $faker) {
+
+    $curso = CursoModel::inRandomOrder()->first();
+    $alumno = User::inRandomOrder()->where('acceso','=','2')->first();
+    $transaccion = new Transaccion();
+    $transaccion->user_id = $alumno->id;
+    $transaccion->curso_id = $curso->id;
+    $transaccion->estado = 1;
+    $transaccion->referencia = $curso->id.$faker->hexcolor.$alumno->id;
+    $transaccion->save();
     return [
-          'curso_id' => function(){
-            $curso = CursoModel::inRandomOrder()->first();
-            return $curso->id;
-          },
-          'user_id' => function(){
-            $alumno = User::inRandomOrder()->where('acceso','=','2')->first();
-            return $alumno->id;
-          },
-          'transaccion' => $faker->randomNumber(),
-          'pagado' => 1,
+          'curso_id' => $curso->id,
+          'user_id' => $alumno->id,
     ];
 });

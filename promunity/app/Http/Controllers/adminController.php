@@ -348,7 +348,7 @@ class adminController extends Controller{
 
         case 1:
         // code...
-      $tipos = TipoModel::orderBy('usoNombre',$orden)->where('estado','=','1')->paginate(5);
+      $tipos = TipoModel::orderBy('tipoNombre',$orden)->where('estado','=','1')->paginate(5);
       $link = "&atributo=1&tipo=$numOrden";
         break;
 
@@ -455,9 +455,56 @@ class adminController extends Controller{
     }
   }
 
-  public function getTransacciones(){
-    $transacciones=Transaccion::all();
-    return view("pages.abm.transacciones",compact('transacciones'));
+  public function getTransacciones(Request $request){
+    $orden;
+    $link = "";
+    $numOrden;
+    $transacciones;
+    if($request['tipo'] != null){
+      $orden = $this->orden($request['tipo']);
+      $numOrden = $request['tipo'];
+      switch ($request['atributo']) {
+        case 0:
+        $transacciones = Transaccion::orderBy('id',$orden)->paginate(5);
+        $link = "&atributo=0&tipo=$numOrden";
+        break;
+        case 1:
+        //Nombre Usuario
+        $transacciones = Transaccion::join('users','users.id','=','transaccion.user_id')
+        ->select('users.username as username','transaccion.*')
+        ->orderBy('username',$orden)
+        ->paginate(5);
+        $link = "&atributo=1&tipo=$numOrden";
+        break;
+        case 2:
+        //titulo Curso
+        $transacciones = Transaccion::join('cursos','cursos.id','=','transaccion.curso_id')
+        ->select('cursos.titulo as titulo','transaccion.*')
+        ->orderBy('titulo',$orden)
+        ->paginate(5);
+        $link = "&atributo=2&tipo=$numOrden";
+        break;
+        case 3:
+        //Estado
+        $transacciones = Transaccion::orderBy('estado',$orden)->paginate(5);
+        $link = "&atributo=3&tipo=$numOrden";
+        break;
+
+        case 3:
+        //Referencia
+        $transacciones = Transaccion::orderBy('referencia',$orden)->paginate(5);
+        $link = "&atributo=3&tipo=$numOrden";
+        break;
+        default:
+        $transacciones = Transaccion::orderBy('id',$orden)->paginate(5);
+        $link = "&atributo=0&tipo=$numOrden";
+        break;
+      }
+    return view("pages.abm.cursos_alumnos",compact('alumnos_cursos','link'));
+    }else{
+    $transacciones=Transaccion::paginate(5);
+    return view("pages.abm.transacciones",compact('transacciones','link'));
+    }
   }
   public function activarCurso(Request $request,$id){
     if($request->ajax()){

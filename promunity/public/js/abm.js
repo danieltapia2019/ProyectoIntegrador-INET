@@ -450,7 +450,31 @@ function verPropiedades(curso,boton){
   buttonEdit.attr('href','/editar/curso/'+curso.id);
 
 }
-
+function verTransaccion(transaccion,boton){
+  var estado;
+  var btnHabilitar = $(".btn-habilitar");
+  $(".modal-title").text('Referencia: '+ transaccion.referencia);
+  $(".username-mobile").text('Usuario: '+transaccion.usuario.username);
+  $(".cursotitle-mobile").text("Lenguaje: "+transaccion.curso.titulo);
+  if(transaccion.estado == 1){
+    estado = "Pagado"
+    btnHabilitar.attr('disabled','true')
+    btnHabilitar.text('Habilitar')
+    btnHabilitar.attr('class','btn btn-danger')
+  }else{
+    estado = "En proceso"
+    btnHabilitar.attr('href', 'http://localhost:8000/activar/'+ transaccion.id)
+    btnHabilitar.attr('tranId',transaccion.id)
+    btnHabilitar.text('Habilitar')
+    btnHabilitar.attr('class','btn btn-success activar')
+    btnHabilitar.removeAttr('disabled')
+  }
+  $(".state-mobile").text("Estado: "+estado);
+  $(".activar").click(function(e){
+    $("#modalTransaccion").hide();
+    $("div.modal-backdrop.fade.show").remove();
+  })
+}
 
 
 

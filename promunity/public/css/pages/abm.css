@@ -1,14 +1,15 @@
-.row{
-    width: 100%;
-
+.contenedor {
+    display: flex !important;
+    /* ETIQUETA QUE POSICIONA UNO AL LADO DEL OTRO */
+    flex-wrap: wrap;
+    height: auto;
 }
 .sideNavigation {
     background-color: black;
-    height: 100vh;
-
+    height: 110vh;
     justify-content: center;
-
 }
+
 .sideNavigation a {
     list-style: none;
     color: white;
@@ -141,7 +142,12 @@ div.abm-directions-panel {
         justify-content: center;
         margin-right: 0%;
     }
-
+    .contenedor{
+      display: inline-block;
+        /* ETIQUETA QUE POSICIONA UNO AL LADO DEL OTRO */
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
     .sideNavigation a:last-child {
         position: relative;
         margin-left: 25px;
@@ -209,7 +215,10 @@ div.abm-directions-panel {
     border: 1px solid black;
   }
   .contenedor{
-    text-align:center;
+    display: inline-block;
+      /* ETIQUETA QUE POSICIONA UNO AL LADO DEL OTRO */
+      flex-wrap: nowrap;
+      flex-direction: column;
   }
   .sideNavigation {
       height: auto;

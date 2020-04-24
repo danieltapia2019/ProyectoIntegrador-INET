@@ -7,8 +7,8 @@
 @section('title','ABM-GENERAL')
 
 @section('content')
-<div class="container-fuild row">
-    <div class=col-md-2>
+<div class="contenedor">
+    <div class="">
     @include('component.sidenav')
     </div>
     <div class="col-md-10 container">
