@@ -1,9 +1,9 @@
-function ocultar() {
-    // let form = document.querySelector('form.filt-form');
-    let divForm = document.querySelector('div.filt-form');
+// function ocultar() {
+//     // let form = document.querySelector('form.filt-form');
+//     let divForm = document.querySelector('div.filt-form');
 
-    (divForm.getAttribute('hidden') != null) ? divForm.removeAttribute('hidden'): divForm.setAttribute('hidden', '');
-}
+//     (divForm.getAttribute('hidden') != null) ? divForm.removeAttribute('hidden'): divForm.setAttribute('hidden', '');
+// }
 
 function filterSearch() {
     //Obtengo los valores de los inputs

@@ -19,10 +19,10 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         {{-- search?q=a&tip=all&uso=all&lng=all&ord=all&state=0&setTime=d --}}
-                        <a href="{{ url('/search?q=&tip=all&uso=1&lng=all&ord=all&state=2&setTime=d') }}" class="dropdown-item">Programación</a>
-                        <a href="{{ url('/search?q=&tip=all&uso=2&lng=all&ord=all&state=2&setTime=d') }}" class="dropdown-item">Desarrollo Web</a>
-                        <a href="{{ url('/search?q=&tip=all&uso=4&lng=all&ord=all&state=2&setTime=d') }}" class="dropdown-item">Desarrollo de Videojuegos</a>
-                        <a href="{{ url('/search?q=&tip=all&uso=3&lng=all&ord=all&state=2&setTime=d') }}" class="dropdown-item">Desarrollo de App moviles</a>
+                        <a href="{{ url('/search/filter?q=&tip=all&uso=1&lng=all&ord=all&state=2&setTime=d') }}" class="dropdown-item">Programación</a>
+                        <a href="{{ url('/search/filter?q=&tip=all&uso=2&lng=all&ord=all&state=2&setTime=d') }}" class="dropdown-item">Desarrollo Web</a>
+                        <a href="{{ url('/search/filter?q=&tip=all&uso=4&lng=all&ord=all&state=2&setTime=d') }}" class="dropdown-item">Desarrollo de Videojuegos</a>
+                        <a href="{{ url('/search/filter?q=&tip=all&uso=3&lng=all&ord=all&state=2&setTime=d') }}" class="dropdown-item">Desarrollo de App moviles</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ url('/search?q=') }}">Mas cursos...</a>
                     </div>
