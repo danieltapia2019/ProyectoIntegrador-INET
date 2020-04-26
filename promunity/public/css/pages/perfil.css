@@ -92,7 +92,11 @@
     margin-right: 25%;
     margin-bottom: 5%;
 }
-
+/*FORMULARIO EDITAR DATOS*/
+.perfil-img{
+  width: 50%;
+  height: 30vh;
+}
 /*FORMULARIO CREAR CURSO*/
 .crearCurso button {
     margin-top: 10px;
@@ -128,8 +132,11 @@
     bottom: 0;
     margin-left: auto;
 }
-
-
+.card-alumno{
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
 /*PERFIL MOBILE*/
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
@@ -137,6 +144,10 @@
         font-size: 20px;
     }
 
+    /*FORMULARIO EDITAR DATOS*/
+    .perfil-img{
+      width: 80%;
+    }
     #perfil,
     #config {
         margin-top: 10%;
@@ -155,6 +166,9 @@
     }
     .opinion textarea{
     width: 100%;
+    }
+    .alumnos table{
+      font-size: 10px;
     }
 }
 

@@ -25,6 +25,13 @@ class CursoController extends Controller
         return view('pages.perfil',compact('cursos'));
     }
 
+    /*lISTADO DE ALUMNOS Y CURSOS*/
+    public function alumnosCurso($id){
+      $curso = CursoModel::find($id);
+      $alumnos = $curso->alumno()->paginate(5);
+      return view('pages.alumnos',compact('curso','alumnos'));
+    }
+
 
     /**
     *Crea un curso desde el perfil

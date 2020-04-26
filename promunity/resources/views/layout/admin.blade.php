@@ -25,6 +25,7 @@
     <script src="{{ asset('js/bootstrap.js') }}"></script>
     <script type="text/javascript" src="/js/main.js"></script>
     <script type="text/javascript" src="/js/abm.js"></script>
+    <script type="text/javascript" src="/js/editarCurso.js"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     @yield('scripting')
 </body>

@@ -11,7 +11,6 @@ $(document).on('click','.activar',function(e){
     let url=$(element).attr("href");
     let id=$(element).attr("tranId");
     let estado=$("td[id="+id+"]")[0];
-
     $.post(url,function(response){
 
         console.log(response.mensaje)
@@ -19,14 +18,13 @@ $(document).on('click','.activar',function(e){
         estado.innerHTML="Pagado"
         element.disabled=true;
         element.className="btn btn-danger"
-
-
     }).fail(function(){
         console.log("esto no funca")
     })
 })
 $(".btn-agregar").click(function(e){
   e.preventDefault();
+  $(".modal-title").text('Crear Usuario');
 })
 $(".btn-submit-user").click(function(e){
   e.preventDefault();
@@ -35,6 +33,7 @@ $(".btn-submit-user").click(function(e){
   var password = $("input[name=password]").val();
   var acceso = $("select[name=acceso]").val();
   var campos = validarCamposUsuario(username,email,password,$("input[name=password_confirmation]").val());
+
   switch (campos) {
     case 1: alert('HAY CAMPOS VACIOS');break;
     case 2: alert('LA CONTRASEÑA TIENE QUE TENER MINIMO 8 CARACTERES');break;
@@ -114,11 +113,14 @@ function borrarRegistro(id,boton,url){
 function editarUsuario(persona,boton){
   var username = $("input[name=username]").val(persona.username);
   var email = $("input[name=email]").val(persona.email);
-  $(".pass").hide();
-  $("select[name=acceso] option[value="+ persona.acceso +"]").prop("selected",true);
-  $(".btn-submit-user").hide();
+  $(".modal-pass").hide();
+  $(".modal-pass-confirm").hide();
+  $(".modal-title").text('Editar Usuario');
   var botonActualizar ="<button type='submit' class='btn btn-warning btn-block my-3 btn-put-user'>Actualizar</button>";
+  $(".btn-submit-user").hide();
   $(".user-form").append(botonActualizar);
+  $("select[name=acceso] option[value="+ persona.acceso +"]").prop("selected",true);
+
     $(".btn-put-user").click(function(e){
         e.preventDefault();
         var username=$("input[name=username]").val();
@@ -138,6 +140,11 @@ function editarUsuario(persona,boton){
                 $("input[name=password_confirmation]").val("");
                 $("input[name=password]").show();
                 $("input[name=password]_confirmation").show();
+                $(".btn-put-user").remove();
+                $("btn-submit-user").show();
+                $(".modal-pass").show();
+                $(".modal-pass-confirm").show();
+                $("div.modal-backdrop.fade.show").remove();
                 return false;
               }
               console.log(data);
@@ -168,8 +175,8 @@ function editarUsuario(persona,boton){
               $('#modalUsuario').modal('hide');
               $(".btn-put-user").remove();
               $("btn-submit-user").show();
-              $("input[name=password]").show();
-              $("input[name=password]_confirmation").show();
+              $(".modal-pass").show();
+              $(".modal-pass-confirm").show();
               $("div.modal-backdrop.fade.show").remove();
              },
              error:function(e){
@@ -180,9 +187,8 @@ function editarUsuario(persona,boton){
 
     $("#modalUsuario").on('hidden.bs.modal', function () {
     $(".btn-put-user").remove();
-    $("input[name=password]").show();
-    $("input[name=password]_confirmation").show();
-    $(".btn-submit-user").show();
+    $(".modal-pass").show();
+    $(".modal-pass-confirm").show();
     });
 
 }
@@ -257,7 +263,7 @@ function editarTipo(tipo,boton){
   $("#modalTipo").on('hidden.bs.modal', function () {
   $(".btn-put-tipo").remove();
   $(".btn-submit-tipo").show();
-  $("input[name=tnombre]").val("");
+  $(this).find('form').trigger('reset');
   });
 
 }
@@ -336,7 +342,7 @@ function editarUso(uso,boton){
   $("#modalUso").on('hidden.bs.modal', function () {
   $(".btn-put-uso").remove();
   $(".btn-submit-uso").show();
-  $("input[name=snombre]").val("");
+  $(this).find('form').trigger('reset');
   });
 
 }
@@ -404,6 +410,7 @@ function editarLenguaje(lenguaje,boton){
           $(".modal-title").text('Crear Lenguaje');
           $("#modalLenguaje").hide();
           $("div.modal-backdrop.fade.show").remove();
+          $("#modalLenguaje").find('form').trigger('reset');
         }
       });
     }
@@ -431,7 +438,7 @@ $("#modalUsuario").on('hidden.bs.modal',function(){
     $(this).find('form').trigger('reset');
 });
 
-
+//SOLO MOBILE
 
 function verPropiedades(curso,boton){
   $(".modal-title").text(curso.titulo);
@@ -441,6 +448,10 @@ function verPropiedades(curso,boton){
   $(".uso-mobile").text('Uso: '+curso.uso.usoNombre);
   $(".tipo-mobile").text('Tipo: '+curso.tipo.tipoNombre);
   $(".autor-mobile").text('Autor: '+curso.creador.username);
+  var imagenLink = "<a href='/storage/img/cursos/"+curso.foto_curso +"'>Ver Imagen</a>"
+  $(".imagen-mobile").html(imagenLink);
+  var alumnosLink = "<a href='/alumnos/curso/"+curso.id +"'>Alumnos</a>";
+  $(".alumnos-mobile").html(alumnosLink);
   var buttonDelete = $(".delete-mobile");
   var buttonEdit = $(".edit-mobile");
   var button = document.querySelector('button.delete-mobile');

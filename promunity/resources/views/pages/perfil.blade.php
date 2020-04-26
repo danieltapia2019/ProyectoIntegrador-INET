@@ -15,7 +15,6 @@
       window.addEventListener("load", function() {
       alert('NO SE PUDO ACTUALIZAR, YA EXISTE UN REGISTRO CON EL NOMBRE DE USUARIO Y/O EMAIL')
       })
-
       </script>
     @endif
 
@@ -86,9 +85,17 @@
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="editar" role="tabpanel" aria-labelledby="nav-home-tab">
 
-    <form class="" action="/actualizarDatos" method="post">
-
+      @if (auth()->user()->foto == null)
+      <img class="perfil-img rounded mx-auto d-block" src="/img/perfil.jpg" alt="">
+      @else
+       <img class="perfil-img rounded mx-auto d-block" src="{{asset('/storage/img/avatar/'.auth()->user()->foto)}}" alt="{{$usuario->username}}">
+      @endif
+    <form class="" action="/actualizarDatos" method="post" enctype="multipart/form-data">
           @csrf
+          <input type="hidden" name="id" value="{{auth()->user()->id}}">
+          <div class="input-group mb-3">
+            <input type="file" id="file-input"  class="form-control" name="foto" data-max-size="2048" accept="image/*">
+          </div>
           <div class="input-group mb-3">
               <div class="input-group-prepend">
                   <span class="input-group-text"><i class="far fa-user"></i></span>
@@ -108,7 +115,7 @@
                   <span class="input-group-text"><i class="fas fa-lock"></i></span>
               </div>
               <input type="password" name="password" class="form-control password" aria-label="password"
-                  placeholder="Ingrese contraseña" id="password" required minlength="8">
+                  placeholder="Ingrese contraseña" id="password" minlength="8">
               <div class="input-group-append">
                   <button class="btn btn-outline-primary" type="button" name="button"
                       onclick="mostrarContrasena()">
@@ -121,7 +128,7 @@
                   <span class="input-group-text"><i class="fas fa-lock"></i></span>
               </div>
               <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
-                  required autocomplete="new-password" placeholder="Confirmar contraseña nueva" minlength="8">
+                   autocomplete="new-password" placeholder="Confirmar contraseña nueva" minlength="8">
           </div>
           <button type="submit" class="btn btn-reg btn-lg btn-block my-3">Actualizar Datos</button>
     </form>
@@ -228,9 +235,11 @@
                     <p>Tipo: {{$curso->tipo->tipoNombre}}</p>
                     <p>Uso: {{$curso->uso->usoNombre}}</p>
                     <a href="/">Ir al curso</a>
+                    <a href="/alumnos/curso/{{$curso->id}}">Ver Alumnos</a>
                 </div>
                 {{--<img id="foto-curso" src="storage\img\cursos\{{$curso->foto_curso}}" class="card-img" alt="...">--}}
                 <img id="foto-curso" src="{{$curso->foto_curso}}" alt="" class="card-img">
+
             </div>
             @empty
             <h3>No has comprado ningun curso</h3>

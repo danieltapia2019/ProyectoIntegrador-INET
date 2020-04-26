@@ -57,26 +57,32 @@ $usuarios->setPath('');
       <table class="table table-light mt-1 usuario">
           <thead>
               <tr>
-                  <th id="IDregistro">ID</th>
+                  <th id="abmUser">ID</th>
                   <th>Nombre de Usuario</th>
-                  <th id="Email">Email</th>
-                  <th id="IDAcceso">Acceso</th>
+                  <th id="abmUser">Email</th>
+                  <th id="abmUser">Acceso</th>
+                  <th id="abmUser">Imagen</th>
                   <th>Acciones</th>
               </tr>
           </thead>
           <tbody>
               @forelse ($usuarios as $key => $usuario)
               <tr>
-                  <td id="IDregistro">{{$usuario->id}}</td>
+                  <td id="abmUser">{{$usuario->id}}</td>
                   <td>{{$usuario->username}}</td>
-                  <td id="Email">{{$usuario->email}}</td>
+                  <td id="abmUser">{{$usuario->email}}</td>
                   @if ($usuario->acceso == 2)
-                  <td id="IDAcceso">Alumno</td>
+                  <td id="abmUser">Alumno</td>
                   @elseif ($usuario->acceso == 1)
-                  <td id="IDAcceso">Profesor</td>
+                  <td id="abmUser">Profesor</td>
                   @else
-                  <td id="IDAcceso">Admin</td>
+                  <td id="abmUser">Admin</td>
                   <td>No hay acciones</td>
+                  @endif
+                  @if ($usuario->foto != null)
+                  <td id="abmUser"><a href="/storage/img/avatar/{{$usuario->foto}}">Ver Imagen</a> </td>
+                  @else
+                  <td id="abmUser">Nulo</td>
                   @endif
                   @if ($usuario->acceso != 0)
                     <td>
@@ -134,7 +140,7 @@ $usuarios->setPath('');
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Crear Usuario</h5>
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -142,26 +148,32 @@ $usuarios->setPath('');
             <div class="modal-body">
                 <form class="user-form" action="" method="POST">
                     @csrf
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 modal-username">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-user"></i></span>
                         </div>
-                        <input type="text" name="username" class="form-control" placeholder="Nombre de usuario"
-                            required>
+                        <div class="modal-username">
+                          <input type="text" name="username" class="form-control" placeholder="Nombre de usuario"
+                              required>
+                        </div>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-envelope"></i></span>
                         </div>
-                        <input type="email" name="email" class="form-control" aria-label="email"
-                            placeholder="Ingrese email" required>
+                        <div class="modal-email">
+                          <input type="email" name="email" class="form-control" aria-label="email"
+                              placeholder="Ingrese email" required>
+                        </div>
                     </div>
-                    <div class="input-group mb-3 pass">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                         </div>
-                        <input type="password" name="password" class="form-control password" aria-label="password"
-                            placeholder="Ingrese contraseña" id="password" required minlength="8">
+                        <div class="modal-pass">
+                          <input type="password" name="password" class="form-control password" aria-label="password"
+                              placeholder="Ingrese contraseña" id="password" required minlength="8">
+                        </div>
                         <div class="input-group-append">
                             <button class="btn btn-outline-primary" type="button" name="button"
                                 onclick="mostrarContrasena()">
@@ -169,22 +181,24 @@ $usuarios->setPath('');
                             </button>
                         </div>
                     </div>
-                    <div class="input-group mb-3 pass">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                         </div>
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
-                            required autocomplete="new-password" placeholder="Confirmar contraseña" minlength="8">
+                        <div class="modal-pass-confirm">
+                          <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
+                              required autocomplete="new-password" placeholder="Confirmar contraseña" minlength="8">
+                        </div>
                     </div>
                     <label for="acceso">Nivel de acceso:</label>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 modal-acceso">
                         <select name="acceso">
                             <option value="2">Alumno</option>
                             <option value="1">Profesor</option>
                             <option value="0">Administrador</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-reg btn-lg btn-block my-3 btn-submit-user">Crear Usuario</button>
+                    <button type='submit' class='btn btn-success btn-reg btn-lg btn-block my-3 btn-submit-user'>Crear Usuario</button>
                 </form>
             </div>
         </div>

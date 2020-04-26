@@ -28,6 +28,10 @@ headers: {
 $(".btn-submit-opinion").click(function(e){
   e.preventDefault();
   var opinion = $("textarea[name=opinion]").val();
+  console.log(opinion.length)
+  if(opinion == null){
+    alert('Error Escriba su opinion')
+  }else{
   $.ajax({
     type:'POST',
     url:'http://localhost:8000/opinion',
@@ -41,7 +45,10 @@ $(".btn-submit-opinion").click(function(e){
       alert('ERROR '+e);
     },
   })
+  }
 });
+
+
 function abrirDarUnCurso() {
     closeNav();
 }

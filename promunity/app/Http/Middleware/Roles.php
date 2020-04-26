@@ -15,6 +15,11 @@ class Roles
      */
     public function handle($request, Closure $next,$user)
     {
+        if($user == "profesor"){
+          if($request->user()->acceso != 2){
+            return $next($request);
+          }
+        }
         if($request->user()->acceso != 0){
           abort(403,'No tienes el acceso suficiente para estar en la pagina');
         }

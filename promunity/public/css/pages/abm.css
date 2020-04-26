@@ -29,6 +29,7 @@ a i {
     border-radius: 150px;
     margin-left: 25px;
     margin-right: 25px;
+    margin-top: 25%;
 }
 div.container{
     display: flex;
@@ -113,7 +114,7 @@ div.abm-directions-panel {
 }
 
 .editar-curso {
-    width: 50%;
+    width: 80%;
     justify-content: center;
     margin: auto;
     margin-top: 2vh;
@@ -186,14 +187,7 @@ div.abm-directions-panel {
     }
 
     /*TAB*/
-    #IDregistro {
-        display: none;
-    }
-
-    #IDAcceso {
-        display: none;
-    }
-    #Email{
+    #abmUser{
       display: none;
     }
 
@@ -207,13 +201,16 @@ div.abm-directions-panel {
     .table-desktop{
       display: none;
     }
+    .editar-curso{
+      width: 90%;
+    }
 }
 
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
   .tipos{
     border: 1px solid black;
-  }
+  }m
   .contenedor{
     display: inline-block;
       /* ETIQUETA QUE POSICIONA UNO AL LADO DEL OTRO */

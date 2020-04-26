@@ -55,7 +55,6 @@ Route::delete('/borrar/curso/{id}','adminController@borrarCurso')->middleware('a
 Route::delete('/abm/consultas/borrar','ConsultaController@deleteConsulta')->middleware('auth','rol:auth');
 Route::delete('/borrar/lenguaje/{id}','adminController@borrarLenguaje')->middleware('auth','rol:auth');
 
-
 Route::get('/logout','\App\http\Controller\Auth\LoginController@logout');
 
 
@@ -70,6 +69,9 @@ Route::get('/search/filter','searchController@filtering');
 //   return view('pages.cursos');
 // });
 
+/* Alumnos */
+Route::get('/alumnos/curso/{id}','cursoController@alumnosCurso')->middleware('auth','rol:profesor');
+
 /*    Curso detalle   */
 Route::get('/curso/{curso_id}','cursoController@detalle');
 
@@ -80,7 +82,7 @@ Route::get('/perfil','UserController@miPerfil')->middleware('auth');
 Route::post('/opinion','UserController@darOpinion')->middleware('auth');
 
 /*PERFIL Actualizar Datos*/
-Route::post('/actualizarDatos','UserController@actualizarDatos');
+Route::post('/actualizarDatos','UserController@actualizarDatos')->middleware('auth');
 
 /*    Carrito   */
 Route::post('/agregar/{id}','CarritoController@agregarAlCarrito')->name('agregarAlCarrito');

@@ -65,6 +65,7 @@
                 <th>Tipo</th>
                 <th>Uso</th>
                 <th>Autor</th>
+                <th>Alumnos</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -79,6 +80,7 @@
                 <td>{{$curso->tipo->tipoNombre}}</td>
                 <td>{{$curso->uso->usoNombre}}</td>
                 <td>{{$curso->creador->username}}</td>
+                <td><a href="/alumnos/curso/{{$curso->id}}">Alumnos</a></td>
                 <td>
                     <div class="row">
                         <button type="button" onclick="borrarRegistro({{$curso->id}},this,2)" name="button" class="btn-delete btn btn-danger">Eliminar</button>
@@ -88,7 +90,6 @@
                         </button>
                     </div>
                 </td>
-                <td></td>
             </tr>
             @empty
             <h3 class="mt-5 mb-5">No hay Cursos :(</h3>
@@ -164,11 +165,13 @@
               <p class="descripcion-mobile">Descripcion:</p>
               <hr>
               <h3 class="lenguaje-mobile">Lenguaje:</h3>
-              <p class="imagen-mobile">Ver imagen</p>
+              <p class="imagen-mobile"></p>
               <p class="precio-mobile">Precio:</p>
               <p class="autor-mobile">Autor:</p>
               <p class="tipo-mobile">Tipo:</p>
               <p class="uso-mobile">Uso:</p>
+              <p class="alumnos-mobile"></p>
+              
                         <button type="button" onclick="" name="button" class="btn-delete btn btn-danger btn-lg btn-block delete-mobile">Eliminar</button>
                         <hr>
                         <a class="edit-mobile">

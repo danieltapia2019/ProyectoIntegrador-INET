@@ -36,11 +36,6 @@
 
                             <div class="col-md-6">
                                 <div class="input-group">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-primary" type="button" name="button"  onclick="mostrarContrasena()">
-                                        <i name="eye" id="ojo" class="fas fa-eye"></i>
-                                    </button>
-                                </div>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')

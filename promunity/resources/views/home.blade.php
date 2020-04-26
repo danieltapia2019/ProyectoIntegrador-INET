@@ -51,7 +51,7 @@
         @if ($key == 0)
         <div class="carousel-item active">
             <article class="border border-secundary border-top-0 curso">
-                <img src="img/cursos.jpg" alt="">
+                <img src="{{ asset('/storage/img/cursos/'.$curso->foto_curso) }}" alt="">
                 <h4>{{$curso->titulo}}</h4>
                 <p>{{$curso->creador->username}}</p>
                 <p>{{$curso->precio}} ARS</p>
@@ -61,7 +61,7 @@
         @else
         <div class="carousel-item">
             <article class="border border-secundary border-top-0 curso">
-                <img src="img/cursos.jpg" alt="">
+                <img src="{{ asset('/storage/img/cursos/'.$curso->foto_curso) }}" alt="">
                 <h4>{{$curso->titulo}}</h4>
                 <p>{{$curso->creador->username}}</p>
                 <p>{{$curso->precio}} ARS</p>

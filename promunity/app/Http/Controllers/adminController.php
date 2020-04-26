@@ -37,14 +37,17 @@ class adminController extends Controller{
     $curso = CursoModel::find($form['id']);
     $tipos = TipoModel::all();
     $usos = UsoModel::all();
-    $vac = compact('curso','tipos','usos');
+    $lenguajes = LenguajeModel::all();
+    //$profesores = User::orderBy('username')->where('acceso','=','1');
+    $profesores = User::where('acceso','=','1')->orderBy('username','asc')->get();
+    $vac = compact('curso','tipos','usos','lenguajes','profesores');
     return view ("pages.editarCurso",$vac);
   }
-  public function actualizarCurso(Request $form){
-    $curso = CursoModel::find($form['id']);
+  public function actualizarCurso(Request $req){
+    $curso = CursoModel::find($req['id']);
     $curso->titulo = $req["titulo"];
     $curso->desc = $req["descripcion"];
-    $curso->lenguaje = $req["lenguaje"];
+    $curso->lenguaje_id = $req["lenguaje"];
     $curso->precio = $req["precio"];
     $curso->autor = $req["autor"];
     $curso->tipo_id = $req['tipo'];
@@ -53,7 +56,7 @@ class adminController extends Controller{
     $nombreArchivo = basename($path);
     $curso->foto_curso = $nombreArchivo;
     $curso->update();
-    return redirect ("/admin/abm")->with('message','SUCCESS');;;
+    return redirect ("/abm/cursos")->with('message','SUCCESS');
   }
   /*USUARIO*/
   public function crearUsuario(Request $request){
