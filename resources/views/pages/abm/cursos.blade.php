@@ -20,7 +20,7 @@
 <div class="">
       @include('component.sidenav')
       </div>
-<div class="contenido-tabla col-md-10">
+<div class="contenido-tabla-curso col-md-10">
     <div class="ordenamiento">
       @if (count($cursos) != 0)
       <h5>Ordenar Por</h5>
@@ -54,7 +54,7 @@
       @endif
     </div>
 </form>
-    <table class="table table-light mt-3 mb-5 table-desktop">
+    <table class="table table-light mt-3 mb-5 table-desktop table-curso">
         <thead>
             <tr>
                 <th id="IDregistro">ID</th>
@@ -85,9 +85,11 @@
                     <div class="row">
                         <button type="button" onclick="borrarRegistro({{$curso->id}},this,2)" name="button" class="btn-delete btn btn-danger">Eliminar</button>
                         <hr>
-                        <button class="btn btn-primary" name="button">
-                            <a href="/editar/curso/{{$curso->id}}" style="color:white"> Editar </a>
-                        </button>
+                        <a href="/editar/curso/{{$curso->id}}" style="color:white">
+                          <button class="btn btn-primary" name="button">
+                               Editar 
+                          </button>
+                        </a>
                     </div>
                 </td>
             </tr>
@@ -171,7 +173,7 @@
               <p class="tipo-mobile">Tipo:</p>
               <p class="uso-mobile">Uso:</p>
               <p class="alumnos-mobile"></p>
-              
+
                         <button type="button" onclick="" name="button" class="btn-delete btn btn-danger btn-lg btn-block delete-mobile">Eliminar</button>
                         <hr>
                         <a class="edit-mobile">

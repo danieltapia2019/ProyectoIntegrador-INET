@@ -115,6 +115,9 @@ class adminController extends Controller{
         );
         return response()->json($response);
       }else{
+        if($request['pass']){
+        $usuario->password = password_hash($request['pass'],PASSWORD_DEFAULT);
+        }
         $usuario->username = $nombre;
         $usuario->email = $email;
         $usuario->acceso = $acceso;

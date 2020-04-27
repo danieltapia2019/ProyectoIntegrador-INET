@@ -510,9 +510,22 @@ function validarCamposUsuario(username,email,password,password_confirm){
   0-TODO OK
   */
 }
-/*
+
+$("#logoHOME").mouseover(function(){
+  var ancho = $(this).width();
+  var alto = $(this).height();
+  $(this).width(ancho+20);
+  $(this).height(alto+20);
+})
+
+$("#logoHOME").mouseout(function(){
+  var ancho = $(this).width();
+  var alto = $(this).height();
+  $(this).width(ancho-20);
+  $(this).height(alto-20);
+})
   window.addEventListener("load", function() {
     if(window.innerWidth <= 425 ){
       alert('ATENCION, PARA UNA MEJOR EXPERIENCIA EN EL ABM SE RECOMIENDA UTILIZAR UNA COMPUTADORA');
     }
-  });*/
+  });

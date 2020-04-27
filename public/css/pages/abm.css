@@ -49,7 +49,7 @@ div.wrapper {
 
 .wrapper > div.icon {
     align-self: center;
-    
+
     width: 40%;
     height: fit-content;
 }
@@ -216,12 +216,25 @@ div.ordenamiento{
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
   .tipos{
     border: 1px solid black;
-  }m
+  }
   .contenedor{
     display: inline-block;
       /* ETIQUETA QUE POSICIONA UNO AL LADO DEL OTRO */
       flex-wrap: nowrap;
       flex-direction: column;
+  }
+  .contenido-tabla{
+    width: 100%;
+    justify-content: center;
+    margin: auto;
+  }
+  .contenido-tabla-curso{
+    width: 100%;
+    justify-content: center;
+  }
+  .ordenamiento{
+    width: 90%;
+    margin: auto;
   }
   .sideNavigation {
       height: auto;
@@ -229,12 +242,21 @@ div.ordenamiento{
       justify-content: center;
       margin-right: 0%;
   }
-  .wrapper.content h1{
+  #imgSideNav {
+  margin-top: 5%;
+  height: 100px;
+  width: 100px;
+  border-radius: 150px;
   }
-  .contenido-tabla{
-    margin: auto;
+  .wrapper.content h1{
   }
   td{
     font-size: 13px;
+  }
+
+  /*TABLAS*/
+  .table-curso{
+    width: 100%;
+    font-size: 12px;
   }
 }
