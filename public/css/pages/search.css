@@ -1,0 +1,74 @@
+@import url('../components/navbar.css');
+@import url('../components/footer.css');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #e2e1e0;
+}
+div.wrapper-curso{
+    overflow: hidden;
+}
+body > div.fondo {
+    position: absolute;
+    z-index: -10;
+    height: 30%;
+    width: 100%;
+    background-image: url('../../img/faqBienvenido.png');
+}
+div.cursos{
+    width: 100%;
+}
+
+.cursos > article{
+    padding: 1%;
+    width: 80%;
+    margin: 5% 10%;
+    border: 1px solid rgba(0,0,0,0.1);
+    overflow: hidden;
+    background-color: whitesmoke;
+}
+
+.cursos > article > figure.img-curso{
+    float: left;
+    width: 40%;
+    height: 40%;
+}
+.cursos > article > figure.img-curso > img{
+    width: 100%;
+    height: auto;
+}
+.cursos > article > section.desc{
+    float: left;
+    width: 60%;
+}
+.cursos > article > section.desc > h2,.cursos > article > section.desc > p,h2{
+    padding-left: 2.5%;
+}
+.cursos > article > footer{
+    float: left;
+    width: 60%;
+}
+.cursos > article >section.desc> footer a{
+    padding-left: 2.5%;
+}
+
+.cursos > div.empty-result{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-flow: column wrap;
+}
+
+.cursos > div.empty-result > img {
+    width: 40%;
+    margin: auto 30%;
+}
+
+ul.pagination{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}

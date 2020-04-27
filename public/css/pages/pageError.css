@@ -1,0 +1,14 @@
+@import url('../components/navbar.css');
+@import url('../components/footer.css');
+
+div.container > div.row {
+    margin: 10% auto 10% auto;
+}
+
+h1, h2 {
+    text-align: center;
+}
+div.col > a {
+    text-decoration: none;
+}
+
