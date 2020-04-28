@@ -10,7 +10,7 @@
 <div class="fondo"></div>
 <div class="container wrapper-curso">
     <div class="row curso-search mt-5">
-        
+
         <form action="{{ url('/search') }}" class="col-12 mt-5 mb-5" method="GET" id="filtForm">
             <div class="form-row">
                 <div class="form-group col-12">
@@ -108,10 +108,8 @@
                     <a href="{{ url("/curso/$curso->id") }}">Ver Mas</a>
                     @else
                     <a href="{{ url("/curso/$curso->id") }}">Ver Mas</a>
-                    <button class="btn btn-primary mr-1" style="margin-left: 75%;">
-                        <a href="{{ url('/carrito'.'/'.$curso->id) }}" style="color: white">
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
+                    <button class="btn btn-primary mr-1 ml-3 agregar" href="{{route('agregarAlCarrito',$curso->id)}}" cursoId="{{$curso->id}}">
+                        <i class="fas fa-shopping-cart"></i></a>
                     </button>
                     @endguest
                 </footer>

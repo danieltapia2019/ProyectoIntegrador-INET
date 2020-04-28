@@ -12,7 +12,7 @@
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @stack('styles')
     <link rel="shortcut icon" href="{{ asset('img/logo.png') }}" />
@@ -32,7 +32,7 @@
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
-
+    <script type="text/javascript" src="/js/carrito.js"></script>
     @yield('scripting')
 </body>
 
