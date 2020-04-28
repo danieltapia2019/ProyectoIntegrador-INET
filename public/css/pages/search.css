@@ -56,6 +56,7 @@ div.cursos{
 }
 
 .cursos > div.empty-result{
+    margin-top: 10%;
     display: flex;
     justify-content: center;
     text-align: center;
@@ -63,8 +64,8 @@ div.cursos{
 }
 
 .cursos > div.empty-result > img {
-    width: 40%;
-    margin: auto 30%;
+    width: 50%;
+    margin: auto 25% 5% 25%;
 }
 
 ul.pagination{

@@ -23,7 +23,7 @@ Route::get('/faq',function(){
 /*    ABM:Admin   */
 
 /*ABM GET*/
-Route::get('/admin/abm','adminController@abm')->middleware('auth','rol:auth');
+Route::get('/admin/abm','adminController@indexAbm')->middleware('auth','rol:auth');
 
 Route::get('/abm/usuarios','adminController@getUsuarios')->middleware('auth','rol:auth');
 Route::get('/abm/cursos','adminController@getCursos')->middleware('auth','rol:auth');
@@ -63,10 +63,9 @@ Route::get('/search','searchController@indexSearch');
 Route::get('/search','searchController@searchCurso');
 
 
-/*    Curso    */
-// Route::get('/curso',function(){
-//   return view('pages.cursos');
-// });
+/*    Curso Alumno   */
+Route::get('/{usuario}/{curso}','CursoAlumnoController@indexCurso')->middleware('auth');
+// Route::get('/usuario/curso','UserController@indexCurso');
 
 /* Alumnos */
 Route::get('/alumnos/curso/{id}','cursoController@alumnosCurso')->middleware('auth','rol:profesor');
@@ -91,7 +90,7 @@ Route::get('/exito',function(){
     return view('pages.exito');
 });
 Route::get('/carrito','CarritoController@mostrarCarrito');
-/*  Login,Register,PasswordReset  */
+/*  Login,Register  */
 Auth::routes();
 
 /*    Consulta    */

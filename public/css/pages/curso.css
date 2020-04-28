@@ -1,0 +1,6 @@
+@import url('../components/navbar.css');
+@import url('../components/footer.css');
+
+body > div.container{
+    margin: 5% auto 10% auto;
+}

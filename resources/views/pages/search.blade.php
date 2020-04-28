@@ -118,7 +118,7 @@
             </section>
         </article>
         @empty
-        <div class="empty-result mt-4">
+        <div class="empty-result">
             <h1>No se encontraron resultados para su busqueda</h1>
             <img src="{{ asset('img/mensajes/nonResult.png')}}" alt="Sin resultados">
         </div>
@@ -131,4 +131,5 @@
 
 @section('scripting')
 <script type="text/javascript" src="{{ asset('js/search.js') }}"></script>
+{{-- <script type="text/javascript" src="{{ asset('js/carrito.js') }}"></script> --}}
 @endsection

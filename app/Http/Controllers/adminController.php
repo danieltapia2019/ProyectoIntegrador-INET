@@ -13,8 +13,9 @@ use App\Transaccion;
 use App\AlumnoCurso;
 use App\LenguajeModel;
 
+
 class adminController extends Controller{
-  public function abm(){
+  public function indexAbm(){
     // $views = CursoModel::sum('views');
     $totales = array(CursoModel::count(),User::count(),CursoModel::sum('views'));
     // $userTotal = ;
@@ -333,7 +334,7 @@ class adminController extends Controller{
       return view('pages.abm.cursos',compact('cursos','link'));
     }else{
       $cursos = CursoModel::where('estado','=','1')->paginate(5);
-      return view("pages.abm.cursos",compact('cursos','link','current'));
+      return view("pages.abm.cursos",compact('cursos','link'));
     }
   }
 
