@@ -1,5 +1,6 @@
 $(function () {
     //Para cada consulta se necesita el token por eso lo configuramos de entrada para no ponerlo en todas las peticiones
+    console.log("hoolaaa")
     var total = $("#total").attr("value");
     console.log(total)
     if (total > 0) {

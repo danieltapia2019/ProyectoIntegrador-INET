@@ -18,7 +18,7 @@ class CursoAlumnoController extends Controller
         $curso = CursoModel::find($form['cid']);
         $user = User::find($form['uid']);
 
-        
+
         if( $this->val($user->id,$curso->id) ){
           return view('pages.curso',compact('curso'));
         } else {

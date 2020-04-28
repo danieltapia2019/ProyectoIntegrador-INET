@@ -65,7 +65,7 @@ Route::get('/search','searchController@searchCurso');
 
 /*    Curso Alumno   */
 Route::get('/{usuario}/{curso}','CursoAlumnoController@indexCurso')->middleware('auth');
-// Route::get('/usuario/curso','UserController@indexCurso');
+//Route::get('/usuario/curso','UserController@indexCurso');
 
 /* Alumnos */
 Route::get('/alumnos/curso/{id}','cursoController@alumnosCurso')->middleware('auth','rol:profesor');
@@ -96,7 +96,7 @@ Auth::routes();
 /*    Consulta    */
 Route::post('/anon','ConsultaController@insertarConsulta');
 
-/*  Error   */
+
 Route::get('/error',function(){
     return view('pages.pageError');
 });
