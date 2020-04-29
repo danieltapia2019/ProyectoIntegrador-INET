@@ -85,12 +85,3 @@ $(function() {
 
 //CIERRE ABM
 
-//Redireccion a curso solicitado
-function cursoRedirect(){
-  let form = document.getElementById('hiddenForm');
-  this.addEventListener('click',function(e){
-    e.preventDefault();
-    form.submit();
-  });
-
-}

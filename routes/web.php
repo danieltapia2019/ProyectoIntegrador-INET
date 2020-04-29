@@ -11,6 +11,9 @@
 |
 */
 
+/*  Login,Register  */
+Auth::routes();
+
 
 /*    Home    */
 Route::get('/','HomeController@listFav');
@@ -62,10 +65,8 @@ Route::get('/logout','\App\http\Controller\Auth\LoginController@logout');
 Route::get('/search','searchController@indexSearch');
 Route::get('/search','searchController@searchCurso');
 
-
 /*    Curso Alumno   */
-Route::get('/{usuario}/{curso}','CursoAlumnoController@indexCurso')->middleware('auth');
-//Route::get('/usuario/curso','UserController@indexCurso');
+Route::get('/miscursos/{curso}','CursoAlumnoController@verCursoAlumno')->middleware('auth');
 
 /* Alumnos */
 Route::get('/alumnos/curso/{id}','cursoController@alumnosCurso')->middleware('auth','rol:profesor');
@@ -90,8 +91,6 @@ Route::get('/exito',function(){
     return view('pages.exito');
 });
 Route::get('/carrito','CarritoController@mostrarCarrito');
-/*  Login,Register  */
-Auth::routes();
 
 /*    Consulta    */
 Route::post('/anon','ConsultaController@insertarConsulta');

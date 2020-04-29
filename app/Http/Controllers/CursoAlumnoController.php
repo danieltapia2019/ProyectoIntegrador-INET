@@ -13,32 +13,28 @@ class CursoAlumnoController extends Controller
     /**
      * Recibe los parametros a traves de un form oculto
      */
-    public function indexCurso(Request $form){
+    public function verCursoAlumno($cursoTitulo, Request $urlUID){
+        
+        $curso = CursoModel::where('titulo','=',$cursoTitulo)->first();
 
-        $curso = CursoModel::find($form['cid']);
-        $user = User::find($form['uid']);
-
-
-        if( $this->val($user->id,$curso->id) ){
+        if( Self::validarAcceso($urlUID['uid'],$curso) ){
           return view('pages.curso',compact('curso'));
         } else {
           return redirect('error');
         }
     }
 
+    private function validarAcceso($id, $curso){
+        $alumno = User::find($id);
 
-    /**
-     * Valida que el usuario este anotado en el curso
-     */
-    private function val($uid,$cid){
-        $aux = AlumnoCurso::where([
-            [ 'curso_id','=',$cid ],
-            [ 'user_id','=',$uid ]
-        ])->get();
-        try {
-            return (count( $aux ) != 0)? true : false;
-        } catch (\Throwable $th) {
-            return redirect('error');
+        if( ( $alumno != null ) && ( $curso != null ) ){
+            $alumnoCurso = AlumnoCurso::where([
+                ['user_id','=',$alumno->id],
+                ['curso_id','=',$curso->id]
+            ])->get();
+            return ( $alumnoCurso->count() != 0 )? true : false;
+        } else {
+            return false;
         }
     }
 }

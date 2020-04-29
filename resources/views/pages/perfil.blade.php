@@ -140,7 +140,7 @@
                         <p>Precio: {{$curso->precio}} ARS</p>
                         <p>Tipo: {{$curso->tipo->tipoNombre}}</p>
                         <p>Uso: {{$curso->uso->usoNombre}}</p>
-                        <a href="#" onclick="cursoRedirect()">Ir al curso</a>
+                        <a href="{{ url('/'.'miscursos/'.$curso->titulo.'?uid='.$usuario->id) }}">Ir al curso</a>
                     </div>
                     {{--<img id="foto-curso" src="storage\img\cursos\{{$curso->foto_curso}}" class="card-img"
                     alt="...">--}}
@@ -251,5 +251,5 @@
 
 @endsection
 @section('scripting')
-<script type="text/javascript" src="js/main.js"></script>
+<script src="{{ asset('js/main.js') }}"></script>
 @endsection
