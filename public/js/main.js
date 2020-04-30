@@ -25,7 +25,7 @@ headers: {
 $(".btn-submit-opinion").click(function(e){
   e.preventDefault();
   var opinion = $("textarea[name=opinion]").val();
-  console.log(opinion.length)
+
   if(opinion == null){
     alert('Error Escriba su opinion')
   }else{
@@ -35,7 +35,10 @@ $(".btn-submit-opinion").click(function(e){
     data:{opinion: opinion},
     success:function(data){
       console.log(data);
-      alert('Opinion Creada CORRECTAMENTE');
+      $.alert({
+      title: 'Exito!',
+      content: 'Opinion creada correctamente desde ya muchas gracias!!!',
+      });
       $("textarea[name=opinion]").val('');
     },
     error:function(e){
@@ -46,10 +49,25 @@ $(".btn-submit-opinion").click(function(e){
 });
 
 
-function abrirDarUnCurso() {
+function cerrarNav() {
     closeNav();
+    var home = $("#nav-home-tab").attr('aria-selected');
+    var profile = $("#nav-profile-tab").attr('aria-selected');
+    var contacto = $("nav-contact-tab").attr('aria-selected');
+    if(home || profile || contacto){
+    $("#nav-home-tab").attr('class','nav-item nav-link');
+    $("#nav-profile-tab").attr('class','nav-item nav-link');
+    $("nav-contact-tab").attr('class','nav-item nav-link');
+    }
 }
-
+function cerrarTab(){
+  var crearCurso = $("#nav-create-tab").attr('aria-selected');
+  var cursoCreado = $("nav-created-tab").attr('aria-selected');
+  if(crearCurso || cursoCreado){
+  $("#nav-create-tab").attr('class','nav-item nav-link');
+  $("#nav-created-tab").attr('class','nav-item nav-link');
+  }
+}
 function openNav() {
     document.getElementById("sideNavigation").style.width = "200px";
 }
@@ -84,4 +102,3 @@ $(function() {
 //ABM
 
 //CIERRE ABM
-

@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="abm-directions-panel">
+        <div class="abm-directions-panel mb-3">
             <button class="btn btn-secondary" onclick="location.href = '/abm/usuarios'">Usuarios</button>
             <button class="btn btn-secondary" onclick="location.href = '/abm/cursos'">Cursos</button>
             <button class="btn btn-secondary" onclick="location.href = '/abm/transacciones'">Transacciones</button>
@@ -49,14 +49,4 @@
     </div>
 
 </div>
-
-
-
-<script>
-  $(window).resize(function () {
-      if( window.matchMedia("(max-width: 900px)") ){
-        alert('Este sitio no esta optimizado para su dispositivos');
-      }
-  })
-</script>
 @endsection

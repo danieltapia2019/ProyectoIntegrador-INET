@@ -25,6 +25,7 @@ $(document).on('click','.activar',function(e){
 $(".btn-agregar").click(function(e){
   e.preventDefault();
   $(".modal-title").text('Crear Usuario');
+  $(".btn-submit-user").show();
 })
 $(".btn-submit-user").click(function(e){
   e.preventDefault();
@@ -33,12 +34,11 @@ $(".btn-submit-user").click(function(e){
   var password = $("input[name=password]").val();
   var acceso = $("select[name=acceso]").val();
   var campos = validarCamposUsuario(username,email,password,$("input[name=password_confirmation]").val());
-
   switch (campos) {
-    case 1: alert('HAY CAMPOS VACIOS');break;
-    case 2: alert('LA CONTRASEÑA TIENE QUE TENER MINIMO 8 CARACTERES');break;
-    case 3: alert('LA CONTRASEÑAS NO COINCIDEN');break;
-    case 4: alert('EL EMAIL NO UTILIZA @');break;
+    case 1: alerta('Campos Vacios!','Por favor llene los campos requeridos ','red')
+    case 2: alerta('Contraseña','La contraseña como minimo necesita un total de 8 caracteres','red');break;
+    case 3: alerta('Contraseñas no coinciden','Las contraseñas no coinciden','red');break;
+    case 4: alerta('Email','El email no utiliza el simbolo @' ,'red');break;
       break;
     default:
   }
@@ -49,7 +49,7 @@ $(".btn-submit-user").click(function(e){
            data:{id:0,username: username, email:email , password:password,acceso:acceso},
            success:function(data){
              if(data.status == 'failure'){
-                 alert('ERROR YA EXISTE UN REGISTRO CON EL TIPO DE EMAIL y/o USUARIO');
+                alerta('Error en el servidor!','Ya existe un registro con el email y/o nombre de usuario ','red')
                  $('#modalUsuario').modal('hide');
                  $("input[name=username]").val("");
                  $("input[name=email]").val("");
@@ -70,7 +70,7 @@ $(".btn-submit-user").click(function(e){
               "</div>"+
             "</tr>";
             $(".usuarios tbody").append(tr_str);
-            alert('Creado correctamente');
+            alerta('Creado correctamente!','El registro usuario ha sido creado correctamente','green');
             $("input[name=username]").val("");
             $("input[name=email]").val("");
             $("input[name=password]").val("");
@@ -78,7 +78,7 @@ $(".btn-submit-user").click(function(e){
             $('#modalUsuario').modal('hide');
            },
            error:function(e){
-             alert('ERROR NO SE PUDO CREAR EL USUARIO (TIPO DE ERROR => '+e+' )')
+             alerta('Error en el servidor!','A ocurrido un error al crear un usuario y el error es '+e,'red')
            }
         });
     }
@@ -94,20 +94,44 @@ function borrarRegistro(id,boton,url){
       case 4: url = 'http://localhost:8000/borrar/uso/';break;
       case 5: url = 'http://localhost:8000/borrar/lenguaje/';break;
     }
-    if(confirm('Esta Seguro')){
-    $.ajax({
-      type:'DELETE',
-      url: url+id,
-      data: {id: id},
-      success:function(data){
-        alert('Borrado con Exito')
-        $(boton).closest('tr').remove();
-      },
-      error:function(e){
-        alert('ERROR'+e);
-      }
+    $.confirm({
+    title: 'Eliminar Registro!',
+    content: '¿Esta seguro que dese eliminar el registro?',
+    columnClass: 'col-md-12',
+    type: 'red',
+    typeAnimated: true,
+    buttons: {
+        confirmar: function () {
+        $.ajax({
+          type:'DELETE',
+          url: url+id,
+          data: {id: id},
+          success:function(data){
+          $.alert({
+          title: 'Borrado con Exito!',
+          content: 'El registro ha sido borrado correctamente',
+          type: 'green',
+          typeAnimated: true,
+          columnClass: 'col-md-12',
+          offsetTop: 0,
+          });
+          $(boton).closest('tr').remove();
+          },
+          error:function(e){
+          $.alert({
+          title: 'Error!',
+          content: 'El registro no ha podido ser eliminado, el error es '+e,
+          type: 'red',
+          typeAnimated: true,
+          });
+          }
+        });
+        },
+        cancelar:
+        function () {
+        },
+    }
     });
-  }
 }
 /*ABM EDITAR USUARIO*/
 function editarUsuario(persona,boton){
@@ -132,7 +156,7 @@ function editarUsuario(persona,boton){
              data:{username: username, email: email,acceso:acceso},
              success:function(data){
                 if(data.status == 'failure'){
-                alert('ERROR YA EXISTE UN REGISTRO CON EL TIPO DE EMAIL y/o USUARIO');
+                  alerta('Error en el servidor!','Ya existe un registro con el email y/o nombre de usuario ','red')
                 $('#modalUsuario').modal('hide');
                 $("input[name=username]").val("")
                 $("input[name=email]").val("");
@@ -148,7 +172,8 @@ function editarUsuario(persona,boton){
                 return false;
               }
               console.log(data);
-              var tpoAcceso ;
+              var tpoAcceso;
+              var imagen;
               if(data.acceso == 2){
                 tipoAcceso = "Alumno";
               }else if (data.acceso == 1) {
@@ -156,31 +181,37 @@ function editarUsuario(persona,boton){
               }else{
                 tipoAcceso = "Administrador";
               }
+              if(data.foto == null){
+                imagen = "Nulo";
+              }else{
+                imagen = "<a href='/storage/img/avatar/"+data.foto+"'>  </a>"
+              }
               var tr =
-              "<td id='IDregistro'>" + data.id + "</td>"+
-              "<td>" + data.username + "</td>" +
-              "<td>"+data.email+ "</td>" +
-              "<td>"+tipoAcceso+"</td>"+
-              "<td>"+
+              "<td id='abmUser' class='table-success'>" + data.id + "</td>"+
+              "<td class='table-success'>" + data.username + "</td>" +
+              "<td id='abmUser' class='table-success'>"+data.email+ "</td>" +
+              "<td id='abmUser' class='table-success'>"+tipoAcceso+"</td>"+
+              "<td id='abmUser' class='table-success'>"+imagen+ "</td>" +
+              "<td id='abmUser' class='table-success'>"+
                 "<div class='row'>"+
                       "<button type='button' onclick='borrarRegistro("+data.id+",this,1)' name='button' class='btn-delete btn btn-danger'>Borrar</button>"+
                       "<hr>"+
                       "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalUsuario' onclick='editarUsuario("+data.id+",'this)'>Editar</button>"+
                 "</div>"+
-              "</td>"+
+              "</td>";
               $(boton).closest('tr').html(tr);
-              alert('Actualizado correctamente');
+              alerta('Actualizado correctamente!','El registro ha sido actualizado correctamente','green');
               $("input[name=username]").val("");
               $("input[name=email]").val("");
               $('#modalUsuario').modal('hide');
               $(".btn-put-user").remove();
-              $("btn-submit-user").show();
+              $(".btn-submit-user").show();
               $(".modal-pass").show();
               $(".modal-pass-confirm").show();
               $("div.modal-backdrop.fade.show").remove();
              },
              error:function(e){
-               alert('ERROR NO SE PUDO ACTUALIZAR'+e);
+               alerta('Error en el servidor!','A ocurrido un error al actualizar y el error es '+e,'red')
              }
           });
     });
@@ -212,15 +243,15 @@ function editarUsuario(persona,boton){
         "</div>"+
         "</td>";
         $(".tipos tbody").append(tr);
-        alert('Creado correctamente');
+        alerta('Creado correctamente!','El registro tipo ha sido creado correctamente','green');
         $("input[name=tnombre]").val(" ");
       },
       error:function(e){
-        alert('ERROR'+e)
+        alerta('Error en el servidor!','A ocurrido un error al crear y el error es '+e,'red')
       }
     });
   }else{
-    alert('CAMPO VACIO PORFAVOR LLENE EL CAMPO');
+    alerta('Campos Vacios!','Por favor llene los campos solicitados','red');
   }
 });
 
@@ -238,9 +269,9 @@ function editarTipo(tipo,boton){
       data: {tipoNombre:$("input[name=tnombre]").val()},
       success:function(data){
         console.log(data);
-        var tr = "<td>"+data.id+"</td>"+
-        "<td>"+data.tipoNombre+"</td>"+
-        "<td>"+
+        var tr = "<td class='table-success'>"+data.id+"</td>"+
+        "<td class='table-success'>"+data.tipoNombre+"</td>"+
+        "<td class='table-success'>"+
         "<div class='row'>"+
         "<button type='button' onclick='borrarRegistro("+ tipo.id +",this,3)' name='button' class='btn-delete btn btn-danger'>Eliminar</button>"+
         "<hr>"+
@@ -248,7 +279,7 @@ function editarTipo(tipo,boton){
         "</div>"+
         "</td>";
         $(boton).closest('tr').html(tr);
-        alert('ACTUALIZADO CORRECTAMENTE');
+        alerta('Actualizado Correctamente!','El registro tipo ha sido actualizado correctamente','green');
         $("input[name=tnombre]").val("");
         $("#modalTipo").hide();
         $("div.modal-backdrop.fade.show").remove();
@@ -256,7 +287,7 @@ function editarTipo(tipo,boton){
         $(".btn-submit-tipo").show();
       },
       error:function(e){
-        alert('ERROR NO SE PUDO ACTUALIZAR'+e);
+        alerta('Error en el servidor!','A ocurrido un error al actualizar y el error es '+e,'red')
       }
     })
   });
@@ -289,16 +320,16 @@ function editarTipo(tipo,boton){
         "</div>"+
         "</td>";
         $(".usos tbody").append(tr);
-        alert('Creado correctamente');
+        alerta('Creado correctamente','El registro uso ha sido creado correctamente','green');
         $("input[name=snombre]").val(" ");
         $('#modalUso').modal('hide');
       },
       error:function(e){
-        alert('ERROR'+e)
+      alerta('Error en el servidor!','A ocurrido un error al crear un registro y el error es '+e,'red')
       }
     });
   }else{
-    alert('CAMPO VACIO PORFAVOR LLENE EL CAMPO');
+    alerta('Campo Vacio','Por favor llene el campo solicitado','Error')
   }
 });
 
@@ -317,9 +348,9 @@ function editarUso(uso,boton){
       data: {snombre:$("input[name=snombre]").val()},
       success:function(data){
         console.log(data);
-        var tr = "<td>"+data.id+"</td>"+
-        "<td>"+data.usoNombre+"</td>"+
-        "<td>"+
+        var tr = "<td class='table-success'>"+data.id+"</td>"+
+        "<td class='table-success'>"+data.usoNombre+"</td>"+
+        "<td class='table-success'>"+
         "<div class='row'>"+
         "<button type='button' onclick='borrarRegistro("+uso.id+",this,3)' name='button' class='btn-delete btn btn-danger'>Eliminar</button>"+
         "<hr>"+
@@ -327,7 +358,7 @@ function editarUso(uso,boton){
         "</div>"+
         "</td>";
         $(boton).closest('tr').html(tr);
-        alert('ACTUALIZADO CORRECTAMENTE');
+        alerta('Actualizado Correctamente!','El registro editar curso ha sido actualizado correctamente ','green');
         $("input[name=snombre]").val("");
         $("#modalUso").hide();
         $("div.modal-backdrop.fade.show").remove();
@@ -335,7 +366,7 @@ function editarUso(uso,boton){
         $(".btn-submit-uso").show();
       },
       error:function(e){
-        alert('ERROR NO SE PUDO ACTUALIZAR'+e);
+        alerta('Error en el servidor!','A ocurrido un error al actualizar y el error es '+e,'red')
       }
     })
   });
@@ -359,11 +390,11 @@ $(".btn-submit-lenguaje").click(function(e){
       url: 'http://localhost:8000/admin/crear/lenguaje',
       data: {lnombre:nombreLenguaje},
       success: function(data){
-        alert('Creado con exito');
+        alerta('Creado correctamente!','El lenguaje fue creado correctamente','green');
         $("#modalLenguaje").hide();
       },
       error: function(e){
-        alert('ERROR '+e);
+        alerta('Error en el servidor!','A ocurrido un error al crear un Lenguaje y el error es '+e,'red');
       }
     });
   }
@@ -386,9 +417,9 @@ function editarLenguaje(lenguaje,boton){
         url: 'http://localhost:8000/actualizar/lenguaje/'+lenguaje.id,
         data: {lnombre:nombreLenguaje},
         success: function(data){
-          var tr = "<td>"+data.id+"</td>"+
-          "<td>"+data.nombreLenguaje+"</td>"+
-          "<td>"+
+          var tr = "<td class='table-success'>"+data.id+"</td>"+
+          "<td class='table-success'>"+data.nombreLenguaje+"</td>"+
+          "<td class='table-success'>"+
           "<div class='row'>"+
           "<button type='button' onclick='borrarRegistro("+data.id+",this,5)' name='button' class='btn-delete btn btn-danger'>Eliminar</button>"+
           "<hr>"+
@@ -396,7 +427,7 @@ function editarLenguaje(lenguaje,boton){
           "</div>"+
           "</td>";
           $(boton).closest('tr').html(tr);
-          alert('Actualizado con exito');
+          alerta('Actualizado con exito!','El registro lenguaje ha sido actualizado con exito','green');
           $(".btn-submit-lenguaje").show();
           $(".btn-put-lenguaje").remove();
           $(".modal-title").text('Crear Lenguaje');
@@ -404,7 +435,7 @@ function editarLenguaje(lenguaje,boton){
           $("div.modal-backdrop.fade.show").remove();
         },
         error: function(e){
-          alert('ERROR '+e);
+          alerta('Error en el servidor!','A ocurrido un error al actualizar y el error es '+e,'red');
           $(".btn-submit-lenguaje").show();
           $(".btn-put-lenguaje").remove();
           $(".modal-title").text('Crear Lenguaje');
@@ -510,7 +541,16 @@ function validarCamposUsuario(username,email,password,password_confirm){
   0-TODO OK
   */
 }
-
+function alerta(titulo,contenido,tipo){
+  $.alert({
+  title: titulo,
+  content: contenido,
+  type: tipo,
+  typeAnimated: true,
+  columnClass: 'col-md-12',
+  offsetTop: 0,
+  });
+}
 $("#logoHOME").mouseover(function(){
   var ancho = $(this).width();
   var alto = $(this).height();

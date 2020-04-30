@@ -139,7 +139,7 @@ $lenguajes->setPath('');
                         <input type="text" name="nlenguaje" class="form-control" placeholder="Lenguaje" maxlength="25"
                             minlength="1" required>
                     </div>
-                    <button type="submit" class="btn btn-reg btn-lg btn-block my-3 btn-submit-lenguaje">Agregar</button>
+                    <button type="submit" class="btn btn-reg btn-lg btn-block mb-3 btn-submit-lenguaje">Agregar</button>
                 </form>
             </div>
         </div>

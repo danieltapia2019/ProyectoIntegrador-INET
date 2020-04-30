@@ -22,7 +22,7 @@
         <div id="sideNavigation" class="sidenav">
             <ul style="color: white;">
                 @if ($usuario->foto == null)
-                <span id="fotoPerfilNav"> <img src="{{asset('storage/img/avatar/'.auth()->user()->foto)}}" alt="">
+                <span id="fotoPerfilNav"> <img src="{{asset('img/perfil.jpg')}}" alt="">
                 </span>
                 @else
                 <span id="fotoPerfilNav"><img src="{{asset('storage/img/avatar/'.auth()->user()->foto)}}"
@@ -44,12 +44,12 @@
                     @if ($usuario->acceso != 2)
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link" id="nav-create-tab" data-toggle="tab" href="#create" role="tab"
-                            aria-controls="create" aria-selected="false" onclick="abrirDarUnCurso()">
+                            aria-controls="create" aria-selected="false" onclick="cerrarNav()">
                             <i class="fas fa-folder-plus"></i>
                             Dar un curso
                         </a>
                         <a class="nav-item nav-link" id="nav-created-tab" data-toggle="tab" href="#created" role="tab"
-                            aria-controls="created" aria-selected="false" onclick="abrirDarUnCurso()">Cursos Creados</a>
+                            aria-controls="created" aria-selected="false" onclick="cerrarNav()">Cursos Creados</a>
                     </div>
                     @endif
                 </li>
@@ -68,11 +68,11 @@
     <nav class="row">
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#editar" role="tab"
-                aria-controls="editar" aria-selected="true">Mis datos</a>
+                aria-controls="editar" aria-selected="true" onclick="cerrarTab()">Mis datos</a>
             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#cursos" role="tab"
-                aria-controls="cursos" aria-selected="false">Cursos Inscriptos</a>
+                aria-controls="cursos" aria-selected="false" onclick="cerrarTab()">Cursos Inscriptos</a>
             <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#opinion" role="tab"
-                aria-controls="opinion" aria-selected="false">¡Dejanos tu opinion!</a>
+                aria-controls="opinion" aria-selected="false" onclick="cerrarTab()">¡Dejanos tu opinion!</a>
         </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
@@ -241,7 +241,7 @@
 
                 </div>
                 @empty
-                <h3>No has comprado ningun curso</h3>
+                <h3>No has creado ningun curso</h3>
                 @endforelse
             </div>
         </div>

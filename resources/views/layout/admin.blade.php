@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!--Jquery-->
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <!--Fontawesome-->
     <script src="https://kit.fontawesome.com/918d19c8b4.js" crossorigin="anonymous"></script>
     <!-- Bootstrap -->
@@ -25,8 +26,8 @@
     <script src="{{ asset('js/bootstrap.js') }}"></script>
     <script type="text/javascript" src="/js/main.js"></script>
     <script type="text/javascript" src="/js/abm.js"></script>
-    <script type="text/javascript" src="/js/editarCurso.js"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     @yield('scripting')
 </body>
 

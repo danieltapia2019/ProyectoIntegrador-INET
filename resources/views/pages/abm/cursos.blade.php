@@ -87,7 +87,7 @@
                         <hr>
                         <a href="/editar/curso/{{$curso->id}}" style="color:white">
                           <button class="btn btn-primary" name="button">
-                               Editar 
+                               Editar
                           </button>
                         </a>
                     </div>
@@ -147,7 +147,7 @@
     </ul>
 
                 <a href="/perfil">
-                <button type="button" class="btn btn-success btn-lg btn-block" name="button">Agregar</button>
+                <button type="button" class="btn btn-success btn-lg btn-block mb-3" name="button">Agregar</button>
                 </a>
  </div>
 </div>

@@ -6,7 +6,7 @@
 }
 .sideNavigation {
     background-color: black;
-    height: 110vh;
+    height: 100%;
     justify-content: center;
 }
 
@@ -155,10 +155,26 @@ div.ordenamiento{
         flex-wrap: nowrap;
         flex-direction: column;
     }
+div.wrapper {
+    width: 50%;
+    height: 25vh;
+    margin-left: 25%;
+    margin-right: 25%;
+    }
+    .wrapper > div.content {
+    text-align: center;
+    position: relative;
+    top: 50%;
+    }
     .sideNavigation a:last-child {
         position: relative;
         margin-left: 25px;
         margin-right: 25px;
+    }
+    .abm-directions-panel>button {
+    width: 90%;
+    margin-right: 5%;
+    margin-left: 5%;
     }
     .ordenamiento{
       text-align: center;
@@ -223,6 +239,9 @@ div.ordenamiento{
       flex-wrap: nowrap;
       flex-direction: column;
   }
+  .container{
+    justify-content: center;
+  }
   .contenido-tabla{
     width: 100%;
     justify-content: center;
@@ -242,13 +261,20 @@ div.ordenamiento{
       justify-content: center;
       margin-right: 0%;
   }
+  .abm-directions-panel>button {
+    width: 90%;
+    margin-right: 5%;
+    margin-left: 5%;
+}
+  .wrapper > div.content {
+    position: relative;
+    top: 50%;
+  }
   #imgSideNav {
   margin-top: 5%;
   height: 100px;
   width: 100px;
   border-radius: 150px;
-  }
-  .wrapper.content h1{
   }
   td{
     font-size: 13px;

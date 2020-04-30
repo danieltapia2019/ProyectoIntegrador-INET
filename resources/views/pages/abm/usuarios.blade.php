@@ -77,7 +77,6 @@ $usuarios->setPath('');
                   <td id="abmUser">Profesor</td>
                   @else
                   <td id="abmUser">Admin</td>
-                  <td>No hay acciones</td>
                   @endif
                   @if ($usuario->foto != null)
                   <td id="abmUser"><a href="/storage/img/avatar/{{$usuario->foto}}">Ver Imagen</a> </td>
@@ -92,6 +91,8 @@ $usuarios->setPath('');
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalUsuario" onclick="editarUsuario({{$usuario}},this)">Editar</button>
                         </div>
                     </td>
+                  @else
+                    <td>No hay acciones</td>
                   @endif
               </tr>
               @empty
