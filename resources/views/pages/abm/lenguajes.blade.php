@@ -54,7 +54,7 @@ $lenguajes->setPath('');
         </div>
         <hr>
         <br>
-        <table class="table table-light mt-1">
+        <table class="table table-light mt-1 ">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -114,7 +114,7 @@ $lenguajes->setPath('');
                         class='btn'>Última</a>
                 </li>
         </ul>
-        <button type="button" class="btn btn-success btn-block btn-lg" name="button" data-toggle="modal"
+        <button type="button" class="btn btn-success btn-block btn-lg mb-3" name="button" data-toggle="modal"
             data-target="#modalLenguaje">Agregar</button>
     </div>
 </div>

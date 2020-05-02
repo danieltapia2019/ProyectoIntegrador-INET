@@ -989,16 +989,16 @@
         },
         {
             "name": "laraveles/spanish",
-            "version": "1.4.5",
+            "version": "1.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laraveles/spanish.git",
-                "reference": "1e71f5d5350f6db0c72e6a5ff4a00802b42805b3"
+                "reference": "d8eb80c966abc5a4fa45fe3aa58734ab6fddb5a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laraveles/spanish/zipball/1e71f5d5350f6db0c72e6a5ff4a00802b42805b3",
-                "reference": "1e71f5d5350f6db0c72e6a5ff4a00802b42805b3",
+                "url": "https://api.github.com/repos/Laraveles/spanish/zipball/d8eb80c966abc5a4fa45fe3aa58734ab6fddb5a5",
+                "reference": "d8eb80c966abc5a4fa45fe3aa58734ab6fddb5a5",
                 "shasum": ""
             },
             "require": {
@@ -1047,7 +1047,7 @@
                 "spanish",
                 "traduccion"
             ],
-            "time": "2019-11-02T08:39:28+00:00"
+            "time": "2020-05-01T09:10:46+00:00"
         },
         {
             "name": "league/flysystem",

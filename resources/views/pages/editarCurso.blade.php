@@ -12,10 +12,10 @@
   <form class="crearCurso" action="/actualizar/curso" method="post" enctype="multipart/form-data">
       {{csrf_field()}}
       <input type="hidden" name="id" value={{$curso->id}}>
-      <label for="titulo" value="{{$curso->titulo}}">Titulo Nuevo: </label>
+      <label for="titulo">Titulo Nuevo: </label>
       <div class="input-group mb-3">
-          <input type="text" name="titulo" class="form-control" placeholder="Ingrese titulo del curso" required
-              maxlength="100" minlength="10">
+          <input type="text" name="titulo" class="form-control" required
+              maxlength="100" minlength="10" value="{{$curso->titulo}}">
       </div>
       <div class="form-group">
           <label for="descripcion">Descripcion nueva:</label>
@@ -26,7 +26,7 @@
       <div class="fotoCurso">
           <img src="storage\img\cursos\{{$curso->foto_curso}}" alt="">
           <label for="foto_curso">Foto nueva:</label>
-          <input type="file" class="form-control" name="foto_curso" >
+          <input type="file" class="form-control" name="foto_curso" accept="image/*">
       </div>
       <br>
       <label for="precio">Precio nuevo:</label>

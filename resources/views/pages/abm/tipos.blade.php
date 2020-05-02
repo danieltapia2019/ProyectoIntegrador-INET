@@ -106,7 +106,7 @@
                       <a href="@if($currentPage<$lastPage){{$tipos->url($lastPage).$link}}@else{{'#'}}@endif" class='btn'>Última</a>
               </li>
       </ul>
-      <button type="button" class="btn btn-success btn-block btn-lg mb-3" name="button" data-toggle="modal"
+      <button type="button" class="btn btn-success btn-block btn-lg mb-3 btn-agregar-tipo" name="button" data-toggle="modal"
       data-target="#modalTipo">Agregar</button>
     </div>
   </div>
