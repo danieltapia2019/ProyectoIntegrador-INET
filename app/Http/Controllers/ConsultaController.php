@@ -89,7 +89,8 @@ class ConsultaController extends Controller
 
 
   public function deleteConsulta(Request $form){
-    ConsultaModel::find($form['id'])->delete();
-    return redirect('pages.abm.consultas');
+    $consulta = ConsultaModel::find($form['id']);
+    $consulta->delete();
+    return redirect('/abm/consultas');
   }
 }

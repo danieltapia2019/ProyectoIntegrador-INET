@@ -14,7 +14,7 @@ $(document).on('click','.activar',function(e){
     $.post(url,function(response){
 
         console.log(response.mensaje)
-        alert(response.mensaje);
+        alerta('Creado Correctamente',response.mensaje,'green');
         estado.innerHTML="Pagado"
         element.disabled=true;
         element.className="btn btn-danger"

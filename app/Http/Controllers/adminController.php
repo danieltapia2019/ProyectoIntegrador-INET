@@ -507,7 +507,7 @@ class adminController extends Controller{
         $link = "&atributo=0&tipo=$numOrden";
         break;
       }
-    return view("pages.abm.cursos_alumnos",compact('alumnos_cursos','link'));
+    return view("pages.abm.transacciones",compact('transacciones','link'));
     }else{
     $transacciones=Transaccion::paginate(5);
     return view("pages.abm.transacciones",compact('transacciones','link'));

@@ -26,7 +26,7 @@
       <div class="ordenamiento">
         @if (count($transacciones) != 0)
         <h5>Ordenar Por</h5>
-        <form class="" action="/abm/usos" method="GET">
+        <form class="" action="/abm/transacciones" method="GET">
           <div class="col-md-12">
             <div class="input-group mb-3">
               <div class="input-group-prepend">

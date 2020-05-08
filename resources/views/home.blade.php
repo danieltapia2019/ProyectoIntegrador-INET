@@ -130,7 +130,11 @@
           <div class="card" style="width: 12rem;">
             <div class="card-body">
               <span>
-                <img src="{{$usuario->foto}}" alt="">
+                @if ($usuario->foto != null)
+                  <span class="h4"><img id="fotoPerfilOpinion" src="{{asset('storage/img/avatar/'.$usuario->foto)}}" alt="">
+                @else
+                  <span class="h4"><img id="fotoPerfilOpinion" src="{{asset('img/perfil.jpg')}}" alt="">
+                @endif
                 @if ($usuario->acceso == 2)
                   <h6 class="card-title mt-2">Estudiante</h6>
                 @elseif($usuario->acceso == 1)
@@ -151,13 +155,17 @@
 </div>
 <!-- /Opiniones -->
 <!--Carrusel solo para mobile-->
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+<div id="carouselUser" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       @forelse ($usuarios as $key => $usuario)
         @if ($key==0)
             <div class="carousel-item active">
                 <article class="border border-secundary border-bottom-0 opinion">
-                    <span class="h4"><img src="{{$usuario->foto}}" alt="">
+                  @if ($usuario->foto != null)
+                    <span class="h4 ml-4"><img src="{{asset('storage/img/avatar/'.$usuario->foto)}}" alt="">
+                  @else
+                    <span class="h5 ml-4"><img src="{{asset('img/perfil.jpg')}}" alt="">
+                  @endif
                       @if ($usuario->acceso == 2)
                         Estudiante
                       @elseif($usuario->acceso == 1)
@@ -170,16 +178,38 @@
                 </article>
             </div>
         @else
-          <div class="carousel-item">
-              <article class="border border-secundary border-bottom-0 opinion">
-                  <span class="h4"><img src="{{$usuario->foto}}" alt="">Estudiante</span>
-                  <p>{{$usuario->opinion}}</p>
-              </article>
-          </div>
+            <div class="carousel-item">
+                <article class="border border-secundary border-bottom-0 opinion">
+                  @if ($usuario->foto != null)
+                    <span class="h4 ml-4"><img src="{{asset('storage/img/avatar/'.$usuario->foto)}}" alt="">
+                  @else
+                    <span class="h5 ml-4">
+                      <img src="{{asset('img/perfil.jpg')}}" alt="">
+                  @endif
+                      @if ($usuario->acceso == 2)
+                        Estudiante
+                      @elseif($usuario->acceso == 1)
+                        Profesor
+                      @else
+                        Administrador
+                      @endif
+                    </span>
+                    <p>{{$usuario->opinion}}</p>
+                </article>
+            </div>
         @endif
       @empty
         <h4>No hay usuarios</h4>
       @endforelse
     </div>
+
+    <a class="carousel-control-prev" href="#carouselUser" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselUser" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
 </div>
 @endsection

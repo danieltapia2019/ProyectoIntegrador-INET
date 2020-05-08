@@ -67,7 +67,9 @@ div#iconos {
 #carouselExampleControls {
     display: none;
 }
-
+#carouselUser{
+  display: none;
+}
 .curso {
     width: 20%;
     margin: 2.5%;
@@ -105,7 +107,11 @@ div#iconos {
     overflow: hidden;
     text-align: center;
 }
-
+#fotoPerfilOpinion{
+  width: 100%;
+  height: 20vh;
+  border-radius: 100%;
+}
 .opinion {
     width: 20%;
     margin: 2.5%;
@@ -135,6 +141,9 @@ div#iconos {
 
 /*Mobile*/
 @media only screen and (min-width: 320px) and (max-width: 767px) {
+    #presentacion{
+      height: 600px;
+    }
     .btn.btn-success {
         font-size: 15px;
         width: 30%;
@@ -193,6 +202,9 @@ div#iconos {
     #carouselExampleControls {
         display: inherit;
     }
+    #carouselUser{
+      display: inherit;
+    }
 
     /*Contacto INDEX*/
     .datosContacto {
@@ -205,6 +217,10 @@ div#iconos {
         width: 90%;
         margin-left: 5%;
         margin-right: 5%;
+    }
+    .col-2{
+      flex: initial;
+      max-width: inherit;
     }
 
     /*Opiniones*/
