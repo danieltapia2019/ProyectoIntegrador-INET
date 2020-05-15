@@ -18,7 +18,7 @@
             @forelse ($cursos as $curso)
                 <div class="curso border-top-0 border-bottom-0 mb-2">
                     <div class="item p-2">
-                        <img class="img-center rounded" src="https://www.anerbarrena.com/wp-content/uploads/2016/04/html5.png" alt="">
+                        <img class="img-center rounded" src="..\storage\img\cursos\{{$curso->foto_curso}}" alt="">
                     </div>
                     <div class="item-desc p-2">
                         <h5 class="font-weight-bold titulo ">{{$curso->titulo}}</h5>
@@ -63,7 +63,7 @@
                         <p>
                             <span class="font-weight-bold mr-5">TOTAL:</span ><span id="total" value="{{$total}}">$<?=$total?></span>
                             <a class="btn btn-danger ml-4" href="{{route('pagar')}}">Comprar</a>
-                            <button class="btn ml-2"><i class="fas fa-trash-alt"></i></button>
+
                             <div>
                                 <img class="img-center" src="{{ asset('img/merca.jpg') }}" alt="">
                             </div>

@@ -115,7 +115,7 @@
                     @endguest
                 </footer>
             </section>
-        </article>
+        </article>z
         @empty
         <div class="empty-result">
             <h1>No se encontraron resultados para su busqueda</h1>

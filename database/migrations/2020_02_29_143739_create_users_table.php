@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
     }
-    cdsacdsacdsacsadsddsadsa3dsadsadsad
+
     /**
      * Elimina la tabla 'users' de la bd
      *

@@ -17,7 +17,7 @@
         </button>
     </div>
     <p class="texto">Compraste...</p>
-    <div class=" row mt-3">
+    <div class=" row mt-3 mb-4">
         <div class=" cuerpo col-md-8">
             @foreach($carrito as $curso)
             @if($loop->iteration==4)
@@ -25,19 +25,15 @@
             @endif
             <div class=curso>
                 <h5 class="font-weight-bold">{{$curso->titulo}}</h5>
-                <img src="https://www.anerbarrena.com/wp-content/uploads/2016/04/html5.png" alt="">
+                <img src="..\storage\img\cursos\{{$curso->foto_curso}}" alt="">
                 <a href="{{url('/curso/'.$curso->id)}}">Ir al curso</a>
             </div>
             @endforeach
         </div>
         <div class="col-md-4 recordatorio">
             <p class="pt-5">Recuerda que podras acceder a TODOS tus cursos desde tu perfil en la pestaña de cursos!</p>
-            <a href="" class="btn btn-danger">Ver mis cursos</a>
+            <a href="/perfil" class="btn btn-danger">Ir a mi perfil</a>
         </div>
-    </div>
-
-    <div class="interesarte mt-3">
-        <p class="texto">Otros cursos que podrian interesarte...</p>
     </div>
 
 

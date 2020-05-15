@@ -29,10 +29,8 @@
                     @guest
                     <p>Para comprar el curso debes estar <a href="{{ url("/register") }}">registrado</a></p>
                     @else
-                    <button class="btn btn-primary mr-1 ml-3">
-                        <a href="{{ url('/carrito'.'/'.$cursoSelect->id) }}" style="color: white">
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
+                    <button class="btn btn-primary mr-1 ml-3 agregar" href="{{route('agregarAlCarrito',$cursoSelect->id)}}" cursoId="{{$cursoSelect->id}}">
+                        <i class="fas fa-shopping-cart"></i>
                     </button>
                     @endguest
                 </footer>
@@ -56,4 +54,9 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripting')
+
+<script type="text/javascript" src="{{ asset('js/carrito.js') }}"></script>
 @endsection

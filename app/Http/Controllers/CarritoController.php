@@ -28,16 +28,42 @@ class CarritoController extends Controller
   public function agregarAlCarrito($id,Request $request){
     if($request->ajax()){
         $curso=CursoModel::find($id);
-        if($request->session()->has('carrito') == false){
+        //verifico que el que quiera agregar al carrito no sea un curso propio
+        if(Auth::user()->id == $curso->creador->id){
+            return response()->json([
+                "mensaje"=>"No se puede agregar al carrito un curso propio."
+            ]);
+
+        }
+        //esto es por si es el primer producto a agregar, se instancia el carrito en session
+        else if($request->session()->has('carrito') == false){
             session(['carrito'=>[]]);
             $request->session()->push('carrito',$curso);
         }
+        //si no es el primer producto quiere decir que el carrito ya esta instanciado, solo agregamos
         else{
+            $cursos=$request->session()->get('carrito');
+            //chequeo que el curso no se repita en el carrito
+            foreach($cursos as $crso){
+                if($crso->id == $curso->id){
+                    return response()->json([
+                        "mensaje"=>"Este curso ya está en su carrito."
+                    ]);
+                }
+            }
+            //verifico que el usuario no tenga este curso ya disponible para no volverlo a comprar
+            foreach($curso->alumno as $usuario){
+                if($usuario->id == Auth::user()->id){
+                    return response()->json([
+                        "mensaje"=>"Ya dispones de este curso."
+                    ]);
+                }
+            }
             $request->session()->push('carrito',$curso);
         }
         return response()->json([
-            "curso"=>$curso,
-            "mensaje"=>"Agregado al carrito correctamente"
+            "curso"=>$curso->alumno,
+            "mensaje"=>"Agregado al carrito correctamente."
         ]);
     }
   }
@@ -85,6 +111,7 @@ public function pagar(Request $request,Faker $faker){
 
   $vac=compact('carrito');
   $this->limpiarCarrito($request);
+
 
   return view('pages.exito',$vac);
 }

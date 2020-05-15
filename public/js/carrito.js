@@ -16,8 +16,8 @@ $(function () {
         let id = $(element).attr("cursoId");
         var url = $(element).attr("href");
         $.post(url, function (response) {
-            alert("Agregado correctamente")
-            console.log(response.mensaje)
+
+            alert(response.mensaje)
         }).fail(function () {
             console.log("esto no funciona")
         })
